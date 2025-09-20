@@ -2,6 +2,33 @@
 
 A comprehensive workspace for developing, documenting, and analyzing requirements for coding agents. This workspace provides structured templates and examples to help teams effectively gather, document, and manage requirements for AI-powered coding assistants.
 
+## 🎯 Primary Project: D&D Character Creator with Adventure Engine
+
+This workspace is currently focused on developing a comprehensive **D&D 3.5 Character Creator** with an integrated **AI-powered Adventure Engine**. The system provides:
+
+### 🎲 Core Character Creation System
+- Complete SRD 3.5 rule implementation for character generation
+- Dynamic ability score generation with multiple methods
+- Full race and class selection with multiclass support  
+- Equipment management with automatic stat calculation
+- Spell management system for spellcasting classes
+- Character portrait generation with customization tools
+
+### 🏰 Adventure Engine (AI-Powered DM)
+- **AI Integration**: ChatGPT and GitHub Copilot API support for dynamic content generation
+- **Complete Adventures**: Generate multi-day adventures (minimum 1 week per character level)
+- **Encounter Simulation**: Full tactical combat with AI-driven monster behavior
+- **SRD Compliance**: 95%+ accuracy for all D&D 3.5 rules and calculations  
+- **Character Integration**: Real-time stat updates, spell tracking, equipment management
+- **Narrative Generation**: Adventure content written in character voice with personality traits
+- **Multi-session Continuity**: Adventure state persistence with world memory
+
+### 🚀 Epic Level Support
+- Character progression through level 100
+- Divine ascension system with divine ranks 0-21+
+- Epic feat selection and spellcaster progression
+- SRD-compliant epic level rule implementation
+
 ## 🎯 Purpose
 
 This workspace is designed to help teams:

@@ -4,15 +4,69 @@
 
 All coding agents and AI assistants must place generated code exclusively within this `code-repository` folder or its subfolders. No code should be generated or placed in any other location within the workspace.
 
+## 🎲 Primary Project: D&D Character Creator with Adventure Engine
+
+This code repository contains the implementation for a comprehensive **D&D 3.5 Character Creator** with integrated **AI-powered Adventure Engine**.
+
+### 🏗️ System Architecture Overview
+
+```
+code-repository/src/
+├── character/             # Character creation and management system
+│   ├── character-manager.js      # Core character data management
+│   ├── ability-scores.js         # Ability score generation methods
+│   ├── race-manager.js           # Race selection and bonuses
+│   ├── class-manager.js          # Class selection and progression
+│   └── multiclass-engine.js      # Multiclass rule implementation
+├── adventure/             # 🚨 AI-Powered Adventure Engine
+│   ├── adventure-engine.js       # Core adventure orchestration
+│   ├── ai-integration.js         # ChatGPT/Copilot API integration
+│   ├── encounter-engine.js       # Combat simulation and encounters
+│   ├── spell-management.js       # Spell system and slot tracking
+│   ├── equipment-engine.js       # Dynamic equipment stat calculation
+│   ├── narrative-generator.js    # AI story generation in character voice
+│   └── world-state-manager.js    # Adventure state persistence
+├── epic/                  # Epic level progression system
+│   ├── epic-level-engine.js      # Levels 21-100 progression
+│   ├── divine-ascension.js       # Divine rank and powers
+│   └── epic-feat-selector.js     # Epic feat selection and validation
+├── portrait/              # Character portrait generation
+│   ├── portrait-engine.js        # SVG/Canvas portrait system
+│   ├── asset-library.js          # Portrait asset management
+│   └── customization-tools.js    # Manual customization interface
+├── story/                 # Story tracker and backstory system
+│   ├── story-tracker.js          # Character backstory management
+│   ├── backstory-generator.js    # Automatic story generation
+│   └── relationship-manager.js   # NPC and PC relationships
+├── dice/                  # High-performance dice engine
+│   └── dice-engine.js            # Optimized random number generation
+└── data/                  # SRD data and rule databases
+    ├── srd-database.js           # Complete SRD 3.5 rules
+    ├── spell-database.js         # All SRD spells with effects
+    └── monster-database.js       # Monster stats and AI behaviors
+```
+
+### 🎯 Core System Priorities
+
+1. **Adventure Engine** - AI-powered DM with full SRD compliance
+2. **Character Management** - Complete D&D 3.5 character creation
+3. **Epic Level Support** - Levels 21-100 with divine ascension
+4. **Portrait System** - Dynamic character visualization
+5. **Story Tracker** - Backstory generation and relationship management
+
 ## Directory Structure
 
 ```
 code-repository/
 ├── src/                    # Source code implementations
-│   ├── auth/              # Authentication modules
-│   ├── core/              # Core business logic
-│   ├── utils/             # Utility functions and helpers
-│   └── services/          # Service layer implementations
+│   ├── adventure/         # 🚨 AI Adventure Engine (CORE SYSTEM)
+│   ├── character/         # Character creation and management
+│   ├── epic/              # Epic level progression (21-100)
+│   ├── portrait/          # Character portrait generation
+│   ├── story/             # Story tracker and backstory system
+│   ├── dice/              # High-performance dice engine
+│   ├── data/              # SRD databases and rule data
+│   └── utils/             # Utility functions and helpers
 ├── tests/                 # Test files and test suites
 │   ├── unit/              # Unit tests
 │   ├── integration/       # Integration tests

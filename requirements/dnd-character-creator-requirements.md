@@ -24,13 +24,19 @@ This document outlines the requirements for a web-based character creation tool 
 - Central character data object management
 - Real-time calculations and validation
 
-### Out of Scope
-- Character advancement beyond 1st level (initial release)
-- Spell management for spellcasters
-- Magic item creation
-- Campaign-specific content
+### Out of Scope (Initial Release)
 - Multi-user functionality
 - Backend database storage
+- Real-time multiplayer features
+- Third-party character sheet exports
+
+### Extended Scope (Adventure Engine)
+- AI-powered adventure generation and dungeon mastering
+- Complete spell management and equipment systems
+- Character advancement through all levels
+- Combat encounter simulation
+- Experience and treasure reward systems
+- SRD-compliant adventure campaigns
 
 ### Success Criteria
 - Generate valid D&D 3.5 characters according to SRD rules
@@ -587,7 +593,64 @@ This document outlines the requirements for a web-based character creation tool 
   - Divine Abilities and Feats: Divine-specific powers
   - Divine Domains and Spells: Divine magic systems
 
+## Adventure Engine Requirements (Extended Functionality)
+
+### FR-012: Enter Dungeon Mode - AI-Powered Adventure Engine
+- **Description**: Complete adventure generation system acting as AI Dungeon Master
+- **Priority**: Medium (Phase 2)
+- **Acceptance Criteria**: 
+  - Generates minimum 1 week of adventures per character level (configurable)
+  - Integrates ChatGPT, GitHub Copilot, or internal random generation
+  - Uses all random tables and SRD encounter data
+  - Produces narrative text in character's voice
+  - Full SRD rule compliance for all encounters
+
+### FR-013: Character Enhancement System
+- **Description**: Extended character system with spells and equipment management
+- **Priority**: High (Phase 2)
+- **Acceptance Criteria**: 
+  - Complete SRD spell database integration
+  - Dynamic equipment system with stat calculations
+  - Automatic character stat updates from equipment/spells
+  - Full equipment slot management (worn/carried/stored)
+  - Magic item effects and identification
+
+### FR-014: Encounter Engine
+- **Description**: Comprehensive combat and encounter simulation engine
+- **Priority**: High (Phase 2) 
+- **Acceptance Criteria**: 
+  - Complete SRD combat rule implementation
+  - Intelligent monster AI with tactical decision-making
+  - Trap and hazard simulation system
+  - NPC interaction and conversation engine
+  - Automatic encounter scaling and difficulty balancing
+
+### FR-015: Reward and Progression System
+- **Description**: SRD-compliant experience, treasure, and advancement systems
+- **Priority**: Medium (Phase 2)
+- **Acceptance Criteria**: 
+  - Automatic XP calculation and level advancement
+  - Treasure generation following SRD guidelines
+  - Character progression through all levels
+  - Skill point allocation and feat selection assistance
+  - Magic item generation and distribution
+
+### FR-016: Adventure Content Generation
+- **Description**: Dynamic adventure content creation and world state management
+- **Priority**: Low (Phase 2)
+- **Acceptance Criteria**: 
+  - Location generation (dungeons, settlements, wilderness)
+  - Coherent plot integration with character backgrounds
+  - Persistent world state across adventure sessions
+  - Multi-session story arcs and side quests
+  - Environmental storytelling and atmosphere
+
+*Note: Complete specifications for Adventure Engine requirements are detailed in `adventure-engine-requirements.md`*
+
+---
+
 ### Appendix C: Change Log
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
+| 1.1 | Sept 20, 2025 | Added Adventure Engine requirements | Requirements Analyst |
 | 1.0 | Sept 20, 2025 | Initial version | Requirements Analyst |
