@@ -40,6 +40,126 @@ Before generating any code, ensure you:
 - Check for potential security vulnerabilities
 - Ensure code follows established patterns
 
+## D&D Character Creator Specific Requirements
+
+### Portrait Generation System (FR-007)
+When implementing the D&D character creation tool, you MUST include the Character Portrait Designer system with the following mandatory components:
+
+**Core Portrait Engine Requirements:**
+- Layered SVG/Canvas-based graphics system
+- Automatic portrait generation from character race/class/equipment choices
+- Real-time synchronization with character object changes
+- Manual customization tools for player personalization
+- Asset library management for race-specific graphics
+- Equipment visualization system with proper layering
+- Export functionality in multiple formats (PNG, SVG, Data URL)
+
+**Implementation Structure (ALL in code-repository/):**
+```
+code-repository/src/portrait/
+├── portrait-engine.js          // Core PortraitEngine class
+├── asset-library.js           // Asset management and loading
+├── layer-manager.js           // SVG layer composition and z-index
+├── customization-tools.js     // Manual customization interface
+└── portrait-integration.js    // Character Manager integration
+
+code-repository/src/data/portrait-assets/
+├── races/                     // Race-specific base portraits and features
+├── equipment/                 // Armor, weapons, accessories overlays  
+├── customization/             // Hair styles, facial features, build options
+└── backgrounds/               // Portrait backgrounds and themes
+```
+
+**Integration Requirements:**
+- Portrait data embedded in central Character object
+- Automatic updates triggered by race/class/equipment changes
+- Performance targets: < 2s generation, < 500ms updates
+- Cross-browser compatibility (Chrome, Firefox, Safari, Edge)
+- Memory usage limits and cleanup procedures
+
+**Technical Implementation Standards:**
+- Pure JavaScript ES6+ (no external frameworks)
+- SVG manipulation with proper layer management
+- Event-driven architecture for real-time updates
+- Comprehensive error handling and graceful degradation
+- Asset lazy loading and optimization
+- Export functionality with quality controls
+
+### MANDATORY: Epic Level Progression System (FR-008)
+**REQUIRED for ALL D&D Character Creator implementations:**
+
+**Epic Level Engine Requirements:**
+- Support character levels 21-100 with SRD-compliant progression rules
+- Epic attack bonus calculation: +1 per odd level above 20
+- Epic save bonus calculation: +1 per even level above 20  
+- Epic feat selection every 3 levels (21, 24, 27, etc.)
+- Epic spellcaster progression with Improved Spell Capacity feats
+- Divine ascension system supporting divine ranks 0 through 21+
+- Multiclass epic progression with cross-class restrictions
+- Performance requirement: < 100ms calculation time per level
+
+**Implementation Structure (ALL in code-repository/):**
+```
+code-repository/src/epic/
+├── epic-level-engine.js        // Core EpicLevelEngine class
+├── divine-ascension-manager.js // Divine rank and power management
+├── epic-feat-selector.js       // Epic feat validation and selection
+├── epic-spellcaster.js        // Epic spellcaster progression
+└── epic-multiclass.js         // Epic multiclass rules engine
+
+code-repository/src/data/epic-rules/
+├── epic-progression-tables.js  // Level-based progression data
+├── divine-abilities.js         // Divine rank powers and restrictions
+├── epic-feats-database.js      // Epic feat prerequisites and effects
+└── epic-spell-progression.js   // Spellcaster level advancement
+```
+
+**Integration Requirements:**
+- Epic data embedded in central Character object epicProgression property
+- Real-time updates for level advancement beyond 20
+- Divine ascension triggers fundamental character type changes
+- Epic feat prerequisites validation with existing character build
+- Cross-system integration with ability scores, skills, and base classes
+
+### MANDATORY: Story Tracker System (FR-009)
+**REQUIRED for ALL D&D Character Creator implementations:**
+
+**Story Tracker Requirements:**
+- Automatic backstory generation based on character stats, race, class, and background
+- Template-based guided creation with pre-defined narrative elements
+- Free-form story editing with rich text and media support
+- Story event tracking with timeline organization
+- Character relationship management with NPCs and other PCs
+- Plot hook generation tied to character background and goals
+- Integration with character sheet as dedicated story tab/section
+- Export capabilities for story elements and complete narratives
+
+**Implementation Structure (ALL in code-repository/):**
+```
+code-repository/src/story/
+├── story-tracker.js           // Core StoryTracker class
+├── backstory-generator.js     // Automatic story generation engine
+├── story-event-manager.js     // Timeline and event tracking
+├── relationship-manager.js    // Character relationship system
+├── narrative-templates.js     // Template-based story construction
+└── story-integration.js      // Character sheet integration
+
+code-repository/src/data/story-templates/
+├── race-based-stories.js      // Race-specific narrative templates
+├── class-based-stories.js     // Class-specific background elements
+├── background-stories.js      // Background-specific story hooks
+├── relationship-templates.js  // NPC and PC relationship frameworks
+└── plot-hook-generators.js    // Automatic plot hook creation
+```
+
+**Integration Requirements:**
+- Story data embedded in central Character object backstory property
+- Automatic story generation triggers on character creation completion
+- Template selection based on character's race, class, background, and ability scores
+- Media asset management for character portraits, location images, and story illustrations
+- Real-time story updates synchronized with character progression
+- Story export functionality integrated with character sheet export system
+
 ## Code Templates
 
 ### Function Template
