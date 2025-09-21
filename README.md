@@ -206,6 +206,51 @@ Use the `analysis/` directory for:
 - **Impact Analysis**: Evaluate business impact of requirements
 - **Feasibility Studies**: Assess technical implementation complexity
 
+## 🚀 Server Management & Development
+
+### Port Management Rules
+**🔥 CRITICAL**: Always clean up ports before starting the server to prevent "address already in use" errors.
+
+#### Windows PowerShell Commands:
+```powershell
+# Method 1: Kill all Node.js processes
+Get-Process -Name node | Stop-Process -Force
+
+# Method 2: Find and kill specific port usage
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+```
+
+#### Cross-Platform Commands:
+```bash
+# If kill-port is installed
+npx kill-port 3000
+
+# Manual approach
+lsof -ti:3000 | xargs kill -9
+```
+
+### Server Startup Sequence
+1. **Clean Ports**: Run port cleanup commands
+2. **Start Server**: Execute `node server.js`  
+3. **Verify**: Check `http://localhost:3000` is accessible
+4. **Test Functionality**: Validate all buttons and features work
+
+### Development Server Commands
+```powershell
+# Full startup sequence (Windows PowerShell)
+Get-Process -Name node | Stop-Process -Force; node server.js
+
+# Quick validation
+node -e "console.log('Server validation complete')"
+```
+
+### Error Prevention
+- **Never** start server without port cleanup
+- **Always** verify port 3000 availability first
+- **Test** button functionality after server restart
+- **Monitor** console for JavaScript errors
+
 ## 🤝 Contributing
 
 When adding new content to this workspace:

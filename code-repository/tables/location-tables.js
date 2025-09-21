@@ -122,6 +122,66 @@ const LocationTables = {
         { range: [19, 19], result: "Floating district held aloft by magic" },
         { range: [20, 20], result: "Portal gate to another location" }
       ]
+    },
+
+    "terrain-features": {
+      id: "terrain-features",
+      name: "Terrain Features",
+      description: "Natural and magical terrain features for outdoor adventures",
+      diceExpression: "1d20",
+      category: "locations",
+      results: [
+        { range: [1, 1], result: "Dense forest with ancient trees" },
+        { range: [2, 2], result: "Rocky hills with hidden caves" },
+        { range: [3, 3], result: "Rushing river with treacherous currents" },
+        { range: [4, 4], result: "Misty swampland with hidden dangers" },
+        { range: [5, 5], result: "Open grasslands stretching to horizon" },
+        { range: [6, 6], result: "Jagged mountain peaks covered in snow" },
+        { range: [7, 7], result: "Desert dunes shifting in the wind" },
+        { range: [8, 8], result: "Frozen tundra with howling winds" },
+        { range: [9, 9], result: "Magical grove glowing with energy" },
+        { range: [10, 10], result: "Deep canyon with narrow passages" },
+        { range: [11, 11], result: "Volcanic region with lava flows" },
+        { range: [12, 12], result: "Crystal formations jutting from ground" },
+        { range: [13, 13], result: "Floating islands connected by bridges" },
+        { range: [14, 14], result: "Underground cavern system" },
+        { range: [15, 15], result: "Coastal cliffs overlooking the sea" },
+        { range: [16, 16], result: "Badlands with strange rock formations" },
+        { range: [17, 17], result: "Jungle canopy blocking out sunlight" },
+        { range: [18, 18], result: "Plateau rising high above surrounding land" },
+        { range: [19, 19], result: "Portal-scarred wasteland with reality tears" },
+        { range: [20, 20], result: "Time-dilated zone where past and present merge" }
+      ]
+    },
+
+    "dungeon-theme": {
+      id: "dungeon-theme",
+      name: "Dungeon Theme",
+      description: "Thematic elements and background for dungeon adventures",
+      diceExpression: "1d20",
+      category: "locations",
+      results: [
+        { range: [1, 1], result: "Ancient tomb of forgotten ruler" },
+        { range: [2, 2], result: "Abandoned wizard's tower" },
+        { range: [3, 3], result: "Underground temple to dark deity" },
+        { range: [4, 4], result: "Natural cave system with monsters" },
+        { range: [5, 5], result: "Ruined castle overrun by evil" },
+        { range: [6, 6], result: "Mine shaft with dangerous creatures" },
+        { range: [7, 7], result: "Underwater palace of sea creatures" },
+        { range: [8, 8], result: "Elemental plane gateway complex" },
+        { range: [9, 9], result: "Prison complex with escaped inmates" },
+        { range: [10, 10], result: "Laboratory of mad alchemist" },
+        { range: [11, 11], result: "Cultist hideout in sewers" },
+        { range: [12, 12], result: "Dragon's lair in mountain cave" },
+        { range: [13, 13], result: "Demonic fortress in hellish realm" },
+        { range: [14, 14], result: "Time-lost ruins from another era" },
+        { range: [15, 15], result: "Living dungeon that changes layout" },
+        { range: [16, 16], result: "Extraplanar maze created by entity" },
+        { range: [17, 17], result: "Abandoned city district with secrets" },
+        { range: [18, 18], result: "Necromancer's crypt with undead army" },
+        { range: [19, 19], result: "Planar convergence point with reality shifts" },
+        { range: [20, 20], result: "Artifact vault guarded by constructs" }
+      ]
     }
   }
 };

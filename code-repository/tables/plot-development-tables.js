@@ -134,6 +134,66 @@ const PlotDevelopmentTables = {
         { range: [11, 11], result: "End suffering through mercy killing or preserve life" },
         { range: [12, 12], result: "Trust reformed enemy or remain suspicious" }
       ]
+    },
+
+    "quest-complication": {
+      id: "quest-complication",
+      name: "Quest Complications",
+      description: "Unexpected obstacles that complicate ongoing adventures",
+      diceExpression: "1d20",
+      category: "complications",
+      results: [
+        { range: [1, 1], result: "Key ally is revealed as double agent" },
+        { range: [2, 2], result: "Important information was deliberately false" },
+        { range: [3, 3], result: "Rival adventuring party pursues same goal" },
+        { range: [4, 4], result: "Target has already been moved or hidden" },
+        { range: [5, 5], result: "Natural disaster blocks primary route" },
+        { range: [6, 6], result: "Local authorities declare party outlaws" },
+        { range: [7, 7], result: "Quest giver disappears under mysterious circumstances" },
+        { range: [8, 8], result: "Magical barrier prevents access to objective" },
+        { range: [9, 9], result: "Key NPC is captured by enemies" },
+        { range: [10, 10], result: "Resource depletion forces difficult choices" },
+        { range: [11, 11], result: "Time limit becomes more urgent than expected" },
+        { range: [12, 12], result: "Innocent bystanders become involved" },
+        { range: [13, 13], result: "Weather conditions severely hamper progress" },
+        { range: [14, 14], result: "Equipment failure at critical moment" },
+        { range: [15, 15], result: "Ancient curse activates due to party's actions" },
+        { range: [16, 16], result: "Political situation changes dramatically" },
+        { range: [17, 17], result: "Monster migration forces detour" },
+        { range: [18, 18], result: "Key location is under siege by hostile forces" },
+        { range: [19, 19], result: "Party member's past catches up with them" },
+        { range: [20, 20], result: "True objective was different than originally stated" }
+      ]
+    },
+
+    "plot-twist": {
+      id: "plot-twist",
+      name: "Plot Twists",
+      description: "Unexpected revelations that change adventure direction",
+      diceExpression: "1d20",
+      category: "plot-development",
+      results: [
+        { range: [1, 1], result: "Trusted ally has been working for the enemy all along" },
+        { range: [2, 2], result: "The villain is actually the party's patron in disguise" },
+        { range: [3, 3], result: "The artifact they seek is already in their possession" },
+        { range: [4, 4], result: "One party member is revealed to be of noble birth" },
+        { range: [5, 5], result: "The mission was a test set up by a secret organization" },
+        { range: [6, 6], result: "The real treasure was the friends they made along the way" },
+        { range: [7, 7], result: "The location they seek exists in multiple dimensions" },
+        { range: [8, 8], result: "The enemy they fight is their future self" },
+        { range: [9, 9], result: "The curse can only be broken by making things worse" },
+        { range: [10, 10], result: "The prophecy was deliberately mistranslated" },
+        { range: [11, 11], result: "The monster they hunt is protecting something innocent" },
+        { range: [12, 12], result: "Their actions have been fulfilling the villain's plan" },
+        { range: [13, 13], result: "The quest giver is already dead, replaced by illusion" },
+        { range: [14, 14], result: "Time loops have made this the same adventure repeatedly" },
+        { range: [15, 15], result: "The map they follow leads to a trap, not treasure" },
+        { range: [16, 16], result: "The party has been transported to alternate reality" },
+        { range: [17, 17], result: "Their memories of why they started have been altered" },
+        { range: [18, 18], result: "The solution requires sacrificing their greatest strength" },
+        { range: [19, 19], result: "The ancient evil was actually keeping worse evil contained" },
+        { range: [20, 20], result: "Victory will fulfill dark prophecy they tried to prevent" }
+      ]
     }
   }
 };

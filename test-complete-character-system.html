@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Character Management Test - RulzLawyer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #1a1a1a; color: #fff; }
+        .test-container { max-width: 1200px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #444; background-color: #2d2d2d; border-radius: 8px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        button { 
+            margin: 5px; padding: 10px 20px; background: #4CAF50; color: white; 
+            border: none; border-radius: 5px; cursor: pointer; 
+        }
+        button:hover { background: #45a049; }
+        .secondary { background: #2196F3 !important; }
+        .secondary:hover { background: #1976D2 !important; }
+        .character-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0; }
+        .character-card { 
+            background: #333; padding: 15px; border-radius: 8px; border: 2px solid transparent; 
+            cursor: pointer; transition: border-color 0.3s;
+        }
+        .character-card:hover { border-color: #4CAF50; }
+        .character-card.active { border-color: #d4af37; }
+        .character-name { font-size: 1.2em; font-weight: bold; color: #d4af37; }
+        .character-info { margin: 5px 0; }
+        .character-stats { font-size: 0.9em; color: #ccc; }
+        .character-actions { margin-top: 10px; }
+        .btn-small { 
+            padding: 5px 10px; font-size: 0.8em; margin-right: 5px;
+            background: #FF9800; color: white; border: none; border-radius: 3px; cursor: pointer;
+        }
+        .btn-small:hover { background: #F57C00; }
+        input, select { padding: 8px; margin: 5px; background: #333; color: #fff; border: 1px solid #666; border-radius: 4px; }
+        .form-group { margin: 15px 0; }
+        .form-group label { display: block; margin-bottom: 5px; color: #ccc; }
+        pre { background: #000; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧙‍♂️ Complete Character Management System Test</h1>
+        
+        <div class="test-section">
+            <h2>System Status</h2>
+            <div id="system-status"></div>
+            <button onclick="checkSystemStatus()" class="secondary">Check System Status</button>
+        </div>
+
+        <div class="test-section">
+            <h2>Character Creation Test</h2>
+            <div class="form-group">
+                <label>Character Name:</label>
+                <input type="text" id="new-char-name" value="Testador the Brave" placeholder="Enter character name">
+            </div>
+            <div class="form-group">
+                <label>Race:</label>
+                <select id="new-char-race">
+                    <option value="Human">Human</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Halfling">Halfling</option>
+                    <option value="Half-Elf">Half-Elf</option>
+                    <option value="Half-Orc">Half-Orc</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Class:</label>
+                <select id="new-char-class">
+                    <option value="Fighter">Fighter</option>
+                    <option value="Wizard">Wizard</option>
+                    <option value="Cleric">Cleric</option>
+                    <option value="Rogue">Rogue</option>
+                    <option value="Ranger">Ranger</option>
+                    <option value="Barbarian">Barbarian</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Level:</label>
+                <input type="number" id="new-char-level" value="1" min="1" max="20">
+            </div>
+            <button onclick="testCreateCharacter()">Create Test Character</button>
+            <button onclick="createMultipleCharacters()" class="secondary">Create Multiple Characters</button>
+            <div id="creation-results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Character List & Selection</h2>
+            <button onclick="refreshCharacterList()">Refresh Character List</button>
+            <button onclick="clearAllCharacters()" style="background: #f44336;">Clear All Characters</button>
+            <div id="character-list" class="character-list"></div>
+            <div id="selection-results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Character Details & Editing</h2>
+            <div id="character-details"></div>
+            <div id="editing-results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Full System Test</h2>
+            <button onclick="runComprehensiveTest()" style="background: #9C27B0;">Run Complete System Test</button>
+            <div id="comprehensive-results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Debug Console</h2>
+            <pre id="debug-output"></pre>
+        </div>
+    </div>
+
+    <!-- Load all game engine modules -->
+    <script src="code-repository/src/dice-engine.js"></script>
+    <script src="code-repository/src/srd-data.js"></script>
+    <script src="code-repository/src/spell-manager.js"></script>
+    <script src="code-repository/src/equipment-manager.js"></script>
+    <script src="code-repository/src/random-tables-index.js"></script>
+    <script src="code-repository/src/character-manager.js"></script>
+    <script src="code-repository/src/adventure-engine.js"></script>
+    <script src="code-repository/src/storage-manager.js"></script>
+    <script src="code-repository/src/web-interface.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        let webInterface = null;
+        let selectedCharacterId = null;
+        
+        // Initialize and check system
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                checkSystemStatus();
+                refreshCharacterList();
+            }, 2000);
+        });
+
+        function logResult(containerId, message, type = 'info') {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            container.appendChild(div);
+            
+            // Also log to debug console
+            const debugConsole = document.getElementById('debug-output');
+            debugConsole.textContent += `[${new Date().toLocaleTimeString()}] ${message}\n`;
+            debugConsole.scrollTop = debugConsole.scrollHeight;
+        }
+
+        function checkSystemStatus() {
+            logResult('system-status', '🔍 Checking system status...', 'info');
+            
+            // Check game engine
+            if (window.gameEngine) {
+                logResult('system-status', '✅ Game Engine: Available', 'success');
+                
+                if (window.gameEngine.characterManager) {
+                    logResult('system-status', '✅ Character Manager: Available', 'success');
+                } else {
+                    logResult('system-status', '❌ Character Manager: Missing', 'error');
+                }
+                
+                if (window.gameEngine.storageManager) {
+                    logResult('system-status', '✅ Storage Manager: Available', 'success');
+                } else {
+                    logResult('system-status', '❌ Storage Manager: Missing', 'error');
+                }
+            } else {
+                logResult('system-status', '❌ Game Engine: Not Available', 'error');
+            }
+            
+            // Check web interface
+            if (window.webInterface) {
+                logResult('system-status', '✅ Web Interface: Available', 'success');
+                webInterface = window.webInterface;
+            } else {
+                logResult('system-status', '❌ Web Interface: Not Available', 'error');
+            }
+
+            // Check global functions
+            const requiredFunctions = ['createNewCharacter', 'selectCharacter', 'editCharacter'];
+            requiredFunctions.forEach(funcName => {
+                if (typeof window[funcName] === 'function') {
+                    logResult('system-status', `✅ ${funcName}: Available`, 'success');
+                } else {
+                    logResult('system-status', `❌ ${funcName}: Missing`, 'error');
+                }
+            });
+        }
+
+        function testCreateCharacter() {
+            const name = document.getElementById('new-char-name').value;
+            const race = document.getElementById('new-char-race').value;
+            const charClass = document.getElementById('new-char-class').value;
+            const level = parseInt(document.getElementById('new-char-level').value) || 1;
+
+            if (!name) {
+                logResult('creation-results', '❌ Character name is required', 'error');
+                return;
+            }
+
+            try {
+                if (!window.gameEngine || !window.gameEngine.characterManager) {
+                    throw new Error('Character Manager not available');
+                }
+
+                const character = window.gameEngine.characterManager.createCharacter({
+                    name: name,
+                    race: race,
+                    class: charClass,
+                    level: level
+                });
+
+                logResult('creation-results', `✅ Character created: ${character.name}`, 'success');
+                logResult('creation-results', `📊 ${character.race} ${character.class}, Level ${character.level}`, 'info');
+                logResult('creation-results', `💪 HP: ${character.hitPoints.current}/${character.hitPoints.maximum}`, 'info');
+                logResult('creation-results', `🎯 AC: ${character.armorClass.total || character.armorClass}`, 'info');
+                logResult('creation-results', `🆔 ID: ${character.id}`, 'info');
+
+                // Refresh character list
+                refreshCharacterList();
+
+            } catch (error) {
+                logResult('creation-results', `❌ Character creation failed: ${error.message}`, 'error');
+            }
+        }
+
+        function createMultipleCharacters() {
+            const testCharacters = [
+                { name: 'Gandalf Gray', race: 'Human', class: 'Wizard', level: 15 },
+                { name: 'Legolas Swift', race: 'Elf', class: 'Ranger', level: 12 },
+                { name: 'Gimli Ironbeard', race: 'Dwarf', class: 'Fighter', level: 10 },
+                { name: 'Bilbo Baggins', race: 'Halfling', class: 'Rogue', level: 5 }
+            ];
+
+            logResult('creation-results', '🧪 Creating multiple test characters...', 'info');
+            let successCount = 0;
+
+            testCharacters.forEach((charData, index) => {
+                try {
+                    const character = window.gameEngine.characterManager.createCharacter(charData);
+                    logResult('creation-results', `✅ ${index + 1}. ${character.name} created successfully`, 'success');
+                    successCount++;
+                } catch (error) {
+                    logResult('creation-results', `❌ ${index + 1}. Failed to create ${charData.name}: ${error.message}`, 'error');
+                }
+            });
+
+            logResult('creation-results', `📊 Batch Creation Complete: ${successCount}/${testCharacters.length} characters created`, successCount === testCharacters.length ? 'success' : 'warning');
+            refreshCharacterList();
+        }
+
+        function refreshCharacterList() {
+            try {
+                const characters = window.gameEngine.storageManager.getAllCharacters();
+                const listContainer = document.getElementById('character-list');
+                
+                logResult('selection-results', `📋 Found ${characters.length} characters in storage`, 'info');
+
+                if (characters.length === 0) {
+                    listContainer.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">No characters found. Create some characters to see them here.</div>';
+                    return;
+                }
+
+                let html = '';
+                characters.forEach(char => {
+                    const isActive = selectedCharacterId === char.id;
+                    html += `
+                        <div class="character-card ${isActive ? 'active' : ''}" onclick="selectCharacterForTesting('${char.id}')">
+                            <div class="character-name">${char.name}</div>
+                            <div class="character-info">Level ${char.level} ${char.race} ${char.class}</div>
+                            <div class="character-stats">
+                                HP: ${char.hitPoints.current || char.hitPoints.maximum}/${char.hitPoints.maximum} | 
+                                AC: ${char.armorClass.total || char.armorClass}
+                            </div>
+                            <div class="character-actions">
+                                <button class="btn-small" onclick="event.stopPropagation(); testEditCharacter('${char.id}')">Edit</button>
+                                <button class="btn-small" onclick="event.stopPropagation(); viewCharacterDetails('${char.id}')" style="background: #2196F3;">View</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                listContainer.innerHTML = html;
+            } catch (error) {
+                logResult('selection-results', `❌ Failed to refresh character list: ${error.message}`, 'error');
+            }
+        }
+
+        function selectCharacterForTesting(characterId) {
+            try {
+                selectedCharacterId = characterId;
+                const character = window.gameEngine.storageManager.getCharacter(characterId);
+                
+                if (character) {
+                    logResult('selection-results', `✅ Selected: ${character.name}`, 'success');
+                    viewCharacterDetails(characterId);
+                    refreshCharacterList(); // Refresh to show active state
+                } else {
+                    logResult('selection-results', `❌ Character not found: ${characterId}`, 'error');
+                }
+            } catch (error) {
+                logResult('selection-results', `❌ Failed to select character: ${error.message}`, 'error');
+            }
+        }
+
+        function viewCharacterDetails(characterId) {
+            try {
+                const character = window.gameEngine.storageManager.getCharacter(characterId);
+                if (!character) {
+                    logResult('editing-results', `❌ Character not found: ${characterId}`, 'error');
+                    return;
+                }
+
+                const detailsHtml = `
+                    <div style="background: #333; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <h3 style="color: #d4af37; margin-top: 0;">${character.name}</h3>
+                        <p><strong>Race:</strong> ${character.race} | <strong>Class:</strong> ${character.class} | <strong>Level:</strong> ${character.level}</p>
+                        
+                        <h4>Ability Scores</h4>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0;">
+                            <div>STR: ${character.abilities.strength}</div>
+                            <div>DEX: ${character.abilities.dexterity}</div>
+                            <div>CON: ${character.abilities.constitution}</div>
+                            <div>INT: ${character.abilities.intelligence}</div>
+                            <div>WIS: ${character.abilities.wisdom}</div>
+                            <div>CHA: ${character.abilities.charisma}</div>
+                        </div>
+                        
+                        <h4>Combat Stats</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 10px 0;">
+                            <div>Hit Points: ${character.hitPoints.current}/${character.hitPoints.maximum}</div>
+                            <div>Armor Class: ${character.armorClass.total || character.armorClass}</div>
+                            <div>Base Attack Bonus: +${character.baseAttackBonus}</div>
+                            <div>Status: ${character.status || 'Alive'}</div>
+                        </div>
+                        
+                        <h4>Saving Throws</h4>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0;">
+                            <div>Fortitude: +${character.savingThrows.fortitude}</div>
+                            <div>Reflex: +${character.savingThrows.reflex}</div>
+                            <div>Will: +${character.savingThrows.will}</div>
+                        </div>
+                        
+                        <div style="margin-top: 20px;">
+                            <button onclick="testEditCharacter('${character.id}')" style="background: #FF9800;">Edit Character</button>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('character-details').innerHTML = detailsHtml;
+            } catch (error) {
+                logResult('editing-results', `❌ Failed to view character details: ${error.message}`, 'error');
+            }
+        }
+
+        function testEditCharacter(characterId) {
+            logResult('editing-results', `🔧 Testing edit character functionality for: ${characterId}`, 'info');
+            
+            try {
+                if (typeof window.editCharacter === 'function') {
+                    window.editCharacter(characterId);
+                    logResult('editing-results', '✅ Edit character modal should be open', 'success');
+                } else {
+                    logResult('editing-results', '❌ editCharacter function not available', 'error');
+                }
+            } catch (error) {
+                logResult('editing-results', `❌ Edit character failed: ${error.message}`, 'error');
+            }
+        }
+
+        function clearAllCharacters() {
+            if (confirm('Are you sure you want to delete all characters? This cannot be undone.')) {
+                try {
+                    localStorage.removeItem('rulzlawyer_characters');
+                    logResult('selection-results', '🗑️ All characters cleared', 'warning');
+                    refreshCharacterList();
+                    selectedCharacterId = null;
+                    document.getElementById('character-details').innerHTML = '';
+                } catch (error) {
+                    logResult('selection-results', `❌ Failed to clear characters: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        function runComprehensiveTest() {
+            logResult('comprehensive-results', '🧪 Starting comprehensive character management system test...', 'info');
+            
+            let testsPassed = 0;
+            let totalTests = 0;
+
+            // Test 1: Character Creation
+            totalTests++;
+            try {
+                const testChar = window.gameEngine.characterManager.createCharacter({
+                    name: 'Comprehensive Test Character',
+                    race: 'Human',
+                    class: 'Fighter',
+                    level: 5
+                });
+                
+                if (testChar && testChar.id) {
+                    logResult('comprehensive-results', '✅ Test 1: Character Creation - PASSED', 'success');
+                    testsPassed++;
+                } else {
+                    logResult('comprehensive-results', '❌ Test 1: Character Creation - FAILED', 'error');
+                }
+            } catch (error) {
+                logResult('comprehensive-results', `❌ Test 1: Character Creation - ERROR: ${error.message}`, 'error');
+            }
+
+            // Test 2: Character Storage
+            totalTests++;
+            try {
+                const characters = window.gameEngine.storageManager.getAllCharacters();
+                if (characters && characters.length > 0) {
+                    logResult('comprehensive-results', `✅ Test 2: Character Storage - PASSED (${characters.length} characters)`, 'success');
+                    testsPassed++;
+                } else {
+                    logResult('comprehensive-results', '❌ Test 2: Character Storage - FAILED (no characters found)', 'error');
+                }
+            } catch (error) {
+                logResult('comprehensive-results', `❌ Test 2: Character Storage - ERROR: ${error.message}`, 'error');
+            }
+
+            // Test 3: Character Selection
+            totalTests++;
+            try {
+                const characters = window.gameEngine.storageManager.getAllCharacters();
+                if (characters.length > 0) {
+                    const testCharacter = characters[0];
+                    selectCharacterForTesting(testCharacter.id);
+                    
+                    if (selectedCharacterId === testCharacter.id) {
+                        logResult('comprehensive-results', '✅ Test 3: Character Selection - PASSED', 'success');
+                        testsPassed++;
+                    } else {
+                        logResult('comprehensive-results', '❌ Test 3: Character Selection - FAILED', 'error');
+                    }
+                } else {
+                    logResult('comprehensive-results', '❌ Test 3: Character Selection - SKIPPED (no characters)', 'warning');
+                }
+            } catch (error) {
+                logResult('comprehensive-results', `❌ Test 3: Character Selection - ERROR: ${error.message}`, 'error');
+            }
+
+            // Test 4: Global Functions
+            totalTests++;
+            const requiredFunctions = ['createNewCharacter', 'selectCharacter', 'editCharacter', 'closeModal'];
+            const availableFunctions = requiredFunctions.filter(funcName => typeof window[funcName] === 'function');
+            
+            if (availableFunctions.length === requiredFunctions.length) {
+                logResult('comprehensive-results', '✅ Test 4: Global Functions - PASSED', 'success');
+                testsPassed++;
+            } else {
+                logResult('comprehensive-results', `❌ Test 4: Global Functions - FAILED (${availableFunctions.length}/${requiredFunctions.length})`, 'error');
+            }
+
+            // Final Results
+            const successRate = ((testsPassed / totalTests) * 100).toFixed(1);
+            logResult('comprehensive-results', '', 'info');
+            logResult('comprehensive-results', `📊 COMPREHENSIVE TEST RESULTS`, 'info');
+            logResult('comprehensive-results', `Tests Passed: ${testsPassed}/${totalTests}`, testsPassed === totalTests ? 'success' : 'warning');
+            logResult('comprehensive-results', `Success Rate: ${successRate}%`, testsPassed === totalTests ? 'success' : 'warning');
+            
+            if (testsPassed === totalTests) {
+                logResult('comprehensive-results', '🎉 ALL TESTS PASSED - Character Management System is fully operational!', 'success');
+            } else {
+                logResult('comprehensive-results', `⚠️ ${totalTests - testsPassed} tests failed - System needs attention`, 'error');
+            }
+
+            // Refresh displays
+            refreshCharacterList();
+        }
+    </script>
+</body>
+</html>

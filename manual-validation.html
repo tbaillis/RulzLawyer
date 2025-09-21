@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RulzLawyer Manual Validation</title>
+    <style>
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: #1a1a2e; 
+            color: #e8e6e3; 
+            margin: 20px; 
+            line-height: 1.6;
+        }
+        .console { 
+            background: #0f0f23; 
+            padding: 20px; 
+            border: 1px solid #d4af37; 
+            border-radius: 8px; 
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+        h1 { color: #d4af37; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>🎲 RulzLawyer System Validation</h1>
+    <div id="console-output" class="console">Starting validation...\n</div>
+
+    <!-- Load all systems in correct order -->
+    <script src="code-repository/src/dice-engine.js"></script>
+    <script src="code-repository/src/srd-data.js"></script>
+    <script src="code-repository/src/spell-manager.js"></script>
+    <script src="code-repository/src/equipment-manager.js"></script>
+    <script src="code-repository/src/random-tables-index.js"></script>
+    <script src="code-repository/src/character-manager.js"></script>
+    <script src="code-repository/src/adventure-engine.js"></script>
+    <script src="code-repository/src/storage-manager.js"></script>
+
+    <script>
+        // Capture console output and display it
+        const consoleDiv = document.getElementById('console-output');
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            consoleDiv.textContent += args.join(' ') + '\n';
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            consoleDiv.textContent += '❌ ERROR: ' + args.join(' ') + '\n';
+        };
+    </script>
+    
+    <!-- Run validation -->
+    <script src="validate-systems.js"></script>
+</body>
+</html>

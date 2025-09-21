@@ -130,6 +130,36 @@ const NPCTables = {
         { range: [19, 19], result: "Possesses a powerful magical item" },
         { range: [20, 20], result: "Is not entirely human" }
       ]
+    },
+
+    "npc-personality": {
+      id: "npc-personality",
+      name: "NPC Personality Traits",
+      description: "Personality characteristics and behavioral traits for NPCs",
+      diceExpression: "1d20",
+      category: "npcs",
+      results: [
+        { range: [1, 1], result: "Cheerful and optimistic" },
+        { range: [2, 2], result: "Gruff and suspicious" },
+        { range: [3, 3], result: "Nervous and fidgety" },
+        { range: [4, 4], result: "Arrogant and condescending" },
+        { range: [5, 5], result: "Kind and helpful" },
+        { range: [6, 6], result: "Sarcastic and witty" },
+        { range: [7, 7], result: "Melancholy and brooding" },
+        { range: [8, 8], result: "Energetic and enthusiastic" },
+        { range: [9, 9], result: "Calm and wise" },
+        { range: [10, 10], result: "Aggressive and quick to anger" },
+        { range: [11, 11], result: "Shy and soft-spoken" },
+        { range: [12, 12], result: "Boastful and loud" },
+        { range: [13, 13], result: "Paranoid and distrustful" },
+        { range: [14, 14], result: "Curious and inquisitive" },
+        { range: [15, 15], result: "Lazy and unmotivated" },
+        { range: [16, 16], result: "Perfectionist and meticulous" },
+        { range: [17, 17], result: "Flirtatious and charming" },
+        { range: [18, 18], result: "Stoic and emotionless" },
+        { range: [19, 19], result: "Eccentric and unpredictable" },
+        { range: [20, 20], result: "Noble and honorable" }
+      ]
     }
   }
 };

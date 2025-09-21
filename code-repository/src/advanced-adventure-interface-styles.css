@@ -1,0 +1,1665 @@
+/**
+ * Advanced Adventure Interface Styles
+ * Comprehensive CSS for campaign management, encounter design, and session tools
+ * Modern, responsive design with accessibility features
+ * 
+ * @version 1.0.0
+ * @author RulzLawyer Development Team
+ */
+
+/* ============================
+   CSS CUSTOM PROPERTIES
+   ============================ */
+
+:root {
+  /* Adventure Interface Colors */
+  --adventure-primary: #8B4513;
+  --adventure-secondary: #DAA520;
+  --adventure-accent: #DC143C;
+  --adventure-success: #228B22;
+  --adventure-warning: #FF8C00;
+  --adventure-danger: #B22222;
+  --adventure-info: #4169E1;
+  
+  /* Background Colors */
+  --adventure-bg-primary: #F5F5DC;
+  --adventure-bg-secondary: #FAEBD7;
+  --adventure-bg-tertiary: #FFF8DC;
+  --adventure-bg-dark: #2F1B14;
+  --adventure-bg-overlay: rgba(47, 27, 20, 0.9);
+  
+  /* Text Colors */
+  --adventure-text-primary: #2F1B14;
+  --adventure-text-secondary: #5D4E37;
+  --adventure-text-muted: #8B7355;
+  --adventure-text-light: #F5F5DC;
+  
+  /* Border Colors */
+  --adventure-border-primary: #8B4513;
+  --adventure-border-secondary: #DAA520;
+  --adventure-border-light: #DDD;
+  
+  /* Combat Colors */
+  --combat-active: #DC143C;
+  --combat-waiting: #FFD700;
+  --combat-done: #808080;
+  --combat-dead: #696969;
+  
+  /* Session Colors */
+  --session-active: #32CD32;
+  --session-paused: #FF8C00;
+  --session-ended: #808080;
+  
+  /* Layout */
+  --adventure-border-radius: 8px;
+  --adventure-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --adventure-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --adventure-transition: all 0.3s ease;
+  
+  /* Typography */
+  --adventure-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --adventure-font-size-small: 0.875rem;
+  --adventure-font-size-base: 1rem;
+  --adventure-font-size-large: 1.125rem;
+  --adventure-font-size-xl: 1.25rem;
+  --adventure-font-size-2xl: 1.5rem;
+  --adventure-font-size-3xl: 1.875rem;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --adventure-bg-primary: #1A1A1A;
+  --adventure-bg-secondary: #2D2D2D;
+  --adventure-bg-tertiary: #3A3A3A;
+  --adventure-text-primary: #F5F5DC;
+  --adventure-text-secondary: #D3D3D3;
+  --adventure-text-muted: #A0A0A0;
+  --adventure-border-light: #404040;
+}
+
+/* ============================
+   MAIN INTERFACE LAYOUT
+   ============================ */
+
+.advanced-adventure-interface {
+  font-family: var(--adventure-font-family);
+  color: var(--adventure-text-primary);
+  background-color: var(--adventure-bg-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.adventure-interface-header {
+  background: linear-gradient(135deg, var(--adventure-primary), var(--adventure-secondary));
+  color: var(--adventure-text-light);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--adventure-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.interface-title h1 {
+  margin: 0;
+  font-size: var(--adventure-font-size-2xl);
+  font-weight: bold;
+}
+
+.interface-status {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.interface-status span {
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: var(--adventure-border-radius);
+  font-size: var(--adventure-font-size-small);
+}
+
+.interface-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ============================
+   TAB SYSTEM
+   ============================ */
+
+.adventure-interface-tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-navigation {
+  background-color: var(--adventure-bg-secondary);
+  border-bottom: 2px solid var(--adventure-border-primary);
+  display: flex;
+  overflow-x: auto;
+  padding: 0 1rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  color: var(--adventure-text-secondary);
+  font-size: var(--adventure-font-size-base);
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: var(--adventure-transition);
+}
+
+.tab-btn:hover {
+  background-color: rgba(139, 69, 19, 0.1);
+  color: var(--adventure-text-primary);
+}
+
+.tab-btn.active {
+  background-color: var(--adventure-bg-primary);
+  color: var(--adventure-primary);
+  border-bottom-color: var(--adventure-primary);
+}
+
+.tab-content {
+  flex: 1;
+  background-color: var(--adventure-bg-primary);
+}
+
+.tab-panel {
+  display: none;
+  height: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ============================
+   CAMPAIGN MANAGEMENT
+   ============================ */
+
+.campaign-manager {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.campaign-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--adventure-border-light);
+}
+
+.campaign-header h2 {
+  color: var(--adventure-primary);
+  margin: 0;
+  font-size: var(--adventure-font-size-2xl);
+}
+
+.campaign-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.campaign-card {
+  background-color: var(--adventure-bg-secondary);
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--adventure-shadow);
+  transition: var(--adventure-transition);
+  cursor: pointer;
+}
+
+.campaign-card:hover {
+  box-shadow: var(--adventure-shadow-hover);
+  transform: translateY(-2px);
+  border-color: var(--adventure-primary);
+}
+
+.campaign-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.campaign-card-header h4 {
+  color: var(--adventure-primary);
+  margin: 0;
+  font-size: var(--adventure-font-size-large);
+}
+
+.campaign-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: var(--adventure-font-size-small);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.campaign-status.active {
+  background-color: var(--adventure-success);
+  color: white;
+}
+
+.campaign-status.paused {
+  background-color: var(--adventure-warning);
+  color: white;
+}
+
+.campaign-status.completed {
+  background-color: var(--adventure-text-muted);
+  color: white;
+}
+
+.campaign-card-body p {
+  color: var(--adventure-text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.campaign-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.campaign-meta span {
+  color: var(--adventure-text-muted);
+  font-size: var(--adventure-font-size-small);
+}
+
+.campaign-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.no-content {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--adventure-text-muted);
+}
+
+.no-content h3 {
+  color: var(--adventure-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.campaign-details {
+  background-color: var(--adventure-bg-secondary);
+  border-radius: var(--adventure-border-radius);
+  padding: 2rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.campaign-info h3 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+}
+
+.campaign-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.campaign-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--adventure-border-light);
+  margin-bottom: 2rem;
+}
+
+.campaign-tab-btn {
+  background: none;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  color: var(--adventure-text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: var(--adventure-transition);
+}
+
+.campaign-tab-btn:hover {
+  color: var(--adventure-text-primary);
+}
+
+.campaign-tab-btn.active {
+  color: var(--adventure-primary);
+  border-bottom-color: var(--adventure-primary);
+}
+
+.campaign-panel {
+  display: none;
+}
+
+.campaign-panel.active {
+  display: block;
+}
+
+.campaign-actions-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--adventure-border-light);
+}
+
+/* ============================
+   ENCOUNTER BUILDER
+   ============================ */
+
+.encounter-manager {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.encounter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--adventure-border-light);
+}
+
+.encounter-header h2 {
+  color: var(--adventure-primary);
+  margin: 0;
+  font-size: var(--adventure-font-size-2xl);
+}
+
+.encounter-builder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.encounter-setup,
+.encounter-preview {
+  background-color: var(--adventure-bg-secondary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.setup-section {
+  margin-bottom: 2rem;
+}
+
+.setup-section h3 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+  font-size: var(--adventure-font-size-large);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--adventure-text-secondary);
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  background-color: var(--adventure-bg-tertiary);
+  color: var(--adventure-text-primary);
+  font-size: var(--adventure-font-size-base);
+  transition: var(--adventure-transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--adventure-primary);
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+}
+
+.creatures-list {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  min-height: 100px;
+  background-color: var(--adventure-bg-tertiary);
+}
+
+.effects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.effect-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--adventure-bg-tertiary);
+  border-radius: var(--adventure-border-radius);
+}
+
+.effect-item input[type="checkbox"] {
+  margin: 0;
+}
+
+.encounter-preview h3 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+}
+
+.preview-content {
+  background-color: var(--adventure-bg-tertiary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  min-height: 200px;
+  border: 2px solid var(--adventure-border-light);
+}
+
+.encounter-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--adventure-bg-tertiary);
+  border-radius: var(--adventure-border-radius);
+  border: 2px solid var(--adventure-border-light);
+}
+
+.stat-item label {
+  display: block;
+  color: var(--adventure-text-secondary);
+  font-size: var(--adventure-font-size-small);
+  margin-bottom: 0.5rem;
+}
+
+.stat-item span {
+  display: block;
+  color: var(--adventure-primary);
+  font-size: var(--adventure-font-size-large);
+  font-weight: bold;
+}
+
+.encounter-actions-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--adventure-border-light);
+}
+
+/* ============================
+   COMBAT TRACKER
+   ============================ */
+
+.combat-tracker {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.combat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--adventure-danger), var(--adventure-accent));
+  color: var(--adventure-text-light);
+  border-radius: var(--adventure-border-radius);
+  box-shadow: var(--adventure-shadow);
+}
+
+.combat-header h2 {
+  margin: 0;
+  font-size: var(--adventure-font-size-2xl);
+}
+
+.combat-status {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.combat-status > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.combat-status label {
+  font-size: var(--adventure-font-size-small);
+  opacity: 0.9;
+  margin-bottom: 0.25rem;
+}
+
+.combat-status span {
+  font-size: var(--adventure-font-size-large);
+  font-weight: bold;
+}
+
+.combat-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.initiative-tracker,
+.combat-details {
+  background-color: var(--adventure-bg-secondary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.initiative-tracker h3,
+.combat-details h3 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+}
+
+.initiative-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.initiative-list {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  background-color: var(--adventure-bg-tertiary);
+  min-height: 300px;
+  padding: 1rem;
+}
+
+.no-combatants {
+  text-align: center;
+  color: var(--adventure-text-muted);
+  padding: 2rem;
+}
+
+.combatant-card {
+  background-color: var(--adventure-bg-primary);
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--adventure-transition);
+}
+
+.combatant-card.active {
+  border-color: var(--combat-active);
+  background-color: rgba(220, 20, 60, 0.1);
+  box-shadow: 0 0 0 2px rgba(220, 20, 60, 0.2);
+}
+
+.combatant-card.waiting {
+  border-color: var(--combat-waiting);
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+.combatant-card.done {
+  border-color: var(--combat-done);
+  background-color: rgba(128, 128, 128, 0.1);
+  opacity: 0.7;
+}
+
+.combatant-info h5 {
+  margin: 0 0 0.5rem 0;
+  color: var(--adventure-text-primary);
+}
+
+.combatant-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--adventure-font-size-small);
+  color: var(--adventure-text-secondary);
+}
+
+.combatant-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.active-combatant {
+  margin-bottom: 2rem;
+}
+
+.combatant-info {
+  background-color: var(--adventure-bg-tertiary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  border: 2px solid var(--adventure-border-light);
+}
+
+.combat-actions-panel {
+  margin-bottom: 2rem;
+}
+
+.combat-actions-panel h4 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.action-btn {
+  background-color: var(--adventure-bg-tertiary);
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: var(--adventure-transition);
+  font-size: var(--adventure-font-size-small);
+  text-align: center;
+}
+
+.action-btn:hover {
+  background-color: var(--adventure-primary);
+  color: var(--adventure-text-light);
+  transform: translateY(-1px);
+}
+
+.combat-log {
+  margin-top: 2rem;
+}
+
+.combat-log h4 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+}
+
+.log-content {
+  background-color: var(--adventure-bg-tertiary);
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: var(--adventure-font-size-small);
+  line-height: 1.4;
+}
+
+.log-empty {
+  color: var(--adventure-text-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+.log-entry {
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.log-entry.system {
+  color: var(--adventure-info);
+  font-weight: bold;
+}
+
+.log-entry.damage {
+  color: var(--adventure-danger);
+}
+
+.log-entry.healing {
+  color: var(--adventure-success);
+}
+
+.log-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+/* ============================
+   NPC MANAGEMENT
+   ============================ */
+
+.npc-manager {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.npc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--adventure-border-light);
+}
+
+.npc-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.npc-generator,
+.npc-library {
+  background-color: var(--adventure-bg-secondary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.generator-options {
+  background-color: var(--adventure-bg-tertiary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.generated-npc {
+  background-color: var(--adventure-bg-tertiary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  border: 2px solid var(--adventure-border-primary);
+}
+
+.npc-display {
+  background-color: var(--adventure-bg-primary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--adventure-border-light);
+}
+
+.npc-actions-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.npc-search {
+  margin-bottom: 1rem;
+}
+
+.search-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.npc-list {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  background-color: var(--adventure-bg-tertiary);
+  padding: 1rem;
+  min-height: 300px;
+}
+
+.no-npcs {
+  text-align: center;
+  color: var(--adventure-text-muted);
+  padding: 2rem;
+}
+
+/* ============================
+   SESSION MANAGEMENT
+   ============================ */
+
+.session-manager {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.session-header {
+  background: linear-gradient(135deg, var(--adventure-success), var(--adventure-secondary));
+  color: var(--adventure-text-light);
+  padding: 1.5rem;
+  border-radius: var(--adventure-border-radius);
+  margin-bottom: 2rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.session-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.session-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.session-timer {
+  font-family: monospace;
+  font-size: var(--adventure-font-size-large);
+  font-weight: bold;
+}
+
+.session-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.session-planning,
+.session-tracking {
+  background-color: var(--adventure-bg-secondary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.planning-sections {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.planning-section h4 {
+  color: var(--adventure-primary);
+  margin-bottom: 0.5rem;
+}
+
+.session-npcs,
+.session-encounters {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  background-color: var(--adventure-bg-tertiary);
+  min-height: 80px;
+}
+
+.session-notes {
+  margin-bottom: 2rem;
+}
+
+.notes-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.toolbar-btn {
+  background-color: var(--adventure-bg-tertiary);
+  border: 1px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: var(--adventure-transition);
+}
+
+.toolbar-btn:hover {
+  background-color: var(--adventure-primary);
+  color: var(--adventure-text-light);
+}
+
+.session-notes-textarea {
+  resize: vertical;
+  min-height: 200px;
+  font-family: var(--adventure-font-family);
+}
+
+.session-stats h4 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.session-timeline {
+  margin-top: 2rem;
+}
+
+.timeline-content {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  background-color: var(--adventure-bg-tertiary);
+  padding: 1rem;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.timeline-empty {
+  text-align: center;
+  color: var(--adventure-text-muted);
+  padding: 2rem;
+}
+
+.session-history {
+  background-color: var(--adventure-bg-secondary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.history-list {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  background-color: var(--adventure-bg-tertiary);
+  padding: 1rem;
+  min-height: 200px;
+}
+
+.no-history {
+  text-align: center;
+  color: var(--adventure-text-muted);
+  padding: 2rem;
+}
+
+/* ============================
+   ADVENTURE TOOLS
+   ============================ */
+
+.adventure-tools {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tools-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--adventure-border-light);
+}
+
+.tools-quick-access {
+  display: flex;
+  gap: 1rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.tool-section {
+  background-color: var(--adventure-bg-secondary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--adventure-shadow);
+}
+
+.tool-section h3 {
+  color: var(--adventure-primary);
+  margin-bottom: 1rem;
+  font-size: var(--adventure-font-size-large);
+}
+
+.tool-content {
+  background-color: var(--adventure-bg-tertiary);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+}
+
+.dice-presets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dice-btn {
+  background-color: var(--adventure-bg-primary);
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: var(--adventure-transition);
+  font-weight: bold;
+  text-align: center;
+}
+
+.dice-btn:hover {
+  background-color: var(--adventure-primary);
+  color: var(--adventure-text-light);
+  transform: scale(1.05);
+}
+
+.custom-dice {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dice-results {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  background-color: var(--adventure-bg-primary);
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dice-result {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--adventure-border-light);
+}
+
+.dice-result:last-child {
+  border-bottom: none;
+}
+
+.treasure-options,
+.name-type-selector,
+.hook-options,
+.weather-options,
+.cr-inputs {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: end;
+}
+
+.treasure-options {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.name-type-selector,
+.hook-options,
+.weather-options {
+  grid-template-columns: 1fr auto;
+}
+
+.cr-inputs {
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+}
+
+.treasure-results,
+.name-results,
+.hook-results,
+.weather-results,
+.cr-results {
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  background-color: var(--adventure-bg-primary);
+  min-height: 100px;
+}
+
+/* ============================
+   BUTTONS AND CONTROLS
+   ============================ */
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--adventure-border-radius);
+  font-size: var(--adventure-font-size-base);
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--adventure-transition);
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--adventure-primary);
+  color: var(--adventure-text-light);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #723A0D;
+  transform: translateY(-1px);
+  box-shadow: var(--adventure-shadow-hover);
+}
+
+.btn-secondary {
+  background-color: var(--adventure-secondary);
+  color: var(--adventure-text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #B8941C;
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background-color: var(--adventure-success);
+  color: var(--adventure-text-light);
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #1E7B1E;
+  transform: translateY(-1px);
+}
+
+.btn-warning {
+  background-color: var(--adventure-warning);
+  color: var(--adventure-text-light);
+}
+
+.btn-warning:hover:not(:disabled) {
+  background-color: #E67E00;
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: var(--adventure-danger);
+  color: var(--adventure-text-light);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #9E1D1D;
+  transform: translateY(-1px);
+}
+
+.btn-info {
+  background-color: var(--adventure-info);
+  color: var(--adventure-text-light);
+}
+
+.btn-info:hover:not(:disabled) {
+  background-color: #385BC7;
+  transform: translateY(-1px);
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: var(--adventure-font-size-small);
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: var(--adventure-font-size-large);
+}
+
+/* ============================
+   MODALS AND OVERLAYS
+   ============================ */
+
+.adventure-interface-modals {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--adventure-bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: all;
+  z-index: 2001;
+}
+
+.modal-dialog {
+  background-color: var(--adventure-bg-primary);
+  border-radius: var(--adventure-border-radius);
+  box-shadow: var(--adventure-shadow-hover);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--adventure-border-light);
+}
+
+.modal-title {
+  margin: 0;
+  color: var(--adventure-primary);
+  font-size: var(--adventure-font-size-xl);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: var(--adventure-font-size-2xl);
+  cursor: pointer;
+  color: var(--adventure-text-muted);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--adventure-text-primary);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--adventure-border-light);
+}
+
+/* ============================
+   NOTIFICATIONS
+   ============================ */
+
+.adventure-interface-notifications {
+  position: fixed;
+  top: 80px;
+  right: 1rem;
+  z-index: 1500;
+  pointer-events: none;
+}
+
+.notification {
+  background-color: var(--adventure-bg-primary);
+  border: 2px solid var(--adventure-border-light);
+  border-radius: var(--adventure-border-radius);
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  box-shadow: var(--adventure-shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 300px;
+  pointer-events: all;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification-success {
+  border-color: var(--adventure-success);
+  background-color: rgba(34, 139, 34, 0.1);
+}
+
+.notification-warning {
+  border-color: var(--adventure-warning);
+  background-color: rgba(255, 140, 0, 0.1);
+}
+
+.notification-error {
+  border-color: var(--adventure-danger);
+  background-color: rgba(178, 34, 34, 0.1);
+}
+
+.notification-info {
+  border-color: var(--adventure-info);
+  background-color: rgba(65, 105, 225, 0.1);
+}
+
+.notification button {
+  background: none;
+  border: none;
+  font-size: var(--adventure-font-size-large);
+  cursor: pointer;
+  color: var(--adventure-text-muted);
+  line-height: 1;
+  margin-left: 1rem;
+}
+
+.notification button:hover {
+  color: var(--adventure-text-primary);
+}
+
+/* ============================
+   RESPONSIVE DESIGN
+   ============================ */
+
+@media (max-width: 768px) {
+  .adventure-interface-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .interface-status {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tab-navigation {
+    padding: 0 0.5rem;
+  }
+  
+  .tab-btn {
+    padding: 0.75rem 1rem;
+    font-size: var(--adventure-font-size-small);
+  }
+  
+  .tab-panel {
+    padding: 1rem;
+  }
+  
+  .campaign-header,
+  .encounter-header,
+  .npc-header,
+  .tools-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .encounter-builder,
+  .combat-main,
+  .npc-content,
+  .session-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .campaigns-grid,
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .session-status {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .modal-dialog {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .notification {
+    margin-right: 1rem;
+    min-width: calc(100vw - 3rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .combat-status {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .campaign-meta,
+  .initiative-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .dice-presets {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================
+   ACCESSIBILITY FEATURES
+   ============================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --adventure-border-light: #000;
+    --adventure-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.btn:focus,
+.form-control:focus,
+.tab-btn:focus,
+.dice-btn:focus,
+.action-btn:focus {
+  outline: 3px solid var(--adventure-primary);
+  outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Print styles */
+@media print {
+  .advanced-adventure-interface {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .adventure-interface-header,
+  .tab-navigation,
+  .modal,
+  .notification,
+  .btn {
+    display: none !important;
+  }
+  
+  .tab-panel {
+    display: block !important;
+    padding: 0 !important;
+  }
+  
+  .campaign-card,
+  .tool-section,
+  .encounter-setup {
+    break-inside: avoid;
+  }
+}
+
+/* ============================
+   UTILITY CLASSES
+   ============================ */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 1.5rem; }
+.p-4 { padding: 2rem; }
+
+.d-none { display: none; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
+
+.text-primary { color: var(--adventure-primary); }
+.text-secondary { color: var(--adventure-text-secondary); }
+.text-muted { color: var(--adventure-text-muted); }
+.text-success { color: var(--adventure-success); }
+.text-warning { color: var(--adventure-warning); }
+.text-danger { color: var(--adventure-danger); }
+.text-info { color: var(--adventure-info); }
+
+.bg-primary { background-color: var(--adventure-primary); }
+.bg-secondary { background-color: var(--adventure-bg-secondary); }
+.bg-tertiary { background-color: var(--adventure-bg-tertiary); }
+
+.border { border: 2px solid var(--adventure-border-light); }
+.border-primary { border: 2px solid var(--adventure-border-primary); }
+.border-secondary { border: 2px solid var(--adventure-border-secondary); }
+
+.rounded { border-radius: var(--adventure-border-radius); }
+.rounded-lg { border-radius: calc(var(--adventure-border-radius) * 2); }
+
+.shadow { box-shadow: var(--adventure-shadow); }
+.shadow-hover { box-shadow: var(--adventure-shadow-hover); }
+
+.transition { transition: var(--adventure-transition); }
+
+/* ============================
+   ANIMATION KEYFRAMES
+   ============================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Apply animations where appropriate */
+.tab-panel.active {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.campaign-card,
+.tool-section,
+.npc-display {
+  animation: slideUp 0.3s ease-out;
+}
+
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+.pulsing {
+  animation: pulse 2s infinite;
+}

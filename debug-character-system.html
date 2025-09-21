@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creation Debug - RulzLawyer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .debug-section { background: #2d2d2d; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+        .info { color: #2196F3; }
+        .warning { color: #FF9800; }
+        pre { background: #000; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧙‍♂️ Character Creation Debug Console</h1>
+        <div class="debug-section">
+            <h2>Debug Output</h2>
+            <p>Open your browser's developer console (F12) to see detailed test results.</p>
+            <p>This page will run comprehensive character creation tests automatically.</p>
+        </div>
+        
+        <div class="debug-section">
+            <h2>Manual Test Interface</h2>
+            <button onclick="testCreateCharacter()" style="padding: 10px 20px; margin: 10px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Test Create Character</button>
+            <button onclick="testListCharacters()" style="padding: 10px 20px; margin: 10px; background: #2196F3; color: white; border: none; border-radius: 5px; cursor: pointer;">Test List Characters</button>
+            <button onclick="testOpenModal()" style="padding: 10px 20px; margin: 10px; background: #FF9800; color: white; border: none; border-radius: 5px; cursor: pointer;">Test Open Modal</button>
+            
+            <div id="results" style="margin-top: 20px; padding: 15px; background: #333; border-radius: 5px; min-height: 100px;"></div>
+        </div>
+    </div>
+
+    <!-- Load all game engine modules -->
+    <script src="code-repository/src/dice-engine.js"></script>
+    <script src="code-repository/src/srd-data.js"></script>
+    <script src="code-repository/src/spell-manager.js"></script>
+    <script src="code-repository/src/equipment-manager.js"></script>
+    <script src="code-repository/src/random-tables-index.js"></script>
+    <script src="code-repository/src/character-manager.js"></script>
+    <script src="code-repository/src/adventure-engine.js"></script>
+    <script src="code-repository/src/storage-manager.js"></script>
+    <script src="code-repository/src/web-interface.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- Debug script -->
+    <script src="debug-character-creation.js"></script>
+    
+    <!-- Manual test functions -->
+    <script>
+        function logResult(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.style.color = type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#fff';
+            div.textContent = message;
+            results.appendChild(div);
+            console.log(message);
+        }
+
+        function testCreateCharacter() {
+            logResult('🧪 Testing character creation...', 'info');
+            
+            try {
+                if (!window.gameEngine) {
+                    throw new Error('Game engine not available');
+                }
+                
+                const character = window.gameEngine.characterManager.createCharacter({
+                    name: 'Manual Test Character',
+                    race: 'Elf',
+                    class: 'Wizard',
+                    level: 2
+                });
+                
+                logResult(`✅ Character created: ${character.name} (${character.race} ${character.class}, Level ${character.level})`, 'success');
+                logResult(`📝 Character ID: ${character.id}`, 'info');
+                
+            } catch (error) {
+                logResult(`❌ Character creation failed: ${error.message}`, 'error');
+            }
+        }
+
+        function testListCharacters() {
+            logResult('📋 Listing all characters...', 'info');
+            
+            try {
+                if (!window.gameEngine || !window.gameEngine.storageManager) {
+                    throw new Error('Storage manager not available');
+                }
+                
+                const characters = window.gameEngine.storageManager.getAllCharacters();
+                logResult(`📊 Found ${characters.length} characters in storage`, 'info');
+                
+                characters.forEach((char, index) => {
+                    logResult(`${index + 1}. ${char.name} (${char.race} ${char.class}, Level ${char.level})`, 'info');
+                });
+                
+            } catch (error) {
+                logResult(`❌ Failed to list characters: ${error.message}`, 'error');
+            }
+        }
+
+        function testOpenModal() {
+            logResult('🎪 Testing modal functionality...', 'info');
+            
+            try {
+                if (typeof window.createNewCharacter !== 'function') {
+                    throw new Error('createNewCharacter function not available');
+                }
+                
+                window.createNewCharacter();
+                logResult('✅ createNewCharacter function called successfully', 'success');
+                
+                // Check if modal is visible
+                setTimeout(() => {
+                    const modal = document.getElementById('character-modal');
+                    if (modal) {
+                        if (modal.style.display === 'flex' || modal.classList.contains('active')) {
+                            logResult('✅ Modal is now visible', 'success');
+                        } else {
+                            logResult('❌ Modal is not visible', 'error');
+                        }
+                    } else {
+                        logResult('❌ character-modal element not found', 'error');
+                    }
+                }, 100);
+                
+            } catch (error) {
+                logResult(`❌ Modal test failed: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
