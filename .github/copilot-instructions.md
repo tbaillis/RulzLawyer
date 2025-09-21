@@ -1,26 +1,31 @@
-<!-- Coding Agent Requirements Workspace Instructions -->
+```instructions
+<!-- GitHub Copilot Instructions - Legacy Support -->
 
-This workspace is designed for developing, documenting, and analyzing requirements for coding agents. 
+⚠️ **DEPRECATED**: This file is maintained for backward compatibility only.
 
-## Project Context
-- **Purpose**: Requirements analysis and specification for coding agents
-- **Focus Areas**: User stories, technical specifications, testing scenarios, and examples
-- **Output**: Comprehensive requirements documentation for coding agent development
+## 📋 Current Instructions Location
 
-## Guidelines for Copilot
-- When working with requirements documents, focus on clarity and completeness
-- Provide structured formats for requirements gathering
-- Suggest templates and frameworks for requirement analysis
-- Help organize requirements by priority, feasibility, and user impact
-- Assist in creating test scenarios and acceptance criteria
-- Support analysis of existing coding agent capabilities and gaps
+**Primary AI Instructions**: See `AGENTS.md` in the workspace root for comprehensive AI agent guidance.
+
+VS Code now supports the `AGENTS.md` standard (August 2025 update) which provides a unified format for all AI coding agents. All current instructions have been migrated to the workspace root `AGENTS.md` file.
+
+## Quick Reference
+
+For immediate guidance, the `AGENTS.md` file contains:
+- Complete project overview and context
+- Mandatory agent protocols and todo list usage
+- Critical server management rules (port cleanup)
+- Build commands and system architecture
+- Testing instructions and validation protocols
+- Code style conventions and error patterns
+- Security considerations and deployment steps
+
+## Legacy Content (Migrated to AGENTS.md)
+
 - **🚨 CRITICAL: Place ALL generated code exclusively in `code-repository/` folder or its subfolders**
-- Reference the `code-repository/README.md` for code organization guidelines
+- **🔥 ALWAYS Clean Up Ports**: Before running server, clean port 3000 first
+- Reference comprehensive documentation in `completed-work-by-agents/` folder
+- Use `manage_todo_list` tool for all non-trivial work
 
-## 🚀 Server Management Rules
-- **🔥 ALWAYS Clean Up Ports Before Starting Server**: Before running `node server.js`, ALWAYS check for and kill any processes using port 3000 to prevent "address already in use" errors
-- **Port Cleanup Commands**: 
-  - Windows PowerShell: `Get-Process -Name node | Stop-Process -Force` or `netstat -ano | findstr :3000` then `taskkill /PID <PID> /F`
-  - Cross-platform: `npx kill-port 3000` (if kill-port is installed)
-- **Startup Sequence**: 1) Clean ports, 2) Start server, 3) Verify functionality
-- **Error Prevention**: Never attempt to start server without first ensuring port 3000 is available
+**Recommendation**: Use the workspace root `AGENTS.md` file for all AI agent interactions in VS Code.
+```
