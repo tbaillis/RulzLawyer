@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Tables - RulzLawyer</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === Theme Variables === */
+        :root {
+            --primary-gold: #D4AF37;
+            --deep-red: #8B0000;
+            --parchment: #F5F5DC;
+            --dark-brown: #654321;
+            --emerald: #50C878;
+            --shadow: rgba(0,0,0,0.3);
+            --text-dark: #2C1810;
+            --accent-blue: #4169E1;
+        }
+
+        /* === Global Styles === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--parchment) 0%, #E8E8E8 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* === Header === */
+        .header {
+            background: linear-gradient(90deg, var(--deep-red) 0%, var(--dark-brown) 100%);
+            color: var(--primary-gold);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(212,175,55,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(212,175,55,0.1)"/><circle cx="40" cy="80" r="2.5" fill="rgba(212,175,55,0.1)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* === Navigation === */
+        .nav-container {
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(145deg, var(--emerald), #32CD32);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* === Main Container === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* === Table Selection === */
+        .table-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .table-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(245,245,220,0.9));
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .table-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .table-card.selected {
+            border-color: var(--emerald);
+            background: linear-gradient(145deg, rgba(80,200,120,0.1), rgba(212,175,55,0.1));
+        }
+
+        .table-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+        }
+
+        .table-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--deep-red);
+        }
+
+        .table-description {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        /* === Generation Controls === */
+        .generation-controls {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-weight: 500;
+            color: var(--deep-red);
+        }
+
+        .control-input {
+            padding: 0.5rem;
+            border: 2px solid rgba(139,0,0,0.2);
+            border-radius: 5px;
+            font-size: 1rem;
+            min-width: 150px;
+        }
+
+        .control-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        .generate-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(145deg, var(--emerald), #32CD32);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* === Results Display === */
+        .results-container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            min-height: 300px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--deep-red);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary-gold);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        .result-item {
+            background: linear-gradient(145deg, rgba(80,200,120,0.1), rgba(212,175,55,0.1));
+            border-left: 4px solid var(--emerald);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-details {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .result-detail {
+            background: rgba(255,255,255,0.7);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        /* === Quick Generation === */
+        .quick-gen {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .quick-gen h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--deep-red);
+            margin-bottom: 1rem;
+        }
+
+        .quick-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(145deg, var(--primary-gold), #B8860B);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* === No Results State === */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-dark);
+            opacity: 0.6;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .table-selection {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .result-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>
+            <i class="fas fa-scroll"></i>
+            Random Tables
+        </h1>
+        <p>Comprehensive D&D 3.5 random generation system</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-buttons">
+            <a href="/" class="nav-button">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="/character-creator.html" class="nav-button">
+                <i class="fas fa-magic"></i>
+                Character Wizard
+            </a>
+            <button class="nav-button" onclick="exportResults()">
+                <i class="fas fa-download"></i>
+                Export Results
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Quick Generation -->
+        <div class="quick-gen">
+            <h3>Quick Generation</h3>
+            <div class="quick-buttons">
+                <button class="quick-btn" onclick="quickGenerate('name')">
+                    <i class="fas fa-user"></i> Random Name
+                </button>
+                <button class="quick-btn" onclick="quickGenerate('npc')">
+                    <i class="fas fa-users"></i> Complete NPC
+                </button>
+                <button class="quick-btn" onclick="quickGenerate('encounter')">
+                    <i class="fas fa-sword"></i> Encounter
+                </button>
+                <button class="quick-btn" onclick="quickGenerate('treasure')">
+                    <i class="fas fa-gem"></i> Treasure
+                </button>
+                <button class="quick-btn" onclick="quickGenerate('settlement')">
+                    <i class="fas fa-city"></i> Settlement
+                </button>
+                <button class="quick-btn" onclick="quickGenerate('adventure')">
+                    <i class="fas fa-scroll"></i> Adventure Hook
+                </button>
+            </div>
+        </div>
+
+        <!-- Table Selection -->
+        <div class="table-selection" id="tableSelection">
+            <!-- Tables will be populated by JavaScript -->
+        </div>
+
+        <!-- Generation Controls -->
+        <div class="generation-controls" id="generationControls" style="display: none;">
+            <div class="controls-row">
+                <div class="control-group">
+                    <label class="control-label">Number of Results</label>
+                    <input type="number" id="resultCount" class="control-input" value="1" min="1" max="20">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Parameters (JSON)</label>
+                    <input type="text" id="parameters" class="control-input" placeholder='{"level": 1}'>
+                </div>
+                
+                <button class="generate-btn" id="generateBtn" onclick="generateResults()">
+                    <i class="fas fa-dice-d20"></i>
+                    Generate
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Display -->
+        <div class="results-container">
+            <div class="results-header">
+                <h2 class="results-title">Generated Results</h2>
+                <div class="results-actions">
+                    <button class="action-btn" onclick="clearResults()">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <button class="action-btn" onclick="copyResults()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+            
+            <div id="resultsContent" class="no-results">
+                <i class="fas fa-dice"></i>
+                <h3>Ready to Generate</h3>
+                <p>Select a table above and click generate, or use quick generation buttons</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load dependencies -->
+    <script src="/app.js"></script>
+    
+    <script>
+        // === State Management ===
+        let randomTablesEngine = null;
+        let selectedTable = null;
+        let generatedResults = [];
+
+        // === Initialize Application ===
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('📚 Random Tables interface initializing...');
+            
+            // Wait for game engine
+            if (window.gameEngine && window.gameEngine.randomTablesEngine) {
+                randomTablesEngine = window.gameEngine.randomTablesEngine;
+                console.log('✅ Random Tables Engine connected');
+            } else {
+                console.warn('⚠️  Random Tables Engine not available - using fallback mode');
+                createFallbackEngine();
+            }
+            
+            // Initialize interface
+            loadTableSelection();
+            
+            console.log('✅ Random Tables interface ready');
+        });
+
+        // === Table Selection ===
+        function loadTableSelection() {
+            const container = document.getElementById('tableSelection');
+            
+            if (!randomTablesEngine) {
+                container.innerHTML = '<div class="no-results"><h3>Random Tables Engine not available</h3></div>';
+                return;
+            }
+
+            const tables = randomTablesEngine.getAvailableTables();
+            const tableData = {
+                'characterNames': {
+                    icon: 'fas fa-user',
+                    title: 'Character Names',
+                    description: 'Generate first names and surnames for various races and genders'
+                },
+                'encounters': {
+                    icon: 'fas fa-sword',
+                    title: 'Random Encounters',
+                    description: 'Generate encounters with monsters, NPCs, and special events'
+                },
+                'treasures': {
+                    icon: 'fas fa-gem',
+                    title: 'Treasure Hoards',
+                    description: 'Generate coins, gems, art objects, and magic items'
+                },
+                'magicItems': {
+                    icon: 'fas fa-magic',
+                    title: 'Magic Items',
+                    description: 'Potions, scrolls, weapons, armor, and wondrous items'
+                },
+                'settlements': {
+                    icon: 'fas fa-city',
+                    title: 'Settlements',
+                    description: 'Villages, towns, cities, and their characteristics'
+                },
+                'weather': {
+                    icon: 'fas fa-cloud',
+                    title: 'Weather',
+                    description: 'Weather conditions, temperature, and atmospheric effects'
+                },
+                'dungeonRooms': {
+                    icon: 'fas fa-door-open',
+                    title: 'Dungeon Rooms',
+                    description: 'Room contents, encounters, traps, and special features'
+                },
+                'npcPersonalities': {
+                    icon: 'fas fa-mask',
+                    title: 'NPC Personalities',
+                    description: 'Character traits, motivations, and quirks for NPCs'
+                },
+                'adventureHooks': {
+                    icon: 'fas fa-scroll',
+                    title: 'Adventure Hooks',
+                    description: 'Plot hooks, quests, and adventure scenarios'
+                },
+                'animals': {
+                    icon: 'fas fa-paw',
+                    title: 'Animals',
+                    description: 'Wild animals, domesticated creatures, and their stats'
+                },
+                'gems': {
+                    icon: 'fas fa-diamond',
+                    title: 'Gems & Jewels',
+                    description: 'Precious stones, jewelry, and valuable materials'
+                },
+                'traps': {
+                    icon: 'fas fa-exclamation-triangle',
+                    title: 'Traps',
+                    description: 'Mechanical and magical traps with difficulty ratings'
+                }
+            };
+
+            container.innerHTML = '';
+            
+            tables.forEach(tableName => {
+                const data = tableData[tableName] || {
+                    icon: 'fas fa-table',
+                    title: tableName,
+                    description: 'Random generation table'
+                };
+
+                const card = document.createElement('div');
+                card.className = 'table-card';
+                card.onclick = () => selectTable(tableName);
+                
+                card.innerHTML = `
+                    <div class="table-icon">
+                        <i class="${data.icon}"></i>
+                    </div>
+                    <h3 class="table-title">${data.title}</h3>
+                    <p class="table-description">${data.description}</p>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // === Table Selection Handler ===
+        function selectTable(tableName) {
+            // Clear previous selection
+            document.querySelectorAll('.table-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Select new table
+            event.currentTarget.classList.add('selected');
+            selectedTable = tableName;
+
+            // Show generation controls
+            document.getElementById('generationControls').style.display = 'block';
+
+            // Update generate button
+            const generateBtn = document.getElementById('generateBtn');
+            generateBtn.innerHTML = `
+                <i class="fas fa-dice-d20"></i>
+                Generate from ${tableName}
+            `;
+
+            console.log('🎯 Selected table:', tableName);
+        }
+
+        // === Generation Functions ===
+        function generateResults() {
+            if (!selectedTable || !randomTablesEngine) {
+                alert('Please select a table first');
+                return;
+            }
+
+            const count = parseInt(document.getElementById('resultCount').value) || 1;
+            const parametersText = document.getElementById('parameters').value.trim();
+            
+            let parameters = {};
+            if (parametersText) {
+                try {
+                    parameters = JSON.parse(parametersText);
+                } catch (error) {
+                    alert('Invalid JSON in parameters field');
+                    return;
+                }
+            }
+
+            try {
+                console.log(`🎲 Generating ${count} results from ${selectedTable}...`);
+                const results = randomTablesEngine.generateMultiple(selectedTable, count, parameters);
+                
+                generatedResults.push(...results);
+                displayResults();
+                
+                console.log('✅ Generation complete:', results);
+            } catch (error) {
+                console.error('❌ Generation failed:', error);
+                alert('Generation failed: ' + error.message);
+            }
+        }
+
+        // === Quick Generation ===
+        function quickGenerate(type) {
+            if (!randomTablesEngine) {
+                alert('Random Tables Engine not available');
+                return;
+            }
+
+            try {
+                let result;
+                switch (type) {
+                    case 'name':
+                        result = randomTablesEngine.generateName();
+                        break;
+                    case 'npc':
+                        result = randomTablesEngine.generateNPC();
+                        break;
+                    case 'encounter':
+                        result = randomTablesEngine.generateEncounter();
+                        break;
+                    case 'treasure':
+                        result = randomTablesEngine.generateTreasure();
+                        break;
+                    case 'settlement':
+                        result = randomTablesEngine.generateSettlement();
+                        break;
+                    case 'adventure':
+                        result = randomTablesEngine.generateAdventure();
+                        break;
+                    default:
+                        throw new Error('Unknown quick generation type: ' + type);
+                }
+
+                // Format result for display
+                const formattedResult = {
+                    table: `quick-${type}`,
+                    result: result,
+                    timestamp: new Date(),
+                    metadata: { method: 'quick generation' }
+                };
+
+                generatedResults.push(formattedResult);
+                displayResults();
+                
+                console.log(`✅ Quick generated ${type}:`, result);
+            } catch (error) {
+                console.error(`❌ Quick generation failed for ${type}:`, error);
+                alert('Quick generation failed: ' + error.message);
+            }
+        }
+
+        // === Results Display ===
+        function displayResults() {
+            const container = document.getElementById('resultsContent');
+            
+            if (generatedResults.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-dice"></i>
+                        <h3>No Results Yet</h3>
+                        <p>Generate some results to see them here</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+
+            generatedResults.slice().reverse().forEach((result, index) => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'result-item';
+                
+                const resultText = formatResultText(result);
+                const details = extractResultDetails(result);
+
+                resultDiv.innerHTML = `
+                    <div class="result-text">${resultText}</div>
+                    <div class="result-details">
+                        <div class="result-detail"><strong>Table:</strong> ${result.table}</div>
+                        <div class="result-detail"><strong>Time:</strong> ${result.timestamp.toLocaleTimeString()}</div>
+                        ${details.map(detail => `<div class="result-detail"><strong>${detail.key}:</strong> ${detail.value}</div>`).join('')}
+                    </div>
+                `;
+
+                container.appendChild(resultDiv);
+            });
+
+            // Scroll to top of results
+            container.scrollTop = 0;
+        }
+
+        function formatResultText(result) {
+            if (typeof result.result === 'string') {
+                return result.result;
+            }
+
+            if (result.result.text) {
+                return result.result.text;
+            }
+
+            if (result.result.fullName) {
+                return `${result.result.fullName} (${result.result.race} ${result.result.gender})`;
+            }
+
+            if (result.result.name && result.result.personality) {
+                return `${result.result.name.fullName} - ${result.result.personality.text}`;
+            }
+
+            if (result.result.hook) {
+                return `Adventure: ${result.result.hook.text}`;
+            }
+
+            // Fallback to JSON representation
+            try {
+                return JSON.stringify(result.result, null, 2);
+            } catch {
+                return 'Complex result (see details below)';
+            }
+        }
+
+        function extractResultDetails(result) {
+            const details = [];
+
+            if (result.result.cr !== undefined) {
+                details.push({ key: 'CR', value: result.result.cr });
+            }
+
+            if (result.result.type) {
+                details.push({ key: 'Type', value: result.result.type });
+            }
+
+            if (result.result.value !== undefined) {
+                details.push({ key: 'Value', value: result.result.value });
+            }
+
+            if (result.result.size) {
+                details.push({ key: 'Size', value: result.result.size });
+            }
+
+            if (result.result.population) {
+                details.push({ key: 'Population', value: result.result.population });
+            }
+
+            if (result.metadata) {
+                details.push({ key: 'Method', value: result.metadata.method || 'standard' });
+            }
+
+            return details;
+        }
+
+        // === Results Management ===
+        function clearResults() {
+            if (generatedResults.length === 0) {
+                return;
+            }
+
+            if (confirm('Clear all generated results?')) {
+                generatedResults = [];
+                displayResults();
+                console.log('🗑️  Results cleared');
+            }
+        }
+
+        function copyResults() {
+            if (generatedResults.length === 0) {
+                alert('No results to copy');
+                return;
+            }
+
+            const textResults = generatedResults.map(result => {
+                const text = formatResultText(result);
+                const time = result.timestamp.toLocaleTimeString();
+                return `[${time}] ${result.table}: ${text}`;
+            }).join('\n');
+
+            navigator.clipboard.writeText(textResults).then(() => {
+                alert('Results copied to clipboard!');
+                console.log('📋 Results copied to clipboard');
+            }).catch(error => {
+                console.error('❌ Failed to copy results:', error);
+                alert('Failed to copy results');
+            });
+        }
+
+        function exportResults() {
+            if (generatedResults.length === 0) {
+                alert('No results to export');
+                return;
+            }
+
+            const exportData = {
+                exportDate: new Date().toISOString(),
+                totalResults: generatedResults.length,
+                results: generatedResults
+            };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+                type: 'application/json'
+            });
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `random-tables-results-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            console.log('💾 Results exported');
+        }
+
+        // === Fallback Engine ===
+        function createFallbackEngine() {
+            console.log('🔄 Creating fallback Random Tables Engine...');
+            
+            // Simple fallback with basic tables
+            randomTablesEngine = {
+                getAvailableTables() {
+                    return ['characterNames', 'encounters', 'treasures'];
+                },
+
+                generateFromTable(tableName, parameters = {}) {
+                    const fallbackResults = {
+                        characterNames: [
+                            'Aragorn', 'Legolas', 'Gimli', 'Gandalf', 'Frodo',
+                            'Conan', 'Xena', 'Hercules', 'Merlin', 'Arthur'
+                        ],
+                        encounters: [
+                            'Goblin patrol (3 goblins)',
+                            'Wandering merchant',
+                            'Brown bear',
+                            'Bandit ambush',
+                            'Ancient ruins'
+                        ],
+                        treasures: [
+                            '50 gold pieces',
+                            'Silver ring',
+                            'Potion of healing',
+                            'Masterwork sword',
+                            'Bag of gems'
+                        ]
+                    };
+
+                    const results = fallbackResults[tableName] || ['Unknown result'];
+                    const randomResult = results[Math.floor(Math.random() * results.length)];
+
+                    return {
+                        table: tableName,
+                        result: { text: randomResult },
+                        timestamp: new Date(),
+                        metadata: { method: 'fallback' }
+                    };
+                },
+
+                generateMultiple(tableName, count, parameters) {
+                    const results = [];
+                    for (let i = 0; i < count; i++) {
+                        results.push(this.generateFromTable(tableName, parameters));
+                    }
+                    return results;
+                },
+
+                generateName() {
+                    const names = ['Aerdrie', 'Aramil', 'Berris', 'Drannor', 'Galinndan'];
+                    const surnames = ['Amakir', 'Galanodel', 'Battlehammer', 'Frostbeard'];
+                    
+                    return {
+                        fullName: `${names[Math.floor(Math.random() * names.length)]} ${surnames[Math.floor(Math.random() * surnames.length)]}`,
+                        race: 'Human',
+                        gender: 'Unknown'
+                    };
+                },
+
+                generateNPC() {
+                    return {
+                        name: this.generateName(),
+                        personality: { text: 'Brave and honest' },
+                        motivation: { text: 'Seeks adventure' },
+                        quirk: { text: 'Always adjusts cloak' }
+                    };
+                },
+
+                generateEncounter() {
+                    return this.generateFromTable('encounters');
+                },
+
+                generateTreasure() {
+                    return this.generateFromTable('treasures');
+                },
+
+                generateSettlement() {
+                    return {
+                        result: { 
+                            text: 'Small village',
+                            size: 'village',
+                            population: '400 people'
+                        }
+                    };
+                },
+
+                generateAdventure() {
+                    return {
+                        hook: { text: 'Missing merchant caravan' },
+                        location: { text: 'Nearby forest' },
+                        title: 'The Missing Caravan Mystery'
+                    };
+                }
+            };
+
+            console.log('✅ Fallback Random Tables Engine created');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RulzLawyer - Equipment System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #DAA520;
+            --accent-color: #CD853F;
+            --text-light: #F5E6D3;
+            --text-dark: #2F1B14;
+            --background-dark: #1a0f0a;
+            --card-background: #2F1B14;
+            --border-color: #4A2C2A;
+            --success-color: #228B22;
+            --warning-color: #FF8C00;
+            --error-color: #DC143C;
+            --magic-color: #9370DB;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, var(--background-dark) 0%, #2F1B14 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(139, 69, 19, 0.3);
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            background: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .content-area {
+            background: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .inventory-panel {
+            background: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .search-section {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: var(--text-light);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .search-input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
+        }
+
+        .filters {
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            background: rgba(0,0,0,0.3);
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .equipment-card {
+            background: rgba(0,0,0,0.2);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .equipment-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(218, 165, 32, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .equipment-card.weapon {
+            border-left: 4px solid #B22222;
+        }
+
+        .equipment-card.armor {
+            border-left: 4px solid #4682B4;
+        }
+
+        .equipment-card.magic {
+            border-left: 4px solid var(--magic-color);
+            box-shadow: 0 0 10px rgba(147, 112, 219, 0.3);
+        }
+
+        .equipment-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+
+        .equipment-name.magic {
+            color: var(--magic-color);
+        }
+
+        .equipment-type {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .equipment-stats {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .equipment-description {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin: 10px 0;
+            color: var(--text-light);
+        }
+
+        .price-weight {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .price {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .weight {
+            color: #999;
+        }
+
+        .action-button {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 5px 5px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            background: var(--accent-color);
+            transform: translateY(-1px);
+        }
+
+        .stats-panel {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .inventory-section {
+            margin-bottom: 25px;
+        }
+
+        .inventory-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .inventory-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .inventory-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        .item-name.magic {
+            color: var(--magic-color);
+        }
+
+        .item-quantity {
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .encumbrance-bar {
+            margin: 15px 0;
+            height: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .encumbrance-fill {
+            height: 100%;
+            border-radius: 9px;
+            transition: all 0.3s ease;
+        }
+
+        .encumbrance-light {
+            background: var(--success-color);
+        }
+
+        .encumbrance-medium {
+            background: var(--warning-color);
+        }
+
+        .encumbrance-heavy {
+            background: var(--error-color);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+        }
+
+        .equipment-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-background);
+            border: 3px solid var(--secondary-color);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+
+        .close-button {
+            float: right;
+            background: var(--error-color);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.2);
+            border: none;
+            color: var(--text-light);
+            font-size: 16px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            border-bottom-color: var(--secondary-color);
+            background: rgba(218, 165, 32, 0.2);
+            color: var(--secondary-color);
+        }
+
+        .tab:hover {
+            background: rgba(218, 165, 32, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .navigation {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--border-color);
+        }
+
+        .nav-button:hover {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            border-color: var(--secondary-color);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .error-message {
+            background: rgba(220, 20, 60, 0.1);
+            border: 1px solid var(--error-color);
+            color: var(--error-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar, .inventory-panel {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .equipment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ Equipment System</h1>
+            <p>D&D 3.5 Complete Equipment Database - Weapons, Armor, and Magic Items</p>
+        </div>
+
+        <!-- Tabs for different views -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('equipment')">📦 Equipment Database</button>
+            <button class="tab" onclick="showTab('inventory')">🎒 My Inventory</button>
+            <button class="tab" onclick="showTab('shop')">🏪 Equipment Shop</button>
+        </div>
+
+        <!-- Equipment Database Tab -->
+        <div id="equipment-tab" class="tab-content active">
+            <div class="main-content">
+                <div class="sidebar">
+                    <div class="stats-panel">
+                        <h3>📊 System Stats</h3>
+                        <div class="stat-row">
+                            <span>Total Items:</span>
+                            <span id="total-equipment">Loading...</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Weapons:</span>
+                            <span id="weapon-count">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Armor:</span>
+                            <span id="armor-count">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Magic Items:</span>
+                            <span id="magic-count">0</span>
+                        </div>
+                    </div>
+
+                    <div class="search-section">
+                        <h3>🔍 Search Equipment</h3>
+                        <input type="text" id="search-input" class="search-input" placeholder="Search equipment...">
+                    </div>
+
+                    <div class="filters">
+                        <h3>🎯 Filters</h3>
+                        <div class="filter-group">
+                            <label class="filter-label">Category:</label>
+                            <select id="category-filter" class="filter-select">
+                                <option value="">All Categories</option>
+                                <option value="weapons">Weapons</option>
+                                <option value="armor">Armor</option>
+                                <option value="magic">Magic Items</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Weapon Type:</label>
+                            <select id="weapon-type-filter" class="filter-select">
+                                <option value="">All Weapon Types</option>
+                                <option value="simple">Simple</option>
+                                <option value="martial">Martial</option>
+                                <option value="exotic">Exotic</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Price Range:</label>
+                            <select id="price-filter" class="filter-select">
+                                <option value="">All Prices</option>
+                                <option value="0-10">Under 10 gp</option>
+                                <option value="10-100">10-100 gp</option>
+                                <option value="100-1000">100-1000 gp</option>
+                                <option value="1000+">Over 1000 gp</option>
+                            </select>
+                        </div>
+
+                        <button id="reset-filters" class="action-button">Reset Filters</button>
+                    </div>
+                </div>
+
+                <div class="content-area">
+                    <div id="loading" class="loading">
+                        ⚔️ Loading Equipment Database...
+                    </div>
+
+                    <div id="error-container"></div>
+
+                    <div id="equipment-grid" class="equipment-grid" style="display: none;">
+                        <!-- Equipment will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="inventory-panel">
+                    <div class="stats-panel">
+                        <h3>💼 Character Stats</h3>
+                        <div class="stat-row">
+                            <span>Strength:</span>
+                            <span id="character-strength">16</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Carrying Capacity:</span>
+                            <span id="carrying-capacity">230 lbs</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Current Load:</span>
+                            <span id="current-load">0 lbs</span>
+                        </div>
+                    </div>
+
+                    <div class="encumbrance-bar">
+                        <div id="encumbrance-fill" class="encumbrance-fill encumbrance-light" style="width: 0%"></div>
+                    </div>
+                    
+                    <div class="inventory-section">
+                        <h3>🎒 Quick Inventory</h3>
+                        <div id="quick-inventory">
+                            <div style="text-align: center; color: #999; padding: 20px;">
+                                No equipment in inventory
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Management Tab -->
+        <div id="inventory-tab" class="tab-content">
+            <div style="text-align: center; padding: 50px;">
+                <h2>🎒 Character Inventory</h2>
+                <p>Complete inventory management coming in next update!</p>
+                <div id="full-inventory-display"></div>
+            </div>
+        </div>
+
+        <!-- Equipment Shop Tab -->
+        <div id="shop-tab" class="tab-content">
+            <div style="text-align: center; padding: 50px;">
+                <h2>🏪 Equipment Shop</h2>
+                <p>Buy and sell equipment - coming in next update!</p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="character-creation.html" class="nav-button">👤 Character Creation</a>
+            <a href="feats-system.html" class="nav-button">🏆 Feats</a>
+            <a href="spells.html" class="nav-button">📚 Spells</a>
+            <a href="index.html" class="nav-button">🏠 Home</a>
+        </div>
+    </div>
+
+    <!-- Equipment Details Modal -->
+    <div id="equipment-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeEquipmentModal()"></div>
+        <div class="equipment-modal">
+            <button class="close-button" onclick="closeEquipmentModal()">&times;</button>
+            <div id="equipment-details">
+                <!-- Equipment details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Include core scripts -->
+    <script src="app.js"></script>
+    <script src="code-repository/src/dice-engine.js"></script>
+    <script src="code-repository/src/character-data-model.js"></script>
+    <script src="code-repository/src/equipment-system.js"></script>
+
+    <script>
+        // === Global Variables ===
+        let gameEngine = null;
+        let equipmentSystem = null;
+        let currentCharacter = null;
+        let filteredEquipment = [];
+        let allEquipment = [];
+        let currentInventory = {};
+
+        // === Initialization ===
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                console.log('⚔️ Initializing Equipment System Interface...');
+                
+                // Initialize game engine
+                gameEngine = new RulzLawyerGameEngine();
+                await gameEngine.initialize();
+                
+                // Get systems
+                equipmentSystem = gameEngine.equipmentSystem;
+                
+                if (!equipmentSystem) {
+                    throw new Error('Equipment System not available');
+                }
+
+                // Load mock character for testing
+                currentCharacter = createMockCharacter();
+                
+                // Load equipment data
+                await loadEquipmentData();
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Initial display
+                displayEquipment();
+                updateStats();
+                updateInventoryDisplay();
+                
+                console.log('✅ Equipment System Interface ready');
+                
+            } catch (error) {
+                console.error('❌ Failed to initialize:', error);
+                showError('Failed to initialize Equipment System: ' + error.message);
+            }
+        });
+
+        // === Mock Character ===
+        function createMockCharacter() {
+            return {
+                name: 'Test Character',
+                race: 'Human',
+                classes: [{ name: 'Fighter', level: 5 }],
+                abilities: {
+                    Strength: 16,
+                    Dexterity: 14,
+                    Constitution: 15
+                },
+                inventory: {},
+                money: { gold: 1000 }
+            };
+        }
+
+        // === Data Loading ===
+        async function loadEquipmentData() {
+            try {
+                allEquipment = [];
+                
+                // Load weapons
+                const weaponTypes = ['simple', 'martial', 'exotic'];
+                for (const type of weaponTypes) {
+                    const weapons = equipmentSystem.getWeaponsByType(type);
+                    allEquipment.push(...weapons.map(w => ({...w, category: 'weapons', weaponType: type})));
+                }
+                
+                // Load armor
+                const armorPieces = equipmentSystem.getArmorPieces();
+                allEquipment.push(...armorPieces.map(a => ({...a, category: 'armor'})));
+                
+                // Load magic items (sample)
+                const magicItems = equipmentSystem.getMagicItems();
+                allEquipment.push(...magicItems.map(m => ({...m, category: 'magic'})));
+                
+                filteredEquipment = [...allEquipment];
+                
+                console.log(`📦 Loaded ${allEquipment.length} equipment items`);
+                
+            } catch (error) {
+                console.error('❌ Error loading equipment:', error);
+                throw error;
+            }
+        }
+
+        // === Tab Management ===
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // === Event Listeners ===
+        function setupEventListeners() {
+            const searchInput = document.getElementById('search-input');
+            const categoryFilter = document.getElementById('category-filter');
+            const weaponTypeFilter = document.getElementById('weapon-type-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const resetButton = document.getElementById('reset-filters');
+
+            searchInput.addEventListener('input', applyFilters);
+            categoryFilter.addEventListener('change', applyFilters);
+            weaponTypeFilter.addEventListener('change', applyFilters);
+            priceFilter.addEventListener('change', applyFilters);
+            resetButton.addEventListener('click', resetFilters);
+        }
+
+        // === Filtering ===
+        function applyFilters() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const categoryFilter = document.getElementById('category-filter').value;
+            const weaponTypeFilter = document.getElementById('weapon-type-filter').value;
+            const priceFilter = document.getElementById('price-filter').value;
+
+            filteredEquipment = allEquipment.filter(item => {
+                // Search filter
+                if (searchTerm && !item.name.toLowerCase().includes(searchTerm)) {
+                    return false;
+                }
+
+                // Category filter
+                if (categoryFilter && item.category !== categoryFilter) {
+                    return false;
+                }
+
+                // Weapon type filter
+                if (weaponTypeFilter && item.weaponType !== weaponTypeFilter) {
+                    return false;
+                }
+
+                // Price filter
+                if (priceFilter && item.cost) {
+                    const price = parsePrice(item.cost);
+                    switch (priceFilter) {
+                        case '0-10':
+                            if (price > 10) return false;
+                            break;
+                        case '10-100':
+                            if (price < 10 || price > 100) return false;
+                            break;
+                        case '100-1000':
+                            if (price < 100 || price > 1000) return false;
+                            break;
+                        case '1000+':
+                            if (price < 1000) return false;
+                            break;
+                    }
+                }
+
+                return true;
+            });
+
+            displayEquipment();
+            updateStats();
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('category-filter').value = '';
+            document.getElementById('weapon-type-filter').value = '';
+            document.getElementById('price-filter').value = '';
+            
+            filteredEquipment = [...allEquipment];
+            displayEquipment();
+            updateStats();
+        }
+
+        function parsePrice(costString) {
+            if (!costString) return 0;
+            
+            // Parse cost like "15 gp", "2,300 gp", etc.
+            const match = costString.match(/(\d+(?:,\d+)*)\s*gp/);
+            if (match) {
+                return parseInt(match[1].replace(/,/g, ''));
+            }
+            return 0;
+        }
+
+        // === Display Functions ===
+        function displayEquipment() {
+            const equipmentGrid = document.getElementById('equipment-grid');
+            const loadingDiv = document.getElementById('loading');
+            
+            if (filteredEquipment.length === 0 && allEquipment.length > 0) {
+                equipmentGrid.innerHTML = '<div class="no-results">No equipment matches the current filters.</div>';
+                equipmentGrid.style.display = 'block';
+                loadingDiv.style.display = 'none';
+                return;
+            }
+            
+            const equipmentHtml = filteredEquipment.map(item => createEquipmentCard(item)).join('');
+            equipmentGrid.innerHTML = equipmentHtml;
+            equipmentGrid.style.display = 'grid';
+            loadingDiv.style.display = 'none';
+        }
+
+        function createEquipmentCard(item) {
+            const cardClass = `equipment-card ${item.category} ${item.magical ? 'magic' : ''}`;
+            const nameClass = item.magical ? 'magic' : '';
+            
+            return `
+                <div class="${cardClass}" onclick="showEquipmentDetails('${item.id}')">
+                    <div class="equipment-name ${nameClass}">${item.name}</div>
+                    <div class="equipment-type">${item.category} ${item.weaponType || ''}</div>
+                    
+                    ${createEquipmentStatsHtml(item)}
+                    
+                    <div class="equipment-description">${item.description || ''}</div>
+                    
+                    <div class="price-weight">
+                        <span class="price">${item.cost || 'No cost'}</span>
+                        <span class="weight">${item.weight || 'No weight'}</span>
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <button class="action-button" onclick="event.stopPropagation(); addToInventory('${item.id}')">
+                            Add to Inventory
+                        </button>
+                        <button class="action-button" onclick="event.stopPropagation(); showEquipmentDetails('${item.id}')">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createEquipmentStatsHtml(item) {
+            if (item.category === 'weapons') {
+                return `
+                    <div class="equipment-stats">
+                        ${item.damage ? `<div class="stat-row"><span>Damage:</span><span>${item.damage}</span></div>` : ''}
+                        ${item.critical ? `<div class="stat-row"><span>Critical:</span><span>${item.critical}</span></div>` : ''}
+                        ${item.range ? `<div class="stat-row"><span>Range:</span><span>${item.range}</span></div>` : ''}
+                        ${item.damageType ? `<div class="stat-row"><span>Type:</span><span>${item.damageType}</span></div>` : ''}
+                    </div>
+                `;
+            } else if (item.category === 'armor') {
+                return `
+                    <div class="equipment-stats">
+                        ${item.armorBonus !== undefined ? `<div class="stat-row"><span>AC Bonus:</span><span>+${item.armorBonus}</span></div>` : ''}
+                        ${item.maxDexBonus !== undefined ? `<div class="stat-row"><span>Max Dex:</span><span>+${item.maxDexBonus}</span></div>` : ''}
+                        ${item.armorCheckPenalty !== undefined ? `<div class="stat-row"><span>Check Penalty:</span><span>${item.armorCheckPenalty}</span></div>` : ''}
+                        ${item.spellFailure !== undefined ? `<div class="stat-row"><span>Spell Failure:</span><span>${item.spellFailure}%</span></div>` : ''}
+                    </div>
+                `;
+            } else {
+                return '';
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('total-equipment').textContent = allEquipment.length;
+            document.getElementById('weapon-count').textContent = allEquipment.filter(i => i.category === 'weapons').length;
+            document.getElementById('armor-count').textContent = allEquipment.filter(i => i.category === 'armor').length;
+            document.getElementById('magic-count').textContent = allEquipment.filter(i => i.category === 'magic').length;
+            
+            // Update character stats
+            const strength = currentCharacter.abilities.Strength;
+            const carryingCapacity = equipmentSystem ? equipmentSystem.calculateCarryingCapacity(strength) : 230;
+            const currentLoad = calculateCurrentLoad();
+            
+            document.getElementById('character-strength').textContent = strength;
+            document.getElementById('carrying-capacity').textContent = `${carryingCapacity} lbs`;
+            document.getElementById('current-load').textContent = `${currentLoad} lbs`;
+            
+            // Update encumbrance bar
+            updateEncumbranceBar(currentLoad, carryingCapacity);
+        }
+
+        function calculateCurrentLoad() {
+            let totalWeight = 0;
+            for (const [itemId, quantity] of Object.entries(currentInventory)) {
+                const item = allEquipment.find(e => e.id === itemId);
+                if (item && item.weight) {
+                    const weight = parseFloat(item.weight.replace(/[^\d.]/g, ''));
+                    totalWeight += weight * quantity;
+                }
+            }
+            return Math.round(totalWeight * 10) / 10; // Round to 1 decimal place
+        }
+
+        function updateEncumbranceBar(currentLoad, maxLoad) {
+            const percentage = (currentLoad / maxLoad) * 100;
+            const fill = document.getElementById('encumbrance-fill');
+            
+            fill.style.width = `${Math.min(percentage, 100)}%`;
+            
+            // Change color based on encumbrance level
+            fill.className = 'encumbrance-fill';
+            if (percentage < 33) {
+                fill.classList.add('encumbrance-light');
+            } else if (percentage < 66) {
+                fill.classList.add('encumbrance-medium');
+            } else {
+                fill.classList.add('encumbrance-heavy');
+            }
+        }
+
+        function updateInventoryDisplay() {
+            const quickInventory = document.getElementById('quick-inventory');
+            
+            if (Object.keys(currentInventory).length === 0) {
+                quickInventory.innerHTML = `
+                    <div style="text-align: center; color: #999; padding: 20px;">
+                        No equipment in inventory
+                    </div>
+                `;
+                return;
+            }
+            
+            const inventoryHtml = Object.entries(currentInventory)
+                .map(([itemId, quantity]) => {
+                    const item = allEquipment.find(e => e.id === itemId);
+                    if (!item) return '';
+                    
+                    return `
+                        <div class="inventory-item">
+                            <span class="item-name ${item.magical ? 'magic' : ''}">${item.name}</span>
+                            <span class="item-quantity">${quantity}</span>
+                        </div>
+                    `;
+                })
+                .filter(html => html)
+                .join('');
+            
+            quickInventory.innerHTML = inventoryHtml;
+        }
+
+        // === Inventory Management ===
+        function addToInventory(itemId) {
+            const item = allEquipment.find(e => e.id === itemId);
+            if (!item) return;
+
+            if (currentInventory[itemId]) {
+                currentInventory[itemId]++;
+            } else {
+                currentInventory[itemId] = 1;
+            }
+
+            updateInventoryDisplay();
+            updateStats();
+
+            alert(`✅ ${item.name} added to inventory!`);
+        }
+
+        // === Modal Functions ===
+        function showEquipmentDetails(itemId) {
+            const item = allEquipment.find(e => e.id === itemId);
+            if (!item) return;
+
+            const modal = document.getElementById('equipment-modal');
+            const details = document.getElementById('equipment-details');
+            
+            details.innerHTML = `
+                <h2 class="${item.magical ? 'magic' : ''}">${item.name}</h2>
+                <div class="equipment-type">${item.category} ${item.weaponType || ''}</div>
+                
+                ${createEquipmentStatsHtml(item)}
+                
+                <div style="margin: 20px 0;">
+                    <strong>Description:</strong><br>
+                    ${item.description || 'No description available.'}
+                </div>
+                
+                <div class="price-weight" style="justify-content: flex-start; gap: 40px;">
+                    <span><strong>Cost:</strong> <span class="price">${item.cost || 'No cost'}</span></span>
+                    <span><strong>Weight:</strong> <span class="weight">${item.weight || 'No weight'}</span></span>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <button class="action-button" onclick="addToInventory('${item.id}'); closeEquipmentModal();">
+                        Add to Inventory
+                    </button>
+                    <button class="action-button" onclick="addMultipleToInventory('${item.id}')">
+                        Add Multiple
+                    </button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeEquipmentModal() {
+            document.getElementById('equipment-modal').style.display = 'none';
+        }
+
+        function addMultipleToInventory(itemId) {
+            const quantity = prompt('How many would you like to add?', '1');
+            const num = parseInt(quantity);
+            
+            if (isNaN(num) || num < 1) return;
+            
+            const item = allEquipment.find(e => e.id === itemId);
+            if (!item) return;
+
+            if (currentInventory[itemId]) {
+                currentInventory[itemId] += num;
+            } else {
+                currentInventory[itemId] = num;
+            }
+
+            updateInventoryDisplay();
+            updateStats();
+
+            alert(`✅ Added ${num} ${item.name}(s) to inventory!`);
+        }
+
+        // === Utility Functions ===
+        function showError(message) {
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.innerHTML = `
+                <div class="error-message">
+                    <strong>❌ Error:</strong> ${message}
+                </div>
+            `;
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // Export for testing
+        window.equipmentInterface = {
+            gameEngine,
+            equipmentSystem,
+            currentCharacter,
+            loadEquipmentData,
+            displayEquipment,
+            addToInventory
+        };
+    </script>
+</body>
+</html>

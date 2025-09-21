@@ -35,6 +35,12 @@
 - **R4.4**: Real-time dice rolling interface
 - **R4.5**: Character list display and management
 - **R4.6**: Error handling and user feedback
+- **R4.7**: D&D 3.5 Systems Web Interfaces (Phase 6)
+  - **R4.7.1**: Feats System Interface with search, filtering, and selection capabilities
+  - **R4.7.2**: Equipment System Interface with inventory management and encumbrance tracking
+  - **R4.7.3**: Spells System Interface with spellbook management and spell preparation
+  - **R4.7.4**: Unified theming with medieval/fantasy aesthetic across all interfaces
+  - **R4.7.5**: Cross-system navigation and integration between all D&D 3.5 interfaces
 
 #### **R5: Technical Requirements**
 - **R5.1**: Node.js HTTP server for static file serving
@@ -43,6 +49,31 @@
 - **R5.4**: Cross-browser compatibility
 - **R5.5**: Mobile-responsive design
 - **R5.6**: Performance optimization for large datasets
+
+#### **R6: D&D 3.5 Core Systems Implementation (Phase 6)**
+- **R6.1**: Complete Feats System with SRD compliance
+  - **R6.1.1**: 80+ feats from D&D 3.5 SRD (General, Combat, Metamagic, Item Creation, Skill, Racial)
+  - **R6.1.2**: Prerequisites validation system with ability scores, skills, feats, race, and class requirements
+  - **R6.1.3**: Character integration with automatic feat effects application
+  - **R6.1.4**: Feat trees and prerequisite chains for advanced feats
+  - **R6.1.5**: Combat and skill bonuses calculation and application
+- **R6.2**: Complete Equipment System with inventory management
+  - **R6.2.1**: Comprehensive weapons database (Simple, Martial, Exotic) with damage, critical, range
+  - **R6.2.2**: Complete armor system with AC bonuses, max dex, spell failure, check penalties
+  - **R6.2.3**: Magic items integration with enhancement bonuses and special properties
+  - **R6.2.4**: Encumbrance system with carrying capacity based on Strength scores
+  - **R6.2.5**: Equipment effects on character stats and combat performance
+- **R6.3**: Complete Spells System with casting mechanics
+  - **R6.3.1**: 100+ spells across all classes and levels (0-9th) from D&D 3.5 SRD
+  - **R6.3.2**: Spell organization by class, level, and school (8 schools of magic)
+  - **R6.3.3**: Spell casting mechanics with save DCs, spell resistance, and components
+  - **R6.3.4**: Metamagic feat integration for spell enhancement and modification
+  - **R6.3.5**: Spellbook management and spell preparation for prepared casters
+- **R6.4**: System Integration and Dependency Management
+  - **R6.4.1**: Unified initialization system with proper dependency ordering
+  - **R6.4.2**: Mock system fallbacks for development and testing environments
+  - **R6.4.3**: Cross-system integration (feats affecting spells, equipment affecting stats)
+  - **R6.4.4**: Browser and Node.js compatibility with universal module pattern
 
 ### **AI Agent Development Requirements**
 
