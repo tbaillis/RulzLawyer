@@ -1,28 +1,31 @@
-# AGENTS.md
+# AGENTS.md - Development Instructions
 
 ## Project Overview
 
-RulzLawyer is a comprehensive D&D 3.5 Character Creator and Adventure Engine workspace designed for developing, documenting, and analyzing requirements for coding agents.
+RulzLawyer is a comprehensive D&D 3.5 Character Creator and Adventure Engine that requires full development and implementation by AI coding agents.
 
-**Current State**: Complete documentation and requirements analysis with comprehensive 18-day implementation plan ready for execution.
+**Project Goal**: Build a world-class D&D 3.5 gaming system with character creation and AI-powered adventure engine
 
-## 🎯 **NEW: Complete Implementation Plan Available**
+**Current Status**: Planning and documentation phase complete - ready for implementation
 
-**📋 Comprehensive Game Plan**: See [`COMPREHENSIVE_GAME_PLAN.md`](./COMPREHENSIVE_GAME_PLAN.md) for the complete 18-day implementation roadmap that transforms this project from documentation into a fully functional, award-winning D&D 3.5 gaming application.
+## 🎯 **Implementation Requirements**
 
-**Implementation Status**:
-- ✅ Complete documentation and requirements analysis
-- ✅ Detailed technical specifications and user stories
-- ✅ Comprehensive testing framework and validation plans
-- ⏳ Ready for full implementation following the game plan
+**📋 Primary Implementation Guide**: See [`IMPLEMENTATION_GUIDE.md`](./IMPLEMENTATION_GUIDE.md) for complete technical guidance and architectural patterns.
 
-## Core Project Context
+**What Must Be Built**:
+- ⏳ Complete D&D 3.5 character creation system (7-step wizard)
+- ⏳ Advanced inventory management with drag-and-drop interface  
+- ⏳ Spell selection system for spellcasting classes
+- ⏳ Equipment preset system (Combat/Exploration/Social/Survival)
+- ⏳ Adventure engine with encounter generation
+- ⏳ Dice rolling system with D&D 3.5 mechanics
+- ⏳ Character persistence and storage system
 
-- **Purpose**: Complete D&D 3.5 gaming system with character creation and AI-powered adventure engine
-- **Implementation**: 18-day phased development approach with error-free execution strategy
-- **Focus Areas**: Award-winning UX/UI, 100% SRD compliance, interactive features, and comprehensive testing
-- **Output**: World-class D&D 3.5 Character Creator and Adventure Engine
-- **Architecture**: Node.js backend with JavaScript frontend, modular engine design
+**Development Specifications**:
+- **Architecture**: Node.js backend with JavaScript frontend, modular design
+- **Compliance**: Strict adherence to D&D 3.5 SRD rules and calculations
+- **User Experience**: Award-winning UI/UX with accessibility compliance
+- **Quality Standards**: Comprehensive testing and error-free execution
 
 ## 🚨 CRITICAL CODE PLACEMENT RULES
 
@@ -47,17 +50,22 @@ RulzLawyer is a comprehensive D&D 3.5 Character Creator and Adventure Engine wor
 - [ ] Step 3: Description of the next step
 ```
 
-## 🚀 Server Management Rules
+## 🚀 Development Requirements
 
+### Server Management Rules
 **ALWAYS Clean Up Ports Before Starting Server**: Before running `node server.js`, ALWAYS check for and kill any processes using port 3000 to prevent "address already in use" errors
 
-### Port Cleanup Commands:
-- Windows PowerShell: `Get-Process -Name node | Stop-Process -Force` 
-- Cross-platform: `npx kill-port 3000` (if kill-port is installed)
-- **Startup Sequence**: 1) Clean ports, 2) Start server, 3) Verify functionality
-- **Error Prevention**: Never attempt to start server without first ensuring port 3000 is available
+#### Port Cleanup Commands:
+```powershell
+# Windows PowerShell - Clean up ports before starting
+Get-Process -Name node -ErrorAction SilentlyContinue | Stop-Process -Force
+netstat -ano | findstr :3000
 
-## Build and Development Commands
+# Then start server
+node server-enhanced.js
+```
+
+**Startup Sequence**: 1) Clean ports, 2) Start server, 3) Verify functionality
 
 ### Core Application Commands
 ```bash
@@ -69,16 +77,6 @@ node -e "console.log('Testing all systems...'); /* validation script */"
 
 # Test individual components
 cd code-repository && node -e "const DiceEngine = require('./src/dice-engine.js'); console.log('DiceEngine loaded');"
-```
-
-### Port Management (CRITICAL)
-```powershell
-# Windows PowerShell - Clean up ports before starting
-Get-Process -Name node -ErrorAction SilentlyContinue | Stop-Process -Force
-netstat -ano | findstr :3000
-
-# Then start server
-node server-enhanced.js
 ```
 
 ## System Architecture
@@ -182,8 +180,8 @@ All major changes documented in `completed-work-by-agents/`:
 - `TASK-LIST-EXAMPLES.md` - Todo management templates
 
 ### Implementation Resources
-**📋 Primary Implementation Guide**: [`COMPREHENSIVE_GAME_PLAN.md`](./COMPREHENSIVE_GAME_PLAN.md)
-- Complete 18-day development roadmap
+**📋 Primary Implementation Guide**: [`IMPLEMENTATION_GUIDE.md`](./IMPLEMENTATION_GUIDE.md)
+- Complete knowledge transfer document for next AI team
 - Phase-by-phase implementation strategy
 - Award-winning UX/UI design guidelines
 - Error-free execution methodology
@@ -216,16 +214,16 @@ Reference user stories in `user-stories/` folder:
 
 1. **Read This File**: Complete understanding of project structure and requirements
 2. **Review Documentation**: Check `completed-work-by-agents/` for detailed guidance  
-3. **Review Implementation Plan**: Read `COMPREHENSIVE_GAME_PLAN.md` for complete roadmap
+3. **Review Implementation Plan**: Read `IMPLEMENTATION_GUIDE.md` for complete roadmap
 4. **Examine Codebase**: Explore `code-repository/` to understand implementation
 5. **Test Existing System**: Run validation scripts to confirm current functionality
 6. **Plan Changes**: Use todo list tool for any non-trivial work
-7. **Follow Game Plan**: Implement according to 18-day phase structure
+7. **Follow Implementation Plan**: Implement according to phased structure in IMPLEMENTATION_GUIDE.md
 8. **Test Thoroughly**: Follow established patterns and comprehensive testing
 
 ## Need Help?
 
-- **Implementation Questions**: See `COMPREHENSIVE_GAME_PLAN.md` for complete development roadmap
+- **Implementation Questions**: See `IMPLEMENTATION_GUIDE.md` for complete development roadmap
 - **Architecture Questions**: See `completed-work-by-agents/AI-AGENT-BUILD-INSTRUCTIONS.md`
 - **Debugging Issues**: Reference user stories US-011 through US-015
 - **Code Standards**: Check existing implementations in `code-repository/src/`
