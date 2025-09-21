@@ -191,6 +191,14 @@ class StorageManager {
   }
 
   /**
+   * Alias for loadAllCharacters for compatibility
+   * @returns {Promise<Array>} Array of character objects
+   */
+  async getAllCharacters() {
+    return this.loadAllCharacters();
+  }
+
+  /**
    * Delete character (only if not permanently dead)
    * @param {string} characterId - Character ID
    * @returns {Promise<boolean>} Success status

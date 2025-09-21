@@ -131,15 +131,12 @@ class RulzLawyerGameEngine {
 
     initializeRandomTables() {
         console.log('📊 Loading random tables system...');
-        if (typeof RandomTablesIndex !== 'undefined') {
-            this.randomTablesIndex = new RandomTablesIndex();
-            
-            // Inject dependencies
-            this.randomTablesIndex.diceEngine = this.diceEngine;
+        if (typeof RandomTablesEngine !== 'undefined') {
+            this.randomTablesIndex = new RandomTablesEngine(this.diceEngine);
             
             console.log('✅ Random tables system loaded');
         } else {
-            console.log('⚠️ RandomTablesIndex not available (optional)');
+            console.log('⚠️ RandomTablesEngine not available (optional)');
         }
     }
 
@@ -276,6 +273,17 @@ class RulzLawyerGameEngine {
             class: characterClass,
             level
         });
+    }
+
+    // New D&D 3.5 Character Creation
+    createDnD35Character() {
+        if (typeof DnD35CharacterWizard === 'undefined') {
+            console.error('D&D 3.5 Character Wizard not available');
+            return null;
+        }
+        
+        const wizard = new DnD35CharacterWizard();
+        return wizard.startWizard();
     }
 
     rollDice(expression) {

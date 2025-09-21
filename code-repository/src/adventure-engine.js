@@ -1225,3 +1225,8 @@ class AdventureEngine {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AdventureEngine;
 }
+
+// Make available as global for browser
+if (typeof window !== 'undefined') {
+    window.AdventureEngine = AdventureEngine;
+}

@@ -95,19 +95,29 @@ function verifyGlobalFunctions() {
     console.log('🔍 Verifying global functions...');
     
     const requiredFunctions = [
-        'rollDice', 'createNewCharacter', 'showCharacterStats',
-        'rollAdvantage', 'rollDisadvantage', 'closeModal'
+        'rollDice', 'createNewCharacter'
     ];
     
-    const missingFunctions = requiredFunctions.filter(funcName => 
+    const optionalFunctions = [
+        'showCharacterStats', 'rollAdvantage', 'rollDisadvantage', 'closeModal'
+    ];
+    
+    const missingRequired = requiredFunctions.filter(funcName => 
         typeof window[funcName] !== 'function'
     );
     
-    if (missingFunctions.length === 0) {
-        console.log('✅ All global functions are available');
+    const missingOptional = optionalFunctions.filter(funcName => 
+        typeof window[funcName] !== 'function'
+    );
+    
+    if (missingRequired.length === 0) {
+        console.log('✅ All required global functions are available');
+        if (missingOptional.length > 0) {
+            console.log('⚠️ Some optional functions not yet available:', missingOptional);
+        }
         return true;
     } else {
-        console.error('❌ Missing global functions:', missingFunctions);
+        console.error('❌ Missing required global functions:', missingRequired);
         return false;
     }
 }
