@@ -10,7 +10,20 @@ RulzLawyer is a comprehensive D&D 3.5 Character Creator and Adventure Engine tha
 
 ## 🎯 **Implementation Requirements**
 
-**📋 Primary Implementation Guide**: See [`IMPLEMENTATION_GUIDE.md`](./IMPLEMENTATION_GUIDE.md) for complete technical guidance and architectural patterns.
+**📋 VSCode AI-Optimized Instructions**: The project now uses Microsoft's recommended `.instructions.md` structure in `.github/instructions/` for precise AI targeting with `applyTo` patterns.
+
+**🎯 Primary Implementation Guides:**
+- **Character Creation:** `.github/instructions/implementation/character-creator.instructions.md`
+- **D&D 3.5 SRD Rules:** `.github/instructions/implementation/srd-data-manager.instructions.md`  
+- **Inventory System:** `.github/instructions/implementation/inventory-management.instructions.md`
+- **Adventure Engine:** `.github/instructions/implementation/adventure-engine.instructions.md`
+- **Server Architecture:** `.github/instructions/implementation/server-architecture.instructions.md`
+- **Testing Framework:** `.github/instructions/implementation/testing-validation.instructions.md`
+
+**🛠️ Development Workflow Guides:**
+- **AI Agent Tasks:** `.github/instructions/development/agent-punch-lists.instructions.md`
+- **Developer Setup:** `.github/instructions/development/developer-punch-lists.instructions.md`
+- **Quality Standards:** `.github/instructions/development/quality-assurance.instructions.md`
 
 **What Must Be Built**:
 - ⏳ Complete D&D 3.5 character creation system (7-step wizard)
@@ -172,19 +185,21 @@ window.gameActions = gameActions; // For HTML game interactions
 
 ## Documentation and Knowledge Transfer
 
-### Comprehensive Work Logs
-All major changes documented in `completed-work-by-agents/`:
+## Documentation and Knowledge Transfer
+
+### VSCode AI-Optimized Structure
+All documentation reorganized into `.github/instructions/` for optimal AI-assisted development:
+- **Implementation Guides:** Complete technical specifications for each major system
+- **Development Workflows:** Step-by-step procedures for both AI agents and human developers
+- **Quality Standards:** Comprehensive testing, validation, and compliance procedures
+- **Migration Guide:** `.github/instructions/analysis/project-migration-guide.md`
+
+### Legacy Documentation (Historical Reference)
+Historical work preserved in original locations:
 - `COMPLETED-WORK-LOG.md` - Chronological change tracking
 - `AI-AGENT-BUILD-INSTRUCTIONS.md` - Step-by-step build process
-- `AI-AGENT-INSTRUCTIONS.md` - Comprehensive agent guidelines
+- `IMPLEMENTATION_GUIDE.md` - High-level implementation roadmap
 - `TASK-LIST-EXAMPLES.md` - Todo management templates
-
-### Implementation Resources
-**📋 Primary Implementation Guide**: [`IMPLEMENTATION_GUIDE.md`](./IMPLEMENTATION_GUIDE.md)
-- Complete knowledge transfer document for next AI team
-- Phase-by-phase implementation strategy
-- Award-winning UX/UI design guidelines
-- Error-free execution methodology
 - Fun factor optimization techniques
 
 ### User Story Integration
@@ -213,20 +228,20 @@ Reference user stories in `user-stories/` folder:
 ## Quick Start for New Agents
 
 1. **Read This File**: Complete understanding of project structure and requirements
-2. **Review Documentation**: Check `completed-work-by-agents/` for detailed guidance  
-3. **Review Implementation Plan**: Read `IMPLEMENTATION_GUIDE.md` for complete roadmap
-4. **Examine Codebase**: Explore `code-repository/` to understand implementation
-5. **Test Existing System**: Run validation scripts to confirm current functionality
-6. **Plan Changes**: Use todo list tool for any non-trivial work
-7. **Follow Implementation Plan**: Implement according to phased structure in IMPLEMENTATION_GUIDE.md
-8. **Test Thoroughly**: Follow established patterns and comprehensive testing
+2. **Review Targeted Instructions**: Check `.github/instructions/implementation/` for system-specific guidance
+3. **Select Relevant Guide**: Choose appropriate `.instructions.md` file based on your assignment
+4. **Review Punch Lists**: Use `.github/instructions/development/agent-punch-lists.instructions.md` for specific tasks
+5. **Examine Codebase**: Explore `code-repository/` to understand current implementation
+6. **Plan Changes**: Use todo list tool for any non-trivial work (BeastMode 3.1 requirement)
+7. **Follow Implementation Patterns**: Use established dual-environment compatibility patterns
+8. **Test Thoroughly**: Maintain 80%+ test coverage and D&D 3.5 compliance validation
 
 ## Need Help?
 
-- **Implementation Questions**: See `IMPLEMENTATION_GUIDE.md` for complete development roadmap
-- **Architecture Questions**: See `completed-work-by-agents/AI-AGENT-BUILD-INSTRUCTIONS.md`
-- **Debugging Issues**: Reference user stories US-011 through US-015
-- **Code Standards**: Check existing implementations in `code-repository/src/`
+- **Implementation Questions**: See appropriate `.instructions.md` file in `.github/instructions/implementation/`
+- **Task Specifications**: Reference `.github/instructions/development/agent-punch-lists.instructions.md`
+- **Setup Questions**: Check `.github/instructions/development/developer-punch-lists.instructions.md`
+- **Quality Standards**: Review `.github/instructions/development/quality-assurance.instructions.md`
 - **Testing Guidance**: Review `COMPLETED-WORK-LOG.md` for validation examples
 
 ---
