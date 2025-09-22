@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧙‍♂️ Character Creator - RulzLawyer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧙‍♂️</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #2d1b69 0%, #11998e 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            color: #ffd700;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 2rem;
+            padding: 2rem;
+            min-height: calc(100vh - 140px);
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Progress Panel */
+        .progress-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .progress-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            transition: width 0.5s ease;
+            width: 14%;
+        }
+
+        .progress-text {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .step-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 10px;
+        }
+
+        .step:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .step.active {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #ffd700;
+        }
+
+        .step.completed {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .step-icon {
+            font-size: 1.2rem;
+            min-width: 25px;
+        }
+
+        .step-info {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        .step-desc {
+            font-size: 0.75rem;
+            color: #a0a0a0;
+            margin-top: 2px;
+        }
+
+        /* Main Content */
+        .content-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .step-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .step-title-main {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        /* Method Selection */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .method-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .method-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .method-card.selected {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .method-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .method-title {
+            font-size: 1.3rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .method-desc {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        /* Ability Scores */
+        .ability-section {
+            margin-top: 2rem;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .generate-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .ability-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .ability-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .ability-name {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 0.5rem;
+        }
+
+        .ability-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 0.25rem;
+        }
+
+        .ability-modifier {
+            font-size: 1rem;
+            color: #a0a0a0;
+        }
+
+        /* Character Preview */
+        .preview-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-title {
+            color: #ffd700;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .character-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .character-info {
+            text-align: center;
+        }
+
+        .char-name {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            margin-bottom: 0.5rem;
+        }
+
+        .char-details {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Navigation Buttons */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .progress-panel, .preview-panel {
+                order: -1;
+            }
+            
+            .method-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ability-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .method-grid {
+                gap: 1rem;
+            }
+            
+            .main-container {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .ability-card.updated {
+            animation: pulse 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background: rgba(255, 215, 0, 0.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🧙‍♂️ CHARACTER CREATOR</h1>
+        <nav class="nav-buttons">
+            <a href="/" class="nav-btn">🏠 Home</a>
+            <a href="#" class="nav-btn" onclick="saveCharacter()">💾 Save</a>
+            <a href="#" class="nav-btn" onclick="loadCharacter()">📁 Load</a>
+            <a href="#" class="nav-btn" onclick="showHelp()">❓ Help</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <!-- Progress Panel -->
+        <aside class="progress-panel">
+            <div class="progress-header">
+                <div class="progress-text" id="progressText">Step 1 of 7: 14%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <nav class="step-nav">
+                <div class="step active" onclick="goToStep(1)">
+                    <div class="step-icon">📊</div>
+                    <div class="step-info">
+                        <div class="step-title">Ability Scores</div>
+                        <div class="step-desc">Generate core stats</div>
+                    </div>
+                </div>
+                <div class="step" onclick="goToStep(2)">
+                    <div class="step-icon">🧝</div>
+                    <div class="step-info">
+                        <div class="step-title">Race</div>
+                        <div class="step-desc">Choose heritage</div>
+                    </div>
+                </div>
+                <div class="step" onclick="goToStep(3)">
+                    <div class="step-icon">⚔️</div>
+                    <div class="step-info">
+                        <div class="step-title">Class</div>
+                        <div class="step-desc">Pick profession</div>
+                    </div>
+                </div>
+                <div class="step" onclick="goToStep(4)">
+                    <div class="step-icon">🎯</div>
+                    <div class="step-info">
+                        <div class="step-title">Skills</div>
+                        <div class="step-desc">Allocate points</div>
+                    </div>
+                </div>
+                <div class="step" onclick="goToStep(5)">
+                    <div class="step-icon">⭐</div>
+                    <div class="step-info">
+                        <div class="step-title">Feats</div>
+                        <div class="step-desc">Special abilities</div>
+                    </div>
+                </div>
+                <div class="step" onclick="goToStep(6)">
+                    <div class="step-icon">🛡️</div>
+                    <div class="step-info">
+                        <div class="step-title">Equipment</div>
+                        <div class="step-desc">Gear & weapons</div>
+                    </div>
+                </div>
+                <div class="step" onclick="goToStep(7)">
+                    <div class="step-icon">✨</div>
+                    <div class="step-info">
+                        <div class="step-title">Finalize</div>
+                        <div class="step-desc">Complete build</div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-panel">
+            <div class="step-header">
+                <h2 class="step-title-main">📊 Ability Scores</h2>
+                <p class="step-description">Generate your character's core attributes using D&D 3.5 rules</p>
+            </div>
+
+            <div id="stepContentArea">
+            <div class="method-grid">
+                <div class="method-card" onclick="selectAbilityMethod('4d6dl1')">
+                    <div class="method-icon">🎲</div>
+                    <div class="method-title">Standard (4d6, drop lowest)</div>
+                    <div class="method-desc">Classic D&D method - balanced characters</div>
+                </div>
+                
+                <div class="method-card" onclick="selectAbilityMethod('3d6')">
+                    <div class="method-icon">🎯</div>
+                    <div class="method-title">Classic (3d6)</div>
+                    <div class="method-desc">Pure random - as intended by Gygax</div>
+                </div>
+                
+                <div class="method-card" onclick="selectAbilityMethod('pointbuy')">
+                    <div class="method-icon">📊</div>
+                    <div class="method-title">Point Buy (28 points)</div>
+                    <div class="method-desc">Official D&D 3.5 balanced system - strategic allocation</div>
+                </div>
+                
+                <div class="method-card" onclick="selectAbilityMethod('array')">
+                    <div class="method-icon">⭐</div>
+                    <div class="method-title">Elite Array</div>
+                    <div class="method-desc">15, 14, 13, 12, 10, 8 - assign as desired</div>
+                </div>
+            </div>
+
+            <div class="ability-section">
+                <button class="generate-btn" onclick="generateAbilityScores()" id="generateBtn" disabled>
+                    Select a method to generate ability scores
+                </button>
+                
+                <div class="ability-grid">
+                    <div class="ability-card" data-ability="str">
+                        <div class="ability-name">💪 Strength</div>
+                        <div class="ability-value" id="strValue">--</div>
+                        <div class="ability-modifier" id="strMod">+0</div>
+                    </div>
+                    <div class="ability-card" data-ability="dex">
+                        <div class="ability-name">🏃 Dexterity</div>
+                        <div class="ability-value" id="dexValue">--</div>
+                        <div class="ability-modifier" id="dexMod">+0</div>
+                    </div>
+                    <div class="ability-card" data-ability="con">
+                        <div class="ability-name">💙 Constitution</div>
+                        <div class="ability-value" id="conValue">--</div>
+                        <div class="ability-modifier" id="conMod">+0</div>
+                    </div>
+                    <div class="ability-card" data-ability="int">
+                        <div class="ability-name">🧠 Intelligence</div>
+                        <div class="ability-value" id="intValue">--</div>
+                        <div class="ability-modifier" id="intMod">+0</div>
+                    </div>
+                    <div class="ability-card" data-ability="wis">
+                        <div class="ability-name">👁️ Wisdom</div>
+                        <div class="ability-value" id="wisValue">--</div>
+                        <div class="ability-modifier" id="wisMod">+0</div>
+                    </div>
+                    <div class="ability-card" data-ability="cha">
+                        <div class="ability-name">✨ Charisma</div>
+                        <div class="ability-value" id="chaValue">--</div>
+                        <div class="ability-modifier" id="chaMod">+0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <button class="nav-button" onclick="prevStep()" id="prevBtn" disabled>
+                    ← Previous
+                </button>
+                <button class="nav-button" onclick="nextStep()" id="nextBtn" disabled>
+                    Next: Race →
+                </button>
+            </div>
+            </div> <!-- /#stepContentArea -->
+        </main>
+
+        <!-- Character Preview -->
+        <aside class="preview-panel">
+            <div class="preview-header">
+                <h3 class="preview-title">Character Preview</h3>
+            </div>
+            
+            <div class="character-avatar">🧙‍♂️</div>
+            
+            <div class="character-info">
+                <div class="char-name" id="charName">New Character</div>
+                <div class="char-details" id="charDetails">
+                    <div>Race: Not Selected</div>
+                    <div>Class: Not Selected</div>
+                    <div>Level: 1</div>
+                    <div style="margin-top: 1rem; color: #a0a0a0;">
+                        Select a generation method and create your character to see preview
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="code-repository/src/srd-data-manager.js"></script>
+    <script>
+        // Initialize SRD Data Manager
+        const srdData = new SRDDataManager();
+        
+        // Character data object
+        let currentCharacter = {
+            step: 1,
+            name: '',
+            race: '',
+            classes: [],
+            level: 1,
+            abilities: {},
+            abilityMethod: '',
+            skills: {},
+            skillRanks: {},
+            feats: [],
+            equipment: [],
+            hitPoints: 0,
+            armorClass: 10,
+            saves: { fort: 0, ref: 0, will: 0 },
+            bab: 0
+        };
+
+        // Initialize character creator with SRD data
+        let originalStep1HTML = null;
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Initialize SRD data first
+            await srdData.initialize();
+            
+            // Capture original step 1 markup so we can restore it when navigating back
+            originalStep1HTML = document.getElementById('stepContentArea').innerHTML;
+            updateProgressDisplay();
+            updateCharacterPreview();
+            
+            // Add fade-in animations
+            setTimeout(() => {
+                document.querySelectorAll('.method-card, .ability-card').forEach((card, index) => {
+                    card.style.animationDelay = (index * 0.1) + 's';
+                    card.classList.add('fade-in');
+                });
+            }, 100);
+
+            // Initial render hook
+            renderCurrentStep();
+        });
+
+        // Method selection functions
+        function selectAbilityMethod(method) {
+            // Remove previous selection
+            document.querySelectorAll('.method-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.target.closest('.method-card').classList.add('selected');
+            
+            // Store method
+            currentCharacter.abilityMethod = method;
+            
+            // Update generate button
+            const generateBtn = document.getElementById('generateBtn');
+            generateBtn.disabled = false;
+            generateBtn.textContent = '🎲 Generate ' + getMethodName(method);
+            
+            // Reset ability scores
+            resetAbilityScores();
+        }
+
+        function getMethodName(method) {
+            const names = {
+                '4d6dl1': 'Standard (4d6)',
+                '3d6': 'Classic (3d6)',
+                'pointbuy': 'Point Buy',
+                'array': 'Elite Array'
+            };
+            return names[method] || 'Ability Scores';
+        }
+
+        function resetAbilityScores() {
+            const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+            abilities.forEach(ability => {
+                document.getElementById(ability + 'Value').textContent = '--';
+                document.getElementById(ability + 'Mod').textContent = '+0';
+            });
+            currentCharacter.abilities = {};
+            document.getElementById('nextBtn').disabled = true;
+            updateCharacterPreview();
+        }
+
+        // Ability score generation
+        function generateAbilityScores() {
+            if (!currentCharacter.abilityMethod) {
+                alert('Please select a generation method first!');
+                return;
+            }
+
+            const method = currentCharacter.abilityMethod;
+            const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+            
+            // Generate scores based on method
+            abilities.forEach((ability, index) => {
+                setTimeout(() => {
+                    let score;
+                    switch(method) {
+                        case '4d6dl1':
+                            score = rollAbilityScore();
+                            break;
+                        case '3d6':
+                            score = roll3d6();
+                            break;
+                        case 'pointbuy':
+                            score = 8; // Starting point buy value
+                            break;
+                        case 'array':
+                            const array = [15, 14, 13, 12, 10, 8];
+                            score = array[index];
+                            break;
+                    }
+                    
+                    currentCharacter.abilities[ability] = score;
+                    updateAbilityDisplay(ability, score);
+                    
+                    // After all abilities are generated, enable next button
+                    if (Object.keys(currentCharacter.abilities).length === 6) {
+                        document.getElementById('nextBtn').disabled = false;
+                        updateCharacterPreview();
+                    }
+                }, index * 200); // Stagger the animations
+            });
+        }
+
+        function rollAbilityScore() {
+            // Roll 4d6, drop lowest
+            const rolls = [roll1d6(), roll1d6(), roll1d6(), roll1d6()];
+            rolls.sort((a, b) => b - a);
+            return rolls[0] + rolls[1] + rolls[2];
+        }
+
+        function roll3d6() {
+            return roll1d6() + roll1d6() + roll1d6();
+        }
+
+        function roll1d6() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+
+        function updateAbilityDisplay(ability, score) {
+            const modifier = Math.floor((score - 10) / 2);
+            const scoreElement = document.getElementById(ability + 'Value');
+            const modElement = document.getElementById(ability + 'Mod');
+            
+            // Animate the score change
+            scoreElement.style.transform = 'scale(1.2)';
+            scoreElement.style.color = '#ffed4e';
+            
+            setTimeout(() => {
+                scoreElement.textContent = score;
+                modElement.textContent = modifier >= 0 ? '+' + modifier : modifier;
+                
+                scoreElement.style.transform = 'scale(1)';
+                scoreElement.style.color = '#ffd700';
+                
+                // Add visual feedback
+                const abilityElement = document.querySelector('[data-ability="' + ability + '"]');
+                abilityElement.classList.add('updated');
+                setTimeout(() => abilityElement.classList.remove('updated'), 1000);
+            }, 100);
+        }
+
+        // ---- New: Step management and additional UIs ----
+        const totalSteps = 7;
+        let currentStep = 1;
+
+        // Point-buy rules (official D&D 3.5 28-point system)
+        const pointBuyCosts = {8:0,9:1,10:2,11:3,12:4,13:5,14:6,15:8,16:10,17:13,18:16};
+
+        function renderCurrentStep() {
+            const area = document.getElementById('stepContentArea');
+            // If moving back to step 1, restore original HTML
+            if (currentStep === 1 && originalStep1HTML) {
+                area.innerHTML = originalStep1HTML;
+                // reattach animations
+                setTimeout(() => {
+                    document.querySelectorAll('.method-card, .ability-card').forEach((card, index) => {
+                        card.style.animationDelay = (index * 0.05) + 's';
+                        card.classList.add('fade-in');
+                    });
+                }, 50);
+                // ensure generate button wired
+                const genBtn = document.getElementById('generateBtn');
+                if (genBtn) genBtn.disabled = !currentCharacter.abilityMethod;
+                updateAbilityCardsFromCharacter();
+                return updateProgressDisplay();
+            }
+
+            area.innerHTML = '';
+            const header = document.createElement('div');
+            header.style.marginBottom = '12px';
+            header.innerHTML = `<h2>Step ${currentStep}: ${stepTitle(currentStep)}</h2>`;
+            area.appendChild(header);
+
+            if (currentStep === 1) {
+                // first time store original
+                if (!originalStep1HTML) originalStep1HTML = document.getElementById('stepContentArea').innerHTML;
+                // restore original
+                area.innerHTML = originalStep1HTML;
+                const genBtn = document.getElementById('generateBtn');
+                if (genBtn) genBtn.disabled = !currentCharacter.abilityMethod;
+                updateAbilityCardsFromCharacter();
+            } else if (currentStep === 2) {
+                renderRaceStep(area);
+            } else if (currentStep === 3) {
+                renderClassStep(area);
+            } else if (currentStep === 4) {
+                renderSkillsStep(area);
+            } else if (currentStep === 5) {
+                renderFeatsStep(area);
+            } else if (currentStep === 6) {
+                renderEquipmentStep(area);
+            } else if (currentStep === 7) {
+                renderFinalizeStep(area);
+            }
+
+            updateProgressDisplay();
+        }
+
+        function stepTitle(step) {
+            switch(step) {
+                case 1: return 'Ability Scores';
+                case 2: return 'Race';
+                case 3: return 'Class';
+                case 4: return 'Skills';
+                case 5: return 'Feats';
+                case 6: return 'Equipment';
+                case 7: return 'Finalize';
+            }
+        }
+
+        function updateAbilityCardsFromCharacter() {
+            const abilities = ['str','dex','con','int','wis','cha'];
+            abilities.forEach(a=>{
+                const v = currentCharacter.abilities[a];
+                if (v !== undefined) updateAbilityDisplay(a, v);
+            });
+        }
+
+        function calculatePointBuy() {
+            let remaining = 28; // Official D&D 3.5 point-buy
+            const abilities = ['STR','DEX','CON','INT','WIS','CHA'];
+            for (const a of abilities) {
+                const sel = document.getElementById('pb_'+a);
+                if (!sel) continue;
+                const v = parseInt(sel.value,10);
+                remaining -= (pointBuyCosts[v] ?? 999);
+            }
+            const remEl = document.getElementById('pbRemaining');
+            if (remEl) {
+                remEl.textContent = remaining;
+                remEl.style.color = remaining < 0 ? 'crimson' : remaining === 0 ? 'gold' : 'inherit';
+            }
+            if (remaining >= 0) {
+                // write into currentCharacter.abilities
+                const map = {'STR':'str','DEX':'dex','CON':'con','INT':'int','WIS':'wis','CHA':'cha'};
+                for (const a of abilities) {
+                    const sel = document.getElementById('pb_'+a);
+                    if (!sel) continue;
+                    currentCharacter.abilities[map[a]] = parseInt(sel.value,10);
+                }
+                updateCharacterPreview();
+                // Enable next button if all points spent
+                document.getElementById('nextBtn').disabled = remaining !== 0;
+            } else {
+                document.getElementById('nextBtn').disabled = true;
+            }
+        }
+
+        function renderRaceStep(area) {
+            const inner = document.createElement('div');
+            inner.style.display='flex'; inner.style.gap='12px'; inner.style.flexWrap='wrap';
+            inner.style.justifyContent='center';
+            
+            // Use SRD data for races
+            Object.values(srdData.races).forEach(race => {
+                const card = document.createElement('div'); 
+                card.className='method-card'; 
+                card.style.width='300px';
+                card.style.minHeight='180px';
+                
+                // Show ability modifiers
+                const mods = Object.entries(race.abilityMods)
+                    .filter(([k,v]) => v !== 0)
+                    .map(([k,v]) => `${k.toUpperCase()}${v>0?'+':''}${v}`)
+                    .join(', ') || 'No modifiers';
+                
+                card.innerHTML = `
+                    <h4>${race.name}</h4>
+                    <div style="font-size:0.9em; margin:8px 0; color:#b0b0b0;">
+                        ${race.description}
+                    </div>
+                    <div style="font-size:0.85em; margin:8px 0;">
+                        <strong>Ability Mods:</strong> ${mods}
+                    </div>
+                    <div style="font-size:0.8em; color:#a0a0a0;">
+                        Size: ${race.size} | Speed: ${race.speed} ft<br>
+                        Favored Class: ${race.favored_class}
+                    </div>
+                `;
+                
+                card.addEventListener('click', ()=>{
+                    // Remove selection from other cards
+                    inner.querySelectorAll('.method-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    
+                    currentCharacter.race = race.id;
+                    
+                    // Apply racial modifiers to preview (temporarily)
+                    if (Object.keys(currentCharacter.abilities).length > 0) {
+                        const modifiedAbilities = srdData.applyRacialModifiers(currentCharacter.abilities, race.id);
+                        Object.entries(modifiedAbilities).forEach(([ability, value]) => {
+                            updateAbilityDisplay(ability, value);
+                        });
+                    }
+                    
+                    updateCharacterPreview();
+                    document.getElementById('nextBtn').disabled = false;
+                });
+                inner.appendChild(card);
+            });
+            area.appendChild(inner);
+        }
+
+        function renderClassStep(area) {
+            const inner = document.createElement('div'); 
+            inner.style.display='grid'; 
+            inner.style.gridTemplateColumns='repeat(auto-fit, minmax(300px, 1fr))'; 
+            inner.style.gap='12px';
+            inner.style.justifyContent='center';
+            
+            // Use SRD data for classes
+            Object.values(srdData.classes).forEach(cls => {
+                const card = document.createElement('div'); 
+                card.className='method-card'; 
+                card.style.minHeight='220px';
+                
+                const skillPts = cls.skill_points;
+                const hitDie = cls.hit_die;
+                const saves = `Fort: ${cls.save_progression.fort}, Ref: ${cls.save_progression.ref}, Will: ${cls.save_progression.will}`;
+                
+                card.innerHTML = `
+                    <h4>${cls.name}</h4>
+                    <div style="font-size:0.9em; margin:8px 0; color:#b0b0b0;">
+                        ${cls.description}
+                    </div>
+                    <div style="font-size:0.85em; margin:8px 0;">
+                        <strong>Hit Die:</strong> ${hitDie}<br>
+                        <strong>Skill Points:</strong> ${skillPts} + Int modifier<br>
+                        <strong>BAB:</strong> ${cls.bab_progression}
+                    </div>
+                    <div style="font-size:0.8em; color:#a0a0a0;">
+                        ${saves}<br>
+                        ${cls.spell_progression ? `Spells: ${cls.spell_progression}` : 'Non-spellcaster'}
+                    </div>
+                `;
+                
+                card.addEventListener('click', ()=>{
+                    // Remove selection from other cards
+                    inner.querySelectorAll('.method-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    
+                    currentCharacter.classes = [cls.id];
+                    updateCharacterPreview();
+                    document.getElementById('nextBtn').disabled = false;
+                });
+                inner.appendChild(card);
+            });
+            area.appendChild(inner);
+        }
+
+        function renderSkillsStep(area) {
+            if (!currentCharacter.classes.length) {
+                area.innerHTML = '<div style="text-align:center; color:#ff6b6b;">Please select a class first!</div>';
+                return;
+            }
+            
+            const classId = currentCharacter.classes[0];
+            const classData = srdData.getClassData(classId);
+            const intMod = Math.floor((currentCharacter.abilities.int || 10 - 10) / 2);
+            const skillPoints = srdData.getClassSkillPoints(classId, 1, intMod);
+            
+            // Create skills interface
+            const header = document.createElement('div');
+            header.innerHTML = `
+                <h3>Skill Selection</h3>
+                <p>Available skill points: <span id="remainingSkillPoints">${skillPoints}</span></p>
+                <p style="font-size:0.9em; color:#b0b0b0;">Class skills cost 1 point per rank, cross-class skills cost 2 points per rank (max 0.5 ranks at 1st level)</p>
+            `;
+            area.appendChild(header);
+            
+            const grid = document.createElement('div'); 
+            grid.style.display='grid'; 
+            grid.style.gridTemplateColumns='repeat(2,1fr)'; 
+            grid.style.gap='8px';
+            grid.style.marginTop='16px';
+            
+            // Display all skills with class/cross-class indication
+            Object.keys(srdData.skills).forEach(skillName => {
+                const isClassSkill = srdData.isClassSkill(skillName, classId);
+                const keyAbility = srdData.skills[skillName].key_ability;
+                
+                const row = document.createElement('div'); 
+                row.style.display='flex'; 
+                row.style.alignItems='center';
+                row.style.padding='8px';
+                row.style.backgroundColor = isClassSkill ? 'rgba(0,255,0,0.1)' : 'rgba(255,255,0,0.05)';
+                row.style.borderRadius='4px';
+                
+                row.innerHTML = `
+                    <div style="flex:1;">
+                        <strong>${skillName}</strong> (${keyAbility.toUpperCase()})
+                        <small style="color:${isClassSkill?'#90EE90':'#FFD700'}">[${isClassSkill?'Class':'Cross-class'}]</small>
+                    </div>
+                    <div>
+                        Ranks: <input type="number" min="0" max="${isClassSkill ? 4 : 2}" step="${isClassSkill ? 1 : 0.5}" 
+                               value="0" id="skill_${skillName.replace(/[^a-zA-Z0-9]/g, '_')}" 
+                               style="width:60px; background:#333; color:#fff; border:1px solid #666; border-radius:3px;">
+                    </div>
+                `;
+                
+                // Add event listener to track skill point spending
+                const input = row.querySelector('input');
+                input.addEventListener('change', updateSkillPoints);
+                
+                grid.appendChild(row);
+            });
+            
+            const btn = document.createElement('button'); 
+            btn.textContent='Confirm Skills'; 
+            btn.style.marginTop='16px';
+            btn.style.width='100%';
+            btn.className='generate-btn';
+            
+            btn.addEventListener('click', ()=>{
+                // Save skill selections
+                currentCharacter.skillRanks = {};
+                Object.keys(srdData.skills).forEach(skillName => {
+                    const input = document.getElementById(`skill_${skillName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                    if (input && parseFloat(input.value) > 0) {
+                        currentCharacter.skillRanks[skillName] = parseFloat(input.value);
+                    }
+                });
+                
+                updateCharacterPreview(); 
+                document.getElementById('nextBtn').disabled = false;
+            });
+            
+            area.appendChild(grid); 
+            area.appendChild(btn);
+            
+            function updateSkillPoints() {
+                let pointsSpent = 0;
+                const classId = currentCharacter.classes[0];
+                
+                Object.keys(srdData.skills).forEach(skillName => {
+                    const input = document.getElementById(`skill_${skillName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                    if (input) {
+                        const ranks = parseFloat(input.value) || 0;
+                        const isClassSkill = srdData.isClassSkill(skillName, classId);
+                        pointsSpent += ranks * (isClassSkill ? 1 : 2);
+                    }
+                });
+                
+                const remaining = skillPoints - pointsSpent;
+                const remainingEl = document.getElementById('remainingSkillPoints');
+                if (remainingEl) {
+                    remainingEl.textContent = remaining;
+                    remainingEl.style.color = remaining < 0 ? 'crimson' : remaining === 0 ? 'gold' : 'inherit';
+                }
+            }
+        }
+
+        function renderFeatsStep(area) {
+            if (!currentCharacter.classes.length) {
+                area.innerHTML = '<div style="text-align:center; color:#ff6b6b;">Please select a class first!</div>';
+                return;
+            }
+            
+            const classId = currentCharacter.classes[0];
+            const raceId = currentCharacter.race;
+            const availableFeats = calculateAvailableFeats(classId, raceId);
+            
+            const header = document.createElement('div');
+            header.innerHTML = `
+                <h3>Feat Selection</h3>
+                <p>Available feats: <span id="remainingFeats">${availableFeats}</span></p>
+                <p style="font-size:0.9em; color:#b0b0b0;">Choose ${availableFeats} feat${availableFeats>1?'s':''}. Some feats have prerequisites.</p>
+            `;
+            area.appendChild(header);
+            
+            const grid = document.createElement('div'); 
+            grid.style.display='grid'; 
+            grid.style.gridTemplateColumns='1fr'; 
+            grid.style.gap='8px';
+            grid.style.marginTop='16px';
+            grid.style.maxHeight='400px';
+            grid.style.overflowY='auto';
+            
+            // Display all feats with prerequisites and selection ability
+            Object.keys(srdData.feats).forEach(featName => {
+                const feat = srdData.feats[featName];
+                const meetsPrereqs = checkFeatPrerequisites(feat, currentCharacter);
+                
+                const row = document.createElement('div');
+                row.style.padding='12px';
+                row.style.backgroundColor = meetsPrereqs ? 'rgba(0,255,0,0.05)' : 'rgba(128,128,128,0.2)';
+                row.style.borderRadius='6px';
+                row.style.border = meetsPrereqs ? '1px solid rgba(0,255,0,0.3)' : '1px solid rgba(128,128,128,0.5)';
+                row.style.opacity = meetsPrereqs ? '1' : '0.6';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `feat_${featName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+                checkbox.disabled = !meetsPrereqs;
+                checkbox.style.marginRight = '8px';
+                
+                checkbox.addEventListener('change', () => {
+                    updateFeatSelection();
+                });
+                
+                const content = document.createElement('div');
+                content.innerHTML = `
+                    <div style="display:flex; align-items:center; margin-bottom:4px;">
+                        <strong style="color:${meetsPrereqs ? '#fff' : '#aaa'}">${featName}</strong>
+                        ${feat.type ? `<span style="margin-left:8px; font-size:0.8em; color:#FFD700;">[${feat.type}]</span>` : ''}
+                    </div>
+                    <div style="font-size:0.9em; color:${meetsPrereqs ? '#ddd' : '#999'}; margin-bottom:4px;">
+                        ${feat.description || 'No description available.'}
+                    </div>
+                    ${feat.prerequisite ? `<div style="font-size:0.8em; color:${meetsPrereqs ? '#90EE90' : '#ff6b6b'};">
+                        <strong>Prerequisites:</strong> ${feat.prerequisite}
+                    </div>` : ''}
+                    ${feat.benefit ? `<div style="font-size:0.8em; color:#B0E0E6; margin-top:4px;">
+                        <strong>Benefit:</strong> ${feat.benefit}
+                    </div>` : ''}
+                `;
+                
+                row.appendChild(checkbox);
+                row.appendChild(content);
+                grid.appendChild(row);
+            });
+            
+            const btn = document.createElement('button'); 
+            btn.textContent='Confirm Feats'; 
+            btn.style.marginTop='16px';
+            btn.style.width='100%';
+            btn.className='generate-btn';
+            
+            btn.addEventListener('click', ()=>{
+                // Save feat selections
+                currentCharacter.feats = [];
+                Object.keys(srdData.feats).forEach(featName => {
+                    const checkbox = document.getElementById(`feat_${featName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                    if (checkbox && checkbox.checked) {
+                        currentCharacter.feats.push(featName);
+                    }
+                });
+                
+                updateCharacterPreview(); 
+                document.getElementById('nextBtn').disabled = false;
+            });
+            
+            area.appendChild(grid); 
+            area.appendChild(btn);
+            
+            function updateFeatSelection() {
+                const selectedFeats = [];
+                Object.keys(srdData.feats).forEach(featName => {
+                    const checkbox = document.getElementById(`feat_${featName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                    if (checkbox && checkbox.checked) {
+                        selectedFeats.push(featName);
+                    }
+                });
+                
+                const remaining = availableFeats - selectedFeats.length;
+                const remainingEl = document.getElementById('remainingFeats');
+                if (remainingEl) {
+                    remainingEl.textContent = remaining;
+                    remainingEl.style.color = remaining < 0 ? 'crimson' : remaining === 0 ? 'gold' : 'inherit';
+                }
+                
+                // Disable other checkboxes if at limit
+                if (remaining <= 0) {
+                    Object.keys(srdData.feats).forEach(featName => {
+                        const checkbox = document.getElementById(`feat_${featName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                        if (checkbox && !checkbox.checked) {
+                            checkbox.disabled = true;
+                        }
+                    });
+                } else {
+                    // Re-enable checkboxes for eligible feats
+                    Object.keys(srdData.feats).forEach(featName => {
+                        const feat = srdData.feats[featName];
+                        const checkbox = document.getElementById(`feat_${featName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                        if (checkbox && !checkbox.checked) {
+                            checkbox.disabled = !checkFeatPrerequisites(feat, currentCharacter);
+                        }
+                    });
+                }
+            }
+        }
+        
+        function calculateAvailableFeats(classId, raceId) {
+            let feats = 1; // Base feat at 1st level
+            
+            // Human bonus feat
+            if (raceId === 'human') feats += 1;
+            
+            // Fighter bonus feat (would need level tracking for more)
+            if (classId === 'fighter') feats += 1;
+            
+            return feats;
+        }
+        
+        function checkFeatPrerequisites(feat, character) {
+            if (!feat.prerequisite) return true;
+            
+            const prereq = feat.prerequisite.toLowerCase();
+            
+            // Basic ability score checks (simplified - would need full parser for complex prereqs)
+            if (prereq.includes('str') && prereq.includes('13')) {
+                return (character.abilities.str || 10) >= 13;
+            }
+            if (prereq.includes('dex') && prereq.includes('13')) {
+                return (character.abilities.dex || 10) >= 13;
+            }
+            if (prereq.includes('int') && prereq.includes('13')) {
+                return (character.abilities.int || 10) >= 13;
+            }
+            if (prereq.includes('wis') && prereq.includes('13')) {
+                return (character.abilities.wis || 10) >= 13;
+            }
+            if (prereq.includes('con') && prereq.includes('13')) {
+                return (character.abilities.con || 10) >= 13;
+            }
+            if (prereq.includes('cha') && prereq.includes('13')) {
+                return (character.abilities.cha || 10) >= 13;
+            }
+            
+            // Base attack bonus checks
+            if (prereq.includes('bab') || prereq.includes('base attack')) {
+                const requiredBAB = parseInt(prereq.match(/\d+/)?.[0] || '0');
+                const currentBAB = srdData.getClassBAB(character.classes[0], 1); // Level 1 for now
+                return currentBAB >= requiredBAB;
+            }
+            
+            // For now, return true for complex prerequisites
+            // In a full implementation, would need sophisticated prerequisite parser
+            return true;
+        }
+
+        function renderEquipmentStep(area) {
+            if (!currentCharacter.classes.length) {
+                area.innerHTML = '<div style="text-align:center; color:#ff6b6b;">Please select a class first!</div>';
+                return;
+            }
+            
+            const classId = currentCharacter.classes[0];
+            const isSpellcaster = srdData.isSpellcaster(classId);
+            
+            const header = document.createElement('div');
+            header.innerHTML = `
+                <h3>Equipment${isSpellcaster ? ' & Spells' : ''} Selection</h3>
+                ${isSpellcaster ? '<p style="color:#DDA0DD;">As a spellcaster, you can also select your starting spells.</p>' : ''}
+            `;
+            area.appendChild(header);
+            
+            // Spells section for spellcasters
+            if (isSpellcaster) {
+                const spellsSection = document.createElement('div');
+                spellsSection.style.marginBottom = '24px';
+                spellsSection.style.padding = '16px';
+                spellsSection.style.background = 'rgba(221,160,221,0.1)';
+                spellsSection.style.borderRadius = '8px';
+                spellsSection.style.border = '1px solid rgba(221,160,221,0.3)';
+                
+                const spellsPerDay = srdData.getSpellsPerDay(classId, 1);
+                const availableSpells = srdData.getClassSpells(classId, 1);
+                
+                spellsSection.innerHTML = '<h4 style="color:#DDA0DD; margin-bottom:12px;">Starting Spells</h4>';
+                
+                Object.keys(spellsPerDay).forEach(spellLevel => {
+                    const count = spellsPerDay[spellLevel];
+                    if (count > 0 && availableSpells[spellLevel]) {
+                        const levelSection = document.createElement('div');
+                        levelSection.style.marginBottom = '16px';
+                        
+                        levelSection.innerHTML = `
+                            <h5 style="color:#B19CD9; margin-bottom:8px;">
+                                Level ${spellLevel} Spells (select ${count})
+                                <span id="remaining_${spellLevel}" style="color:#FFD700; margin-left:8px;">${count} remaining</span>
+                            </h5>
+                        `;
+                        
+                        const spellGrid = document.createElement('div');
+                        spellGrid.style.display = 'grid';
+                        spellGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(200px, 1fr))';
+                        spellGrid.style.gap = '6px';
+                        
+                        availableSpells[spellLevel].forEach(spellName => {
+                            const spellOption = document.createElement('label');
+                            spellOption.style.display = 'flex';
+                            spellOption.style.alignItems = 'center';
+                            spellOption.style.padding = '4px 8px';
+                            spellOption.style.background = 'rgba(221,160,221,0.05)';
+                            spellOption.style.borderRadius = '4px';
+                            spellOption.style.cursor = 'pointer';
+                            spellOption.style.fontSize = '0.9em';
+                            
+                            const checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.dataset.spellLevel = spellLevel;
+                            checkbox.dataset.spellName = spellName;
+                            checkbox.style.marginRight = '6px';
+                            
+                            checkbox.addEventListener('change', () => {
+                                updateSpellSelection(spellLevel, count);
+                            });
+                            
+                            spellOption.appendChild(checkbox);
+                            spellOption.appendChild(document.createTextNode(spellName));
+                            spellGrid.appendChild(spellOption);
+                        });
+                        
+                        levelSection.appendChild(spellGrid);
+                        spellsSection.appendChild(levelSection);
+                    }
+                });
+                
+                area.appendChild(spellsSection);
+            }
+            
+            const startingGold = srdData.getStartingGold(classId);
+            
+            const equipHeader = document.createElement('div');
+            equipHeader.innerHTML = `
+                <h4>Equipment Selection</h4>
+                <p>Starting gold: ${startingGold} gp (or select starting packages)</p>
+                <div style="margin:16px 0;">
+                    <label><input type="radio" name="equipMode" value="package" checked> Use starting equipment package</label><br>
+                    <label><input type="radio" name="equipMode" value="gold" style="margin-top:8px;"> Buy equipment with gold</label>
+                </div>
+            `;
+            area.appendChild(equipHeader);
+            
+            const packageSection = document.createElement('div');
+            packageSection.id = 'packageSection';
+            packageSection.innerHTML = `
+                <div style="background:rgba(0,100,0,0.1); padding:12px; border-radius:6px; margin:8px 0;">
+                    <div id="startingPackageDisplay">Select a class to see starting equipment</div>
+                </div>
+            `;
+            area.appendChild(packageSection);
+            
+            const goldSection = document.createElement('div');
+            goldSection.id = 'goldSection';
+            goldSection.style.display = 'none';
+            
+            // Weapons section
+            const weaponsDiv = document.createElement('div');
+            weaponsDiv.innerHTML = '<h5>Weapons</h5>';
+            const weaponGrid = document.createElement('div');
+            weaponGrid.style.display = 'grid';
+            weaponGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(300px, 1fr))';
+            weaponGrid.style.gap = '8px';
+            weaponGrid.style.marginBottom = '16px';
+            
+            // Armor section  
+            const armorDiv = document.createElement('div');
+            armorDiv.innerHTML = '<h5>Armor</h5>';
+            const armorGrid = document.createElement('div');
+            armorGrid.style.display = 'grid';
+            armorGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(300px, 1fr))';
+            armorGrid.style.gap = '8px';
+            armorGrid.style.marginBottom = '16px';
+            
+            // Gear section
+            const gearDiv = document.createElement('div');
+            gearDiv.innerHTML = '<h5>Adventuring Gear</h5>';
+            const gearGrid = document.createElement('div');
+            gearGrid.style.display = 'grid';
+            gearGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+            gearGrid.style.gap = '8px';
+            gearGrid.style.marginBottom = '16px';
+            
+            // Populate equipment from SRD data
+            populateEquipmentGrid(weaponGrid, 'weapons', srdData.equipment.weapons);
+            populateEquipmentGrid(armorGrid, 'armor', srdData.equipment.armor);
+            populateEquipmentGrid(gearGrid, 'gear', srdData.equipment.gear);
+            
+            goldSection.appendChild(weaponsDiv);
+            goldSection.appendChild(weaponGrid);
+            goldSection.appendChild(armorDiv);
+            goldSection.appendChild(armorGrid);
+            goldSection.appendChild(gearDiv);
+            goldSection.appendChild(gearGrid);
+            
+            area.appendChild(goldSection);
+            
+            // Mode switching
+            const modeRadios = equipHeader.querySelectorAll('input[name="equipMode"]');
+            modeRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (radio.value === 'package') {
+                        packageSection.style.display = 'block';
+                        goldSection.style.display = 'none';
+                        updateStartingPackage(classId);
+                    } else {
+                        packageSection.style.display = 'none';
+                        goldSection.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Initialize with starting package
+            updateStartingPackage(classId);
+            
+            const btn = document.createElement('button'); 
+            btn.textContent='Confirm Equipment' + (isSpellcaster ? ' & Spells' : ''); 
+            btn.style.marginTop='16px';
+            btn.style.width='100%';
+            btn.className='generate-btn';
+            
+            btn.addEventListener('click', ()=>{
+                const mode = document.querySelector('input[name="equipMode"]:checked').value;
+                
+                // Save spell selections for spellcasters
+                if (isSpellcaster) {
+                    currentCharacter.spells = {};
+                    const checkboxes = area.querySelectorAll('input[type="checkbox"][data-spell-level]:checked');
+                    checkboxes.forEach(cb => {
+                        const level = cb.dataset.spellLevel;
+                        const spell = cb.dataset.spellName;
+                        if (!currentCharacter.spells[level]) {
+                            currentCharacter.spells[level] = [];
+                        }
+                        currentCharacter.spells[level].push(spell);
+                    });
+                }
+                
+                if (mode === 'package') {
+                    currentCharacter.equipment = getStartingPackageItems(classId);
+                    currentCharacter.gold = 0;
+                } else {
+                    // Collect selected equipment and calculate cost
+                    currentCharacter.equipment = [];
+                    let totalCost = 0;
+                    
+                    ['weapons', 'armor', 'gear'].forEach(category => {
+                        const checkboxes = goldSection.querySelectorAll(`input[data-category="${category}"]:checked`);
+                        checkboxes.forEach(cb => {
+                            const itemName = cb.dataset.item;
+                            const cost = parseFloat(cb.dataset.cost) || 0;
+                            currentCharacter.equipment.push(itemName);
+                            totalCost += cost;
+                        });
+                    });
+                    
+                    currentCharacter.gold = startingGold - totalCost;
+                }
+                
+                updateCharacterPreview(); 
+                document.getElementById('nextBtn').disabled = false;
+            });
+            
+            area.appendChild(btn);
+            
+            function updateSpellSelection(spellLevel, maxCount) {
+                const checkboxes = area.querySelectorAll(`input[data-spell-level="${spellLevel}"]`);
+                const selected = Array.from(checkboxes).filter(cb => cb.checked);
+                const remaining = maxCount - selected.length;
+                
+                const remainingEl = document.getElementById(`remaining_${spellLevel}`);
+                if (remainingEl) {
+                    remainingEl.textContent = `${remaining} remaining`;
+                    remainingEl.style.color = remaining < 0 ? 'crimson' : remaining === 0 ? 'gold' : '#FFD700';
+                }
+                
+                // Disable other checkboxes if at limit
+                if (remaining <= 0) {
+                    checkboxes.forEach(cb => {
+                        if (!cb.checked) cb.disabled = true;
+                    });
+                } else {
+                    checkboxes.forEach(cb => {
+                        cb.disabled = false;
+                    });
+                }
+            }
+        }
+        
+        function populateEquipmentGrid(grid, category, items) {
+            Object.keys(items).forEach(itemName => {
+                const item = items[itemName];
+                const row = document.createElement('div');
+                row.style.padding = '8px';
+                row.style.backgroundColor = 'rgba(100,100,100,0.1)';
+                row.style.borderRadius = '4px';
+                row.style.border = '1px solid rgba(100,100,100,0.3)';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `eq_${itemName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+                checkbox.dataset.category = category;
+                checkbox.dataset.item = itemName;
+                checkbox.dataset.cost = item.cost || 0;
+                
+                const label = document.createElement('label');
+                label.style.display = 'flex';
+                label.style.alignItems = 'center';
+                label.style.cursor = 'pointer';
+                label.appendChild(checkbox);
+                
+                const content = document.createElement('div');
+                content.style.marginLeft = '8px';
+                content.innerHTML = `
+                    <div><strong>${itemName}</strong> - ${item.cost || 0} gp</div>
+                    ${item.damage ? `<div style="font-size:0.8em; color:#ddd;">Damage: ${item.damage}</div>` : ''}
+                    ${item.ac_bonus ? `<div style="font-size:0.8em; color:#ddd;">AC: ${item.ac_bonus}</div>` : ''}
+                    ${item.weight ? `<div style="font-size:0.8em; color:#aaa;">Weight: ${item.weight} lb</div>` : ''}
+                `;
+                
+                label.appendChild(content);
+                row.appendChild(label);
+                grid.appendChild(row);
+            });
+        }
+        
+        function updateStartingPackage(classId) {
+            const packageItems = getStartingPackageItems(classId);
+            const display = document.getElementById('startingPackageDisplay');
+            if (display) {
+                display.innerHTML = `
+                    <h5>Starting Equipment for ${classId.charAt(0).toUpperCase() + classId.slice(1)}</h5>
+                    <ul style="margin:8px 0; padding-left:20px;">
+                        ${packageItems.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+            }
+        }
+        
+        function getStartingPackageItems(classId) {
+            // Simplified starting packages - would be more detailed in full implementation
+            const packages = {
+                barbarian: ['Greataxe', 'Javelin (4)', 'Scale mail', 'Shield', 'Backpack', 'Bedroll', 'Rations (2 days)', 'Waterskin', 'Flint and steel'],
+                bard: ['Longsword', 'Light crossbow', 'Bolts (20)', 'Studded leather', 'Backpack', 'Bedroll', 'Rations (2 days)', 'Waterskin', 'Flute'],
+                cleric: ['Heavy mace', 'Light crossbow', 'Bolts (20)', 'Scale mail', 'Shield', 'Holy symbol', 'Backpack', 'Bedroll', 'Rations (2 days)'],
+                druid: ['Scimitar', 'Sling', 'Bullets (20)', 'Studded leather', 'Shield', 'Wooden shield', 'Backpack', 'Bedroll', 'Holly and mistletoe'],
+                fighter: ['Longsword', 'Heavy crossbow', 'Bolts (20)', 'Scale mail', 'Shield', 'Backpack', 'Bedroll', 'Rations (2 days)', 'Whetstone'],
+                monk: ['Quarterstaff', 'Shuriken (10)', 'Backpack', 'Bedroll', 'Rations (2 days)', 'Waterskin', 'Flint and steel'],
+                paladin: ['Longsword', 'Heavy crossbow', 'Bolts (20)', 'Scale mail', 'Shield', 'Holy symbol', 'Backpack', 'Bedroll', 'Rations (2 days)'],
+                ranger: ['Longsword', 'Longbow', 'Arrows (40)', 'Studded leather', 'Backpack', 'Bedroll', 'Rations (2 days)', 'Rope (50 ft)'],
+                rogue: ['Rapier', 'Light crossbow', 'Bolts (20)', 'Studded leather', 'Thieves tools', 'Backpack', 'Bedroll', 'Rations (2 days)'],
+                sorcerer: ['Light crossbow', 'Bolts (20)', 'Dagger (2)', 'Backpack', 'Bedroll', 'Rations (2 days)', 'Waterskin', 'Spellbook'],
+                wizard: ['Quarterstaff', 'Light crossbow', 'Bolts (20)', 'Spellbook', 'Component pouch', 'Backpack', 'Bedroll', 'Rations (2 days)']
+            };
+            
+            return packages[classId] || ['Basic equipment'];
+        }
+
+        function renderFinalizeStep(area) {
+            // Generate complete character sheet
+            const stats = calculateCharacterStats(currentCharacter);
+            
+            const header = document.createElement('div');
+            header.innerHTML = '<h3>Character Complete!</h3><p>Review your finished character:</p>';
+            area.appendChild(header);
+            
+            const sheet = document.createElement('div');
+            sheet.style.background = '#1a1a1a';
+            sheet.style.padding = '20px';
+            sheet.style.borderRadius = '8px';
+            sheet.style.border = '2px solid #444';
+            sheet.style.marginTop = '16px';
+            
+            // Character name input
+            const nameSection = document.createElement('div');
+            nameSection.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; color: #FFD700; font-weight: bold;">Character Name:</label>
+                    <input type="text" id="characterName" placeholder="Enter character name" 
+                           style="background: #333; color: #fff; border: 1px solid #666; padding: 8px; border-radius: 4px; text-align: center; font-size: 1.1em; width: 250px;" 
+                           value="${currentCharacter.name || ''}">
+                </div>
+            `;
+            sheet.appendChild(nameSection);
+            
+            // Character basics
+            const basics = document.createElement('div');
+            basics.style.display = 'grid';
+            basics.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            basics.style.gap = '20px';
+            basics.style.marginBottom = '20px';
+            
+            basics.innerHTML = `
+                <div style="text-align: center; background: rgba(0,100,0,0.1); padding: 12px; border-radius: 6px;">
+                    <div style="font-weight: bold; color: #90EE90; margin-bottom: 4px;">Race</div>
+                    <div style="font-size: 1.2em;">${currentCharacter.race ? currentCharacter.race.charAt(0).toUpperCase() + currentCharacter.race.slice(1) : 'None'}</div>
+                </div>
+                <div style="text-align: center; background: rgba(100,0,0,0.1); padding: 12px; border-radius: 6px;">
+                    <div style="font-weight: bold; color: #FF6B6B; margin-bottom: 4px;">Class</div>
+                    <div style="font-size: 1.2em;">${currentCharacter.classes.length ? currentCharacter.classes[0].charAt(0).toUpperCase() + currentCharacter.classes[0].slice(1) : 'None'}</div>
+                </div>
+                <div style="text-align: center; background: rgba(100,100,0,0.1); padding: 12px; border-radius: 6px;">
+                    <div style="font-weight: bold; color: #FFD700; margin-bottom: 4px;">Level</div>
+                    <div style="font-size: 1.2em;">1st</div>
+                </div>
+            `;
+            sheet.appendChild(basics);
+            
+            // Combat statistics
+            const combat = document.createElement('div');
+            combat.innerHTML = `
+                <h4 style="color: #FF6B6B; border-bottom: 2px solid #FF6B6B; padding-bottom: 4px; margin-bottom: 12px;">Combat Statistics</h4>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                    <div style="text-align: center; background: rgba(255,0,0,0.1); padding: 8px; border-radius: 4px;">
+                        <div style="font-weight: bold; color: #FF6B6B;">Hit Points</div>
+                        <div style="font-size: 1.4em; margin-top: 4px;">${stats.hp}</div>
+                    </div>
+                    <div style="text-align: center; background: rgba(0,0,255,0.1); padding: 8px; border-radius: 4px;">
+                        <div style="font-weight: bold; color: #87CEEB;">Armor Class</div>
+                        <div style="font-size: 1.4em; margin-top: 4px;">${stats.ac}</div>
+                    </div>
+                    <div style="text-align: center; background: rgba(255,165,0,0.1); padding: 8px; border-radius: 4px;">
+                        <div style="font-weight: bold; color: #FFA500;">Base Attack</div>
+                        <div style="font-size: 1.4em; margin-top: 4px;">+${stats.bab}</div>
+                    </div>
+                    <div style="text-align: center; background: rgba(128,0,128,0.1); padding: 8px; border-radius: 4px;">
+                        <div style="font-weight: bold; color: #DDA0DD;">Initiative</div>
+                        <div style="font-size: 1.4em; margin-top: 4px;">${stats.abilityMods.dex >= 0 ? '+' : ''}${stats.abilityMods.dex}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 12px; text-align: center;">
+                    <strong style="color: #90EE90;">Saving Throws:</strong> 
+                    Fort +${stats.saves.fort}, Ref +${stats.saves.ref}, Will +${stats.saves.will}
+                </div>
+            `;
+            sheet.appendChild(combat);
+            
+            // Ability scores
+            const abilities = document.createElement('div');
+            abilities.style.marginTop = '20px';
+            abilities.innerHTML = `
+                <h4 style="color: #90EE90; border-bottom: 2px solid #90EE90; padding-bottom: 4px; margin-bottom: 12px;">Ability Scores</h4>
+                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
+            `;
+            
+            ['str', 'dex', 'con', 'int', 'wis', 'cha'].forEach(ability => {
+                const baseScore = currentCharacter.abilities[ability] || 10;
+                let finalScore = baseScore;
+                if (currentCharacter.race && srdData.getRaceData(currentCharacter.race)) {
+                    const raceData = srdData.getRaceData(currentCharacter.race);
+                    if (raceData.ability_adjustments[ability]) {
+                        finalScore += raceData.ability_adjustments[ability];
+                    }
+                }
+                const modifier = Math.floor((finalScore - 10) / 2);
+                
+                abilities.innerHTML += `
+                    <div style="text-align: center; background: rgba(144,238,144,0.1); padding: 8px; border-radius: 4px;">
+                        <div style="font-weight: bold; color: #90EE90;">${ability.toUpperCase()}</div>
+                        <div style="font-size: 1.4em; margin: 4px 0;">${finalScore}</div>
+                        <div style="font-size: 0.9em; color: #ddd;">${modifier >= 0 ? '+' : ''}${modifier}</div>
+                        ${finalScore !== baseScore ? `<div style="font-size: 0.7em; color: #FFD700;">(${baseScore} base)</div>` : ''}
+                    </div>
+                `;
+            });
+            abilities.innerHTML += '</div>';
+            sheet.appendChild(abilities);
+            
+            // Skills (if any selected)
+            if (currentCharacter.skillRanks && Object.keys(currentCharacter.skillRanks).length > 0) {
+                const skills = document.createElement('div');
+                skills.style.marginTop = '20px';
+                skills.innerHTML = `
+                    <h4 style="color: #87CEEB; border-bottom: 2px solid #87CEEB; padding-bottom: 4px; margin-bottom: 12px;">Skills</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                `;
+                
+                Object.keys(currentCharacter.skillRanks).forEach(skillName => {
+                    const totalBonus = stats.skillBonuses[skillName] || 0;
+                    const ranks = currentCharacter.skillRanks[skillName];
+                    skills.innerHTML += `
+                        <div style="display: flex; justify-content: space-between; padding: 4px 8px; background: rgba(135,206,235,0.1); border-radius: 4px;">
+                            <span>${skillName} (${ranks} rank${ranks !== 1 ? 's' : ''})</span>
+                            <span style="font-weight: bold;">+${totalBonus}</span>
+                        </div>
+                    `;
+                });
+                skills.innerHTML += '</div>';
+                sheet.appendChild(skills);
+            }
+            
+            // Spells (if any selected)
+            if (currentCharacter.spells && Object.keys(currentCharacter.spells).length > 0) {
+                const spells = document.createElement('div');
+                spells.style.marginTop = '20px';
+                spells.innerHTML = `
+                    <h4 style="color: #DDA0DD; border-bottom: 2px solid #DDA0DD; padding-bottom: 4px; margin-bottom: 12px;">Spells Known</h4>
+                `;
+                
+                Object.keys(currentCharacter.spells).forEach(level => {
+                    spells.innerHTML += `
+                        <div style="margin-bottom: 12px;">
+                            <h5 style="color: #B19CD9; margin-bottom: 6px;">Level ${level} Spells</h5>
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    `;
+                    
+                    currentCharacter.spells[level].forEach(spell => {
+                        spells.innerHTML += `
+                            <div style="background: rgba(221,160,221,0.1); padding: 4px 8px; border-radius: 8px; border: 1px solid rgba(221,160,221,0.3); font-size: 0.9em;">
+                                ${spell}
+                            </div>
+                        `;
+                    });
+                    
+                    spells.innerHTML += '</div></div>';
+                });
+                
+                sheet.appendChild(spells);
+            }
+            
+            // Feats (if any selected)
+            if (currentCharacter.feats && currentCharacter.feats.length > 0) {
+                const feats = document.createElement('div');
+                feats.style.marginTop = '20px';
+                feats.innerHTML = `
+                    <h4 style="color: #DDA0DD; border-bottom: 2px solid #DDA0DD; padding-bottom: 4px; margin-bottom: 12px;">Feats</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                `;
+                
+                currentCharacter.feats.forEach(feat => {
+                    feats.innerHTML += `
+                        <div style="background: rgba(221,160,221,0.1); padding: 6px 12px; border-radius: 12px; border: 1px solid rgba(221,160,221,0.3);">
+                            ${feat}
+                        </div>
+                    `;
+                });
+                feats.innerHTML += '</div>';
+                sheet.appendChild(feats);
+            }
+            
+            // Equipment (if any selected)
+            if (currentCharacter.equipment && currentCharacter.equipment.length > 0) {
+                const equipment = document.createElement('div');
+                equipment.style.marginTop = '20px';
+                equipment.innerHTML = `
+                    <h4 style="color: #F4A460; border-bottom: 2px solid #F4A460; padding-bottom: 4px; margin-bottom: 12px;">Equipment</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                `;
+                
+                currentCharacter.equipment.forEach(item => {
+                    equipment.innerHTML += `
+                        <div style="background: rgba(244,164,96,0.1); padding: 4px 8px; border-radius: 8px; border: 1px solid rgba(244,164,96,0.3); font-size: 0.9em;">
+                            ${item}
+                        </div>
+                    `;
+                });
+                equipment.innerHTML += '</div>';
+                
+                if (currentCharacter.gold !== undefined) {
+                    equipment.innerHTML += `<div style="margin-top: 12px; text-align: center; color: #FFD700; font-weight: bold;">Remaining Gold: ${currentCharacter.gold} gp</div>`;
+                }
+                
+                sheet.appendChild(equipment);
+            }
+            
+            area.appendChild(sheet);
+            
+            // Action buttons
+            const actions = document.createElement('div');
+            actions.style.display = 'grid';
+            actions.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            actions.style.gap = '12px';
+            actions.style.marginTop = '20px';
+            
+            const saveBtn = document.createElement('button');
+            saveBtn.textContent = 'Save Character';
+            saveBtn.className = 'generate-btn';
+            saveBtn.addEventListener('click', () => {
+                currentCharacter.name = document.getElementById('characterName').value || 'Unnamed Character';
+                // For now, save to localStorage
+                localStorage.setItem('dnd35_character', JSON.stringify(currentCharacter));
+                alert('Character saved successfully!');
+            });
+            
+            const exportBtn = document.createElement('button');
+            exportBtn.textContent = 'Export Character';
+            exportBtn.className = 'generate-btn';
+            exportBtn.addEventListener('click', () => {
+                currentCharacter.name = document.getElementById('characterName').value || 'Unnamed Character';
+                const characterData = JSON.stringify(currentCharacter, null, 2);
+                const blob = new Blob([characterData], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentCharacter.name.replace(/[^a-zA-Z0-9]/g, '_')}_character.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            actions.appendChild(saveBtn);
+            actions.appendChild(exportBtn);
+            area.appendChild(actions);
+            
+            // Mark as complete
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        function nextStep() {
+            // Ensure abilities exist for step 1
+            if (Object.keys(currentCharacter.abilities).length === 0 && currentStep === 1) {
+                alert('Please generate ability scores first!');
+                return;
+            }
+            if (currentStep < totalSteps) {
+                currentStep++;
+                renderCurrentStep();
+                document.getElementById('prevBtn').disabled = false;
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('nextBtn').textContent = currentStep === totalSteps ? 'Finish' : `Next: ${stepTitle(currentStep+1)} →`;
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                renderCurrentStep();
+                document.getElementById('nextBtn').disabled = false;
+                if (currentStep === 1) document.getElementById('prevBtn').disabled = true;
+                document.getElementById('nextBtn').textContent = `Next: ${stepTitle(currentStep+1)} →`;
+            }
+        }
+
+        function goToStep(step) {
+            if (step>=1 && step<=totalSteps) {
+                currentStep = step;
+                renderCurrentStep();
+            }
+        }
+
+        function updateProgressDisplay() {
+            const progress = (currentCharacter.step / 7) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = 
+                'Step ' + currentCharacter.step + ' of 7: ' + Math.round(progress) + '%';
+            
+            // Update step navigation
+            document.querySelectorAll('.step').forEach((btn, index) => {
+                btn.classList.toggle('active', index + 1 === currentCharacter.step);
+                btn.classList.toggle('completed', index + 1 < currentCharacter.step);
+            });
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentCharacter.step === 1;
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.textContent = 
+                currentCharacter.step === 7 ? 'Finalize Character' : 
+                'Next: ' + getStepName(currentCharacter.step + 1) + ' →';
+        }
+
+        function getStepName(step) {
+            const stepNames = ['', 'Ability Scores', 'Race', 'Class', 'Skills', 'Feats', 'Equipment', 'Finalize'];
+            return stepNames[step] || 'Complete';
+        }
+
+        // Character statistics calculation
+        function calculateCharacterStats(character) {
+            if (!character.classes.length || !character.race) {
+                return { hp: 0, ac: 10, saves: { fort: 0, ref: 0, will: 0 }, bab: 0 };
+            }
+
+            const classId = character.classes[0];
+            const raceId = character.race;
+            const level = 1; // First level for now
+            
+            // Get class and race data
+            const classData = srdData.getClassData(classId);
+            const raceData = srdData.getRaceData(raceId);
+            
+            // Calculate ability modifiers
+            const abilityMods = {};
+            ['str', 'dex', 'con', 'int', 'wis', 'cha'].forEach(ability => {
+                let score = character.abilities[ability] || 10;
+                if (raceData.ability_adjustments[ability]) {
+                    score += raceData.ability_adjustments[ability];
+                }
+                abilityMods[ability] = Math.floor((score - 10) / 2);
+            });
+            
+            // Calculate HP
+            let hp = classData.hit_die; // Max HP at first level
+            hp += abilityMods.con;
+            if (hp < 1) hp = 1; // Minimum 1 HP
+            
+            // Calculate AC
+            let ac = 10; // Base AC
+            ac += abilityMods.dex; // Dex modifier
+            // TODO: Add armor bonus from equipment
+            
+            // Calculate saves
+            const saves = {
+                fort: classData.base_saves.fort + abilityMods.con,
+                ref: classData.base_saves.ref + abilityMods.dex,
+                will: classData.base_saves.will + abilityMods.wis
+            };
+            
+            // Calculate BAB
+            const bab = srdData.getClassBAB(classId, level);
+            
+            // Calculate skills with bonuses
+            const skillBonuses = {};
+            if (character.skillRanks) {
+                Object.keys(character.skillRanks).forEach(skillName => {
+                    const ranks = character.skillRanks[skillName];
+                    const keyAbility = srdData.skills[skillName].key_ability;
+                    const abilityMod = abilityMods[keyAbility] || 0;
+                    const classSkill = srdData.isClassSkill(skillName, classId) ? 3 : 0; // +3 class skill bonus if 1+ rank
+                    skillBonuses[skillName] = ranks + abilityMod + (ranks > 0 ? classSkill : 0);
+                });
+            }
+            
+            return { 
+                hp, 
+                ac, 
+                saves, 
+                bab, 
+                abilityMods,
+                skillBonuses: skillBonuses || {}
+            };
+        }
+
+        function updateCharacterPreview() {
+            const abilities = currentCharacter.abilities;
+            const details = document.getElementById('charDetails');
+            
+            if (Object.keys(abilities).length === 0) {
+                details.innerHTML = 
+                    '<div>Race: Not Selected</div>' +
+                    '<div>Class: Not Selected</div>' +
+                    '<div>Level: 1</div>' +
+                    '<div style="margin-top: 1rem; color: #a0a0a0;">' +
+                    'Select a generation method and create your character to see preview' +
+                    '</div>';
+            } else {
+                // Calculate character statistics
+                const stats = calculateCharacterStats(currentCharacter);
+                
+                let display = 
+                    '<div>Race: ' + (currentCharacter.race ? currentCharacter.race.charAt(0).toUpperCase() + currentCharacter.race.slice(1) : 'Not Selected') + '</div>' +
+                    '<div>Class: ' + (currentCharacter.classes.length ? currentCharacter.classes[0].charAt(0).toUpperCase() + currentCharacter.classes[0].slice(1) : 'Not Selected') + '</div>' +
+                    '<div>Level: 1</div>';
+                
+                // Display key statistics if character has race and class
+                if (currentCharacter.race && currentCharacter.classes.length) {
+                    display += '<div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">';
+                    display += '<div style="font-weight: bold; margin-bottom: 0.5rem; color: #FFD700;">Combat Stats</div>';
+                    display += '<div>Hit Points: ' + stats.hp + '</div>';
+                    display += '<div>Armor Class: ' + stats.ac + '</div>';
+                    display += '<div>Base Attack: +' + stats.bab + '</div>';
+                    display += '<div style="margin-top: 0.5rem;">';
+                    display += 'Fort: +' + stats.saves.fort + ', ';
+                    display += 'Ref: +' + stats.saves.ref + ', ';
+                    display += 'Will: +' + stats.saves.will;
+                    display += '</div></div>';
+                }
+                
+                let abilityDisplay = '<div style="margin-top: 1rem; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">';
+                abilityDisplay += '<div style="font-weight: bold; margin-bottom: 0.5rem; color: #90EE90;">Abilities</div>';
+                Object.keys(abilities).forEach(ability => {
+                    const baseScore = abilities[ability];
+                    let finalScore = baseScore;
+                    
+                    // Apply racial modifiers if race is selected
+                    if (currentCharacter.race && srdData.getRaceData(currentCharacter.race)) {
+                        const raceData = srdData.getRaceData(currentCharacter.race);
+                        if (raceData.ability_adjustments[ability]) {
+                            finalScore += raceData.ability_adjustments[ability];
+                        }
+                    }
+                    
+                    const modifier = Math.floor((finalScore - 10) / 2);
+                    const abilityName = ability.charAt(0).toUpperCase() + ability.slice(1);
+                    abilityDisplay += '<div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">';
+                    abilityDisplay += '<span>' + abilityName + ':</span>';
+                    abilityDisplay += '<span>' + finalScore + ' (' + (modifier >= 0 ? '+' : '') + modifier + ')';
+                    if (finalScore !== baseScore) {
+                        abilityDisplay += ' <small style="color:#FFD700;">(' + baseScore + ' base)</small>';
+                    }
+                    abilityDisplay += '</span></div>';
+                });
+                abilityDisplay += '</div>';
+                
+                // Display selected skills if any
+                if (currentCharacter.skillRanks && Object.keys(currentCharacter.skillRanks).length > 0) {
+                    let skillDisplay = '<div style="margin-top: 1rem; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">';
+                    skillDisplay += '<div style="font-weight: bold; margin-bottom: 0.5rem; color: #87CEEB;">Skills</div>';
+                    Object.keys(currentCharacter.skillRanks).forEach(skillName => {
+                        const totalBonus = stats.skillBonuses[skillName] || 0;
+                        skillDisplay += '<div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">';
+                        skillDisplay += '<span>' + skillName + ':</span>';
+                        skillDisplay += '<span>+' + totalBonus + '</span></div>';
+                    });
+                    skillDisplay += '</div>';
+                    abilityDisplay += skillDisplay;
+                }
+                
+                // Display selected spells if any
+                if (currentCharacter.spells && Object.keys(currentCharacter.spells).length > 0) {
+                    let spellDisplay = '<div style="margin-top: 1rem; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">';
+                    spellDisplay += '<div style="font-weight: bold; margin-bottom: 0.5rem; color: #DDA0DD;">Spells</div>';
+                    Object.keys(currentCharacter.spells).forEach(level => {
+                        spellDisplay += '<div style="margin-bottom: 0.5rem;"><strong>Level ' + level + ':</strong></div>';
+                        currentCharacter.spells[level].forEach(spell => {
+                            spellDisplay += '<div style="margin-bottom: 0.25rem; padding-left: 16px;">• ' + spell + '</div>';
+                        });
+                    });
+                    spellDisplay += '</div>';
+                    abilityDisplay += spellDisplay;
+                }
+                
+                // Display selected feats if any
+                if (currentCharacter.feats && currentCharacter.feats.length > 0) {
+                    let featDisplay = '<div style="margin-top: 1rem; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">';
+                    featDisplay += '<div style="font-weight: bold; margin-bottom: 0.5rem; color: #DDA0DD;">Feats</div>';
+                    currentCharacter.feats.forEach(feat => {
+                        featDisplay += '<div style="margin-bottom: 0.25rem;">• ' + feat + '</div>';
+                    });
+                    featDisplay += '</div>';
+                    abilityDisplay += featDisplay;
+                }
+                
+                // Display equipment if any
+                if (currentCharacter.equipment && currentCharacter.equipment.length > 0) {
+                    let equipDisplay = '<div style="margin-top: 1rem; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">';
+                    equipDisplay += '<div style="font-weight: bold; margin-bottom: 0.5rem; color: #F4A460;">Equipment</div>';
+                    currentCharacter.equipment.forEach(item => {
+                        equipDisplay += '<div style="margin-bottom: 0.25rem;">• ' + item + '</div>';
+                    });
+                    if (currentCharacter.gold !== undefined) {
+                        equipDisplay += '<div style="margin-top: 0.5rem; color: #FFD700;">Gold: ' + currentCharacter.gold + ' gp</div>';
+                    }
+                    equipDisplay += '</div>';
+                    abilityDisplay += equipDisplay;
+                }
+
+                details.innerHTML = display + abilityDisplay;
+            }
+        }
+
+        // Placeholder functions
+        function saveCharacter() {
+            if (Object.keys(currentCharacter.abilities).length === 0) {
+                alert('Please generate ability scores first before saving!');
+                return;
+            }
+            
+            localStorage.setItem('rulzlawyer_character', JSON.stringify(currentCharacter));
+            alert('🎉 Character saved successfully!');
+        }
+
+        function loadCharacter() {
+            const savedChar = localStorage.getItem('rulzlawyer_character');
+            if (savedChar) {
+                const confirm = window.confirm('This will overwrite your current character. Continue?');
+                if (confirm) {
+                    currentCharacter = JSON.parse(savedChar);
+                    
+                    // Update display
+                    if (currentCharacter.abilityMethod) {
+                        selectAbilityMethod(currentCharacter.abilityMethod);
+                    }
+                    
+                    // Update ability displays
+                    Object.keys(currentCharacter.abilities).forEach(ability => {
+                        updateAbilityDisplay(ability, currentCharacter.abilities[ability]);
+                    });
+                    
+                    updateProgressDisplay();
+                    updateCharacterPreview();
+                    
+                    if (Object.keys(currentCharacter.abilities).length > 0) {
+                        document.getElementById('nextBtn').disabled = false;
+                    }
+                    
+                    alert('Character loaded successfully!');
+                }
+            } else {
+                alert('No saved character found!');
+            }
+        }
+
+        function showHelp() {
+            alert('🧙‍♂️ D&D 3.5 Character Creator Help\n\n' +
+                  '📊 Ability Scores:\n' +
+                  '• Standard (4d6): Roll 4 dice, drop the lowest\n' +
+                  '• Classic (3d6): Roll 3 dice straight\n' +
+                  '• Point Buy: Spend 28 points to customize\n' +
+                  '• Elite Array: Use preset values 15,14,13,12,10,8\n\n' +
+                  'Click a method, then Generate to create your character!');
+        }
+
+        // Global function exports for compatibility
+        window.selectAbilityMethod = selectAbilityMethod;
+        window.generateAbilityScores = generateAbilityScores;
+        window.nextStep = nextStep;
+        window.prevStep = prevStep;
+        window.goToStep = goToStep;
+        window.saveCharacter = saveCharacter;
+        window.loadCharacter = loadCharacter;
+        window.showHelp = showHelp;
+    </script>
+</body>
+</html>

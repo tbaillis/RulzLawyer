@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RulzLawyer - D&D 3.5 Character Creator & Equipment Manager</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Character Creator Styles -->
+    <link rel="stylesheet" href="code-repository/src/character-creation-styles.css">
+    <!-- Inventory Interface Styles -->
+    <link rel="stylesheet" href="code-repository/src/inventory-interface.css">
+    <!-- Spell Selection Styles -->
+    <link rel="stylesheet" href="code-repository/src/spell-selection-interface.css">
+    
+    <style>
+        /* Additional Integration Styles */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0d1421 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .header-nav {
+            background: linear-gradient(90deg, #0f3460 0%, #16537e 100%);
+            padding: 15px 0;
+            border-bottom: 2px solid #2a4a6b;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e8f4fd;
+            text-decoration: none;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            border-color: #29b6f6;
+        }
+        
+        .content-container {
+            flex: 1;
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .character-panel {
+            flex: 1;
+            min-width: 600px;
+        }
+        
+        .equipment-panel {
+            flex: 1;
+            min-width: 600px;
+        }
+        
+        .panel-toggle {
+            display: none;
+            background: #4fc3f7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        @media (max-width: 1200px) {
+            .content-container {
+                flex-direction: column;
+            }
+            
+            .panel-toggle {
+                display: block;
+            }
+        }
+        
+        /* Status indicators */
+        .character-status {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .character-status.success {
+            background: linear-gradient(135deg, #66bb6a, #4caf50);
+        }
+        
+        .character-status.warning {
+            background: linear-gradient(135deg, #ff9800, #ffc107);
+        }
+        
+        .character-status.error {
+            background: linear-gradient(135deg, #f44336, #e91e63);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Navigation Header -->
+        <header class="header-nav">
+            <div class="nav-container">
+                <a href="/" class="logo">🎲 RulzLawyer</a>
+                <nav class="nav-tabs">
+                    <a href="#character" class="nav-tab active" onclick="switchTab('character', this)">Character Creator</a>
+                    <a href="#equipment" class="nav-tab" onclick="switchTab('equipment', this)">Equipment & Inventory</a>
+                    <a href="#spells" class="nav-tab" onclick="switchTab('spells', this)">Spells</a>
+                    <a href="#adventure" class="nav-tab" onclick="switchTab('adventure', this)">Adventure Engine</a>
+                    <a href="#summary" class="nav-tab" onclick="switchTab('summary', this)">Character Sheet</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Status Indicator -->
+        <div id="statusIndicator" class="character-status" style="display: none;"></div>
+        
+        <!-- Main Content -->
+        <div class="content-container">
+            
+            <!-- Character Creation Panel -->
+            <div id="characterPanel" class="character-panel">
+                <div id="characterCreationContainer">
+                    <!-- Character creation wizard will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Equipment Management Panel -->
+            <div id="equipmentPanel" class="equipment-panel" style="display: none;">
+                <div id="inventoryContainer" class="inventory-container">
+                    <!-- Equipment and inventory interface will be loaded here -->
+                </div>
+            </div>
+            
+    <!-- Spell Management Panel -->
+    <div id="spellsPanel" class="character-panel" style="display: none;">
+        <div id="spellContainer" class="spell-container">
+            <!-- Spell selection interface will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Adventure Engine Panel -->
+    <div id="adventurePanel" class="character-panel" style="display: none;">
+        <div id="adventureContainer" class="adventure-container">
+            <!-- Adventure interface will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Character Summary Panel -->
+            <div id="summaryPanel" class="character-panel" style="display: none;">
+                <div id="characterSummary" style="padding: 40px; color: #ffffff;">
+                    <h2>📋 Complete Character Sheet</h2>
+                    <p>Your finished D&D 3.5 character will appear here</p>
+                    <div id="characterSheetContent">
+                        <!-- Dynamic character sheet will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="code-repository/src/character-creation-engine.js"></script>
+    <script src="code-repository/src/equipment-manager.js"></script>
+    <script src="code-repository/src/inventory-interface.js"></script>
+    <script src="code-repository/src/spell-manager.js"></script>
+    <script src="code-repository/src/spell-selection-interface.js"></script>
+    <script src="code-repository/src/adventure-engine.js"></script>
+    <script src="code-repository/src/adventure-interface.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="code-repository/src/spell-selection-interface.css">
+    <link rel="stylesheet" href="code-repository/src/adventure-interface.css">
+    
+    <script>
+        // Global state management
+        let currentCharacter = null;
+        let characterEngine = null;
+        let equipmentManager = null;
+        let inventoryInterface = null;
+        let spellManager = null;
+        let spellInterface = null;
+        let adventureEngine = null;
+        let adventureInterface = null;
+        let currentTab = 'character';
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApplication();
+        });
+        
+        function initializeApplication() {
+            try {
+                // Initialize character creation engine
+                if (typeof CharacterCreationEngine !== 'undefined') {
+                    characterEngine = new CharacterCreationEngine();
+                    characterEngine.initializeInterface('characterCreationContainer');
+                    console.log('✓ Character Creation Engine initialized');
+                } else {
+                    console.warn('⚠ CharacterCreationEngine not available');
+                }
+                
+                // Initialize equipment manager
+                if (typeof EquipmentManager !== 'undefined') {
+                    equipmentManager = new EquipmentManager();
+                    console.log('✓ Equipment Manager initialized');
+                } else {
+                    console.warn('⚠ EquipmentManager not available');
+                }
+                
+                // Initialize inventory interface
+                if (typeof InventoryInterface !== 'undefined' && equipmentManager) {
+                    inventoryInterface = new InventoryInterface(equipmentManager, 'inventoryContainer');
+                    console.log('✓ Inventory Interface initialized');
+                    
+                    // Make it globally accessible for HTML onclick handlers
+                    window.inventoryInterface = inventoryInterface;
+                } else {
+                    console.warn('⚠ InventoryInterface not available');
+                }
+                
+                // Initialize spell manager
+                if (typeof SpellManager !== 'undefined') {
+                    spellManager = new SpellManager();
+                    console.log('✓ Spell Manager initialized');
+                } else {
+                    console.warn('⚠ SpellManager not available');
+                }
+                
+                // Initialize spell selection interface
+                if (typeof SpellSelectionInterface !== 'undefined' && spellManager) {
+                    spellInterface = new SpellSelectionInterface(spellManager, document.getElementById('spellContainer'));
+                    console.log('✓ Spell Selection Interface initialized');
+                    
+                    // Make it globally accessible for HTML onclick handlers
+                    window.spellInterface = spellInterface;
+                } else {
+                    console.warn('⚠ SpellSelectionInterface not available');
+                }
+                
+                // Initialize adventure engine
+                if (typeof AdventureEngine !== 'undefined') {
+                    adventureEngine = new AdventureEngine();
+                    console.log('✓ Adventure Engine initialized');
+                } else {
+                    console.warn('⚠ AdventureEngine not available');
+                }
+                
+                // Initialize adventure interface
+                if (typeof AdventureInterface !== 'undefined' && adventureEngine) {
+                    adventureInterface = new AdventureInterface(adventureEngine, document.getElementById('adventureContainer'));
+                    console.log('✓ Adventure Interface initialized');
+                    
+                    // Make it globally accessible for HTML onclick handlers
+                    window.adventureInterface = adventureInterface;
+                } else {
+                    console.warn('⚠ AdventureInterface not available');
+                }
+                
+                // Set up event listeners
+                setupEventListeners();
+                
+                showStatus('Application initialized successfully', 'success');
+                
+            } catch (error) {
+                console.error('❌ Application initialization error:', error);
+                showStatus('Failed to initialize application: ' + error.message, 'error');
+            }
+        }
+        
+        function setupEventListeners() {
+            // Listen for character creation completion
+            document.addEventListener('characterCreated', function(event) {
+                currentCharacter = event.detail.character;
+                
+                // Load character into equipment manager
+                if (equipmentManager && currentCharacter) {
+                    equipmentManager.loadCharacter(currentCharacter);
+                    inventoryInterface?.updateDisplay();
+                    
+                    showStatus('Character created! Equipment panel now available.', 'success');
+                    
+                    // Enable equipment tab
+                    document.querySelector('.nav-tab[href="#equipment"]').style.opacity = '1';
+                }
+                
+                // Load character into spell manager
+                if (spellManager && currentCharacter) {
+                    spellInterface?.loadCharacter(currentCharacter.id || 'temp', currentCharacter);
+                    
+                    // Check if character has spellcasting classes
+                    const hasSpellcasters = currentCharacter.classes?.some(c => 
+                        ['Wizard', 'Sorcerer', 'Cleric', 'Bard', 'Druid', 'Paladin', 'Ranger'].includes(c.name)
+                    );
+                    
+                    if (hasSpellcasters) {
+                        document.querySelector('.nav-tab[href="#spells"]').style.opacity = '1';
+                        showStatus('Spellcasting class detected! Spell panel available.', 'success');
+                    }
+                }
+            });
+            
+            // Listen for character updates
+            document.addEventListener('characterUpdated', function(event) {
+                currentCharacter = event.detail.character;
+                
+                if (equipmentManager && currentCharacter) {
+                    equipmentManager.loadCharacter(currentCharacter);
+                    inventoryInterface?.updateDisplay();
+                }
+            });
+            
+            // Listen for equipment changes
+            document.addEventListener('equipmentChanged', function(event) {
+                if (currentCharacter) {
+                    // Update character with new equipment data
+                    currentCharacter.equipment = equipmentManager.equipment;
+                    currentCharacter.inventory = equipmentManager.inventory;
+                    currentCharacter.encumbrance = equipmentManager.encumbrance;
+                    
+                    // Save character
+                    saveCharacter();
+                    
+                    showStatus('Equipment updated', 'success');
+                }
+            });
+        }
+        
+        // Tab switching functionality
+        function switchTab(tabName, tabElement) {
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            tabElement.classList.add('active');
+            
+            // Hide all panels
+            document.querySelectorAll('.character-panel, .equipment-panel').forEach(panel => {
+                panel.style.display = 'none';
+            });
+            document.getElementById('spellsPanel').style.display = 'none';
+            document.getElementById('adventurePanel').style.display = 'none';
+            
+            // Show selected panel
+            switch(tabName) {
+                case 'character':
+                    document.getElementById('characterPanel').style.display = 'block';
+                    break;
+                case 'equipment':
+                    if (currentCharacter) {
+                        document.getElementById('equipmentPanel').style.display = 'block';
+                        inventoryInterface?.updateDisplay();
+                    } else {
+                        showStatus('Please create a character first', 'warning');
+                        switchTab('character', document.querySelector('.nav-tab[href="#character"]'));
+                        return;
+                    }
+                    break;
+                case 'spells':
+                    if (currentCharacter && spellInterface) {
+                        document.getElementById('spellsPanel').style.display = 'block';
+                        // Check if character has spellcasting classes
+                        const hasSpellcasters = currentCharacter.classes?.some(c => 
+                            ['Wizard', 'Sorcerer', 'Cleric', 'Bard', 'Druid', 'Paladin', 'Ranger'].includes(c.name)
+                        );
+                        if (!hasSpellcasters) {
+                            showStatus('This character has no spellcasting classes', 'warning');
+                        }
+                    } else if (!currentCharacter) {
+                        showStatus('Please create a character first', 'warning');
+                        switchTab('character', document.querySelector('.nav-tab[href="#character"]'));
+                        return;
+                    } else {
+                        document.getElementById('spellsPanel').style.display = 'block';
+                    }
+                    break;
+                case 'adventure':
+                    document.getElementById('adventurePanel').style.display = 'block';
+                    if (adventureInterface) {
+                        console.log('🏰 Switching to Adventure Engine');
+                    } else {
+                        showStatus('Adventure Engine not available', 'error');
+                    }
+                    break;
+                case 'summary':
+                    document.getElementById('summaryPanel').style.display = 'block';
+                    generateCharacterSummary();
+                    break;
+            }
+            
+            currentTab = tabName;
+        }
+        
+        // Character management functions
+        function saveCharacter() {
+            if (!currentCharacter) return;
+            
+            fetch('/api/character/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    character: currentCharacter
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('✓ Character saved successfully');
+                } else {
+                    console.warn('⚠ Character save failed:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('❌ Character save error:', error);
+            });
+        }
+        
+        function loadCharacter(characterId) {
+            fetch(`/api/character/load?id=${characterId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    currentCharacter = data.character;
+                    
+                    if (equipmentManager) {
+                        equipmentManager.loadCharacter(currentCharacter);
+                        inventoryInterface?.updateDisplay();
+                    }
+                    
+                    showStatus('Character loaded successfully', 'success');
+                } else {
+                    showStatus('Failed to load character: ' + data.error, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('❌ Character load error:', error);
+                showStatus('Character load error: ' + error.message, 'error');
+            });
+        }
+        
+        function generateCharacterSummary() {
+            if (!currentCharacter) {
+                document.getElementById('characterSheetContent').innerHTML = 
+                    '<p style="text-align: center; color: #888;">No character loaded</p>';
+                return;
+            }
+            
+            const combat = currentCharacter.combat || {};
+            const abilities = currentCharacter.abilities || {};
+            
+            document.getElementById('characterSheetContent').innerHTML = `
+                <div class="character-sheet">
+                    <div class="character-header">
+                        <h2>${currentCharacter.name || 'Unnamed Character'}</h2>
+                        <h3>${currentCharacter.race || 'Unknown'} ${currentCharacter.class || 'Unknown'} ${currentCharacter.level || 1}</h3>
+                    </div>
+                    
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div class="stat-section">
+                            <h4>Abilities</h4>
+                            ${Object.entries(abilities).map(([ability, data]) => 
+                                `<div>${ability.toUpperCase()}: ${data.score} (${data.modifier >= 0 ? '+' : ''}${data.modifier})</div>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="stat-section">
+                            <h4>Combat</h4>
+                            <div>AC: ${combat.armorClass || 10}</div>
+                            <div>Touch AC: ${combat.touchAC || 10}</div>
+                            <div>Flat-Footed AC: ${combat.flatFootedAC || 10}</div>
+                            <div>BAB: +${combat.baseAttackBonus || 0}</div>
+                            <div>Initiative: +${combat.initiative || 0}</div>
+                        </div>
+                        
+                        <div class="stat-section">
+                            <h4>Saves</h4>
+                            <div>Fortitude: +${currentCharacter.saves?.fortitude || 0}</div>
+                            <div>Reflex: +${currentCharacter.saves?.reflex || 0}</div>
+                            <div>Will: +${currentCharacter.saves?.will || 0}</div>
+                        </div>
+                        
+                        <div class="stat-section">
+                            <h4>Equipment</h4>
+                            <div>Load: ${currentCharacter.encumbrance?.level || 'Light'}</div>
+                            <div>Weight: ${currentCharacter.encumbrance?.current || 0} lbs</div>
+                            <div>Items: ${Object.keys(currentCharacter.equipment || {}).length} equipped</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Utility functions
+        function showStatus(message, type = 'info') {
+            const indicator = document.getElementById('statusIndicator');
+            indicator.textContent = message;
+            indicator.className = `character-status ${type}`;
+            indicator.style.display = 'block';
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Global functions for HTML integration
+        window.switchTab = switchTab;
+        window.showStatus = showStatus;
+        window.saveCharacter = saveCharacter;
+        window.loadCharacter = loadCharacter;
+        
+        // Export for debugging
+        window.currentCharacter = () => currentCharacter;
+        window.characterEngine = () => characterEngine;
+        window.equipmentManager = () => equipmentManager;
+        window.spellManager = () => spellManager;
+        window.spellInterface = () => spellInterface;
+    </script>
+</body>
+</html>

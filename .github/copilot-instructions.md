@@ -1,7 +1,7 @@
 # GitHub Copilot Instructions - RulzLawyer D&D 3.5 Character Creator
 
 ## 🎯 Project Overview
-RulzLawyer is a comprehensive D&D 3.5 Character Creator and Adventure Engine with modular architecture and complete SRD compliance. The project is in active development with extensive documentation-driven requirements.
+RulzLawyer is a comprehensive **D&D 3.5 GAME** - not just a toolset or utility, but a complete gaming experience with Character Creator and Adventure Engine. This is a fully-featured D&D game with modular architecture and complete SRD compliance, designed for immersive gameplay sessions. The project is in active development with extensive documentation-driven requirements.
 
 ## 🚨 Critical Code Placement Rules
 **ALL generated code MUST be placed exclusively in `code-repository/` folder or its subfolders**
@@ -72,17 +72,20 @@ node server-enhanced.js
 - `completed-work-by-agents/` - Detailed work history and patterns
 
 ## 🎲 Domain-Specific Patterns
-### D&D 3.5 Rule Implementation
-- All calculations must match SRD specifications exactly
+### Complete D&D 3.5 Game Implementation
+- **Full Game Experience**: This is a complete D&D game, not a utility or toolset
+- All calculations must match SRD specifications exactly for authentic gameplay
 - Implement prerequisites validation for feats, spells, equipment
-- Support multiclass characters and epic levels (21-100)
+- Support multiclass characters and epic levels (21-100) for complete campaigns
 
 ### Web Interface Standards  
-- Modern drag-and-drop inventory management
-- Responsive design with accessibility compliance
+- **Gaming-Focused UI**: Design for immersive D&D gaming sessions, not just character management
+- Modern drag-and-drop inventory management for in-game equipment handling
+- Responsive design with accessibility compliance for all players
 - Global window exports for HTML integration (`window.systemName`)
 
 ### Testing & Validation
+- **Complete Gaming Workflows**: Test full D&D gameplay scenarios, not just individual features
 - Test complete character creation workflows (7-step wizard)
 - Validate D&D rule compliance with actual gameplay scenarios
 - Browser compatibility testing for all generated HTML
