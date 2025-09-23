@@ -28,15 +28,15 @@ Implementation order for AI agents:
 | 1 | Portrait Designer | 8 | [ULTIMATE-IMPLEMENTATION-GUIDE.md#portrait-designer](../../ULTIMATE-IMPLEMENTATION-GUIDE.md) | `code-repository/src/portrait/` |
 | 2 | Epic Level Engine | 13 | [ULTIMATE-IMPLEMENTATION-GUIDE.md#epic-level-engine](../../ULTIMATE-IMPLEMENTATION-GUIDE.md) | `code-repository/src/epic/` |
 | 3 | Story Tracker | 21 | [ULTIMATE-IMPLEMENTATION-GUIDE.md#story-tracker](../../ULTIMATE-IMPLEMENTATION-GUIDE.md) | `code-repository/src/story/` |
-| 4 | Adventure Engine | 23 | [adventure-engine.instructions.md](adventure-engine.instructions.md) | `code-repository/src/adventure/` |
-| 5 | Character Creator | 18 | [character-creator.instructions.md](character-creator.instructions.md) | `code-repository/src/character/` |
-| 6 | Inventory System | 15 | [inventory-management.instructions.md](inventory-management.instructions.md) | `code-repository/src/inventory/` |
+| 4 | Adventure Engine | 23 | [adventure-engine.instructions.md](implementation/adventure-engine.instructions.md) | `code-repository/src/adventure/` |
+| 5 | Character Creator | 18 | [character-creator.instructions.md](implementation\character-creator.instructions.md) | `code-repository/src/character/` |
+| 6 | Inventory System | 15 | [inventory-management.instructions.md](implementation\inventory-management.instructions.md) | `code-repository/src/inventory/` |
 
 ### **PHASE 2: ENHANCED SYSTEMS** (Weeks 25-71)
 | System | Story Points | Dependencies | Implementation Guide |
 |--------|--------------|--------------|---------------------|
 | Modern Gaming Interface | 12 | Portrait Designer, Character Creator | [ULTIMATE-IMPLEMENTATION-GUIDE.md#modern-interface](../../ULTIMATE-IMPLEMENTATION-GUIDE.md) |
-| Server Architecture | 7 | All core systems | [server-architecture.instructions.md](server-architecture.instructions.md) |
+| Server Architecture | 7 | All core systems | [server-architecture.instructions.md](implementation\server-architecture.instructions.md) |
 
 ## 🎲 SYSTEM INTEGRATION REQUIREMENTS
 
@@ -115,10 +115,10 @@ if (typeof module !== 'undefined' && module.exports) {
 ### **Implementation Guides**
 | System | Primary Guide | Secondary References |
 |--------|---------------|---------------------|
-| Character Creator | [character-creator.instructions.md](character-creator.instructions.md) | [Character Requirements](../../requirements/dnd-character-creator-requirements.md) |
-| Adventure Engine | [adventure-engine.instructions.md](adventure-engine.instructions.md) | [Adventure Requirements](../../requirements/adventure-engine-requirements.md) |
-| Inventory System | [inventory-management.instructions.md](inventory-management.instructions.md) | [Inventory Requirements](../../requirements/inventory-management-system-requirements.md) |
-| SRD Data | [srd-data-manager.instructions.md](srd-data-manager.instructions.md) | [SRD Database](../../code-repository/SRD/) |
+| Character Creator | [character-creator.instructions.md](implementation\character-creator.instructions.md) | [Character Requirements](../../requirements/dnd-character-creator-requirements.md) |
+| Adventure Engine | [adventure-engine.instructions.md](implementation\adventure-engine.instructions.md) | [Adventure Requirements](../../requirements/adventure-engine-requirements.md) |
+| Inventory System | [inventory-management.instructions.md](implementation\inventory-management.instructions.md) | [Inventory Requirements](../../requirements/inventory-management-system-requirements.md) |
+| SRD Data | [srd-data-manager.instructions.md](implementation\srd-data-manager.instructions.md) | [SRD Database](../../code-repository/SRD/) |
 
 ## 🧪 TESTING AND VALIDATION
 
