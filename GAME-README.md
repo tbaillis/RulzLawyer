@@ -27,7 +27,7 @@ RulzLawyer is a fully functional D&D 3.5 character creator and adventure system 
    # Start the game server
    node server-enhanced.js
    ```
-
+    
 2. **Open Your Browser**:
    - Go to `http://localhost:3000`
    - The game interface will load automatically
