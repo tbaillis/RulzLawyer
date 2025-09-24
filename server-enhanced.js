@@ -173,13 +173,21 @@ function handleAPIRequest(req, res, pathname, query) {
 
 // Homepage handler
 function handleHomePage(res) {
-    const homeContent = generateHomePage();
-
-    res.writeHead(200, {
-        'Content-Type': 'text/html',
-        'Cache-Control': 'no-cache'
-    });
-    res.end(homeContent);
+    // Serve the actual index.html file instead of generated content
+    const indexPath = path.join(__dirname, 'index.html');
+    
+    try {
+        const indexContent = fs.readFileSync(indexPath, 'utf8');
+        res.writeHead(200, {
+            'Content-Type': 'text/html',
+            'Cache-Control': 'no-cache'
+        });
+        res.end(indexContent);
+    } catch (error) {
+        console.error('Error reading index.html:', error);
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('index.html not found');
+    }
 }
 
 // Character creator handler

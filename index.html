@@ -4,9 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RulzLawyer - D&D 3.5 Character Survival Game</title>
+    <title>RulzLawyer - D&D 3.5 Gaming System</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Character Sheet Styling - Based on PDF Examples */
+        :root {
+            /* D&D Theme Colors */
+            --primary-red: #8B0000;
+            --primary-gold: #FFD700;
+            --parchment: #F4E9D1;
+            --dark-parchment: #E6D5A8;
+            --scroll-brown: #8B4513;
+            --ancient-black: #1a1a1a;
+            --soft-white: #FEFEFE;
+            --danger-red: #dc3545;
+            --success-green: #28a745;
+            --info-blue: #007bff;
+
+            /* Modern Gaming Gradients */
+            --hero-gradient: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #1a1a1a 100%);
+            --card-gradient: linear-gradient(145deg, #F4E9D1 0%, #E6D5A8 100%);
+            --button-gradient: linear-gradient(145deg, #8B0000 0%, #A52A2A 100%);
+
+            /* Typography */
+            --font-fantasy: 'Cinzel', serif;
+            --font-modern: 'Inter', sans-serif;
+
+            /* Spacing & Layout */
+            --header-height: 80px;
+            --section-padding: 4rem 0;
+            --container-max: 1200px;
+            --border-radius: 12px;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --hover-transform: translateY(-5px);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,327 +48,1231 @@
         }
 
         body {
-            font-family: 'Times New Roman', serif;
-            background: #f5f3f0;
-            color: #2c1810;
-            line-height: 1.4;
+            font-family: var(--font-modern);
+            line-height: 1.6;
+            background: var(--parchment);
+            color: var(--ancient-black);
+            overflow-x: hidden;
         }
 
-        .game-container {
-            max-width: 1400px;
+        /* Header & Navigation */
+        .navbar {
+            background: var(--hero-gradient);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: var(--container-max);
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 10px;
-        }
-
-        .header .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        /* Character Sheet Panel - Mimics PDF Layout */
-        .character-panel {
-            background: white;
-            border: 2px solid #8B4513;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .character-panel h2 {
-            color: #8B4513;
-            border-bottom: 2px solid #8B4513;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 1.5em;
-        }
-
-        /* Character Basic Info - Top Section Like PDF */
-        .character-basics {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #faf9f7;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .field-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .field-group label {
-            font-weight: bold;
-            font-size: 0.9em;
-            color: #5d4037;
-            margin-bottom: 3px;
-            text-transform: uppercase;
-        }
-
-        .field-group input,
-        .field-group select {
-            padding: 5px 8px;
-            border: 1px solid #8B4513;
-            border-radius: 3px;
-            font-family: inherit;
-            font-size: 1em;
-        }
-
-        /* Ability Scores - PDF Style Layout */
-        .ability-scores {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 15px 0;
-            padding: 15px;
-            background: #f8f6f3;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .ability-score {
-            text-align: center;
-            padding: 10px;
-            background: white;
-            border: 1px solid #8B4513;
-            border-radius: 5px;
-        }
-
-        .ability-score label {
-            display: block;
-            font-weight: bold;
-            color: #8B4513;
-            font-size: 0.8em;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .score-display {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #2c1810;
-            margin-bottom: 3px;
-        }
-
-        .modifier-display {
-            font-size: 1em;
-            color: #666;
-            font-style: italic;
-        }
-
-        /* Skills and Features - PDF Style Tables */
-        .skills-section,
-        .features-section {
-            margin: 15px 0;
-            padding: 15px;
-            background: #faf9f7;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .section-title {
-            font-weight: bold;
-            color: #8B4513;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
-            font-size: 0.9em;
-        }
-
-        .skill-item {
             display: flex;
             justify-content: space-between;
-            padding: 3px 5px;
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 3px;
+            align-items: center;
+            padding: 0 2rem;
         }
 
-        /* Equipment and Inventory */
-        .equipment-section {
-            margin: 15px 0;
-            padding: 15px;
-            background: #f8f6f3;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .equipment-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .equipment-item {
-            padding: 8px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            font-size: 0.9em;
-        }
-
-        /* Game Panel - Right Side */
-        .game-panel {
-            background: white;
-            border: 2px solid #8B4513;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .game-panel h2 {
-            color: #8B4513;
-            border-bottom: 2px solid #8B4513;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 1.5em;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .action-btn {
-            padding: 15px 20px;
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .action-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Dice Rolling Area */
-        .dice-section {
-            background: #f8f6f3;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-        }
-
-        .dice-input {
+        .logo {
+            font-family: var(--font-fantasy);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            text-decoration: none;
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
             align-items: center;
         }
 
-        .dice-input input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #8B4513;
-            border-radius: 3px;
-            font-size: 1em;
+        .nav-links a {
+            color: var(--soft-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            position: relative;
         }
 
-        .dice-result {
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            border: 2px solid #8B4513;
+        .nav-links a:hover {
+            color: var(--primary-gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--hero-gradient);
+            color: var(--soft-white);
+            padding: calc(var(--header-height) + 4rem) 0 4rem;
             text-align: center;
-            min-height: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23FFD700" opacity="0.1"/><circle cx="80" cy="40" r="1" fill="%23FFD700" opacity="0.05"/><circle cx="40" cy="80" r="1" fill="%23FFD700" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: var(--font-fantasy);
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--soft-white);
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: var(--font-modern);
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: var(--button-gradient);
+            color: var(--soft-white);
+            box-shadow: var(--card-shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--soft-white);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn:hover {
+            transform: var(--hover-transform);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--ancient-black);
+        }
+
+        /* Feature Cards Section */
+        .features {
+            padding: var(--section-padding);
+            background: var(--parchment);
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-fantasy);
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--scroll-brown);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-gradient);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: var(--hover-transform);
+            border-color: var(--primary-gold);
+            box-shadow: 0 20px 50px rgba(139, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-red);
+            color: var(--soft-white);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
-            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
-        /* Adventure Log */
-        .adventure-log {
-            background: #faf9f7;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            margin: 20px 0;
-            max-height: 300px;
-            overflow-y: auto;
+        .feature-card h3 {
+            font-family: var(--font-fantasy);
+            font-size: 1.4rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
         }
 
-        .log-entry {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-            font-size: 0.9em;
-            line-height: 1.3;
+        .feature-card p {
+            color: var(--scroll-brown);
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
-        .log-entry:last-child {
-            border-bottom: none;
+        .feature-link {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-link:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Game Areas Section */
+        .game-areas {
+            padding: var(--section-padding);
+            background: var(--dark-parchment);
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .area-card {
+            background: var(--soft-white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .area-card:hover {
+            transform: var(--hover-transform);
+            border-color: var(--primary-red);
+        }
+
+        .area-icon {
+            font-size: 3rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .area-card h4 {
+            font-family: var(--font-fantasy);
+            font-size: 1.2rem;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .area-card p {
+            font-size: 0.9rem;
+            color: var(--scroll-brown);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--ancient-black);
+            color: var(--soft-white);
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
         }
 
         /* Responsive Design */
-        @media (max-width: 1200px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
         @media (max-width: 768px) {
-            .character-basics {
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid {
                 grid-template-columns: 1fr;
             }
 
-            .ability-scores {
+            .areas-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+        }
 
-            .action-buttons {
+        @media (max-width: 480px) {
+            .areas-grid {
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Status Indicators */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .status-implemented {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .status-ready {
+            background: var(--info-blue);
+            color: white;
+        }
+
+        .status-new {
+            background: var(--primary-gold);
+            color: var(--ancient-black);
+        }
+
+
+
+
+
+
+
+
+
+        .nav-control-btn {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary-gold);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-control-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: scale(1.1);
+        }
+
+        .nav-pane-content {
+            padding: 1rem;
+            max-height: calc(70vh - 80px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--scroll-brown) transparent;
+        }
+
+        .nav-pane.collapsed .nav-pane-content {
+            display: none;
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section-title {
+            font-family: var(--font-fantasy);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--scroll-brown);
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.3);
+        }
+
+        .nav-section-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-section-links li {
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-section-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            color: var(--ancient-black);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-section-links a:hover {
+            background: rgba(139, 0, 0, 0.1);
+            color: var(--primary-red);
+            transform: translateX(2px);
+        }
+
+        .nav-section-links a i {
+            width: 16px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Collapse Icon */
+        .nav-pane.collapsed .nav-pane-header {
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .nav-pane.collapsed .nav-pane-header::before {
+            content: '\f0c9';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+        }
+
+        /* Context Menu */
+        .nav-context-menu {
+            position: fixed;
+            background: var(--card-gradient);
+            border: 1px solid var(--scroll-brown);
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 0;
+            z-index: 10001;
+            min-width: 180px;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.2s ease;
+        }
+
+        .nav-context-menu.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .context-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            color: var(--ancient-black);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .context-menu-item:hover {
+            background: rgba(139, 0, 0, 0.1);
+            color: var(--primary-red);
+        }
+
+        .context-menu-item i {
+            width: 16px;
+            text-align: center;
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: rgba(139, 69, 19, 0.3);
+            margin: 0.5rem 0;
+        }
+
+        /* Pin indicators */
+        .pin-indicator {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-pane.pinned-left .pin-indicator {
+            left: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 1;
+        }
+
+        .nav-pane.pinned-right .pin-indicator {
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 1;
+        }
+
+        .nav-pane.pinned-top .pin-indicator {
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+        }
+
+        .nav-pane.pinned-bottom .pin-indicator {
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+        }
     </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-dice-d20"></i>
+                RulzLawyer
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#game-areas">Game Areas</a></li>
+                <li><a href="./new-character-creator.html">Character Creator</a></li>
+                <li><a href="./code-repository/docs/">Documentation</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- D&D Navigation Pane -->
+        <div id="dndNavPane"
+            style="position: fixed; top: 20px; left: 20px; width: 320px; min-width: 100px; min-height: 100px; background: linear-gradient(145deg, #F4E9D1 0%, #E6D5A8 100%); border: 3px solid #8B4513; border-radius: 12px; padding: 0; z-index: 999999; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); font-family: 'Inter', sans-serif; opacity: 1 !important; display: block !important;">
+            <!-- Header -->
+            <div
+                style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; background: linear-gradient(145deg, #8B4513, #A0522D); border-bottom: 1px solid rgba(0, 0, 0, 0.1); cursor: grab; border-radius: 9px 9px 0 0;">
+                <h3
+                    style="font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 600; color: #FFD700; margin: 0; flex: 1;">
+                    🎲 Quick Navigator</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button onclick="toggleDndNav()"
+                        style="width: 24px; height: 24px; border: none; background: rgba(255, 215, 0, 0.1); color: #FFD700; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(255,215,0,0.2)'"
+                        onmouseout="this.style.background='rgba(255,215,0,0.1)'">
+                        <i class="fas fa-compress"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div id="dndNavContent" style="padding: 1rem; max-height: 400px; overflow-y: auto;">
+                <!-- Game Tools -->
+                <div style="margin-bottom: 1rem;">
+                    <h4
+                        style="font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: #8B4513; margin: 0 0 0.5rem 0; padding-bottom: 0.25rem; border-bottom: 1px solid rgba(139, 69, 19, 0.3);">
+                        Game Tools</h4>
+                    <a href="./new-character-creator.html"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-user-edit" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        Character Creator
+                    </a>
+                    <a href="./dice-roller.html"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-dice-d20" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        Dice Roller
+                    </a>
+                    <a href="#adventure"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-map" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        Adventure Engine
+                    </a>
+                </div>
+
+                <!-- Resources -->
+                <div style="margin-bottom: 1rem;">
+                    <h4
+                        style="font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: #8B4513; margin: 0 0 0.5rem 0; padding-bottom: 0.25rem; border-bottom: 1px solid rgba(139, 69, 19, 0.3);">
+                        Resources</h4>
+                    <a href="./code-repository/tables/"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-table" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        Random Tables
+                    </a>
+                    <a href="./code-repository/docs/"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-book" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        Documentation
+                    </a>
+                    <a href="./code-repository/SRD/"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-scroll" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        D&D 3.5 SRD
+                    </a>
+                </div>
+
+                <!-- System -->
+                <div>
+                    <h4
+                        style="font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: #8B4513; margin: 0 0 0.5rem 0; padding-bottom: 0.25rem; border-bottom: 1px solid rgba(139, 69, 19, 0.3);">
+                        System</h4>
+                    <a href="#settings"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-cogs" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        Settings
+                    </a>
+                    <a href="./README.md"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
+                        onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
+                        onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
+                        <i class="fas fa-info-circle" style="width: 16px; text-align: center; font-size: 0.85rem;"></i>
+                        About
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let dndNavCollapsed = false;
+
+            function toggleDndNav() {
+                const navPane = document.getElementById('dndNavPane');
+                const navContent = document.getElementById('dndNavContent');
+                const button = navPane.querySelector('button i');
+
+                dndNavCollapsed = !dndNavCollapsed;
+
+                if (dndNavCollapsed) {
+                    navPane.style.width = '100px';
+                    navPane.style.height = '100px';
+                    navPane.style.minWidth = '100px';
+                    navPane.style.minHeight = '100px';
+                    navPane.style.borderRadius = '50%';
+                    navContent.style.display = 'none';
+                    button.className = 'fas fa-expand';
+                } else {
+                    navPane.style.width = '320px';
+                    navPane.style.height = 'auto';
+                    navPane.style.minWidth = '100px';
+                    navPane.style.minHeight = '100px';
+                    navPane.style.borderRadius = '12px';
+                    navContent.style.display = 'block';
+                    button.className = 'fas fa-compress';
+                }
+            }
+
+            // Make draggable
+            let isDraggingNav = false;
+            let dragOffsetNav = { x: 0, y: 0 };
+
+            document.getElementById('dndNavPane').addEventListener('mousedown', function (e) {
+                if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.tagName === 'I') return;
+
+                isDraggingNav = true;
+                const rect = this.getBoundingClientRect();
+                dragOffsetNav.x = e.clientX - rect.left;
+                dragOffsetNav.y = e.clientY - rect.top;
+                this.style.cursor = 'grabbing';
+
+                // Switch from centered positioning to absolute positioning when dragging
+                this.style.position = 'fixed';
+                this.style.top = rect.top + 'px';
+                this.style.left = rect.left + 'px';
+                this.style.transform = 'scale(1.02)';
+            });
+
+            document.addEventListener('mousemove', function (e) {
+                if (!isDraggingNav) return;
+
+                const navPane = document.getElementById('dndNavPane');
+                const x = e.clientX - dragOffsetNav.x;
+                const y = e.clientY - dragOffsetNav.y;
+
+                navPane.style.left = x + 'px';
+                navPane.style.top = y + 'px';
+                navPane.style.right = 'auto';
+                navPane.style.position = 'fixed';
+            });
+
+            document.addEventListener('mouseup', function () {
+                if (isDraggingNav) {
+                    isDraggingNav = false;
+                    const navPane = document.getElementById('dndNavPane');
+                    navPane.style.cursor = 'grab';
+                    navPane.style.transform = 'scale(1)';
+                }
+            });
+
+            // Double-click to reset to default left position
+            document.getElementById('dndNavPane').addEventListener('dblclick', function () {
+                this.style.position = 'fixed';
+                this.style.top = '20px';
+                this.style.left = '20px';
+                this.style.transform = 'scale(1)';
+                this.style.right = 'auto';
+            });
+        </script>
+
+        <div class="hero-content">
+            <h1>RulzLawyer</h1>
+            <p class="subtitle">The Ultimate D&D 3.5 Gaming System</p>
+            <p class="description">
+                Experience the most comprehensive D&D 3.5 character creator and adventure engine ever built.
+                Create characters, manage campaigns, and explore infinite adventures with our AI-powered system.
+            </p>
+            <div class="cta-buttons">
+                <a href="./new-character-creator.html" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Create Character
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-scroll"></i>
+                    Explore Features
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Legendary Features</h2>
+                <p>Built for players, by players. Every feature designed to enhance your D&D 3.5 experience.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-wizard"></i>
+                    </div>
+                    <h3>7-Step Character Creation<span class="status-badge status-implemented">✓ Live</span></h3>
+                    <p>Award-winning character creation wizard with real-time validation, spell management, and
+                        equipment presets. Full D&D 3.5 SRD compliance.</p>
+                    <a href="./new-character-creator.html" class="feature-link">
+                        Start Creating <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <h3>Advanced Dice Engine<span class="status-badge status-implemented">✓ Live</span></h3>
+                    <p>3D animated dice rolling with physics simulation, advantage/disadvantage mechanics, and
+                        comprehensive expression parsing.</p>
+                    <a href="./dice-roller.html" class="feature-link">
+                        Roll Dice <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-backpack"></i>
+                    </div>
+                    <h3>Inventory Management<span class="status-badge status-implemented">✓ Live</span></h3>
+                    <p>Drag-and-drop inventory system with 1000+ items, equipment presets, and automatic encumbrance
+                        calculation.</p>
+                    <a href="#inventory" class="feature-link">
+                        Manage Gear <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Spell System<span class="status-badge status-implemented">✓ Live</span></h3>
+                    <p>Complete D&D 3.5 spell database with automatic class detection, spell slot management, and
+                        preparation tracking.</p>
+                    <a href="#spells" class="feature-link">
+                        Cast Spells <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3>Adventure Engine<span class="status-badge status-ready">Ready</span></h3>
+                    <p>AI-powered adventure generation with dynamic encounters, story hooks, and campaign management
+                        tools.</p>
+                    <a href="#adventure" class="feature-link">
+                        Start Adventure <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Epic Level Support<span class="status-badge status-new">New</span></h3>
+                    <p>Character progression to level 100 with divine ranks, epic feats, and legendary abilities for
+                        ultimate campaigns.</p>
+                    <a href="#epic" class="feature-link">
+                        Go Epic <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Areas Section -->
+    <section id="game-areas" class="game-areas">
+        <div class="container">
+            <div class="section-header">
+                <h2>Game Areas</h2>
+                <p>Navigate to any area of the game system</p>
+            </div>
+
+            <div class="areas-grid">
+                <a href="./new-character-creator.html" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <h4>Character Creator</h4>
+                    <p>Create & customize characters</p>
+                </a>
+
+                <a href="./dice-roller.html" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-dice-d20"></i>
+                    </div>
+                    <h4>Dice Roller</h4>
+                    <p>Roll dice & calculate results</p>
+                </a>
+
+                <a href="#spellbook" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>Spellbook</h4>
+                    <p>Browse & manage spells</p>
+                </a>
+
+                <a href="#adventure" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h4>Adventure Generator</h4>
+                    <p>Create epic adventures</p>
+                </a>
+
+                <a href="./code-repository/tables/" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <h4>Random Tables</h4>
+                    <p>17+ D&D tables & generators</p>
+                </a>
+
+                <a href="#campaign" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h4>Campaign Manager</h4>
+                    <p>Manage campaigns & sessions</p>
+                </a>
+
+                <a href="./code-repository/docs/" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Documentation</h4>
+                    <p>Rules, guides & references</p>
+                </a>
+
+                <a href="#settings" class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4>Settings</h4>
+                    <p>Customize your experience</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="./README.md">Documentation</a>
+                <a href="./AGENTS.md">Development Guide</a>
+                <a href="./code-repository/">Source Code</a>
+                <a href="./user-stories/">User Stories</a>
+                <a href="./technical-specs/">Technical Specs</a>
+            </div>
+            <p>&copy; 2025 RulzLawyer D&D 3.5 Gaming System. Built with ❤️ for the D&D community.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // System status checker
+        async function checkSystemStatus() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                console.log('🎲 System Status:', data);
+                return data.status === 'healthy';
+            } catch (error) {
+                console.warn('System status check failed:', error);
+                return false;
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🎲 RulzLawyer Gaming System Loaded');
+            checkSystemStatus();
+        });
+    </script>
+</body>
+
+</html>
+gap: 5px;
+font-size: 0.9em;
+}
+
+.skill-item {
+display: flex;
+justify-content: space-between;
+padding: 3px 5px;
+background: white;
+border: 1px solid #eee;
+border-radius: 3px;
+}
+
+/* Equipment and Inventory */
+.equipment-section {
+margin: 15px 0;
+padding: 15px;
+background: #f8f6f3;
+border: 1px solid #ddd;
+border-radius: 5px;
+}
+
+.equipment-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+margin-top: 10px;
+}
+
+.equipment-item {
+padding: 8px;
+background: white;
+border: 1px solid #ddd;
+border-radius: 3px;
+font-size: 0.9em;
+}
+
+/* Game Panel - Right Side */
+.game-panel {
+background: white;
+border: 2px solid #8B4513;
+border-radius: 8px;
+padding: 20px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.game-panel h2 {
+color: #8B4513;
+border-bottom: 2px solid #8B4513;
+padding-bottom: 5px;
+margin-bottom: 15px;
+text-align: center;
+font-size: 1.5em;
+}
+
+/* Action Buttons */
+.action-buttons {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+margin: 20px 0;
+}
+
+.action-btn {
+padding: 15px 20px;
+background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 1.1em;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:active {
+transform: translateY(0);
+}
+
+/* Dice Rolling Area */
+.dice-section {
+background: #f8f6f3;
+padding: 20px;
+border-radius: 8px;
+margin: 20px 0;
+border: 1px solid #ddd;
+}
+
+.dice-input {
+display: flex;
+gap: 10px;
+margin-bottom: 15px;
+align-items: center;
+}
+
+.dice-input input {
+flex: 1;
+padding: 8px;
+border: 1px solid #8B4513;
+border-radius: 3px;
+font-size: 1em;
+}
+
+.dice-result {
+background: white;
+padding: 15px;
+border-radius: 5px;
+border: 2px solid #8B4513;
+text-align: center;
+min-height: 80px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.2em;
+font-weight: bold;
+}
+
+/* Adventure Log */
+.adventure-log {
+background: #faf9f7;
+padding: 15px;
+border-radius: 8px;
+border: 1px solid #ddd;
+margin: 20px 0;
+max-height: 300px;
+overflow-y: auto;
+}
+
+.log-entry {
+padding: 8px;
+border-bottom: 1px solid #eee;
+font-size: 0.9em;
+line-height: 1.3;
+}
+
+.log-entry:last-child {
+border-bottom: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+.main-content {
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 768px) {
+.character-basics {
+grid-template-columns: 1fr;
+}
+
+.ability-scores {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.action-buttons {
+grid-template-columns: 1fr;
+}
+}
+</style>
 </head>
 
 <body>
@@ -742,7 +1680,319 @@
             log.appendChild(entry);
             log.scrollTop = log.scrollHeight;
         }
+
+        // Unified Navigation Pane System
+        class NavigationPaneManager {
+            constructor() {
+                this.navPane = document.getElementById('navPane');
+                this.navPaneHeader = document.getElementById('navPaneHeader');
+                this.collapseBtn = document.getElementById('collapseBtn');
+                this.pinBtn = document.getElementById('pinBtn');
+                this.contextMenu = document.getElementById('navContextMenu');
+
+                this.isDragging = false;
+                this.isCollapsed = false;
+                this.isPinned = false;
+                this.pinnedPosition = null;
+                this.dragOffset = { x: 0, y: 0 };
+
+                this.loadSettings();
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                // Header drag functionality
+                this.navPaneHeader.addEventListener('mousedown', this.startDrag.bind(this));
+                document.addEventListener('mousemove', this.drag.bind(this));
+                document.addEventListener('mouseup', this.stopDrag.bind(this));
+
+                // Control buttons
+                this.collapseBtn.addEventListener('click', this.toggleCollapse.bind(this));
+                this.pinBtn.addEventListener('click', this.togglePin.bind(this));
+
+                // Right-click context menu
+                this.navPane.addEventListener('contextmenu', this.showContextMenu.bind(this));
+                document.addEventListener('click', this.hideContextMenu.bind(this));
+
+                // Context menu actions
+                this.contextMenu.addEventListener('click', this.handleContextMenuAction.bind(this));
+
+                // Prevent context menu from closing when clicking inside it
+                this.contextMenu.addEventListener('click', (e) => e.stopPropagation());
+
+                // Double-click header to toggle collapse
+                this.navPaneHeader.addEventListener('dblclick', this.toggleCollapse.bind(this));
+
+                // Window resize handler
+                window.addEventListener('resize', this.handleWindowResize.bind(this));
+            }
+
+            startDrag(e) {
+                if (this.isPinned || e.target.closest('.nav-control-btn')) return;
+
+                this.isDragging = true;
+                this.navPane.classList.add('dragging');
+
+                const rect = this.navPane.getBoundingClientRect();
+                this.dragOffset.x = e.clientX - rect.left;
+                this.dragOffset.y = e.clientY - rect.top;
+
+                e.preventDefault();
+            }
+
+            drag(e) {
+                if (!this.isDragging) return;
+
+                const x = e.clientX - this.dragOffset.x;
+                const y = e.clientY - this.dragOffset.y;
+
+                // Constrain to viewport
+                const maxX = window.innerWidth - this.navPane.offsetWidth;
+                const maxY = window.innerHeight - this.navPane.offsetHeight;
+
+                const constrainedX = Math.max(0, Math.min(x, maxX));
+                const constrainedY = Math.max(0, Math.min(y, maxY));
+
+                this.navPane.style.left = constrainedX + 'px';
+                this.navPane.style.top = constrainedY + 'px';
+                this.navPane.style.right = 'auto';
+                this.navPane.style.transform = 'none';
+            }
+
+            stopDrag() {
+                if (!this.isDragging) return;
+
+                this.isDragging = false;
+                this.navPane.classList.remove('dragging');
+                this.saveSettings();
+            }
+
+            toggleCollapse() {
+                this.isCollapsed = !this.isCollapsed;
+                this.navPane.classList.toggle('collapsed', this.isCollapsed);
+
+                const icon = this.collapseBtn.querySelector('i');
+                icon.className = this.isCollapsed ? 'fas fa-expand' : 'fas fa-compress';
+
+                this.saveSettings();
+            }
+
+            togglePin() {
+                if (this.isPinned) {
+                    this.unpin();
+                } else {
+                    this.pinToNearestEdge();
+                }
+            }
+
+            pinToNearestEdge() {
+                const rect = this.navPane.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const distanceToLeft = centerX;
+                const distanceToRight = window.innerWidth - centerX;
+                const distanceToTop = centerY;
+                const distanceToBottom = window.innerHeight - centerY;
+
+                const minDistance = Math.min(distanceToLeft, distanceToRight, distanceToTop, distanceToBottom);
+
+                if (minDistance === distanceToLeft) {
+                    this.pinToEdge('left');
+                } else if (minDistance === distanceToRight) {
+                    this.pinToEdge('right');
+                } else if (minDistance === distanceToTop) {
+                    this.pinToEdge('top');
+                } else {
+                    this.pinToEdge('bottom');
+                }
+            }
+
+            pinToEdge(position) {
+                this.isPinned = true;
+                this.pinnedPosition = position;
+
+                // Remove existing pin classes
+                this.navPane.classList.remove('pinned-left', 'pinned-right', 'pinned-top', 'pinned-bottom');
+                this.navPane.classList.add(`pinned-${position}`);
+
+                // Reset inline styles
+                this.navPane.style.left = '';
+                this.navPane.style.right = '';
+                this.navPane.style.top = '';
+                this.navPane.style.bottom = '';
+                this.navPane.style.transform = '';
+
+                // Update pin button icon
+                this.pinBtn.querySelector('i').className = 'fas fa-thumbtack';
+                this.pinBtn.style.color = 'var(--primary-gold)';
+
+                this.saveSettings();
+            }
+
+            unpin() {
+                this.isPinned = false;
+                this.pinnedPosition = null;
+
+                this.navPane.classList.remove('pinned-left', 'pinned-right', 'pinned-top', 'pinned-bottom');
+
+                // Reset to floating position
+                this.navPane.style.top = '50%';
+                this.navPane.style.right = '20px';
+                this.navPane.style.transform = 'translateY(-50%)';
+
+                // Update pin button icon
+                this.pinBtn.querySelector('i').className = 'fas fa-thumbtack';
+                this.pinBtn.style.color = '';
+
+                this.saveSettings();
+            }
+
+            showContextMenu(e) {
+                e.preventDefault();
+
+                this.contextMenu.style.left = e.clientX + 'px';
+                this.contextMenu.style.top = e.clientY + 'px';
+                this.contextMenu.classList.add('show');
+
+                // Ensure menu stays within viewport
+                setTimeout(() => {
+                    const rect = this.contextMenu.getBoundingClientRect();
+                    if (rect.right > window.innerWidth) {
+                        this.contextMenu.style.left = (e.clientX - rect.width) + 'px';
+                    }
+                    if (rect.bottom > window.innerHeight) {
+                        this.contextMenu.style.top = (e.clientY - rect.height) + 'px';
+                    }
+                }, 0);
+            }
+
+            hideContextMenu() {
+                this.contextMenu.classList.remove('show');
+            }
+
+            handleContextMenuAction(e) {
+                const action = e.target.closest('.context-menu-item')?.dataset.action;
+                if (!action) return;
+
+                switch (action) {
+                    case 'toggle':
+                        this.toggleCollapse();
+                        break;
+                    case 'pin':
+                        this.togglePin();
+                        break;
+                    case 'pin-left':
+                        this.pinToEdge('left');
+                        break;
+                    case 'pin-right':
+                        this.pinToEdge('right');
+                        break;
+                    case 'pin-top':
+                        this.pinToEdge('top');
+                        break;
+                    case 'pin-bottom':
+                        this.pinToEdge('bottom');
+                        break;
+                    case 'reset':
+                        this.resetPosition();
+                        break;
+                }
+
+                this.hideContextMenu();
+            }
+
+            resetPosition() {
+                this.unpin();
+                this.isCollapsed = false;
+                this.navPane.classList.remove('collapsed');
+                this.collapseBtn.querySelector('i').className = 'fas fa-compress';
+                this.saveSettings();
+            }
+
+            handleWindowResize() {
+                if (!this.isPinned) {
+                    // Ensure floating nav pane stays within bounds
+                    const rect = this.navPane.getBoundingClientRect();
+                    if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
+                        this.navPane.style.top = '50%';
+                        this.navPane.style.right = '20px';
+                        this.navPane.style.left = 'auto';
+                        this.navPane.style.transform = 'translateY(-50%)';
+                        this.saveSettings();
+                    }
+                }
+            }
+
+            saveSettings() {
+                const settings = {
+                    isCollapsed: this.isCollapsed,
+                    isPinned: this.isPinned,
+                    pinnedPosition: this.pinnedPosition,
+                    position: {
+                        left: this.navPane.style.left,
+                        top: this.navPane.style.top,
+                        right: this.navPane.style.right,
+                        transform: this.navPane.style.transform
+                    }
+                };
+
+                localStorage.setItem('navPaneSettings', JSON.stringify(settings));
+            }
+
+            loadSettings() {
+                try {
+                    const settings = JSON.parse(localStorage.getItem('navPaneSettings') || '{}');
+
+                    if (settings.isCollapsed) {
+                        this.isCollapsed = true;
+                        this.navPane.classList.add('collapsed');
+                        this.collapseBtn.querySelector('i').className = 'fas fa-expand';
+                    }
+
+                    if (settings.isPinned && settings.pinnedPosition) {
+                        this.pinToEdge(settings.pinnedPosition);
+                    } else if (settings.position) {
+                        // Restore floating position
+                        Object.assign(this.navPane.style, settings.position);
+                    }
+                } catch (error) {
+                    console.log('Failed to load navigation pane settings:', error);
+                }
+            }
+        }
+
+        // Initialize navigation pane when DOM is ready
+        function initializeNavPane() {
+            console.log('Initializing navigation pane...');
+            const navPaneElement = document.getElementById('navPane');
+            if (navPaneElement) {
+                console.log('Navigation pane element found:', navPaneElement);
+                // Make sure the pane is visible
+                navPaneElement.style.display = 'block';
+                navPaneElement.style.visibility = 'visible';
+                navPaneElement.style.opacity = '1';
+                window.navPaneManager = new NavigationPaneManager();
+                console.log('NavigationPaneManager initialized successfully');
+            } else {
+                console.error('Navigation pane element not found!');
+                // Try again after a short delay
+                setTimeout(initializeNavPane, 100);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeNavPane);
+
+        // Fallback initialization
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeNavPane);
+        } else {
+            initializeNavPane();
+        }
     </script>
+
+
+
 </body>
 
 </html>
