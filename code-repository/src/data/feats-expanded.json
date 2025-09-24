@@ -1,856 +1,1279 @@
 [
-  {
-    "name": "Acrobatic",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Jump +2", "Tumble +2"],
-    "description": "You have excellent body awareness and coordination.",
-    "source": "PHB"
-  },
-  {
-    "name": "Agile",
-    "type": "General", 
-    "prerequisites": [],
-    "benefits": ["Balance +2", "Escape Artist +2"],
-    "description": "You are particularly flexible and poised.",
-    "source": "PHB"
-  },
-  {
-    "name": "Alertness",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Listen +2", "Spot +2"],
-    "description": "You have finely tuned senses.",
-    "source": "PHB"
-  },
-  {
-    "name": "Animal Affinity",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Handle Animal +2", "Ride +2"],
-    "description": "You are good with animals.",
-    "source": "PHB"
-  },
-  {
-    "name": "Armor Proficiency (Heavy)",
-    "type": "General",
-    "prerequisites": ["Armor Proficiency (Light)", "Armor Proficiency (Medium)"],
-    "benefits": ["No penalty for wearing heavy armor"],
-    "description": "You are proficient with heavy armor.",
-    "source": "PHB"
-  },
-  {
-    "name": "Armor Proficiency (Light)",
-    "type": "General", 
-    "prerequisites": [],
-    "benefits": ["No penalty for wearing light armor"],
-    "description": "You are proficient with light armor.",
-    "source": "PHB"
-  },
-  {
-    "name": "Armor Proficiency (Medium)",
-    "type": "General",
-    "prerequisites": ["Armor Proficiency (Light)"],
-    "benefits": ["No penalty for wearing medium armor"],
-    "description": "You are proficient with medium armor.",
-    "source": "PHB"
-  },
-  {
-    "name": "Athletic",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Climb +2", "Swim +2"],
-    "description": "You have a knack for athletic endeavors.",
-    "source": "PHB"
-  },
-  {
-    "name": "Augment Summoning",
-    "type": "General",
-    "prerequisites": ["Spell Focus (conjuration)"],
-    "benefits": ["Summoned creatures gain +4 Str and Con"],
-    "description": "Your summoned creatures are more powerful than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Blind-Fight",
-    "type": "Fighter",
-    "prerequisites": [],
-    "benefits": ["Re-roll miss chances from concealment", "No loss of Dex to AC against invisible attackers", "Half speed penalty when moving in darkness"],
-    "description": "You know how to fight in melee without being able to see your foes.",
-    "source": "PHB"
-  },
-  {
-    "name": "Brew Potion",
-    "type": "Item Creation",
-    "prerequisites": ["Caster level 3rd"],
-    "benefits": ["Can create potions"],
-    "description": "You can create magic potions.",
-    "source": "PHB"
-  },
-  {
-    "name": "Cleave", 
-    "type": "Fighter",
-    "prerequisites": ["Str 13", "Power Attack"],
-    "benefits": ["Extra attack after killing blow"],
-    "description": "You can follow through with powerful blows.",
-    "source": "PHB"
-  },
-  {
-    "name": "Combat Casting",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+4 bonus on Concentration checks for defensive casting"],
-    "description": "You are adept at casting spells in combat.",
-    "source": "PHB"
-  },
-  {
-    "name": "Combat Expertise", 
-    "type": "Fighter",
-    "prerequisites": ["Int 13"],
-    "benefits": ["Trade attack bonus for AC bonus"],
-    "description": "You are trained at using your combat skill for defense.",
-    "source": "PHB"
-  },
-  {
-    "name": "Combat Reflexes",
-    "type": "Fighter",
-    "prerequisites": [],
-    "benefits": ["Additional attacks of opportunity equal to Dex modifier"],
-    "description": "You can respond quickly and repeatedly to opponents who drop their guard.",
-    "source": "PHB"
-  },
-  {
-    "name": "Craft Magic Arms and Armor",
-    "type": "Item Creation", 
-    "prerequisites": ["Caster level 5th"],
-    "benefits": ["Can create magic weapons, armor, and shields"],
-    "description": "You can create magic weapons, armor, and shields.",
-    "source": "PHB"
-  },
-  {
-    "name": "Craft Rod",
-    "type": "Item Creation",
-    "prerequisites": ["Caster level 9th"],
-    "benefits": ["Can create magic rods"],
-    "description": "You can create magic rods.",
-    "source": "PHB"
-  },
-  {
-    "name": "Craft Staff",
-    "type": "Item Creation",
-    "prerequisites": ["Caster level 12th"],
-    "benefits": ["Can create magic staffs"],
-    "description": "You can create magic staffs.",
-    "source": "PHB"
-  },
-  {
-    "name": "Craft Wand",
-    "type": "Item Creation",
-    "prerequisites": ["Caster level 5th"],
-    "benefits": ["Can create magic wands"],
-    "description": "You can create magic wands.",
-    "source": "PHB"
-  },
-  {
-    "name": "Craft Wondrous Item",
-    "type": "Item Creation",
-    "prerequisites": ["Caster level 3rd"],
-    "benefits": ["Can create wondrous items"],
-    "description": "You can create magic wondrous items.",
-    "source": "PHB"
-  },
-  {
-    "name": "Deceitful",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Disguise +2", "Forgery +2"],
-    "description": "You have a talent for misleading others.",
-    "source": "PHB"
-  },
-  {
-    "name": "Deft Hands",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Sleight of Hand +2", "Use Rope +2"],
-    "description": "You have exceptional manual dexterity.",
-    "source": "PHB"
-  },
-  {
-    "name": "Diligent", 
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Appraise +2", "Decipher Script +2"],
-    "description": "You are thorough and pay attention to detail.",
-    "source": "PHB"
-  },
-  {
-    "name": "Dodge",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13"],
-    "benefits": ["+1 dodge bonus to AC against one opponent"],
-    "description": "You are adept at dodging blows.",
-    "source": "PHB"
-  },
-  {
-    "name": "Empower Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Spell variables increased by 50%", "+2 spell levels"],
-    "description": "You can cast spells to greater effect.",
-    "source": "PHB"
-  },
-  {
-    "name": "Endurance",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+4 bonus on checks for extended activity"],
-    "description": "You have exceptional endurance.",
-    "source": "PHB"
-  },
-  {
-    "name": "Enlarge Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Double spell range", "+1 spell level"],
-    "description": "You can cast spells farther than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Eschew Materials",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Cast spells without material components up to 1 gp"],
-    "description": "You can cast spells without relying on material components.",
-    "source": "PHB"
-  },
-  {
-    "name": "Exotic Weapon Proficiency",
-    "type": "Fighter",
-    "prerequisites": ["Base attack bonus +1"],
-    "benefits": ["No penalty with chosen exotic weapon"],
-    "description": "You understand how to use an exotic weapon in combat.",
-    "special": "Must choose specific exotic weapon",
-    "source": "PHB"
-  },
-  {
-    "name": "Extend Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Double spell duration", "+1 spell level"],
-    "description": "You can make your spells last twice as long.",
-    "source": "PHB"
-  },
-  {
-    "name": "Extra Turning",
-    "type": "General",
-    "prerequisites": ["Ability to turn or rebuke undead"],
-    "benefits": ["Turn or rebuke undead 4 more times per day"],
-    "description": "You can turn or rebuke undead more often than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Far Shot",
-    "type": "Fighter",
-    "prerequisites": ["Point Blank Shot"],
-    "benefits": ["Increase range increment by 50% for ranged weapons"],
-    "description": "You can get greater distance out of ranged weapons.",
-    "source": "PHB"
-  },
-  {
-    "name": "Forge Ring",
-    "type": "Item Creation",
-    "prerequisites": ["Caster level 12th"],
-    "benefits": ["Can create magic rings"],
-    "description": "You can create magic rings.",
-    "source": "PHB"
-  },
-  {
-    "name": "Great Cleave",
-    "type": "Fighter",
-    "prerequisites": ["Str 13", "Power Attack", "Cleave", "Base attack bonus +4"],
-    "benefits": ["No limit on cleave attacks per round"],
-    "description": "You can strike many nearby foes with a single mighty swing.",
-    "source": "PHB"
-  },
-  {
-    "name": "Great Fortitude",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+2 bonus on Fortitude saves"],
-    "description": "You are tougher than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Greater Spell Focus",
-    "type": "General",
-    "prerequisites": ["Spell Focus"],
-    "benefits": ["+1 bonus to save DC of chosen spell school (stacks with Spell Focus)"],
-    "description": "Your spells of a particular school are even more potent than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Greater Spell Penetration",
-    "type": "General",
-    "prerequisites": ["Spell Penetration"],
-    "benefits": ["+2 bonus on caster level checks to overcome spell resistance (stacks)"],
-    "description": "Your spells break through spell resistance much more easily.",
-    "source": "PHB"
-  },
-  {
-    "name": "Greater Two-Weapon Fighting",
-    "type": "Fighter",
-    "prerequisites": ["Dex 19", "Improved Two-Weapon Fighting", "Two-Weapon Fighting", "Base attack bonus +11"],
-    "benefits": ["Third attack with off-hand weapon at -10"],
-    "description": "You are a master at fighting two-handed.",
-    "source": "PHB"
-  },
-  {
-    "name": "Greater Weapon Focus",
-    "type": "Fighter", 
-    "prerequisites": ["Weapon Focus", "Fighter level 8th"],
-    "benefits": ["+1 bonus on attack rolls (stacks with Weapon Focus)"],
-    "description": "You have mastered a single weapon.",
-    "source": "PHB"
-  },
-  {
-    "name": "Greater Weapon Specialization",
-    "type": "Fighter",
-    "prerequisites": ["Greater Weapon Focus", "Weapon Focus", "Weapon Specialization", "Fighter level 12th"],
-    "benefits": ["+2 bonus on damage rolls (stacks with Weapon Specialization)"],
-    "description": "You deal especially deadly blows with your favored weapon.",
-    "source": "PHB"
-  },
-  {
-    "name": "Heighten Spell", 
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Cast spell at higher level", "Variable spell level increase"],
-    "description": "You can cast a spell as if it were a higher-level spell.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Bull Rush",
-    "type": "Fighter",
-    "prerequisites": ["Str 13", "Power Attack"],
-    "benefits": ["+4 bonus on bull rush attempts", "No attack of opportunity when bull rushing"],
-    "description": "You know how to push opponents back.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Counterspell",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Counterspell with spells of same school one level higher"],
-    "description": "You understand the nuances of magic to such an extent that you can counter your opponents' spells with great efficiency.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Critical",
-    "type": "Fighter",
-    "prerequisites": ["Proficient with weapon", "Base attack bonus +8"],
-    "benefits": ["Double critical threat range of chosen weapon"],
-    "description": "You know how to hit where it hurts.",
-    "special": "Must choose specific weapon",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Disarm",
-    "type": "Fighter",
-    "prerequisites": ["Int 13", "Combat Expertise"],
-    "benefits": ["+4 bonus on disarm attempts", "No attack of opportunity when disarming"],
-    "description": "You know how to disarm opponents in melee combat.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Feint",
-    "type": "Fighter",
-    "prerequisites": ["Int 13", "Combat Expertise"],
-    "benefits": ["Feint as move action"],
-    "description": "You are skilled at misdirecting your opponent's attention in melee.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Grapple",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13", "Improved Unarmed Strike"],
-    "benefits": ["+4 bonus on grapple checks", "No attack of opportunity when grappling"],
-    "description": "You are skilled at grappling opponents.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Initiative",
-    "type": "Fighter",
-    "prerequisites": [],
-    "benefits": ["+4 bonus on initiative checks"],
-    "description": "You can react more quickly than normal in a fight.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Overrun",
-    "type": "Fighter",
-    "prerequisites": ["Str 13", "Power Attack"],
-    "benefits": ["+4 bonus on overrun attempts", "No attack of opportunity when overrunning"],
-    "description": "You are skilled at knocking down opponents.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Precise Shot",
-    "type": "Fighter",
-    "prerequisites": ["Dex 19", "Point Blank Shot", "Precise Shot", "Base attack bonus +11"],
-    "benefits": ["No penalty for shooting into melee"],
-    "description": "Your aim is so precise that you can shoot an arrow or bolt at an opponent engaged in melee.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Shield Bash",
-    "type": "Fighter",
-    "prerequisites": ["Shield Proficiency"],
-    "benefits": ["Retain shield AC when shield bashing"],
-    "description": "You can bash with a shield while retaining its defensive bonus.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Sunder",
-    "type": "Fighter",
-    "prerequisites": ["Str 13", "Power Attack"],
-    "benefits": ["+4 bonus on sunder attempts", "No attack of opportunity when sundering"],
-    "description": "You are skilled at attacking your opponents' weapons and armor.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Trip",
-    "type": "Fighter",
-    "prerequisites": ["Int 13", "Combat Expertise"],
-    "benefits": ["+4 bonus on trip attempts", "No attack of opportunity when tripping", "Free attack if trip succeeds"],
-    "description": "You know how to trip opponents in melee combat.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Turning",
-    "type": "General",
-    "prerequisites": ["Ability to turn or rebuke undead"],
-    "benefits": ["Turn or rebuke undead as if 1 level higher"],
-    "description": "Your turning or rebuking attempts are more powerful than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Two-Weapon Fighting",
-    "type": "Fighter",
-    "prerequisites": ["Dex 17", "Two-Weapon Fighting", "Base attack bonus +6"],
-    "benefits": ["Second attack with off-hand weapon at -5"],
-    "description": "You are an expert in fighting two-handed.",
-    "source": "PHB"
-  },
-  {
-    "name": "Improved Unarmed Strike",
-    "type": "Fighter",
-    "prerequisites": [],
-    "benefits": ["Unarmed attacks don't provoke attacks of opportunity", "Deal lethal damage"],
-    "description": "You are skilled at fighting while unarmed.",
-    "source": "PHB"
-  },
-  {
-    "name": "Investigator",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Gather Information +2", "Search +2"],
-    "description": "You have a knack for finding information.",
-    "source": "PHB"
-  },
-  {
-    "name": "Iron Will",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+2 bonus on Will saves"],
-    "description": "You have a stronger will than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Leadership",
-    "type": "General",
-    "prerequisites": ["Character level 6th"],
-    "benefits": ["Attract followers and cohort"],
-    "description": "You are a leader of men.",
-    "source": "PHB"
-  },
-  {
-    "name": "Lightning Reflexes",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+2 bonus on Reflex saves"],
-    "description": "You have faster reflexes than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Magical Aptitude",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Spellcraft +2", "Use Magic Device +2"],
-    "description": "You have a knack for magical endeavors.",
-    "source": "PHB"
-  },
-  {
-    "name": "Manyshot",
-    "type": "Fighter",
-    "prerequisites": ["Dex 17", "Point Blank Shot", "Rapid Shot", "Base attack bonus +6"],
-    "benefits": ["Fire two arrows simultaneously"],
-    "description": "You can fire multiple arrows simultaneously against a nearby target.",
-    "source": "PHB"
-  },
-  {
-    "name": "Martial Weapon Proficiency",
-    "type": "Fighter",
-    "prerequisites": [],
-    "benefits": ["No penalty with chosen martial weapon"],
-    "description": "You understand how to use a martial weapon in combat.",
-    "special": "Must choose specific martial weapon or group",
-    "source": "PHB"
-  },
-  {
-    "name": "Maximize Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["All variable dice results maximized", "+3 spell levels"],
-    "description": "You can cast spells to maximum effect.",
-    "source": "PHB"
-  },
-  {
-    "name": "Mobility",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13", "Dodge"],
-    "benefits": ["+4 AC against attacks of opportunity from movement"],
-    "description": "You are skilled at dodging past opponents and avoiding blows.",
-    "source": "PHB"
-  },
-  {
-    "name": "Mounted Archery",
-    "type": "Fighter",
-    "prerequisites": ["Ride 1 rank", "Mounted Combat"],
-    "benefits": ["Half penalty for ranged attacks while mounted"],
-    "description": "You are skilled at making ranged attacks while mounted.",
-    "source": "PHB"
-  },
-  {
-    "name": "Mounted Combat",
-    "type": "Fighter",
-    "prerequisites": ["Ride 1 rank"],
-    "benefits": ["Negate attack against mount once per round"],
-    "description": "You are skilled in mounted combat.",
-    "source": "PHB"
-  },
-  {
-    "name": "Natural Spell",
-    "type": "General",
-    "prerequisites": ["Wis 13", "Wild shape ability"],
-    "benefits": ["Cast spells while in wild shape"],
-    "description": "You can cast spells while in a wild shape.",
-    "source": "PHB"
-  },
-  {
-    "name": "Negotiator",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Diplomacy +2", "Sense Motive +2"],
-    "description": "You are good at gauging and swaying attitudes.",
-    "source": "PHB"
-  },
-  {
-    "name": "Nimble Fingers",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Disable Device +2", "Open Lock +2"],
-    "description": "You are adept at manipulation and misdirection.",
-    "source": "PHB"
-  },
-  {
-    "name": "Persuasive",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Bluff +2", "Intimidate +2"],
-    "description": "You have a way with words and body language.",
-    "source": "PHB"
-  },
-  {
-    "name": "Point Blank Shot",
-    "type": "Fighter",
-    "prerequisites": [],
-    "benefits": ["+1 bonus on attack and damage rolls with ranged weapons within 30 feet"],
-    "description": "You are skilled at making well-placed shots with ranged weapons at close range.",
-    "source": "PHB"
-  },
-  {
-    "name": "Power Attack",
-    "type": "Fighter",
-    "prerequisites": ["Str 13"],
-    "benefits": ["Trade attack bonus for damage bonus"],
-    "description": "You can make exceptionally deadly melee attacks by sacrificing accuracy for strength.",
-    "source": "PHB"
-  },
-  {
-    "name": "Precise Shot",
-    "type": "Fighter",
-    "prerequisites": ["Point Blank Shot"],
-    "benefits": ["No -4 penalty for shooting into melee"],
-    "description": "You can shoot or throw ranged weapons at an opponent engaged in melee without penalty.",
-    "source": "PHB"
-  },
-  {
-    "name": "Quick Draw",
-    "type": "Fighter",
-    "prerequisites": ["Base attack bonus +1"],
-    "benefits": ["Draw weapon as free action"],
-    "description": "You can draw weapons with startling speed.",
-    "source": "PHB"
-  },
-  {
-    "name": "Quicken Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Cast spell as swift action", "+4 spell levels"],
-    "description": "You can cast spells with a moment's thought.",
-    "source": "PHB"
-  },
-  {
-    "name": "Rapid Reload",
-    "type": "Fighter",
-    "prerequisites": ["Weapon Proficiency (crossbow type chosen)"],
-    "benefits": ["Reload chosen crossbow type faster"],
-    "description": "Choose a type of crossbow. You can reload that type of crossbow quickly.",
-    "source": "PHB"
-  },
-  {
-    "name": "Rapid Shot",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13", "Point Blank Shot"],
-    "benefits": ["One extra ranged attack per round at -2 to all attacks"],
-    "description": "You can use ranged weapons with exceptional speed.",
-    "source": "PHB"
-  },
-  {
-    "name": "Ride-By Attack",
-    "type": "Fighter",
-    "prerequisites": ["Ride 1 rank", "Mounted Combat"],
-    "benefits": ["Move before and after mounted charge attack"],
-    "description": "You are skilled at fast mounted attacks.",
-    "source": "PHB"
-  },
-  {
-    "name": "Run",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Run at 5x speed", "No Dex loss when running"],
-    "description": "You are fleet of foot.",
-    "source": "PHB"
-  },
-  {
-    "name": "Scribe Scroll",
-    "type": "Item Creation",
-    "prerequisites": ["Caster level 1st"],
-    "benefits": ["Can create scrolls"],
-    "description": "You can create scrolls from known spells.",
-    "source": "PHB"
-  },
-  {
-    "name": "Self-Sufficient",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Heal +2", "Survival +2"],
-    "description": "You can take care of yourself in harsh environments and situations.",
-    "source": "PHB"
-  },
-  {
-    "name": "Shield Proficiency",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["No penalty for using shields"],
-    "description": "You are proficient with bucklers, small shields, and large shields.",
-    "source": "PHB"
-  },
-  {
-    "name": "Shot on the Run",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13", "Dodge", "Mobility", "Point Blank Shot", "Base attack bonus +4"],
-    "benefits": ["Move before and after ranged attack"],
-    "description": "You are highly trained in skirmish ranged attack tactics.",
-    "source": "PHB"
-  },
-  {
-    "name": "Silent Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Cast spell without verbal components", "+1 spell level"],
-    "description": "You can cast spells silently.",
-    "source": "PHB"
-  },
-  {
-    "name": "Simple Weapon Proficiency",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["No penalty for using simple weapons"],
-    "description": "You understand how to use simple weapons in combat.",
-    "source": "PHB"
-  },
-  {
-    "name": "Skill Focus",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+3 bonus to chosen skill"],
-    "description": "You are particularly adept at a certain skill.",
-    "special": "Must choose specific skill",
-    "source": "PHB"
-  },
-  {
-    "name": "Spell Focus",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+1 bonus to save DC of chosen spell school"],
-    "description": "Your spells of a particular school are more potent than normal.",
-    "special": "Must choose spell school",
-    "source": "PHB"
-  },
-  {
-    "name": "Spell Mastery",
-    "type": "Special",
-    "prerequisites": ["Wizard level 1st"],
-    "benefits": ["Prepare chosen spells without spellbook"],
-    "description": "You have mastered certain spells and can prepare them from memory.",
-    "source": "PHB"
-  },
-  {
-    "name": "Spell Penetration",
-    "type": "General", 
-    "prerequisites": [],
-    "benefits": ["+2 bonus on caster level checks to overcome spell resistance"],
-    "description": "Your spells break through spell resistance better than most.",
-    "source": "PHB"
-  },
-  {
-    "name": "Spirited Charge",
-    "type": "Fighter",
-    "prerequisites": ["Ride 1 rank", "Mounted Combat", "Ride-By Attack"],
-    "benefits": ["Double damage on mounted charge with melee weapon", "Triple damage with lance"],
-    "description": "You are trained at making devastating mounted charges.",
-    "source": "PHB"
-  },
-  {
-    "name": "Spring Attack",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13", "Dodge", "Mobility", "Base attack bonus +4"],
-    "benefits": ["Move before and after melee attack without provoking attacks of opportunity"],
-    "description": "You are trained in fast melee attacks.",
-    "source": "PHB"
-  },
-  {
-    "name": "Stealthy",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Hide +2", "Move Silently +2"],
-    "description": "You are particularly good at avoiding notice.",
-    "source": "PHB"
-  },
-  {
-    "name": "Still Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Cast spell without somatic components", "+1 spell level"],
-    "description": "You can cast spells without gestures.",
-    "source": "PHB"
-  },
-  {
-    "name": "Stunning Fist",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13", "Wis 13", "Improved Unarmed Strike", "Base attack bonus +8"],
-    "benefits": ["Stun opponent with unarmed strike"],
-    "description": "You know how to strike opponents in vulnerable areas.",
-    "source": "PHB"
-  },
-  {
-    "name": "Toughness",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["+3 hit points"],
-    "description": "You are tougher than normal.",
-    "source": "PHB"
-  },
-  {
-    "name": "Tower Shield Proficiency",
-    "type": "General",
-    "prerequisites": ["Shield Proficiency"],
-    "benefits": ["No penalty for using tower shields"],
-    "description": "You are proficient with tower shields.",
-    "source": "PHB"
-  },
-  {
-    "name": "Track",
-    "type": "General",
-    "prerequisites": [],
-    "benefits": ["Use Survival skill to track"],
-    "description": "You can follow the trails of creatures and characters across most types of terrain.",
-    "source": "PHB"
-  },
-  {
-    "name": "Trample",
-    "type": "Fighter", 
-    "prerequisites": ["Ride 1 rank", "Mounted Combat"],
-    "benefits": ["Overrun opponents while mounted"],
-    "description": "You are skilled at running down opponents with your mount.",
-    "source": "PHB"
-  },
-  {
-    "name": "Two-Weapon Defense",
-    "type": "Fighter",
-    "prerequisites": ["Dex 15", "Two-Weapon Fighting"],
-    "benefits": ["+1 shield bonus to AC when fighting with two weapons"],
-    "description": "You are skilled at defending yourself while dual-wielding.",
-    "source": "PHB"
-  },
-  {
-    "name": "Two-Weapon Fighting",
-    "type": "Fighter",
-    "prerequisites": ["Dex 15"],
-    "benefits": ["Reduced penalties for fighting with two weapons"],
-    "description": "You can fight with a weapon in each hand.",
-    "source": "PHB"
-  },
-  {
-    "name": "Weapon Finesse",
-    "type": "Fighter",
-    "prerequisites": ["Base attack bonus +1"],
-    "benefits": ["Use Dex instead of Str for attack rolls with light weapons"],
-    "description": "You are skilled at using your agility in melee combat, as opposed to brute strength.",
-    "source": "PHB"
-  },
-  {
-    "name": "Weapon Focus",
-    "type": "Fighter",
-    "prerequisites": ["Proficiency with weapon", "Base attack bonus +1"],
-    "benefits": ["+1 bonus on attack rolls with selected weapon"],
-    "description": "You are especially good at using a selected weapon.",
-    "special": "Must choose specific weapon",
-    "source": "PHB"
-  },
-  {
-    "name": "Weapon Specialization",
-    "type": "Fighter",
-    "prerequisites": ["Weapon Focus", "Fighter level 4th"],
-    "benefits": ["+2 bonus on damage rolls with selected weapon"],
-    "description": "You deal extra damage when using your favored weapon.",
-    "source": "PHB"
-  },
-  {
-    "name": "Whirlwind Attack",
-    "type": "Fighter",
-    "prerequisites": ["Dex 13", "Int 13", "Dodge", "Mobility", "Spring Attack", "Combat Expertise", "Base attack bonus +4"],
-    "benefits": ["Attack all adjacent enemies"],
-    "description": "You can strike out at every foe within reach.",
-    "source": "PHB"
-  },
-  {
-    "name": "Widen Spell",
-    "type": "Metamagic",
-    "prerequisites": [],
-    "benefits": ["Double spell area", "+3 spell levels"],
-    "description": "You can cast spells that affect a larger area than normal.",
-    "source": "PHB"
-  }
+    {
+        "name": "Acrobatic",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Jump +2",
+            "Tumble +2"
+        ],
+        "description": "You have excellent body awareness and coordination.",
+        "source": "PHB"
+    },
+    {
+        "name": "Agile",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Balance +2",
+            "Escape Artist +2"
+        ],
+        "description": "You are particularly flexible and poised.",
+        "source": "PHB"
+    },
+    {
+        "name": "Alertness",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Listen +2",
+            "Spot +2"
+        ],
+        "description": "You have finely tuned senses.",
+        "source": "PHB"
+    },
+    {
+        "name": "Animal Affinity",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Handle Animal +2",
+            "Ride +2"
+        ],
+        "description": "You are good with animals.",
+        "source": "PHB"
+    },
+    {
+        "name": "Armor Proficiency (Heavy)",
+        "type": "General",
+        "prerequisites": [
+            "Armor Proficiency (Light)",
+            "Armor Proficiency (Medium)"
+        ],
+        "benefits": [
+            "No penalty for wearing heavy armor"
+        ],
+        "description": "You are proficient with heavy armor.",
+        "source": "PHB"
+    },
+    {
+        "name": "Armor Proficiency (Light)",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "No penalty for wearing light armor"
+        ],
+        "description": "You are proficient with light armor.",
+        "source": "PHB"
+    },
+    {
+        "name": "Armor Proficiency (Medium)",
+        "type": "General",
+        "prerequisites": [
+            "Armor Proficiency (Light)"
+        ],
+        "benefits": [
+            "No penalty for wearing medium armor"
+        ],
+        "description": "You are proficient with medium armor.",
+        "source": "PHB"
+    },
+    {
+        "name": "Athletic",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Climb +2",
+            "Swim +2"
+        ],
+        "description": "You have a knack for athletic endeavors.",
+        "source": "PHB"
+    },
+    {
+        "name": "Augment Summoning",
+        "type": "General",
+        "prerequisites": [
+            "Spell Focus (conjuration)"
+        ],
+        "benefits": [
+            "Summoned creatures gain +4 Str and Con"
+        ],
+        "description": "Your summoned creatures are more powerful than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Blind-Fight",
+        "type": "Fighter",
+        "prerequisites": [],
+        "benefits": [
+            "Re-roll miss chances from concealment",
+            "No loss of Dex to AC against invisible attackers",
+            "Half speed penalty when moving in darkness"
+        ],
+        "description": "You know how to fight in melee without being able to see your foes.",
+        "source": "PHB"
+    },
+    {
+        "name": "Brew Potion",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 3rd"
+        ],
+        "benefits": [
+            "Can create potions"
+        ],
+        "description": "You can create magic potions.",
+        "source": "PHB"
+    },
+    {
+        "name": "Cleave",
+        "type": "Fighter",
+        "prerequisites": [
+            "Str 13",
+            "Power Attack"
+        ],
+        "benefits": [
+            "Extra attack after killing blow"
+        ],
+        "description": "You can follow through with powerful blows.",
+        "source": "PHB"
+    },
+    {
+        "name": "Combat Casting",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+4 bonus on Concentration checks for defensive casting"
+        ],
+        "description": "You are adept at casting spells in combat.",
+        "source": "PHB"
+    },
+    {
+        "name": "Combat Expertise",
+        "type": "Fighter",
+        "prerequisites": [
+            "Int 13"
+        ],
+        "benefits": [
+            "Trade attack bonus for AC bonus"
+        ],
+        "description": "You are trained at using your combat skill for defense.",
+        "source": "PHB"
+    },
+    {
+        "name": "Combat Reflexes",
+        "type": "Fighter",
+        "prerequisites": [],
+        "benefits": [
+            "Additional attacks of opportunity equal to Dex modifier"
+        ],
+        "description": "You can respond quickly and repeatedly to opponents who drop their guard.",
+        "source": "PHB"
+    },
+    {
+        "name": "Craft Magic Arms and Armor",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 5th"
+        ],
+        "benefits": [
+            "Can create magic weapons, armor, and shields"
+        ],
+        "description": "You can create magic weapons, armor, and shields.",
+        "source": "PHB"
+    },
+    {
+        "name": "Craft Rod",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 9th"
+        ],
+        "benefits": [
+            "Can create magic rods"
+        ],
+        "description": "You can create magic rods.",
+        "source": "PHB"
+    },
+    {
+        "name": "Craft Staff",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 12th"
+        ],
+        "benefits": [
+            "Can create magic staffs"
+        ],
+        "description": "You can create magic staffs.",
+        "source": "PHB"
+    },
+    {
+        "name": "Craft Wand",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 5th"
+        ],
+        "benefits": [
+            "Can create magic wands"
+        ],
+        "description": "You can create magic wands.",
+        "source": "PHB"
+    },
+    {
+        "name": "Craft Wondrous Item",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 3rd"
+        ],
+        "benefits": [
+            "Can create wondrous items"
+        ],
+        "description": "You can create magic wondrous items.",
+        "source": "PHB"
+    },
+    {
+        "name": "Deceitful",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Disguise +2",
+            "Forgery +2"
+        ],
+        "description": "You have a talent for misleading others.",
+        "source": "PHB"
+    },
+    {
+        "name": "Deft Hands",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Sleight of Hand +2",
+            "Use Rope +2"
+        ],
+        "description": "You have exceptional manual dexterity.",
+        "source": "PHB"
+    },
+    {
+        "name": "Diligent",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Appraise +2",
+            "Decipher Script +2"
+        ],
+        "description": "You are thorough and pay attention to detail.",
+        "source": "PHB"
+    },
+    {
+        "name": "Dodge",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13"
+        ],
+        "benefits": [
+            "+1 dodge bonus to AC against one opponent"
+        ],
+        "description": "You are adept at dodging blows.",
+        "source": "PHB"
+    },
+    {
+        "name": "Empower Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Spell variables increased by 50%",
+            "+2 spell levels"
+        ],
+        "description": "You can cast spells to greater effect.",
+        "source": "PHB"
+    },
+    {
+        "name": "Endurance",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+4 bonus on checks for extended activity"
+        ],
+        "description": "You have exceptional endurance.",
+        "source": "PHB"
+    },
+    {
+        "name": "Enlarge Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Double spell range",
+            "+1 spell level"
+        ],
+        "description": "You can cast spells farther than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Eschew Materials",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Cast spells without material components up to 1 gp"
+        ],
+        "description": "You can cast spells without relying on material components.",
+        "source": "PHB"
+    },
+    {
+        "name": "Exotic Weapon Proficiency",
+        "type": "Fighter",
+        "prerequisites": [
+            "Base attack bonus +1"
+        ],
+        "benefits": [
+            "No penalty with chosen exotic weapon"
+        ],
+        "description": "You understand how to use an exotic weapon in combat.",
+        "special": "Must choose specific exotic weapon",
+        "source": "PHB"
+    },
+    {
+        "name": "Extend Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Double spell duration",
+            "+1 spell level"
+        ],
+        "description": "You can make your spells last twice as long.",
+        "source": "PHB"
+    },
+    {
+        "name": "Extra Turning",
+        "type": "General",
+        "prerequisites": [
+            "Ability to turn or rebuke undead"
+        ],
+        "benefits": [
+            "Turn or rebuke undead 4 more times per day"
+        ],
+        "description": "You can turn or rebuke undead more often than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Far Shot",
+        "type": "Fighter",
+        "prerequisites": [
+            "Point Blank Shot"
+        ],
+        "benefits": [
+            "Increase range increment by 50% for ranged weapons"
+        ],
+        "description": "You can get greater distance out of ranged weapons.",
+        "source": "PHB"
+    },
+    {
+        "name": "Forge Ring",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 12th"
+        ],
+        "benefits": [
+            "Can create magic rings"
+        ],
+        "description": "You can create magic rings.",
+        "source": "PHB"
+    },
+    {
+        "name": "Great Cleave",
+        "type": "Fighter",
+        "prerequisites": [
+            "Str 13",
+            "Power Attack",
+            "Cleave",
+            "Base attack bonus +4"
+        ],
+        "benefits": [
+            "No limit on cleave attacks per round"
+        ],
+        "description": "You can strike many nearby foes with a single mighty swing.",
+        "source": "PHB"
+    },
+    {
+        "name": "Great Fortitude",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+2 bonus on Fortitude saves"
+        ],
+        "description": "You are tougher than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Greater Spell Focus",
+        "type": "General",
+        "prerequisites": [
+            "Spell Focus"
+        ],
+        "benefits": [
+            "+1 bonus to save DC of chosen spell school (stacks with Spell Focus)"
+        ],
+        "description": "Your spells of a particular school are even more potent than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Greater Spell Penetration",
+        "type": "General",
+        "prerequisites": [
+            "Spell Penetration"
+        ],
+        "benefits": [
+            "+2 bonus on caster level checks to overcome spell resistance (stacks)"
+        ],
+        "description": "Your spells break through spell resistance much more easily.",
+        "source": "PHB"
+    },
+    {
+        "name": "Greater Two-Weapon Fighting",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 19",
+            "Improved Two-Weapon Fighting",
+            "Two-Weapon Fighting",
+            "Base attack bonus +11"
+        ],
+        "benefits": [
+            "Third attack with off-hand weapon at -10"
+        ],
+        "description": "You are a master at fighting two-handed.",
+        "source": "PHB"
+    },
+    {
+        "name": "Greater Weapon Focus",
+        "type": "Fighter",
+        "prerequisites": [
+            "Weapon Focus",
+            "Fighter level 8th"
+        ],
+        "benefits": [
+            "+1 bonus on attack rolls (stacks with Weapon Focus)"
+        ],
+        "description": "You have mastered a single weapon.",
+        "source": "PHB"
+    },
+    {
+        "name": "Greater Weapon Specialization",
+        "type": "Fighter",
+        "prerequisites": [
+            "Greater Weapon Focus",
+            "Weapon Focus",
+            "Weapon Specialization",
+            "Fighter level 12th"
+        ],
+        "benefits": [
+            "+2 bonus on damage rolls (stacks with Weapon Specialization)"
+        ],
+        "description": "You deal especially deadly blows with your favored weapon.",
+        "source": "PHB"
+    },
+    {
+        "name": "Heighten Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Cast spell at higher level",
+            "Variable spell level increase"
+        ],
+        "description": "You can cast a spell as if it were a higher-level spell.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Bull Rush",
+        "type": "Fighter",
+        "prerequisites": [
+            "Str 13",
+            "Power Attack"
+        ],
+        "benefits": [
+            "+4 bonus on bull rush attempts",
+            "No attack of opportunity when bull rushing"
+        ],
+        "description": "You know how to push opponents back.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Counterspell",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Counterspell with spells of same school one level higher"
+        ],
+        "description": "You understand the nuances of magic to such an extent that you can counter your opponents' spells with great efficiency.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Critical",
+        "type": "Fighter",
+        "prerequisites": [
+            "Proficient with weapon",
+            "Base attack bonus +8"
+        ],
+        "benefits": [
+            "Double critical threat range of chosen weapon"
+        ],
+        "description": "You know how to hit where it hurts.",
+        "special": "Must choose specific weapon",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Disarm",
+        "type": "Fighter",
+        "prerequisites": [
+            "Int 13",
+            "Combat Expertise"
+        ],
+        "benefits": [
+            "+4 bonus on disarm attempts",
+            "No attack of opportunity when disarming"
+        ],
+        "description": "You know how to disarm opponents in melee combat.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Feint",
+        "type": "Fighter",
+        "prerequisites": [
+            "Int 13",
+            "Combat Expertise"
+        ],
+        "benefits": [
+            "Feint as move action"
+        ],
+        "description": "You are skilled at misdirecting your opponent's attention in melee.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Grapple",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13",
+            "Improved Unarmed Strike"
+        ],
+        "benefits": [
+            "+4 bonus on grapple checks",
+            "No attack of opportunity when grappling"
+        ],
+        "description": "You are skilled at grappling opponents.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Initiative",
+        "type": "Fighter",
+        "prerequisites": [],
+        "benefits": [
+            "+4 bonus on initiative checks"
+        ],
+        "description": "You can react more quickly than normal in a fight.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Overrun",
+        "type": "Fighter",
+        "prerequisites": [
+            "Str 13",
+            "Power Attack"
+        ],
+        "benefits": [
+            "+4 bonus on overrun attempts",
+            "No attack of opportunity when overrunning"
+        ],
+        "description": "You are skilled at knocking down opponents.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Precise Shot",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 19",
+            "Point Blank Shot",
+            "Precise Shot",
+            "Base attack bonus +11"
+        ],
+        "benefits": [
+            "No penalty for shooting into melee"
+        ],
+        "description": "Your aim is so precise that you can shoot an arrow or bolt at an opponent engaged in melee.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Shield Bash",
+        "type": "Fighter",
+        "prerequisites": [
+            "Shield Proficiency"
+        ],
+        "benefits": [
+            "Retain shield AC when shield bashing"
+        ],
+        "description": "You can bash with a shield while retaining its defensive bonus.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Sunder",
+        "type": "Fighter",
+        "prerequisites": [
+            "Str 13",
+            "Power Attack"
+        ],
+        "benefits": [
+            "+4 bonus on sunder attempts",
+            "No attack of opportunity when sundering"
+        ],
+        "description": "You are skilled at attacking your opponents' weapons and armor.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Trip",
+        "type": "Fighter",
+        "prerequisites": [
+            "Int 13",
+            "Combat Expertise"
+        ],
+        "benefits": [
+            "+4 bonus on trip attempts",
+            "No attack of opportunity when tripping",
+            "Free attack if trip succeeds"
+        ],
+        "description": "You know how to trip opponents in melee combat.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Turning",
+        "type": "General",
+        "prerequisites": [
+            "Ability to turn or rebuke undead"
+        ],
+        "benefits": [
+            "Turn or rebuke undead as if 1 level higher"
+        ],
+        "description": "Your turning or rebuking attempts are more powerful than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Two-Weapon Fighting",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 17",
+            "Two-Weapon Fighting",
+            "Base attack bonus +6"
+        ],
+        "benefits": [
+            "Second attack with off-hand weapon at -5"
+        ],
+        "description": "You are an expert in fighting two-handed.",
+        "source": "PHB"
+    },
+    {
+        "name": "Improved Unarmed Strike",
+        "type": "Fighter",
+        "prerequisites": [],
+        "benefits": [
+            "Unarmed attacks don't provoke attacks of opportunity",
+            "Deal lethal damage"
+        ],
+        "description": "You are skilled at fighting while unarmed.",
+        "source": "PHB"
+    },
+    {
+        "name": "Investigator",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Gather Information +2",
+            "Search +2"
+        ],
+        "description": "You have a knack for finding information.",
+        "source": "PHB"
+    },
+    {
+        "name": "Iron Will",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+2 bonus on Will saves"
+        ],
+        "description": "You have a stronger will than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Leadership",
+        "type": "General",
+        "prerequisites": [
+            "Character level 6th"
+        ],
+        "benefits": [
+            "Attract followers and cohort"
+        ],
+        "description": "You are a leader of men.",
+        "source": "PHB"
+    },
+    {
+        "name": "Lightning Reflexes",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+2 bonus on Reflex saves"
+        ],
+        "description": "You have faster reflexes than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Magical Aptitude",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Spellcraft +2",
+            "Use Magic Device +2"
+        ],
+        "description": "You have a knack for magical endeavors.",
+        "source": "PHB"
+    },
+    {
+        "name": "Manyshot",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 17",
+            "Point Blank Shot",
+            "Rapid Shot",
+            "Base attack bonus +6"
+        ],
+        "benefits": [
+            "Fire two arrows simultaneously"
+        ],
+        "description": "You can fire multiple arrows simultaneously against a nearby target.",
+        "source": "PHB"
+    },
+    {
+        "name": "Martial Weapon Proficiency",
+        "type": "Fighter",
+        "prerequisites": [],
+        "benefits": [
+            "No penalty with chosen martial weapon"
+        ],
+        "description": "You understand how to use a martial weapon in combat.",
+        "special": "Must choose specific martial weapon or group",
+        "source": "PHB"
+    },
+    {
+        "name": "Maximize Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "All variable dice results maximized",
+            "+3 spell levels"
+        ],
+        "description": "You can cast spells to maximum effect.",
+        "source": "PHB"
+    },
+    {
+        "name": "Mobility",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13",
+            "Dodge"
+        ],
+        "benefits": [
+            "+4 AC against attacks of opportunity from movement"
+        ],
+        "description": "You are skilled at dodging past opponents and avoiding blows.",
+        "source": "PHB"
+    },
+    {
+        "name": "Mounted Archery",
+        "type": "Fighter",
+        "prerequisites": [
+            "Ride 1 rank",
+            "Mounted Combat"
+        ],
+        "benefits": [
+            "Half penalty for ranged attacks while mounted"
+        ],
+        "description": "You are skilled at making ranged attacks while mounted.",
+        "source": "PHB"
+    },
+    {
+        "name": "Mounted Combat",
+        "type": "Fighter",
+        "prerequisites": [
+            "Ride 1 rank"
+        ],
+        "benefits": [
+            "Negate attack against mount once per round"
+        ],
+        "description": "You are skilled in mounted combat.",
+        "source": "PHB"
+    },
+    {
+        "name": "Natural Spell",
+        "type": "General",
+        "prerequisites": [
+            "Wis 13",
+            "Wild shape ability"
+        ],
+        "benefits": [
+            "Cast spells while in wild shape"
+        ],
+        "description": "You can cast spells while in a wild shape.",
+        "source": "PHB"
+    },
+    {
+        "name": "Negotiator",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Diplomacy +2",
+            "Sense Motive +2"
+        ],
+        "description": "You are good at gauging and swaying attitudes.",
+        "source": "PHB"
+    },
+    {
+        "name": "Nimble Fingers",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Disable Device +2",
+            "Open Lock +2"
+        ],
+        "description": "You are adept at manipulation and misdirection.",
+        "source": "PHB"
+    },
+    {
+        "name": "Persuasive",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Bluff +2",
+            "Intimidate +2"
+        ],
+        "description": "You have a way with words and body language.",
+        "source": "PHB"
+    },
+    {
+        "name": "Point Blank Shot",
+        "type": "Fighter",
+        "prerequisites": [],
+        "benefits": [
+            "+1 bonus on attack and damage rolls with ranged weapons within 30 feet"
+        ],
+        "description": "You are skilled at making well-placed shots with ranged weapons at close range.",
+        "source": "PHB"
+    },
+    {
+        "name": "Power Attack",
+        "type": "Fighter",
+        "prerequisites": [
+            "Str 13"
+        ],
+        "benefits": [
+            "Trade attack bonus for damage bonus"
+        ],
+        "description": "You can make exceptionally deadly melee attacks by sacrificing accuracy for strength.",
+        "source": "PHB"
+    },
+    {
+        "name": "Precise Shot",
+        "type": "Fighter",
+        "prerequisites": [
+            "Point Blank Shot"
+        ],
+        "benefits": [
+            "No -4 penalty for shooting into melee"
+        ],
+        "description": "You can shoot or throw ranged weapons at an opponent engaged in melee without penalty.",
+        "source": "PHB"
+    },
+    {
+        "name": "Quick Draw",
+        "type": "Fighter",
+        "prerequisites": [
+            "Base attack bonus +1"
+        ],
+        "benefits": [
+            "Draw weapon as free action"
+        ],
+        "description": "You can draw weapons with startling speed.",
+        "source": "PHB"
+    },
+    {
+        "name": "Quicken Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Cast spell as swift action",
+            "+4 spell levels"
+        ],
+        "description": "You can cast spells with a moment's thought.",
+        "source": "PHB"
+    },
+    {
+        "name": "Rapid Reload",
+        "type": "Fighter",
+        "prerequisites": [
+            "Weapon Proficiency (crossbow type chosen)"
+        ],
+        "benefits": [
+            "Reload chosen crossbow type faster"
+        ],
+        "description": "Choose a type of crossbow. You can reload that type of crossbow quickly.",
+        "source": "PHB"
+    },
+    {
+        "name": "Rapid Shot",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13",
+            "Point Blank Shot"
+        ],
+        "benefits": [
+            "One extra ranged attack per round at -2 to all attacks"
+        ],
+        "description": "You can use ranged weapons with exceptional speed.",
+        "source": "PHB"
+    },
+    {
+        "name": "Ride-By Attack",
+        "type": "Fighter",
+        "prerequisites": [
+            "Ride 1 rank",
+            "Mounted Combat"
+        ],
+        "benefits": [
+            "Move before and after mounted charge attack"
+        ],
+        "description": "You are skilled at fast mounted attacks.",
+        "source": "PHB"
+    },
+    {
+        "name": "Run",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Run at 5x speed",
+            "No Dex loss when running"
+        ],
+        "description": "You are fleet of foot.",
+        "source": "PHB"
+    },
+    {
+        "name": "Scribe Scroll",
+        "type": "Item Creation",
+        "prerequisites": [
+            "Caster level 1st"
+        ],
+        "benefits": [
+            "Can create scrolls"
+        ],
+        "description": "You can create scrolls from known spells.",
+        "source": "PHB"
+    },
+    {
+        "name": "Self-Sufficient",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Heal +2",
+            "Survival +2"
+        ],
+        "description": "You can take care of yourself in harsh environments and situations.",
+        "source": "PHB"
+    },
+    {
+        "name": "Shield Proficiency",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "No penalty for using shields"
+        ],
+        "description": "You are proficient with bucklers, small shields, and large shields.",
+        "source": "PHB"
+    },
+    {
+        "name": "Shot on the Run",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13",
+            "Dodge",
+            "Mobility",
+            "Point Blank Shot",
+            "Base attack bonus +4"
+        ],
+        "benefits": [
+            "Move before and after ranged attack"
+        ],
+        "description": "You are highly trained in skirmish ranged attack tactics.",
+        "source": "PHB"
+    },
+    {
+        "name": "Silent Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Cast spell without verbal components",
+            "+1 spell level"
+        ],
+        "description": "You can cast spells silently.",
+        "source": "PHB"
+    },
+    {
+        "name": "Simple Weapon Proficiency",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "No penalty for using simple weapons"
+        ],
+        "description": "You understand how to use simple weapons in combat.",
+        "source": "PHB"
+    },
+    {
+        "name": "Skill Focus",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+3 bonus to chosen skill"
+        ],
+        "description": "You are particularly adept at a certain skill.",
+        "special": "Must choose specific skill",
+        "source": "PHB"
+    },
+    {
+        "name": "Spell Focus",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+1 bonus to save DC of chosen spell school"
+        ],
+        "description": "Your spells of a particular school are more potent than normal.",
+        "special": "Must choose spell school",
+        "source": "PHB"
+    },
+    {
+        "name": "Spell Mastery",
+        "type": "Special",
+        "prerequisites": [
+            "Wizard level 1st"
+        ],
+        "benefits": [
+            "Prepare chosen spells without spellbook"
+        ],
+        "description": "You have mastered certain spells and can prepare them from memory.",
+        "source": "PHB"
+    },
+    {
+        "name": "Spell Penetration",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+2 bonus on caster level checks to overcome spell resistance"
+        ],
+        "description": "Your spells break through spell resistance better than most.",
+        "source": "PHB"
+    },
+    {
+        "name": "Spirited Charge",
+        "type": "Fighter",
+        "prerequisites": [
+            "Ride 1 rank",
+            "Mounted Combat",
+            "Ride-By Attack"
+        ],
+        "benefits": [
+            "Double damage on mounted charge with melee weapon",
+            "Triple damage with lance"
+        ],
+        "description": "You are trained at making devastating mounted charges.",
+        "source": "PHB"
+    },
+    {
+        "name": "Spring Attack",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13",
+            "Dodge",
+            "Mobility",
+            "Base attack bonus +4"
+        ],
+        "benefits": [
+            "Move before and after melee attack without provoking attacks of opportunity"
+        ],
+        "description": "You are trained in fast melee attacks.",
+        "source": "PHB"
+    },
+    {
+        "name": "Stealthy",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Hide +2",
+            "Move Silently +2"
+        ],
+        "description": "You are particularly good at avoiding notice.",
+        "source": "PHB"
+    },
+    {
+        "name": "Still Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Cast spell without somatic components",
+            "+1 spell level"
+        ],
+        "description": "You can cast spells without gestures.",
+        "source": "PHB"
+    },
+    {
+        "name": "Stunning Fist",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13",
+            "Wis 13",
+            "Improved Unarmed Strike",
+            "Base attack bonus +8"
+        ],
+        "benefits": [
+            "Stun opponent with unarmed strike"
+        ],
+        "description": "You know how to strike opponents in vulnerable areas.",
+        "source": "PHB"
+    },
+    {
+        "name": "Toughness",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "+3 hit points"
+        ],
+        "description": "You are tougher than normal.",
+        "source": "PHB"
+    },
+    {
+        "name": "Tower Shield Proficiency",
+        "type": "General",
+        "prerequisites": [
+            "Shield Proficiency"
+        ],
+        "benefits": [
+            "No penalty for using tower shields"
+        ],
+        "description": "You are proficient with tower shields.",
+        "source": "PHB"
+    },
+    {
+        "name": "Track",
+        "type": "General",
+        "prerequisites": [],
+        "benefits": [
+            "Use Survival skill to track"
+        ],
+        "description": "You can follow the trails of creatures and characters across most types of terrain.",
+        "source": "PHB"
+    },
+    {
+        "name": "Trample",
+        "type": "Fighter",
+        "prerequisites": [
+            "Ride 1 rank",
+            "Mounted Combat"
+        ],
+        "benefits": [
+            "Overrun opponents while mounted"
+        ],
+        "description": "You are skilled at running down opponents with your mount.",
+        "source": "PHB"
+    },
+    {
+        "name": "Two-Weapon Defense",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 15",
+            "Two-Weapon Fighting"
+        ],
+        "benefits": [
+            "+1 shield bonus to AC when fighting with two weapons"
+        ],
+        "description": "You are skilled at defending yourself while dual-wielding.",
+        "source": "PHB"
+    },
+    {
+        "name": "Two-Weapon Fighting",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 15"
+        ],
+        "benefits": [
+            "Reduced penalties for fighting with two weapons"
+        ],
+        "description": "You can fight with a weapon in each hand.",
+        "source": "PHB"
+    },
+    {
+        "name": "Weapon Finesse",
+        "type": "Fighter",
+        "prerequisites": [
+            "Base attack bonus +1"
+        ],
+        "benefits": [
+            "Use Dex instead of Str for attack rolls with light weapons"
+        ],
+        "description": "You are skilled at using your agility in melee combat, as opposed to brute strength.",
+        "source": "PHB"
+    },
+    {
+        "name": "Weapon Focus",
+        "type": "Fighter",
+        "prerequisites": [
+            "Proficiency with weapon",
+            "Base attack bonus +1"
+        ],
+        "benefits": [
+            "+1 bonus on attack rolls with selected weapon"
+        ],
+        "description": "You are especially good at using a selected weapon.",
+        "special": "Must choose specific weapon",
+        "source": "PHB"
+    },
+    {
+        "name": "Weapon Specialization",
+        "type": "Fighter",
+        "prerequisites": [
+            "Weapon Focus",
+            "Fighter level 4th"
+        ],
+        "benefits": [
+            "+2 bonus on damage rolls with selected weapon"
+        ],
+        "description": "You deal extra damage when using your favored weapon.",
+        "source": "PHB"
+    },
+    {
+        "name": "Whirlwind Attack",
+        "type": "Fighter",
+        "prerequisites": [
+            "Dex 13",
+            "Int 13",
+            "Dodge",
+            "Mobility",
+            "Spring Attack",
+            "Combat Expertise",
+            "Base attack bonus +4"
+        ],
+        "benefits": [
+            "Attack all adjacent enemies"
+        ],
+        "description": "You can strike out at every foe within reach.",
+        "source": "PHB"
+    },
+    {
+        "name": "Widen Spell",
+        "type": "Metamagic",
+        "prerequisites": [],
+        "benefits": [
+            "Double spell area",
+            "+3 spell levels"
+        ],
+        "description": "You can cast spells that affect a larger area than normal.",
+        "source": "PHB"
+    }
 ]

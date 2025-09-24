@@ -18,14 +18,15 @@ try {
     Write-Host "  Paper Size: $($sheet1.PageSetup.PaperSize)"
     try {
         Write-Host "  Print Area: $($sheet1.PageSetup.PrintArea)"
-    } catch {}
+    }
+    catch {}
     
     # Analyze key regions for formatting patterns
     $regions = @(
-        @{Name="Header"; StartRow=1; EndRow=10; StartCol=1; EndCol=30},
-        @{Name="Abilities"; StartRow=15; EndRow=35; StartCol=1; EndCol=15},
-        @{Name="Combat"; StartRow=35; EndRow=55; StartCol=1; EndCol=20},
-        @{Name="Skills"; StartRow=60; EndRow=100; StartCol=1; EndCol=25}
+        @{Name = "Header"; StartRow = 1; EndRow = 10; StartCol = 1; EndCol = 30 },
+        @{Name = "Abilities"; StartRow = 15; EndRow = 35; StartCol = 1; EndCol = 15 },
+        @{Name = "Combat"; StartRow = 35; EndRow = 55; StartCol = 1; EndCol = 20 },
+        @{Name = "Skills"; StartRow = 60; EndRow = 100; StartCol = 1; EndCol = 25 }
     )
     
     foreach ($region in $regions) {
@@ -39,10 +40,10 @@ try {
                 $cell = $sheet1.Cells.Item($r, $c)
                 if ($cell.Value2) {
                     $cellInfo = @{
-                        Address = $cell.Address($false, $false)
-                        Value = $cell.Value2
-                        FontSize = $cell.Font.Size
-                        FontBold = $cell.Font.Bold
+                        Address   = $cell.Address($false, $false)
+                        Value     = $cell.Value2
+                        FontSize  = $cell.Font.Size
+                        FontBold  = $cell.Font.Bold
                         BackColor = $cell.Interior.Color
                         HasBorder = $cell.Borders.LineStyle -ne -4142
                     }
@@ -96,7 +97,8 @@ try {
             if ($printArea) {
                 Write-Host "  Print Area Defined: $printArea"
             }
-        } catch {}
+        }
+        catch {}
         
         # Sample some key cells for content patterns
         $contentSample = @()
@@ -123,6 +125,7 @@ try {
     $excel.Quit()
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
     
-} catch {
+}
+catch {
     Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
 }

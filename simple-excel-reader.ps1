@@ -19,7 +19,8 @@ try {
             $component = $vbProject.VBComponents.Item($i)
             Write-Host "  - $($component.Name) (Lines: $($component.CodeModule.CountOfLines))"
         }
-    } catch {
+    }
+    catch {
         Write-Host "  VBA access restricted or not available"
     }
     
@@ -27,6 +28,7 @@ try {
     $excel.Quit()
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
     
-} catch {
+}
+catch {
     Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
 }

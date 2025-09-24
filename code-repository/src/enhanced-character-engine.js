@@ -11,19 +11,19 @@ class RulzLawyerCharacterEngine {
         this.calculationEngine = null;
         this.systemIntegration = null;
         this.isInitialized = false;
-        
+
         // Character state management
         this.currentCharacter = null;
         this.characterHistory = [];
-        
+
         // UI integration points
         this.uiElements = {};
         this.eventListeners = {};
-        
+
         // Spell system integration
         this.spellManager = null;
         this.activeSpellbook = {};
-        
+
         // Real-time validation
         this.validationResults = { valid: false, warnings: [], errors: [] };
     }
@@ -34,31 +34,31 @@ class RulzLawyerCharacterEngine {
      */
     async initialize() {
         if (this.isInitialized) return;
-        
+
         console.log('🎲 Initializing RulzLawyer Character Engine...');
-        
+
         try {
             // Initialize core D&D 3.5 system
             await this.initializeCoreSystem();
-            
+
             // Initialize spell system
             await this.initializeSpellSystem();
-            
+
             // Connect to UI elements
             this.connectUIElements();
-            
+
             // Setup event listeners
             this.setupEventListeners();
-            
+
             // Initialize default character
             this.createNewCharacter();
-            
+
             this.isInitialized = true;
             console.log('✅ RulzLawyer Character Engine initialized successfully');
-            
+
             // Dispatch initialization event
             this.dispatchEvent('engineInitialized', { engine: this });
-            
+
         } catch (error) {
             console.error('❌ Failed to initialize Character Engine:', error);
             throw error;
@@ -74,13 +74,13 @@ class RulzLawyerCharacterEngine {
             const { DnDSystemIntegration } = await this.loadModule('./code-repository/src/system-integration.js');
             this.systemIntegration = new DnDSystemIntegration();
             await this.systemIntegration.initialize();
-            
+
             // Get references to core components
             this.dataManager = this.systemIntegration.dataManager;
             this.calculationEngine = this.systemIntegration.calculationEngine;
-            
+
             console.log('✅ Core D&D 3.5 system loaded');
-            
+
         } catch (error) {
             console.error('❌ Failed to load core D&D 3.5 system:', error);
             throw error;
@@ -95,33 +95,33 @@ class RulzLawyerCharacterEngine {
             // Create enhanced spell manager
             this.spellManager = {
                 getAllSpells: () => this.dataManager.getSpells(),
-                getSpellsByClass: (className) => this.dataManager.getSpells().filter(spell => 
+                getSpellsByClass: (className) => this.dataManager.getSpells().filter(spell =>
                     spell.level && spell.level[className] !== undefined),
                 getSpellsByLevel: (className, level) => this.dataManager.getSpellsByClassAndLevel(className, level),
                 getSpellDetails: (spellName) => this.dataManager.getSpell(spellName),
-                
+
                 // Enhanced spell queries
                 searchSpells: (query) => {
                     const spells = this.dataManager.getSpells();
                     const searchTerm = query.toLowerCase();
-                    return spells.filter(spell => 
+                    return spells.filter(spell =>
                         spell.name.toLowerCase().includes(searchTerm) ||
                         spell.school.toLowerCase().includes(searchTerm) ||
                         (spell.description && spell.description.toLowerCase().includes(searchTerm))
                     );
                 },
-                
+
                 // Spell slot calculations
                 calculateSpellSlots: (character) => {
                     if (!character || !character.classes) return {};
-                    
+
                     const slots = {};
                     for (const classLevel of character.classes) {
                         const classData = this.dataManager.getClass(classLevel.className);
                         if (classData && classData.spellcasting) {
                             slots[classLevel.className] = this.calculationEngine.calculateSpellsPerDay(
-                                classLevel.className, 
-                                classLevel.level, 
+                                classLevel.className,
+                                classLevel.level,
                                 character.abilityModifiers[classData.spell_save_dc_ability?.toLowerCase() || 'intelligence'] || 0
                             );
                         }
@@ -129,9 +129,9 @@ class RulzLawyerCharacterEngine {
                     return slots;
                 }
             };
-            
+
             console.log('✅ Spell system initialized');
-            
+
         } catch (error) {
             console.error('❌ Failed to initialize spell system:', error);
             throw error;
@@ -147,7 +147,7 @@ class RulzLawyerCharacterEngine {
         this.uiElements.classLevel = document.getElementById('classLevel');
         this.uiElements.race = document.getElementById('race');
         this.uiElements.alignment = document.getElementById('alignment');
-        
+
         // Ability scores
         const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
         this.uiElements.abilities = {};
@@ -158,22 +158,22 @@ class RulzLawyerCharacterEngine {
                 tempAdjust: document.getElementById(ability + 'TempAdjust')
             };
         });
-        
+
         // Combat stats
         this.uiElements.hitPoints = {
             total: document.getElementById('totalHP'),
             current: document.getElementById('currentHP')
         };
-        
+
         this.uiElements.armorClass = {
             total: document.getElementById('totalAC'),
             armor: document.getElementById('armorBonus'),
             shield: document.getElementById('shieldBonus'),
             natural: document.getElementById('naturalArmor')
         };
-        
+
         this.uiElements.baseAttackBonus = document.getElementById('bab');
-        
+
         // Saving throws
         this.uiElements.saves = {
             fortitude: {
@@ -189,7 +189,7 @@ class RulzLawyerCharacterEngine {
                 total: document.getElementById('willTotal')
             }
         };
-        
+
         console.log('✅ UI elements connected');
     }
 
@@ -203,36 +203,36 @@ class RulzLawyerCharacterEngine {
                 this.updateCharacter({ name: e.target.value });
             });
         }
-        
+
         if (this.uiElements.race) {
             this.uiElements.race.addEventListener('change', (e) => {
                 this.updateCharacterRace(e.target.value);
             });
         }
-        
+
         if (this.uiElements.classLevel) {
             this.uiElements.classLevel.addEventListener('change', (e) => {
                 this.updateCharacterClass(e.target.value);
             });
         }
-        
+
         // Ability scores
         Object.keys(this.uiElements.abilities).forEach(ability => {
             const elements = this.uiElements.abilities[ability];
-            
+
             if (elements.score) {
                 elements.score.addEventListener('input', (e) => {
                     this.updateAbilityScore(ability, parseInt(e.target.value) || 10);
                 });
             }
-            
+
             if (elements.tempAdjust) {
                 elements.tempAdjust.addEventListener('input', () => {
                     this.recalculateCharacterStats();
                 });
             }
         });
-        
+
         console.log('✅ Event listeners setup');
     }
 
@@ -255,18 +255,18 @@ class RulzLawyerCharacterEngine {
                     charisma: 8
                 }
             };
-            
+
             // Create character using the D&D 3.5 system
             this.currentCharacter = this.systemIntegration.createCharacter(defaultCharacter);
-            
+
             // Update UI with new character
             this.updateUI();
-            
+
             // Initialize spellbook for spellcasting classes
             this.updateSpellbook();
-            
+
             console.log('✅ New character created:', this.currentCharacter.name);
-            
+
         } catch (error) {
             console.error('❌ Failed to create new character:', error);
         }
@@ -277,22 +277,22 @@ class RulzLawyerCharacterEngine {
      */
     updateCharacter(updates) {
         if (!this.currentCharacter) return;
-        
+
         try {
             // Update character using system integration
             this.currentCharacter = this.systemIntegration.updateCharacter(this.currentCharacter, updates);
-            
+
             // Update UI
             this.updateUI();
-            
+
             // Update spellbook if classes changed
             if (updates.classes) {
                 this.updateSpellbook();
             }
-            
+
             // Validate character
             this.validateCurrentCharacter();
-            
+
         } catch (error) {
             console.error('❌ Failed to update character:', error);
         }
@@ -307,7 +307,7 @@ class RulzLawyerCharacterEngine {
             console.warn('Unknown race:', raceName);
             return;
         }
-        
+
         this.updateCharacter({ race: raceName });
         console.log(`✅ Character race updated to ${raceName}`);
     }
@@ -319,10 +319,10 @@ class RulzLawyerCharacterEngine {
         try {
             // Parse class/level string (e.g., "Fighter 5" or "Fighter 3/Wizard 2")
             const classes = this.parseClassLevelString(classLevelString);
-            
+
             this.updateCharacter({ classes });
             console.log('✅ Character classes updated:', classes);
-            
+
         } catch (error) {
             console.error('❌ Failed to parse class/level string:', classLevelString, error);
         }
@@ -333,10 +333,10 @@ class RulzLawyerCharacterEngine {
      */
     parseClassLevelString(classLevelString) {
         const classes = [];
-        
+
         // Handle multiclass format: "Fighter 3/Wizard 2"
         const classParts = classLevelString.split('/');
-        
+
         for (const part of classParts) {
             const match = part.trim().match(/^(.+)\s+(\d+)$/);
             if (match) {
@@ -347,7 +347,7 @@ class RulzLawyerCharacterEngine {
                 });
             }
         }
-        
+
         return classes.length > 0 ? classes : [{ className: 'Fighter', level: 1 }];
     }
 
@@ -361,7 +361,7 @@ class RulzLawyerCharacterEngine {
                 [abilityName]: score
             }
         };
-        
+
         this.updateCharacter(updates);
     }
 
@@ -370,7 +370,7 @@ class RulzLawyerCharacterEngine {
      */
     recalculateCharacterStats() {
         if (!this.currentCharacter) return;
-        
+
         // Force recalculation by updating character with current data
         this.updateCharacter({});
     }
@@ -380,69 +380,69 @@ class RulzLawyerCharacterEngine {
      */
     updateUI() {
         if (!this.currentCharacter) return;
-        
+
         try {
             // Update basic information
             if (this.uiElements.characterName) {
                 this.uiElements.characterName.value = this.currentCharacter.name || '';
             }
-            
+
             if (this.uiElements.race) {
                 this.uiElements.race.value = this.currentCharacter.race || '';
             }
-            
+
             if (this.uiElements.classLevel) {
                 const classString = this.currentCharacter.classes.map(c => `${c.className} ${c.level}`).join('/');
                 this.uiElements.classLevel.value = classString;
             }
-            
+
             if (this.uiElements.alignment) {
                 this.uiElements.alignment.value = this.currentCharacter.alignment || '';
             }
-            
+
             // Update ability scores
             Object.keys(this.uiElements.abilities).forEach(ability => {
                 const elements = this.uiElements.abilities[ability];
                 const score = this.currentCharacter.abilities[ability] || 10;
                 const modifier = this.currentCharacter.abilityModifiers[ability] || 0;
-                
+
                 if (elements.score) elements.score.value = score;
                 if (elements.modifier) {
                     elements.modifier.textContent = (modifier >= 0 ? '+' : '') + modifier;
                 }
             });
-            
+
             // Update combat stats
             if (this.uiElements.hitPoints.total) {
                 this.uiElements.hitPoints.total.value = this.currentCharacter.hitPoints?.max || 0;
             }
-            
+
             if (this.uiElements.hitPoints.current && !this.uiElements.hitPoints.current.value) {
                 this.uiElements.hitPoints.current.value = this.currentCharacter.hitPoints?.max || 0;
             }
-            
+
             if (this.uiElements.armorClass.total) {
                 this.uiElements.armorClass.total.textContent = this.currentCharacter.armorClass?.total || 10;
             }
-            
+
             if (this.uiElements.baseAttackBonus) {
                 const bab = this.currentCharacter.baseAttackBonus || 0;
                 this.uiElements.baseAttackBonus.value = (bab >= 0 ? '+' : '') + bab;
             }
-            
+
             // Update saving throws
             const saves = this.currentCharacter.savingThrows || {};
             Object.keys(this.uiElements.saves).forEach(saveType => {
                 const saveElements = this.uiElements.saves[saveType];
                 const saveValue = saves[saveType] || 0;
-                
+
                 if (saveElements.total) {
                     saveElements.total.value = saveValue;
                 }
             });
-            
+
             console.log('✅ UI updated with character data');
-            
+
         } catch (error) {
             console.error('❌ Failed to update UI:', error);
         }
@@ -453,16 +453,16 @@ class RulzLawyerCharacterEngine {
      */
     updateSpellbook() {
         if (!this.currentCharacter) return;
-        
+
         try {
             // Calculate spell slots for all spellcasting classes
             this.activeSpellbook = this.spellManager.calculateSpellSlots(this.currentCharacter);
-            
+
             // Update spell UI if it exists
             this.updateSpellUI();
-            
+
             console.log('✅ Spellbook updated:', this.activeSpellbook);
-            
+
         } catch (error) {
             console.error('❌ Failed to update spellbook:', error);
         }
@@ -481,13 +481,13 @@ class RulzLawyerCharacterEngine {
      */
     validateCurrentCharacter() {
         if (!this.currentCharacter) return;
-        
+
         try {
             this.validationResults = this.systemIntegration.validateCharacter(this.currentCharacter);
-            
+
             // Display validation results
             this.displayValidationResults();
-            
+
         } catch (error) {
             console.error('❌ Character validation failed:', error);
         }
@@ -515,15 +515,15 @@ class RulzLawyerCharacterEngine {
             `;
             document.body.appendChild(validationDisplay);
         }
-        
+
         let html = `<h4>Character Validation</h4>`;
-        
+
         if (this.validationResults.valid) {
             html += `<p style="color: green;">✅ Character is valid!</p>`;
         } else {
             html += `<p style="color: red;">❌ Character has issues:</p>`;
         }
-        
+
         if (this.validationResults.errors && this.validationResults.errors.length > 0) {
             html += `<h5>Errors:</h5><ul>`;
             this.validationResults.errors.forEach(error => {
@@ -531,7 +531,7 @@ class RulzLawyerCharacterEngine {
             });
             html += `</ul>`;
         }
-        
+
         if (this.validationResults.warnings && this.validationResults.warnings.length > 0) {
             html += `<h5>Warnings:</h5><ul>`;
             this.validationResults.warnings.forEach(warning => {
@@ -539,7 +539,7 @@ class RulzLawyerCharacterEngine {
             });
             html += `</ul>`;
         }
-        
+
         validationDisplay.innerHTML = html;
     }
 

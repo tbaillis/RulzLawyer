@@ -934,12 +934,13 @@
   <!-- PAGE 3 - SPELLS & NOTES -->
   <div id="page3" class="page">
     <div style="padding: 20px;">
-      <h2 style="text-align: center; color: var(--red-text); margin-bottom: 30px;">Page 3 - Spells & Character Notes</h2>
-      
+      <h2 style="text-align: center; color: var(--red-text); margin-bottom: 30px;">Page 3 - Spells & Character Notes
+      </h2>
+
       <!-- Spell Management Section -->
       <div style="background: white; border: 2px solid var(--black-text); margin-bottom: 20px; padding: 15px;">
         <h3 style="color: var(--red-text); margin-bottom: 15px;">🧙‍♂️ Spell Management</h3>
-        
+
         <!-- Spell Slots Display -->
         <div id="spellSlotsContainer" style="margin-bottom: 20px;">
           <h4 style="color: var(--black-text);">Spells Per Day</h4>
@@ -947,13 +948,13 @@
             <!-- Spell slots will be populated by JavaScript -->
           </div>
         </div>
-        
+
         <!-- Spell Search and Selection -->
         <div style="margin-bottom: 20px;">
           <h4 style="color: var(--black-text);">Available Spells</h4>
           <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <input type="text" id="spellSearchInput" placeholder="Search spells..." 
-                   style="flex: 1; padding: 5px; border: 1px solid #ccc;">
+            <input type="text" id="spellSearchInput" placeholder="Search spells..."
+              style="flex: 1; padding: 5px; border: 1px solid #ccc;">
             <select id="spellClassFilter" style="padding: 5px; border: 1px solid #ccc;">
               <option value="">All Classes</option>
             </select>
@@ -970,86 +971,99 @@
               <option value="8">8th Level</option>
               <option value="9">9th Level</option>
             </select>
-            <button onclick="searchSpells()" style="padding: 5px 15px; background: var(--red-text); color: white; border: none;">Search</button>
+            <button onclick="searchSpells()"
+              style="padding: 5px 15px; background: var(--red-text); color: white; border: none;">Search</button>
           </div>
-          
+
           <!-- Spell Results -->
-          <div id="spellSearchResults" style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #f9f9f9;">
+          <div id="spellSearchResults"
+            style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #f9f9f9;">
             <!-- Spell search results will appear here -->
           </div>
         </div>
-        
+
         <!-- Known/Prepared Spells -->
         <div style="margin-bottom: 20px;">
           <h4 style="color: var(--black-text);">Known/Prepared Spells</h4>
-          <div id="knownSpellsList" style="border: 1px solid #ccc; padding: 10px; min-height: 150px; background: white;">
+          <div id="knownSpellsList"
+            style="border: 1px solid #ccc; padding: 10px; min-height: 150px; background: white;">
             <!-- Known spells will be displayed here -->
           </div>
         </div>
       </div>
-      
+
       <!-- Character Background Section -->
       <div style="background: white; border: 2px solid var(--black-text); margin-bottom: 20px; padding: 15px;">
         <h3 style="color: var(--red-text); margin-bottom: 15px;">📜 Character Background</h3>
-        
+
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
           <div>
             <label style="font-weight: bold; color: var(--black-text);">Character Backstory:</label>
-            <textarea id="characterBackstory" rows="6" style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
-                      placeholder="Write your character's background story..."></textarea>
+            <textarea id="characterBackstory" rows="6"
+              style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
+              placeholder="Write your character's background story..."></textarea>
           </div>
-          
+
           <div>
             <label style="font-weight: bold; color: var(--black-text);">Personality Traits:</label>
-            <textarea id="personalityTraits" rows="3" style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
-                      placeholder="Describe personality traits..."></textarea>
-            
-            <label style="font-weight: bold; color: var(--black-text); margin-top: 10px; display: block;">Ideals:</label>
-            <textarea id="characterIdeals" rows="2" style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
-                      placeholder="What drives your character?"></textarea>
+            <textarea id="personalityTraits" rows="3"
+              style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
+              placeholder="Describe personality traits..."></textarea>
+
+            <label
+              style="font-weight: bold; color: var(--black-text); margin-top: 10px; display: block;">Ideals:</label>
+            <textarea id="characterIdeals" rows="2"
+              style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
+              placeholder="What drives your character?"></textarea>
           </div>
         </div>
       </div>
-      
+
       <!-- Languages and Proficiencies -->
       <div style="background: white; border: 2px solid var(--black-text); margin-bottom: 20px; padding: 15px;">
         <h3 style="color: var(--red-text); margin-bottom: 15px;">🗣️ Languages & Proficiencies</h3>
-        
+
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
           <div>
             <label style="font-weight: bold; color: var(--black-text);">Languages Known:</label>
-            <textarea id="knownLanguages" rows="4" style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
-                      placeholder="Common, Draconic, Elven..."></textarea>
+            <textarea id="knownLanguages" rows="4"
+              style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
+              placeholder="Common, Draconic, Elven..."></textarea>
           </div>
-          
+
           <div>
             <label style="font-weight: bold; color: var(--black-text);">Weapon Proficiencies:</label>
-            <textarea id="weaponProficiencies" rows="4" style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
-                      placeholder="Simple weapons, martial weapons..."></textarea>
+            <textarea id="weaponProficiencies" rows="4"
+              style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
+              placeholder="Simple weapons, martial weapons..."></textarea>
           </div>
         </div>
       </div>
-      
+
       <!-- Campaign Notes -->
       <div style="background: white; border: 2px solid var(--black-text); margin-bottom: 20px; padding: 15px;">
         <h3 style="color: var(--red-text); margin-bottom: 15px;">📋 Campaign Notes</h3>
-        
+
         <div>
           <label style="font-weight: bold; color: var(--black-text);">Adventure Log & Notes:</label>
-          <textarea id="campaignNotes" rows="8" style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
-                    placeholder="Record important campaign events, NPCs met, quests undertaken..."></textarea>
+          <textarea id="campaignNotes" rows="8"
+            style="width: 100%; padding: 5px; border: 1px solid #ccc; margin-top: 5px;"
+            placeholder="Record important campaign events, NPCs met, quests undertaken..."></textarea>
         </div>
       </div>
-      
+
       <!-- Character Actions -->
       <div style="text-align: center; padding: 20px;">
-        <button onclick="saveCharacter()" style="background: var(--red-text); color: white; border: none; padding: 12px 24px; font-size: 16px; margin: 0 10px; cursor: pointer;">
+        <button onclick="saveCharacter()"
+          style="background: var(--red-text); color: white; border: none; padding: 12px 24px; font-size: 16px; margin: 0 10px; cursor: pointer;">
           💾 Save Character
         </button>
-        <button onclick="loadCharacter()" style="background: #666; color: white; border: none; padding: 12px 24px; font-size: 16px; margin: 0 10px; cursor: pointer;">
+        <button onclick="loadCharacter()"
+          style="background: #666; color: white; border: none; padding: 12px 24px; font-size: 16px; margin: 0 10px; cursor: pointer;">
           📁 Load Character
         </button>
-        <button onclick="exportCharacterPDF()" style="background: #008000; color: white; border: none; padding: 12px 24px; font-size: 16px; margin: 0 10px; cursor: pointer;">
+        <button onclick="exportCharacterPDF()"
+          style="background: #008000; color: white; border: none; padding: 12px 24px; font-size: 16px; margin: 0 10px; cursor: pointer;">
           📄 Export PDF
         </button>
       </div>
@@ -1060,36 +1074,36 @@
   <script src="code-repository/src/random-tables-engine.js"></script>
   <script src="code-repository/src/system-integration.js"></script>
   <script src="code-repository/src/enhanced-character-engine.js"></script>
-  
+
   <script>
     // Initialize enhanced character engine with full D&D 3.5 system
     let characterEngine = null;
-    
+
     // Initialize the complete character system
     async function initializeCharacterSystem() {
       try {
         console.log('🎲 Starting RulzLawyer Character System...');
-        
+
         // Initialize the enhanced character engine
         characterEngine = window.rulzLawyerEngine;
         await characterEngine.initialize();
-        
+
         // Populate dropdowns with D&D 3.5 data
         await populateDropdowns();
-        
+
         console.log('✅ RulzLawyer Character System ready!');
-        
+
       } catch (error) {
         console.error('❌ Failed to initialize character system:', error);
         // Show user-friendly error
         alert('Failed to initialize character system. Please refresh and try again.');
       }
     }
-    
+
     // Populate dropdowns with actual D&D 3.5 data
     async function populateDropdowns() {
       if (!characterEngine || !characterEngine.dataManager) return;
-      
+
       try {
         // Populate race dropdown
         const races = characterEngine.dataManager.getRaces();
@@ -1103,7 +1117,7 @@
             raceSelect.appendChild(option);
           });
         }
-        
+
         // Populate class dropdown
         const classes = characterEngine.dataManager.getClasses();
         const classSelect = document.getElementById('classLevel');
@@ -1118,7 +1132,7 @@
             }
           });
         }
-        
+
         // Populate spell class filter
         const spellClassFilter = document.getElementById('spellClassFilter');
         if (spellClassFilter && classes) {
@@ -1132,12 +1146,12 @@
             }
           });
         }
-        
+
         // Update spell slots display
         setTimeout(() => updateSpellSlotsDisplay(), 100);
-        
+
         console.log('✅ Dropdowns populated with D&D 3.5 data');
-        
+
       } catch (error) {
         console.error('❌ Failed to populate dropdowns:', error);
       }
@@ -1224,14 +1238,14 @@
         updateStatsLegacy();
       }
     }
-    
+
     // Enhanced stats update using the D&D 3.5 system
     function updateStatsWithEnhancedEngine() {
       try {
         // Get current character from the engine
         const character = characterEngine.getCharacter();
         if (!character) return;
-        
+
         // Update basic ability score calculations
         const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
         abilities.forEach(ability => {
@@ -1244,7 +1258,7 @@
           if (scoreInput && modDisplay) {
             const score = parseInt(scoreInput.value) || 10;
             const tempAdjust = parseInt(tempAdjustInput?.value) || 0;
-            
+
             // Use the calculation engine for accurate D&D 3.5 modifiers
             const modifier = characterEngine.calculationEngine.calculateAbilityModifier(score);
             const tempModifier = characterEngine.calculationEngine.calculateAbilityModifier(score + tempAdjust);
@@ -1263,14 +1277,14 @@
         updateInitiativeEnhanced();
         updateSavingThrowsEnhanced();
         updateSkills();
-        
+
       } catch (error) {
         console.error('❌ Enhanced stats update failed:', error);
         // Fallback to legacy system
         updateStatsLegacy();
       }
     }
-    
+
     // Legacy stats update (original system)
     function updateStatsLegacy() {
       // Update ability modifiers for all abilities
@@ -1322,7 +1336,7 @@
       if (totalACElement) totalACElement.textContent = totalAC;
       if (dexBonusElement) dexBonusElement.textContent = (dexMod >= 0 ? '+' : '') + dexMod;
     }
-    
+
     // Enhanced Armor Class calculation using D&D 3.5 system
     function updateArmorClassEnhanced() {
       try {
@@ -1330,23 +1344,23 @@
           updateArmorClass();
           return;
         }
-        
+
         const character = characterEngine.getCharacter();
         if (!character || !character.armorClass) {
           updateArmorClass();
           return;
         }
-        
+
         // Use the enhanced AC calculation from the D&D 3.5 system
         const totalAC = character.armorClass.total;
         const dexMod = character.abilityModifiers.dexterity;
-        
+
         const totalACElement = document.getElementById('totalAC');
         const dexBonusElement = document.getElementById('dexBonus');
 
         if (totalACElement) totalACElement.textContent = totalAC;
         if (dexBonusElement) dexBonusElement.textContent = (dexMod >= 0 ? '+' : '') + dexMod;
-        
+
       } catch (error) {
         console.error('❌ Enhanced AC calculation failed:', error);
         updateArmorClass();
@@ -1365,7 +1379,7 @@
       if (totalInitElement) totalInitElement.value = (totalInit >= 0 ? '+' : '') + totalInit;
       if (initDexElement) initDexElement.value = (dexMod >= 0 ? '+' : '') + dexMod;
     }
-    
+
     // Enhanced Initiative calculation using D&D 3.5 system
     function updateInitiativeEnhanced() {
       try {
@@ -1373,13 +1387,13 @@
           updateInitiative();
           return;
         }
-        
+
         const character = characterEngine.getCharacter();
         if (!character) {
           updateInitiative();
           return;
         }
-        
+
         const dexMod = character.abilityModifiers.dexterity;
         const initMisc = parseInt(document.getElementById('initMisc')?.value) || 0;
         const totalInit = dexMod + initMisc;
@@ -1389,7 +1403,7 @@
 
         if (totalInitElement) totalInitElement.value = (totalInit >= 0 ? '+' : '') + totalInit;
         if (initDexElement) initDexElement.value = (dexMod >= 0 ? '+' : '') + dexMod;
-        
+
       } catch (error) {
         console.error('❌ Enhanced initiative calculation failed:', error);
         updateInitiative();
@@ -1432,7 +1446,7 @@
       if (willAbilityElement) willAbilityElement.value = wisMod;
       if (willTotalElement) willTotalElement.value = willTotal;
     }
-    
+
     // Enhanced Saving Throws calculation using D&D 3.5 system
     function updateSavingThrowsEnhanced() {
       try {
@@ -1440,22 +1454,22 @@
           updateSavingThrows();
           return;
         }
-        
+
         const character = characterEngine.getCharacter();
         if (!character || !character.savingThrows) {
           updateSavingThrows();
           return;
         }
-        
+
         // Use enhanced saving throws from the D&D 3.5 system
         const saves = character.savingThrows;
         const abilityMods = character.abilityModifiers;
-        
+
         // Update Fortitude
         const fortBase = parseInt(document.getElementById('fortBase')?.value) || 0;
         const fortMisc = parseInt(document.getElementById('fortMisc')?.value) || 0;
         const fortTotal = saves.fortitude || (fortBase + abilityMods.constitution + fortMisc);
-        
+
         const fortAbilityElement = document.getElementById('fortAbility');
         const fortTotalElement = document.getElementById('fortTotal');
         if (fortAbilityElement) fortAbilityElement.value = abilityMods.constitution;
@@ -1465,7 +1479,7 @@
         const refBase = parseInt(document.getElementById('refBase')?.value) || 0;
         const refMisc = parseInt(document.getElementById('refMisc')?.value) || 0;
         const refTotal = saves.reflex || (refBase + abilityMods.dexterity + refMisc);
-        
+
         const refAbilityElement = document.getElementById('refAbility');
         const refTotalElement = document.getElementById('refTotal');
         if (refAbilityElement) refAbilityElement.value = abilityMods.dexterity;
@@ -1475,12 +1489,12 @@
         const willBase = parseInt(document.getElementById('willBase')?.value) || 0;
         const willMisc = parseInt(document.getElementById('willMisc')?.value) || 0;
         const willTotal = saves.will || (willBase + abilityMods.wisdom + willMisc);
-        
+
         const willAbilityElement = document.getElementById('willAbility');
         const willTotalElement = document.getElementById('willTotal');
         if (willAbilityElement) willAbilityElement.value = abilityMods.wisdom;
         if (willTotalElement) willTotalElement.value = willTotal;
-        
+
       } catch (error) {
         console.error('❌ Enhanced saving throws calculation failed:', error);
         updateSavingThrows();
@@ -1554,10 +1568,10 @@
     // Initialize Character Sheet
     function initializeCharacterSheet() {
       console.log('📋 Initializing character sheet with enhanced D&D 3.5 system...');
-      
+
       // Initialize the enhanced character system first
       initializeCharacterSystem();
-      
+
       // Populate skills table
       populateSkills();
 
@@ -1601,7 +1615,7 @@
       if (initMisc) {
         initMisc.addEventListener('input', updateInitiative);
       }
-      
+
       console.log('✅ Character sheet initialized');
     }
 
@@ -1609,65 +1623,65 @@
     document.addEventListener('DOMContentLoaded', initializeCharacterSheet);
 
     // ======= ENHANCED SPELL MANAGEMENT FUNCTIONS =======
-    
+
     // Update spell slots display
     function updateSpellSlotsDisplay() {
       if (!characterEngine || !characterEngine.isInitialized) return;
-      
+
       try {
         const spellSlotsDisplay = document.getElementById('spellSlotsDisplay');
         if (!spellSlotsDisplay) return;
-        
+
         const character = characterEngine.getCharacter();
         const spellSlots = characterEngine.spellManager.calculateSpellSlots(character);
-        
+
         spellSlotsDisplay.innerHTML = '';
-        
+
         for (const className in spellSlots) {
           const classSlots = spellSlots[className];
           const classDiv = document.createElement('div');
           classDiv.style.cssText = 'border: 1px solid #ccc; padding: 10px; background: #f9f9f9; min-width: 150px;';
-          
+
           let slotsHTML = `<h5 style="margin: 0 0 10px 0; color: var(--red-text);">${className}</h5>`;
-          
+
           for (let level = 0; level <= 9; level++) {
             if (classSlots[level] && classSlots[level] > 0) {
               slotsHTML += `<div>Level ${level}: ${classSlots[level]} slots</div>`;
             }
           }
-          
+
           classDiv.innerHTML = slotsHTML;
           spellSlotsDisplay.appendChild(classDiv);
         }
-        
+
       } catch (error) {
         console.error('❌ Failed to update spell slots display:', error);
       }
     }
-    
+
     // Search spells with filters
     function searchSpells() {
       if (!characterEngine || !characterEngine.spellManager) return;
-      
+
       try {
         const searchTerm = document.getElementById('spellSearchInput')?.value || '';
         const classFilter = document.getElementById('spellClassFilter')?.value || '';
         const levelFilter = document.getElementById('spellLevelFilter')?.value || '';
-        
+
         let spells = characterEngine.spellManager.getAllSpells();
-        
+
         // Apply search term filter
         if (searchTerm) {
           spells = characterEngine.spellManager.searchSpells(searchTerm);
         }
-        
+
         // Apply class filter
         if (classFilter) {
-          spells = spells.filter(spell => 
+          spells = spells.filter(spell =>
             spell.level && spell.level[classFilter] !== undefined
           );
         }
-        
+
         // Apply level filter
         if (levelFilter) {
           const level = parseInt(levelFilter);
@@ -1676,48 +1690,48 @@
             return Object.values(spell.level).includes(level);
           });
         }
-        
+
         // Display results
         displaySpellSearchResults(spells);
-        
+
       } catch (error) {
         console.error('❌ Spell search failed:', error);
       }
     }
-    
+
     // Display spell search results
     function displaySpellSearchResults(spells) {
       const resultsContainer = document.getElementById('spellSearchResults');
       if (!resultsContainer) return;
-      
+
       resultsContainer.innerHTML = '';
-      
+
       if (spells.length === 0) {
         resultsContainer.innerHTML = '<p style="color: #666;">No spells found matching your criteria.</p>';
         return;
       }
-      
+
       spells.forEach(spell => {
         const spellDiv = document.createElement('div');
         spellDiv.style.cssText = 'border-bottom: 1px solid #eee; padding: 10px; cursor: pointer; background: white; margin-bottom: 5px;';
         spellDiv.onclick = () => showSpellDetails(spell);
-        
+
         let levelInfo = '';
         if (spell.level) {
           const levels = Object.entries(spell.level).map(([cls, lvl]) => `${cls} ${lvl}`).join(', ');
           levelInfo = ` (${levels})`;
         }
-        
+
         spellDiv.innerHTML = `
           <strong>${spell.name}</strong>${levelInfo}
           <br><small style="color: #666;">${spell.school || 'Unknown School'}</small>
           <br><small style="color: #888;">${(spell.description || '').substring(0, 100)}...</small>
         `;
-        
+
         resultsContainer.appendChild(spellDiv);
       });
     }
-    
+
     // Show spell details
     function showSpellDetails(spell) {
       let details = `=== ${spell.name} ===\\n`;
@@ -1731,22 +1745,22 @@
       if (spell.range) details += `Range: ${spell.range}\\n`;
       if (spell.duration) details += `Duration: ${spell.duration}\\n`;
       if (spell.description) details += `\\nDescription: ${spell.description}`;
-      
+
       alert(details);
     }
-    
+
     // ======= CHARACTER MANAGEMENT FUNCTIONS =======
-    
+
     // Save character to local storage
     function saveCharacter() {
       if (!characterEngine) {
         alert('Character system not initialized');
         return;
       }
-      
+
       try {
         const character = characterEngine.getCharacter();
-        
+
         // Add spell and background data
         const fullCharacterData = {
           ...character,
@@ -1758,26 +1772,26 @@
           campaignNotes: document.getElementById('campaignNotes')?.value || '',
           savedDate: new Date().toISOString()
         };
-        
+
         const characterName = fullCharacterData.name || 'Unnamed Character';
         const saveKey = `rulzlawyer_character_${characterName.replace(/[^a-zA-Z0-9]/g, '_')}`;
-        
+
         localStorage.setItem(saveKey, JSON.stringify(fullCharacterData));
         localStorage.setItem('rulzlawyer_last_character', saveKey);
-        
+
         alert(`Character "${characterName}" saved successfully!`);
-        
+
       } catch (error) {
         console.error('❌ Failed to save character:', error);
         alert('Failed to save character. Please try again.');
       }
     }
-    
+
     // Load character from local storage
     function loadCharacter() {
       try {
         const savedCharacters = [];
-        
+
         // Find all saved characters
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
@@ -1787,12 +1801,12 @@
             savedCharacters.push({ key, character });
           }
         }
-        
+
         if (savedCharacters.length === 0) {
           alert('No saved characters found.');
           return;
         }
-        
+
         // Create selection dialog
         let selection = 'Select a character to load:\\n\\n';
         savedCharacters.forEach((item, index) => {
@@ -1800,30 +1814,30 @@
           const date = item.character.savedDate ? new Date(item.character.savedDate).toLocaleDateString() : 'Unknown date';
           selection += `${index + 1}. ${name} (${date})\\n`;
         });
-        
+
         const choice = prompt(selection + '\\nEnter the number of the character to load:');
         const index = parseInt(choice) - 1;
-        
+
         if (index >= 0 && index < savedCharacters.length) {
           loadCharacterData(savedCharacters[index].character);
           alert(`Character "${savedCharacters[index].character.name}" loaded successfully!`);
         }
-        
+
       } catch (error) {
         console.error('❌ Failed to load character:', error);
         alert('Failed to load character. Please try again.');
       }
     }
-    
+
     // Load character data into the interface
     function loadCharacterData(characterData) {
       if (!characterEngine) return;
-      
+
       try {
         // Update character engine
         characterEngine.currentCharacter = characterData;
         characterEngine.updateUI();
-        
+
         // Load background and notes data
         if (characterData.backstory) document.getElementById('characterBackstory').value = characterData.backstory;
         if (characterData.personalityTraits) document.getElementById('personalityTraits').value = characterData.personalityTraits;
@@ -1831,18 +1845,18 @@
         if (characterData.languages) document.getElementById('knownLanguages').value = characterData.languages;
         if (characterData.weaponProficiencies) document.getElementById('weaponProficiencies').value = characterData.weaponProficiencies;
         if (characterData.campaignNotes) document.getElementById('campaignNotes').value = characterData.campaignNotes;
-        
+
         // Update spell slots display
         updateSpellSlotsDisplay();
-        
+
         // Update all calculated fields
         updateCharacterStats();
-        
+
       } catch (error) {
         console.error('❌ Failed to load character data into interface:', error);
       }
     }
-    
+
     // Export character as PDF (placeholder)
     function exportCharacterPDF() {
       alert('PDF export feature coming soon! For now, use your browser\'s Print function on this page.');
@@ -1858,25 +1872,25 @@
       updateSkills,
       calculateModifier,
       showPage,
-      
+
       // Enhanced D&D 3.5 functions
       updateStatsWithEnhancedEngine,
       updateArmorClassEnhanced,
       updateInitiativeEnhanced,
       updateSavingThrowsEnhanced,
-      
+
       // Spell management functions
       updateSpellSlotsDisplay,
       searchSpells,
       displaySpellSearchResults,
       showSpellDetails,
-      
+
       // Character management functions
       saveCharacter,
       loadCharacter,
       loadCharacterData,
       exportCharacterPDF,
-      
+
       // System references
       characterEngine: () => characterEngine
     };

@@ -27,7 +27,8 @@ try {
             }
         }
         
-    } catch {
+    }
+    catch {
         Write-Host "VBA access denied or protected. Error: $($_.Exception.Message)" -ForegroundColor Red
         
         # Try alternative approach - examine object model
@@ -43,7 +44,8 @@ try {
                     $hasEvents = $true
                 }
             }
-        } catch {}
+        }
+        catch {}
         
         if ($hasEvents) {
             Write-Host "Workbook contains VBA code but access is restricted" -ForegroundColor Yellow
@@ -54,6 +56,7 @@ try {
     $excel.Quit()
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
     
-} catch {
+}
+catch {
     Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
 }

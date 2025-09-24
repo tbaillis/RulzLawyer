@@ -12,7 +12,7 @@ class DnDCalculationEngine {
         this.spellData = null;
         this.equipmentData = null;
         this.skillData = null;
-        
+
         // Cache for calculated values
         this.cache = {
             abilityModifiers: {},
@@ -56,11 +56,11 @@ class DnDCalculationEngine {
     calculateAllAbilityModifiers(abilities) {
         const modifiers = {};
         const abilityNames = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
-        
+
         for (const ability of abilityNames) {
             modifiers[ability] = this.calculateAbilityModifier(abilities[ability] || 10);
         }
-        
+
         this.cache.abilityModifiers = modifiers;
         return modifiers;
     }
@@ -78,7 +78,7 @@ class DnDCalculationEngine {
         }
 
         const adjustedAbilities = { ...baseAbilities };
-        
+
         for (const [ability, adjustment] of Object.entries(race.ability_adjustments)) {
             if (adjustedAbilities[ability]) {
                 adjustedAbilities[ability] += adjustment;
@@ -213,10 +213,10 @@ class DnDCalculationEngine {
 
         // Calculate total AC
         ac.total = ac.base + ac.armor + ac.shield + ac.dexterity + ac.size + ac.natural + ac.deflection + ac.misc;
-        
+
         // Touch AC (no armor, shield, or natural armor)
         ac.touch = ac.base + ac.dexterity + ac.size + ac.deflection + ac.misc;
-        
+
         // Flat-footed AC (no dexterity bonus)
         ac.flatFooted = ac.base + ac.armor + ac.shield + ac.size + ac.natural + ac.deflection + ac.misc;
 
@@ -232,7 +232,7 @@ class DnDCalculationEngine {
         const baseAttackBonus = this.calculateBaseAttackBonus(character.classes || []);
         const strMod = this.calculateAbilityModifier(character.abilities?.strength || 10);
         const dexMod = this.calculateAbilityModifier(character.abilities?.dexterity || 10);
-        
+
         // Size modifier
         let sizeModifier = 0;
         const race = this.raceData.find(r => r.name === character.race);
@@ -263,7 +263,7 @@ class DnDCalculationEngine {
         if (baseAttackBonus >= 6) {
             attacks.melee.iterative = [];
             attacks.ranged.iterative = [];
-            
+
             for (let bab = baseAttackBonus - 5; bab > 0; bab -= 5) {
                 const iterativeBonus = Math.max(1, bab);
                 attacks.melee.iterative.push(iterativeBonus + strMod + sizeModifier);
@@ -288,15 +288,15 @@ class DnDCalculationEngine {
         if (!classData) return 0;
 
         let skillPoints = classData.skill_points_per_level + intModifier;
-        
+
         // Minimum 1 skill point per level
         skillPoints = Math.max(1, skillPoints);
-        
+
         // Humans get +1 skill point per level
         if (race === 'Human') {
             skillPoints += 1;
         }
-        
+
         // First level gets x4 skill points
         if (isFirstLevel) {
             skillPoints *= 4;
@@ -313,23 +313,23 @@ class DnDCalculationEngine {
      */
     calculateHitPoints(classes, conModifier) {
         let totalHp = 0;
-        
+
         for (const classLevel of classes) {
             const classData = this.classData.find(c => c.name === classLevel.className);
             if (!classData) continue;
 
             const hitDie = parseInt(classData.hit_die.replace('d', ''));
             const level = classLevel.level;
-            
+
             // First level gets max hit die
             if (level >= 1) {
                 totalHp += hitDie; // First level
-                
+
                 // Subsequent levels (assuming average hit die + 1)
                 const avgHitDie = Math.floor(hitDie / 2) + 1;
                 totalHp += (level - 1) * avgHitDie;
             }
-            
+
             // Constitution modifier applies to each level
             totalHp += level * conModifier;
         }
@@ -371,11 +371,11 @@ class DnDCalculationEngine {
      */
     calculateBonusSpells(abilityModifier) {
         const bonusSpells = [0]; // No bonus 0-level spells
-        
+
         for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
             const minAbilityForLevel = 10 + spellLevel;
             const requiredModifier = spellLevel;
-            
+
             if (abilityModifier >= requiredModifier) {
                 // Bonus spells formula: (ability modifier - spell level + 4) / 4
                 const bonus = Math.floor((abilityModifier - spellLevel + 4) / 4);
@@ -384,7 +384,7 @@ class DnDCalculationEngine {
                 bonusSpells.push(0);
             }
         }
-        
+
         return bonusSpells;
     }
 
@@ -397,7 +397,7 @@ class DnDCalculationEngine {
     calculateCarryingCapacity(strength, size = 'Medium') {
         // Base carrying capacity for Medium creatures
         let lightLoad, mediumLoad, heavyLoad;
-        
+
         if (strength <= 10) {
             const baseCapacities = [
                 [10, 20, 30], [13, 26, 40], [16, 33, 50], [20, 40, 60], [23, 46, 70],
@@ -410,20 +410,20 @@ class DnDCalculationEngine {
             const str10Base = [40, 80, 120]; // Str 10 values
             const multiplier = Math.pow(2, Math.floor((strength - 10) / 10));
             const remainder = (strength - 10) % 10;
-            
-            [lightLoad, mediumLoad, heavyLoad] = str10Base.map(base => 
+
+            [lightLoad, mediumLoad, heavyLoad] = str10Base.map(base =>
                 Math.floor(base * multiplier * (1 + remainder * 0.25))
             );
         }
 
         // Size adjustments
         const sizeMultipliers = {
-            'Fine': 1/8, 'Diminutive': 1/4, 'Tiny': 1/2, 'Small': 3/4,
+            'Fine': 1 / 8, 'Diminutive': 1 / 4, 'Tiny': 1 / 2, 'Small': 3 / 4,
             'Medium': 1, 'Large': 2, 'Huge': 4, 'Gargantuan': 8, 'Colossal': 16
         };
-        
+
         const multiplier = sizeMultipliers[size] || 1;
-        
+
         return {
             light: Math.floor(lightLoad * multiplier),
             medium: Math.floor(mediumLoad * multiplier),
@@ -455,10 +455,10 @@ class DnDCalculationEngine {
             0, 1000, 3000, 6000, 10000, 15000, 21000, 28000, 36000, 45000,
             55000, 66000, 78000, 91000, 105000, 120000, 136000, 153000, 171000, 190000
         ];
-        
+
         const currentXP = xpTable[Math.min(currentLevel - 1, 19)] || 0;
         const nextLevelXP = xpTable[Math.min(currentLevel, 19)] || (currentXP + 10000);
-        
+
         return {
             current: currentXP,
             next: nextLevelXP,
@@ -517,18 +517,18 @@ class DnDCalculationEngine {
 
         const raceData = this.raceData.find(r => r.name === race);
         const favoredClass = raceData?.favored_class;
-        
+
         // Sort classes by level (highest first)
         const sortedClasses = [...classes].sort((a, b) => b.level - a.level);
         const highestLevel = sortedClasses[0].level;
-        
+
         let penaltyClasses = 0;
         for (const classLevel of sortedClasses) {
             // Skip favored class and highest level class
             if (classLevel.className === favoredClass || classLevel.level === highestLevel) {
                 continue;
             }
-            
+
             // Check if class is within one level of highest
             if (highestLevel - classLevel.level > 1) {
                 penaltyClasses++;
@@ -546,7 +546,7 @@ class DnDCalculationEngine {
      */
     validateAlignment(alignment, requirement) {
         if (requirement === 'Any') return true;
-        
+
         const alignmentMap = {
             'LG': 'Lawful Good', 'NG': 'Neutral Good', 'CG': 'Chaotic Good',
             'LN': 'Lawful Neutral', 'N': 'True Neutral', 'CN': 'Chaotic Neutral',
@@ -557,11 +557,11 @@ class DnDCalculationEngine {
         if (requirement === 'Lawful Good only') {
             return alignment === 'LG' || alignment === 'Lawful Good';
         }
-        
+
         if (requirement === 'Any nonlawful') {
             return !alignment.includes('Lawful') && alignment !== 'LN';
         }
-        
+
         // Add more specific alignment validation as needed
         return true;
     }
@@ -574,7 +574,7 @@ class DnDCalculationEngine {
     calculateAllStats(character) {
         const abilities = this.applyRacialAbilityAdjustments(character.baseAbilities || character.abilities, character.race);
         const abilityModifiers = this.calculateAllAbilityModifiers(abilities);
-        
+
         const stats = {
             abilities,
             abilityModifiers,
@@ -597,8 +597,8 @@ class DnDCalculationEngine {
                 const abilityName = classData.spell_save_dc_ability?.toLowerCase();
                 const abilityMod = abilityModifiers[abilityName] || 0;
                 stats.spellsPerDay[classLevel.className] = this.calculateSpellsPerDay(
-                    classLevel.className, 
-                    classLevel.level, 
+                    classLevel.className,
+                    classLevel.level,
                     abilityMod
                 );
             }

@@ -34,10 +34,10 @@ try {
         
         # Check for ability scores pattern (common locations)
         $abilityAreas = @(
-            @{Row=1; Col=1; Size=20},    # Top-left area
-            @{Row=1; Col=10; Size=20},   # Top-right area  
-            @{Row=20; Col=1; Size=20},   # Mid-left area
-            @{Row=40; Col=1; Size=20}    # Lower area
+            @{Row = 1; Col = 1; Size = 20 },    # Top-left area
+            @{Row = 1; Col = 10; Size = 20 },   # Top-right area  
+            @{Row = 20; Col = 1; Size = 20 },   # Mid-left area
+            @{Row = 40; Col = 1; Size = 20 }    # Lower area
         )
         
         foreach ($area in $abilityAreas) {
@@ -87,7 +87,8 @@ try {
                     $namedRanges += "$($name.Name) -> $($name.RefersToRange.Address)"
                 }
             }
-        } catch {}
+        }
+        catch {}
         
         if ($namedRanges.Count -gt 0) {
             foreach ($range in $namedRanges[0..4]) {
@@ -96,7 +97,8 @@ try {
             if ($namedRanges.Count -gt 5) {
                 Write-Host "  ... and $($namedRanges.Count - 5) more"
             }
-        } else {
+        }
+        else {
             Write-Host "  No named ranges found for this sheet"
         }
     }
@@ -165,15 +167,18 @@ try {
         
         Write-Host "`nTotal VBA Code: $totalLines lines across $($vbProject.VBComponents.Count) modules"
         
-    } catch {
+    }
+    catch {
         Write-Host "VBA access restricted: $($_.Exception.Message)"
     }
     
     Write-Host "`n✅ Deep analysis complete!" -ForegroundColor Green
     
-} catch {
+}
+catch {
     Write-Host "Error during analysis: $($_.Exception.Message)" -ForegroundColor Red
-} finally {
+}
+finally {
     if ($workbook) { $workbook.Close($false) }
     if ($excel) { 
         $excel.Quit()

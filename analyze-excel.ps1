@@ -87,9 +87,11 @@ try {
     
     Write-Host "`n✅ Analysis complete!" -ForegroundColor Green
     
-} catch {
+}
+catch {
     Write-Error "Failed to analyze Excel file: $($_.Exception.Message)"
-} finally {
+}
+finally {
     # Cleanup
     if ($workbook) { $workbook.Close($false) }
     if ($excel) { 

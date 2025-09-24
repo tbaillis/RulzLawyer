@@ -1,766 +1,954 @@
 [
-  {
-    "name": "Acid Arrow",
-    "school": "Conjuration",
-    "subschool": "Creation",
-    "level": {
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Acid Arrow",
+        "school": "Conjuration",
+        "subschool": "Creation",
+        "level": {
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M",
+            "F"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Long (400 ft. + 40 ft./level)",
+        "effect": "One arrow of acid",
+        "duration": "1 round + 1 round per three levels",
+        "saving_throw": "None",
+        "spell_resistance": "No",
+        "description": "An arrow of acid springs from your hand and speeds to its target. You must succeed on a ranged touch attack to hit your target. The arrow deals 2d4 points of acid damage with no splash damage. For every three caster levels (to a maximum of 18th level), the acid, unless neutralized, lasts for another round, dealing another 2d4 points of damage in that round.",
+        "material_component": "Powdered rhubarb leaf and an adder's stomach.",
+        "focus": "A dart."
     },
-    "components": ["V", "S", "M", "F"],
-    "casting_time": "1 standard action",
-    "range": "Long (400 ft. + 40 ft./level)",
-    "effect": "One arrow of acid",
-    "duration": "1 round + 1 round per three levels",
-    "saving_throw": "None",
-    "spell_resistance": "No",
-    "description": "An arrow of acid springs from your hand and speeds to its target. You must succeed on a ranged touch attack to hit your target. The arrow deals 2d4 points of acid damage with no splash damage. For every three caster levels (to a maximum of 18th level), the acid, unless neutralized, lasts for another round, dealing another 2d4 points of damage in that round.",
-    "material_component": "Powdered rhubarb leaf and an adder's stomach.",
-    "focus": "A dart."
-  },
-  {
-    "name": "Aid",
-    "school": "Enchantment",
-    "subschool": "Compulsion",
-    "descriptors": ["Mind-Affecting"],
-    "level": {
-      "Bard": 2,
-      "Cleric": 2,
-      "Paladin": 2
+    {
+        "name": "Aid",
+        "school": "Enchantment",
+        "subschool": "Compulsion",
+        "descriptors": [
+            "Mind-Affecting"
+        ],
+        "level": {
+            "Bard": 2,
+            "Cleric": 2,
+            "Paladin": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Living creature touched",
+        "duration": "1 min./level",
+        "saving_throw": "None",
+        "spell_resistance": "Yes (harmless)",
+        "description": "Aid grants the target a +1 morale bonus on attack rolls and saves against fear effects, plus temporary hit points equal to 1d8 + caster level (to a maximum of 1d8+10 temporary hit points at caster level 10th)."
     },
-    "components": ["V", "S", "DF"],
-    "casting_time": "1 standard action", 
-    "range": "Touch",
-    "target": "Living creature touched",
-    "duration": "1 min./level",
-    "saving_throw": "None",
-    "spell_resistance": "Yes (harmless)",
-    "description": "Aid grants the target a +1 morale bonus on attack rolls and saves against fear effects, plus temporary hit points equal to 1d8 + caster level (to a maximum of 1d8+10 temporary hit points at caster level 10th)."
-  },
-  {
-    "name": "Alarm",
-    "school": "Abjuration",
-    "level": {
-      "Bard": 1,
-      "Ranger": 1,
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Alarm",
+        "school": "Abjuration",
+        "level": {
+            "Bard": 1,
+            "Ranger": 1,
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "F/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Close (25 ft. + 5 ft./2 levels)",
+        "area": "20-ft.-radius emanation centered on a point in space",
+        "duration": "2 hours/level (D)",
+        "saving_throw": "None",
+        "spell_resistance": "No",
+        "description": "Alarm sounds a mental or audible alarm each time a creature of Tiny or larger size enters the warded area or touches it. A creature that speaks the password (determined by you at the time of casting) does not set off the alarm.",
+        "focus": "A tiny bell and a piece of very fine silver wire.",
+        "divine_focus": "A small bell."
     },
-    "components": ["V", "S", "F/DF"],
-    "casting_time": "1 standard action",
-    "range": "Close (25 ft. + 5 ft./2 levels)",
-    "area": "20-ft.-radius emanation centered on a point in space",
-    "duration": "2 hours/level (D)",
-    "saving_throw": "None",
-    "spell_resistance": "No",
-    "description": "Alarm sounds a mental or audible alarm each time a creature of Tiny or larger size enters the warded area or touches it. A creature that speaks the password (determined by you at the time of casting) does not set off the alarm.",
-    "focus": "A tiny bell and a piece of very fine silver wire.",
-    "divine_focus": "A small bell."
-  },
-  {
-    "name": "Animate Dead",
-    "school": "Necromancy",
-    "descriptors": ["Evil"],
-    "level": {
-      "Cleric": 3,
-      "Sorcerer": 4,
-      "Wizard": 4
+    {
+        "name": "Animate Dead",
+        "school": "Necromancy",
+        "descriptors": [
+            "Evil"
+        ],
+        "level": {
+            "Cleric": 3,
+            "Sorcerer": 4,
+            "Wizard": 4
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "targets": "One or more corpses touched",
+        "duration": "Instantaneous",
+        "saving_throw": "None",
+        "spell_resistance": "No",
+        "description": "This spell turns the bones or bodies of dead creatures into undead skeletons or zombies that follow your spoken commands. The undead can follow you, or they can remain in an area and attack any creature (or just a specific kind of creature) entering the place. They remain animated until they are destroyed. (A destroyed skeleton or zombie can't be animated again.)",
+        "material_component": "A black onyx gem worth at least 25 gp per Hit Die of the undead."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "targets": "One or more corpses touched",
-    "duration": "Instantaneous",
-    "saving_throw": "None",
-    "spell_resistance": "No",
-    "description": "This spell turns the bones or bodies of dead creatures into undead skeletons or zombies that follow your spoken commands. The undead can follow you, or they can remain in an area and attack any creature (or just a specific kind of creature) entering the place. They remain animated until they are destroyed. (A destroyed skeleton or zombie can't be animated again.)",
-    "material_component": "A black onyx gem worth at least 25 gp per Hit Die of the undead."
-  },
-  {
-    "name": "Bane",
-    "school": "Enchantment",
-    "subschool": "Compulsion",
-    "descriptors": ["Fear", "Mind-Affecting"],
-    "level": {
-      "Cleric": 1
+    {
+        "name": "Bane",
+        "school": "Enchantment",
+        "subschool": "Compulsion",
+        "descriptors": [
+            "Fear",
+            "Mind-Affecting"
+        ],
+        "level": {
+            "Cleric": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "50 ft.",
+        "targets": "Enemies within a 50-ft.-radius burst centered on you",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates",
+        "spell_resistance": "Yes",
+        "description": "Bane fills your enemies with fear and doubt. Each affected creature takes a –1 penalty on attack rolls and a –1 penalty on saving throws against fear effects. Bane counters and dispels bless."
     },
-    "components": ["V", "S", "DF"],
-    "casting_time": "1 standard action",
-    "range": "50 ft.",
-    "targets": "Enemies within a 50-ft.-radius burst centered on you",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates",
-    "spell_resistance": "Yes",
-    "description": "Bane fills your enemies with fear and doubt. Each affected creature takes a –1 penalty on attack rolls and a –1 penalty on saving throws against fear effects. Bane counters and dispels bless."
-  },
-  {
-    "name": "Barkskin",
-    "school": "Transmutation",
-    "level": {
-      "Druid": 2,
-      "Ranger": 2
+    {
+        "name": "Barkskin",
+        "school": "Transmutation",
+        "level": {
+            "Druid": 2,
+            "Ranger": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Living creature touched",
+        "duration": "10 min./level",
+        "saving_throw": "None",
+        "spell_resistance": "Yes (harmless)",
+        "description": "Barkskin toughens a creature's skin. The effect grants a +2 enhancement bonus to the creature's existing natural armor bonus. This enhancement bonus increases by 1 for every three caster levels above 3rd, to a maximum of +5 at caster level 12th."
     },
-    "components": ["V", "S", "DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Living creature touched",
-    "duration": "10 min./level",
-    "saving_throw": "None",
-    "spell_resistance": "Yes (harmless)",
-    "description": "Barkskin toughens a creature's skin. The effect grants a +2 enhancement bonus to the creature's existing natural armor bonus. This enhancement bonus increases by 1 for every three caster levels above 3rd, to a maximum of +5 at caster level 12th."
-  },
-  {
-    "name": "Bear's Endurance",
-    "school": "Transmutation",
-    "level": {
-      "Cleric": 2,
-      "Druid": 2,
-      "Paladin": 2,
-      "Ranger": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Bear's Endurance",
+        "school": "Transmutation",
+        "level": {
+            "Cleric": 2,
+            "Druid": 2,
+            "Paladin": 2,
+            "Ranger": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "Yes",
+        "description": "The affected creature gains greater vitality and stamina. The spell grants the subject a +4 enhancement bonus to Constitution, which adds the usual benefits to hit points, Fortitude saves, Constitution checks, and so forth.",
+        "material_component": "A few hairs, or a pinch of dung, from a bear."
     },
-    "components": ["V", "S", "M/DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "Yes",
-    "description": "The affected creature gains greater vitality and stamina. The spell grants the subject a +4 enhancement bonus to Constitution, which adds the usual benefits to hit points, Fortitude saves, Constitution checks, and so forth.",
-    "material_component": "A few hairs, or a pinch of dung, from a bear."
-  },
-  {
-    "name": "Bless",
-    "school": "Enchantment",
-    "subschool": "Compulsion",
-    "descriptors": ["Mind-Affecting"],
-    "level": {
-      "Cleric": 1,
-      "Paladin": 1
+    {
+        "name": "Bless",
+        "school": "Enchantment",
+        "subschool": "Compulsion",
+        "descriptors": [
+            "Mind-Affecting"
+        ],
+        "level": {
+            "Cleric": 1,
+            "Paladin": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "50 ft.",
+        "targets": "The caster and all allies within a 50-ft. burst, centered on the caster",
+        "duration": "1 min./level",
+        "saving_throw": "None",
+        "spell_resistance": "Yes (harmless)",
+        "description": "Bless fills your allies with courage. Each ally gains a +1 morale bonus on attack rolls and on saving throws against fear effects. Bless counters and dispels bane."
     },
-    "components": ["V", "S", "DF"],
-    "casting_time": "1 standard action",
-    "range": "50 ft.",
-    "targets": "The caster and all allies within a 50-ft. burst, centered on the caster",
-    "duration": "1 min./level",
-    "saving_throw": "None",
-    "spell_resistance": "Yes (harmless)",
-    "description": "Bless fills your allies with courage. Each ally gains a +1 morale bonus on attack rolls and on saving throws against fear effects. Bless counters and dispels bane."
-  },
-  {
-    "name": "Blindness/Deafness",
-    "school": "Necromancy",
-    "level": {
-      "Bard": 2,
-      "Cleric": 3,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Blindness/Deafness",
+        "school": "Necromancy",
+        "level": {
+            "Bard": 2,
+            "Cleric": 3,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Medium (100 ft. + 10 ft./level)",
+        "target": "One living creature",
+        "duration": "Permanent (D)",
+        "saving_throw": "Fortitude negates",
+        "spell_resistance": "Yes",
+        "description": "You call upon the powers of unlife to render the subject blinded or deafened, as you choose. If the target has more than 50 hit points, it gets a +4 bonus on its saving throw."
     },
-    "components": ["V"],
-    "casting_time": "1 standard action",
-    "range": "Medium (100 ft. + 10 ft./level)",
-    "target": "One living creature",
-    "duration": "Permanent (D)",
-    "saving_throw": "Fortitude negates",
-    "spell_resistance": "Yes",
-    "description": "You call upon the powers of unlife to render the subject blinded or deafened, as you choose. If the target has more than 50 hit points, it gets a +4 bonus on its saving throw."
-  },
-  {
-    "name": "Bull's Strength",
-    "school": "Transmutation",
-    "level": {
-      "Cleric": 2,
-      "Druid": 2,
-      "Paladin": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Bull's Strength",
+        "school": "Transmutation",
+        "level": {
+            "Cleric": 2,
+            "Druid": 2,
+            "Paladin": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "Yes",
+        "description": "The subject becomes stronger. The spell grants a +4 enhancement bonus to Strength, adding the usual benefits to melee attack rolls, melee damage rolls, and other uses of the Strength modifier.",
+        "material_component": "A few hairs, or a pinch of dung, from a bull."
     },
-    "components": ["V", "S", "M/DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "Yes",
-    "description": "The subject becomes stronger. The spell grants a +4 enhancement bonus to Strength, adding the usual benefits to melee attack rolls, melee damage rolls, and other uses of the Strength modifier.",
-    "material_component": "A few hairs, or a pinch of dung, from a bull."
-  },
-  {
-    "name": "Burning Hands",
-    "school": "Evocation",
-    "descriptors": ["Fire"],
-    "level": {
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Burning Hands",
+        "school": "Evocation",
+        "descriptors": [
+            "Fire"
+        ],
+        "level": {
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "15 ft.",
+        "area": "Cone-shaped burst",
+        "duration": "Instantaneous",
+        "saving_throw": "Reflex half",
+        "spell_resistance": "Yes",
+        "description": "A cone of searing flame shoots from your fingertips. Any creature in the area of the flames takes 1d4 points of fire damage per caster level (maximum 5d4). Flammable materials burn if the flames touch them."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "15 ft.",
-    "area": "Cone-shaped burst",
-    "duration": "Instantaneous",
-    "saving_throw": "Reflex half",
-    "spell_resistance": "Yes",
-    "description": "A cone of searing flame shoots from your fingertips. Any creature in the area of the flames takes 1d4 points of fire damage per caster level (maximum 5d4). Flammable materials burn if the flames touch them."
-  },
-  {
-    "name": "Cat's Grace",
-    "school": "Transmutation",
-    "level": {
-      "Bard": 2,
-      "Druid": 2,
-      "Ranger": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Cat's Grace",
+        "school": "Transmutation",
+        "level": {
+            "Bard": 2,
+            "Druid": 2,
+            "Ranger": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "Yes",
+        "description": "The transmuted creature becomes more graceful, agile, and coordinated. The spell grants a +4 enhancement bonus to Dexterity, adding the usual benefits to AC, Reflex saves, and other uses of the Dexterity modifier.",
+        "material_component": "A pinch of cat fur."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "Yes",
-    "description": "The transmuted creature becomes more graceful, agile, and coordinated. The spell grants a +4 enhancement bonus to Dexterity, adding the usual benefits to AC, Reflex saves, and other uses of the Dexterity modifier.",
-    "material_component": "A pinch of cat fur."
-  },
-  {
-    "name": "Charm Person",
-    "school": "Enchantment",
-    "subschool": "Charm",
-    "descriptors": ["Mind-Affecting"],
-    "level": {
-      "Bard": 1,
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Charm Person",
+        "school": "Enchantment",
+        "subschool": "Charm",
+        "descriptors": [
+            "Mind-Affecting"
+        ],
+        "level": {
+            "Bard": 1,
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Close (25 ft. + 5 ft./2 levels)",
+        "target": "One humanoid creature",
+        "duration": "1 hour/level",
+        "saving_throw": "Will negates",
+        "spell_resistance": "Yes",
+        "description": "This charm makes a humanoid creature regard you as its trusted friend and ally (treat the target's attitude as friendly). If the creature is currently being threatened or attacked by you or your allies, however, it receives a +5 bonus on its saving throw."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Close (25 ft. + 5 ft./2 levels)",
-    "target": "One humanoid creature",
-    "duration": "1 hour/level",
-    "saving_throw": "Will negates",
-    "spell_resistance": "Yes",
-    "description": "This charm makes a humanoid creature regard you as its trusted friend and ally (treat the target's attitude as friendly). If the creature is currently being threatened or attacked by you or your allies, however, it receives a +5 bonus on its saving throw."
-  },
-  {
-    "name": "Color Spray",
-    "school": "Illusion",
-    "subschool": "Pattern",
-    "descriptors": ["Mind-Affecting"],
-    "level": {
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Color Spray",
+        "school": "Illusion",
+        "subschool": "Pattern",
+        "descriptors": [
+            "Mind-Affecting"
+        ],
+        "level": {
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "15 ft.",
+        "area": "Cone-shaped burst",
+        "duration": "Instantaneous; see text",
+        "saving_throw": "Will negates",
+        "spell_resistance": "Yes",
+        "description": "A vivid cone of clashing colors springs forth from your hand, causing creatures to become stunned, perhaps also blinded, and possibly knocking them unconscious. Each creature within the cone is affected according to its Hit Dice.",
+        "material_component": "A pinch each of powder or sand that is colored red, yellow, and blue."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "15 ft.",
-    "area": "Cone-shaped burst",
-    "duration": "Instantaneous; see text",
-    "saving_throw": "Will negates",
-    "spell_resistance": "Yes",
-    "description": "A vivid cone of clashing colors springs forth from your hand, causing creatures to become stunned, perhaps also blinded, and possibly knocking them unconscious. Each creature within the cone is affected according to its Hit Dice.",
-    "material_component": "A pinch each of powder or sand that is colored red, yellow, and blue."
-  },
-  {
-    "name": "Cone of Cold",
-    "school": "Evocation",
-    "descriptors": ["Cold"],
-    "level": {
-      "Sorcerer": 5,
-      "Wizard": 5
+    {
+        "name": "Cone of Cold",
+        "school": "Evocation",
+        "descriptors": [
+            "Cold"
+        ],
+        "level": {
+            "Sorcerer": 5,
+            "Wizard": 5
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "60 ft.",
+        "area": "Cone-shaped burst",
+        "duration": "Instantaneous",
+        "saving_throw": "Reflex half",
+        "spell_resistance": "Yes",
+        "description": "Cone of cold creates an area of extreme cold, originating at your hand and extending outward in a cone. It drains heat, dealing 1d6 points of cold damage per caster level (maximum 15d6).",
+        "material_component": "A very small crystal or glass cone."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "60 ft.",
-    "area": "Cone-shaped burst",
-    "duration": "Instantaneous",
-    "saving_throw": "Reflex half",
-    "spell_resistance": "Yes",
-    "description": "Cone of cold creates an area of extreme cold, originating at your hand and extending outward in a cone. It drains heat, dealing 1d6 points of cold damage per caster level (maximum 15d6).",
-    "material_component": "A very small crystal or glass cone."
-  },
-  {
-    "name": "Cure Light Wounds",
-    "school": "Conjuration",
-    "subschool": "Healing",
-    "level": {
-      "Bard": 1,
-      "Cleric": 1,
-      "Druid": 1,
-      "Paladin": 1,
-      "Ranger": 2
+    {
+        "name": "Cure Light Wounds",
+        "school": "Conjuration",
+        "subschool": "Healing",
+        "level": {
+            "Bard": 1,
+            "Cleric": 1,
+            "Druid": 1,
+            "Paladin": 1,
+            "Ranger": 2
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "Instantaneous",
+        "saving_throw": "Will half (harmless); see text",
+        "spell_resistance": "Yes (harmless); see text",
+        "description": "When laying your hand upon a living creature, you channel positive energy that cures 1d8 points of damage +1 point per caster level (maximum +5). Since undead are powered by negative energy, this spell deals damage to them instead of curing their wounds. An undead creature can apply spell resistance, and can attempt a Will save to take half damage."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "Instantaneous",
-    "saving_throw": "Will half (harmless); see text",
-    "spell_resistance": "Yes (harmless); see text",
-    "description": "When laying your hand upon a living creature, you channel positive energy that cures 1d8 points of damage +1 point per caster level (maximum +5). Since undead are powered by negative energy, this spell deals damage to them instead of curing their wounds. An undead creature can apply spell resistance, and can attempt a Will save to take half damage."
-  },
-  {
-    "name": "Cure Moderate Wounds",
-    "school": "Conjuration", 
-    "subschool": "Healing",
-    "level": {
-      "Bard": 2,
-      "Cleric": 2,
-      "Druid": 3,
-      "Paladin": 3,
-      "Ranger": 3
+    {
+        "name": "Cure Moderate Wounds",
+        "school": "Conjuration",
+        "subschool": "Healing",
+        "level": {
+            "Bard": 2,
+            "Cleric": 2,
+            "Druid": 3,
+            "Paladin": 3,
+            "Ranger": 3
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "Instantaneous",
+        "saving_throw": "Will half (harmless); see text",
+        "spell_resistance": "Yes (harmless); see text",
+        "description": "This spell functions like cure light wounds, except that it cures 2d8 points of damage +1 point per caster level (maximum +10)."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "Instantaneous",
-    "saving_throw": "Will half (harmless); see text",
-    "spell_resistance": "Yes (harmless); see text",
-    "description": "This spell functions like cure light wounds, except that it cures 2d8 points of damage +1 point per caster level (maximum +10)."
-  },
-  {
-    "name": "Cure Serious Wounds",
-    "school": "Conjuration",
-    "subschool": "Healing",
-    "level": {
-      "Bard": 3,
-      "Cleric": 3,
-      "Druid": 4,
-      "Paladin": 4,
-      "Ranger": 4
+    {
+        "name": "Cure Serious Wounds",
+        "school": "Conjuration",
+        "subschool": "Healing",
+        "level": {
+            "Bard": 3,
+            "Cleric": 3,
+            "Druid": 4,
+            "Paladin": 4,
+            "Ranger": 4
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "Instantaneous",
+        "saving_throw": "Will half (harmless); see text",
+        "spell_resistance": "Yes (harmless); see text",
+        "description": "This spell functions like cure light wounds, except that it cures 3d8 points of damage +1 point per caster level (maximum +15)."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "Instantaneous",
-    "saving_throw": "Will half (harmless); see text",
-    "spell_resistance": "Yes (harmless); see text",
-    "description": "This spell functions like cure light wounds, except that it cures 3d8 points of damage +1 point per caster level (maximum +15)."
-  },
-  {
-    "name": "Detect Magic",
-    "school": "Divination",
-    "level": {
-      "Bard": 0,
-      "Cleric": 0,
-      "Druid": 0,
-      "Sorcerer": 0,
-      "Wizard": 0
+    {
+        "name": "Detect Magic",
+        "school": "Divination",
+        "level": {
+            "Bard": 0,
+            "Cleric": 0,
+            "Druid": 0,
+            "Sorcerer": 0,
+            "Wizard": 0
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "60 ft.",
+        "area": "Cone-shaped emanation",
+        "duration": "Concentration, up to 1 min./level (D)",
+        "saving_throw": "None",
+        "spell_resistance": "No",
+        "description": "You detect magical auras. The amount of information revealed depends on how long you study a particular area or subject."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "60 ft.",
-    "area": "Cone-shaped emanation",
-    "duration": "Concentration, up to 1 min./level (D)",
-    "saving_throw": "None",
-    "spell_resistance": "No",
-    "description": "You detect magical auras. The amount of information revealed depends on how long you study a particular area or subject."
-  },
-  {
-    "name": "Dispel Magic",
-    "school": "Abjuration",
-    "level": {
-      "Bard": 3,
-      "Cleric": 3,
-      "Druid": 4,
-      "Paladin": 3,
-      "Sorcerer": 3,
-      "Wizard": 3
+    {
+        "name": "Dispel Magic",
+        "school": "Abjuration",
+        "level": {
+            "Bard": 3,
+            "Cleric": 3,
+            "Druid": 4,
+            "Paladin": 3,
+            "Sorcerer": 3,
+            "Wizard": 3
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Medium (100 ft. + 10 ft./level)",
+        "target_or_area": "One spellcaster, creature, or object; or 20-ft.-radius burst",
+        "duration": "Instantaneous",
+        "saving_throw": "None",
+        "spell_resistance": "No",
+        "description": "You can use dispel magic to end ongoing spells that have been cast on a creature or object, to temporarily suppress the magical abilities of a magic item, to end ongoing spells (or at least their effects) within an area, or to counter another spellcaster's spell."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Medium (100 ft. + 10 ft./level)",
-    "target_or_area": "One spellcaster, creature, or object; or 20-ft.-radius burst",
-    "duration": "Instantaneous",
-    "saving_throw": "None",
-    "spell_resistance": "No",
-    "description": "You can use dispel magic to end ongoing spells that have been cast on a creature or object, to temporarily suppress the magical abilities of a magic item, to end ongoing spells (or at least their effects) within an area, or to counter another spellcaster's spell."
-  },
-  {
-    "name": "Eagle's Splendor",
-    "school": "Transmutation",
-    "level": {
-      "Bard": 2,
-      "Cleric": 2,
-      "Paladin": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Eagle's Splendor",
+        "school": "Transmutation",
+        "level": {
+            "Bard": 2,
+            "Cleric": 2,
+            "Paladin": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "Yes",
+        "description": "The transmuted creature becomes more poised, articulate, and personally forceful. The spell grants a +4 enhancement bonus to Charisma, adding the usual benefits to Charisma-based skill checks and other uses of the Charisma modifier.",
+        "material_component": "A few feathers or a pinch of droppings from an eagle."
     },
-    "components": ["V", "S", "M/DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "Yes",
-    "description": "The transmuted creature becomes more poised, articulate, and personally forceful. The spell grants a +4 enhancement bonus to Charisma, adding the usual benefits to Charisma-based skill checks and other uses of the Charisma modifier.",
-    "material_component": "A few feathers or a pinch of droppings from an eagle."
-  },
-  {
-    "name": "Fireball",
-    "school": "Evocation",
-    "descriptors": ["Fire"],
-    "level": {
-      "Sorcerer": 3,
-      "Wizard": 3
+    {
+        "name": "Fireball",
+        "school": "Evocation",
+        "descriptors": [
+            "Fire"
+        ],
+        "level": {
+            "Sorcerer": 3,
+            "Wizard": 3
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Long (400 ft. + 40 ft./level)",
+        "area": "20-ft.-radius spread",
+        "duration": "Instantaneous",
+        "saving_throw": "Reflex half",
+        "spell_resistance": "Yes",
+        "description": "A fireball spell generates a searing explosion of flame that detonates with a low roar and deals 1d6 points of fire damage per caster level (maximum 10d6) to every creature within the area. Unattended objects also take this damage. The explosion creates almost no pressure.",
+        "material_component": "A tiny ball of bat guano and sulfur."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "Long (400 ft. + 40 ft./level)",
-    "area": "20-ft.-radius spread",
-    "duration": "Instantaneous",
-    "saving_throw": "Reflex half",
-    "spell_resistance": "Yes",
-    "description": "A fireball spell generates a searing explosion of flame that detonates with a low roar and deals 1d6 points of fire damage per caster level (maximum 10d6) to every creature within the area. Unattended objects also take this damage. The explosion creates almost no pressure.",
-    "material_component": "A tiny ball of bat guano and sulfur."
-  },
-  {
-    "name": "Flame Arrow",
-    "school": "Transmutation",
-    "descriptors": ["Fire"],
-    "level": {
-      "Ranger": 2,
-      "Sorcerer": 3,
-      "Wizard": 3
+    {
+        "name": "Flame Arrow",
+        "school": "Transmutation",
+        "descriptors": [
+            "Fire"
+        ],
+        "level": {
+            "Ranger": 2,
+            "Sorcerer": 3,
+            "Wizard": 3
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Close (25 ft. + 5 ft./2 levels)",
+        "target": "50 projectiles, all of which must be in contact with each other at the time of casting",
+        "duration": "10 min./level",
+        "saving_throw": "None",
+        "spell_resistance": "No",
+        "description": "This spell allows you to turn ammunition (such as arrows, crossbow bolts, shuriken, and sling stones) into fiery projectiles. Each piece of ammunition deals an extra 1d6 points of fire damage to any target it hits.",
+        "material_component": "A drop of oil and a small piece of flint."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "Close (25 ft. + 5 ft./2 levels)",
-    "target": "50 projectiles, all of which must be in contact with each other at the time of casting",
-    "duration": "10 min./level",
-    "saving_throw": "None",
-    "spell_resistance": "No",
-    "description": "This spell allows you to turn ammunition (such as arrows, crossbow bolts, shuriken, and sling stones) into fiery projectiles. Each piece of ammunition deals an extra 1d6 points of fire damage to any target it hits.",
-    "material_component": "A drop of oil and a small piece of flint."
-  },
-  {
-    "name": "Fox's Cunning",
-    "school": "Transmutation",
-    "level": {
-      "Bard": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Fox's Cunning",
+        "school": "Transmutation",
+        "level": {
+            "Bard": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "Yes",
+        "description": "The transmuted creature becomes smarter. The spell grants a +4 enhancement bonus to Intelligence, adding the usual benefits to Intelligence-based skill checks and other uses of the Intelligence modifier.",
+        "material_component": "A few hairs, or a pinch of dung, from a fox."
     },
-    "components": ["V", "S", "M/DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "Yes",
-    "description": "The transmuted creature becomes smarter. The spell grants a +4 enhancement bonus to Intelligence, adding the usual benefits to Intelligence-based skill checks and other uses of the Intelligence modifier.",
-    "material_component": "A few hairs, or a pinch of dung, from a fox."
-  },
-  {
-    "name": "Haste",
-    "school": "Transmutation",
-    "level": {
-      "Bard": 3,
-      "Sorcerer": 3,
-      "Wizard": 3
+    {
+        "name": "Haste",
+        "school": "Transmutation",
+        "level": {
+            "Bard": 3,
+            "Sorcerer": 3,
+            "Wizard": 3
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Close (25 ft. + 5 ft./2 levels)",
+        "targets": "One creature/level, no two of which can be more than 30 ft. apart",
+        "duration": "1 round/level",
+        "saving_throw": "Fortitude negates (harmless)",
+        "spell_resistance": "Yes (harmless)",
+        "description": "The transmuted creatures move and act more quickly than normal. This extra speed has several effects. When making a full attack action, a hasted creature may make one extra attack with any weapon he is holding.",
+        "material_component": "A shaving of licorice root."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "Close (25 ft. + 5 ft./2 levels)",
-    "targets": "One creature/level, no two of which can be more than 30 ft. apart",
-    "duration": "1 round/level",
-    "saving_throw": "Fortitude negates (harmless)",
-    "spell_resistance": "Yes (harmless)",
-    "description": "The transmuted creatures move and act more quickly than normal. This extra speed has several effects. When making a full attack action, a hasted creature may make one extra attack with any weapon he is holding.",
-    "material_component": "A shaving of licorice root."
-  },
-  {
-    "name": "Hold Person",
-    "school": "Enchantment",
-    "subschool": "Compulsion",
-    "descriptors": ["Mind-Affecting"],
-    "level": {
-      "Bard": 2,
-      "Cleric": 2,
-      "Sorcerer": 3,
-      "Wizard": 3
+    {
+        "name": "Hold Person",
+        "school": "Enchantment",
+        "subschool": "Compulsion",
+        "descriptors": [
+            "Mind-Affecting"
+        ],
+        "level": {
+            "Bard": 2,
+            "Cleric": 2,
+            "Sorcerer": 3,
+            "Wizard": 3
+        },
+        "components": [
+            "V",
+            "S",
+            "F/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Medium (100 ft. + 10 ft./level)",
+        "target": "One humanoid creature",
+        "duration": "1 round/level (D); see text",
+        "saving_throw": "Will negates; see text",
+        "spell_resistance": "Yes",
+        "description": "The subject becomes paralyzed and freezes in place. It is aware and breathes normally but cannot take any actions, even speech. Each round on its turn, the subject may attempt a new saving throw to end the effect.",
+        "focus": "A small, straight piece of iron."
     },
-    "components": ["V", "S", "F/DF"],
-    "casting_time": "1 standard action",
-    "range": "Medium (100 ft. + 10 ft./level)",
-    "target": "One humanoid creature",
-    "duration": "1 round/level (D); see text",
-    "saving_throw": "Will negates; see text",
-    "spell_resistance": "Yes",
-    "description": "The subject becomes paralyzed and freezes in place. It is aware and breathes normally but cannot take any actions, even speech. Each round on its turn, the subject may attempt a new saving throw to end the effect.",
-    "focus": "A small, straight piece of iron."
-  },
-  {
-    "name": "Inflict Light Wounds",
-    "school": "Necromancy",
-    "level": {
-      "Cleric": 1
+    {
+        "name": "Inflict Light Wounds",
+        "school": "Necromancy",
+        "level": {
+            "Cleric": 1
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "Instantaneous",
+        "saving_throw": "Will half",
+        "spell_resistance": "Yes",
+        "description": "When laying your hand upon a creature, you channel negative energy that deals 1d8 points of damage +1 point per caster level (maximum +5). Since undead are powered by negative energy, this spell cures such a creature of a like amount of damage, rather than harming it."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "Instantaneous",
-    "saving_throw": "Will half",
-    "spell_resistance": "Yes",
-    "description": "When laying your hand upon a creature, you channel negative energy that deals 1d8 points of damage +1 point per caster level (maximum +5). Since undead are powered by negative energy, this spell cures such a creature of a like amount of damage, rather than harming it."
-  },
-  {
-    "name": "Invisibility",
-    "school": "Illusion",
-    "subschool": "Glamer",
-    "level": {
-      "Bard": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Invisibility",
+        "school": "Illusion",
+        "subschool": "Glamer",
+        "level": {
+            "Bard": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Personal or touch",
+        "target": "You or a creature or object weighing no more than 100 lb./level",
+        "duration": "1 min./level (D)",
+        "saving_throw": "Will negates (harmless) or Will negates (harmless, object)",
+        "spell_resistance": "Yes (harmless) or Yes (harmless, object)",
+        "description": "The creature or object touched becomes invisible, vanishing from sight, even from darkvision. If the recipient is a creature carrying gear, that vanishes, too. If you cast the spell on someone else, neither you nor your allies can see the subject, unless you can normally see invisible things or you employ magic to do so.",
+        "material_component": "An eyelash encased in a bit of gum arabic."
     },
-    "components": ["V", "S", "M/DF"],
-    "casting_time": "1 standard action",
-    "range": "Personal or touch",
-    "target": "You or a creature or object weighing no more than 100 lb./level",
-    "duration": "1 min./level (D)",
-    "saving_throw": "Will negates (harmless) or Will negates (harmless, object)",
-    "spell_resistance": "Yes (harmless) or Yes (harmless, object)",
-    "description": "The creature or object touched becomes invisible, vanishing from sight, even from darkvision. If the recipient is a creature carrying gear, that vanishes, too. If you cast the spell on someone else, neither you nor your allies can see the subject, unless you can normally see invisible things or you employ magic to do so.",
-    "material_component": "An eyelash encased in a bit of gum arabic."
-  },
-  {
-    "name": "Lightning Bolt",
-    "school": "Evocation",
-    "descriptors": ["Electricity"],
-    "level": {
-      "Sorcerer": 3,
-      "Wizard": 3
+    {
+        "name": "Lightning Bolt",
+        "school": "Evocation",
+        "descriptors": [
+            "Electricity"
+        ],
+        "level": {
+            "Sorcerer": 3,
+            "Wizard": 3
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "120 ft.",
+        "area": "120-ft. line",
+        "duration": "Instantaneous",
+        "saving_throw": "Reflex half",
+        "spell_resistance": "Yes",
+        "description": "You release a powerful stroke of electrical energy that deals 1d6 points of electricity damage per caster level (maximum 10d6) to each creature within its area. The bolt begins at your fingertips.",
+        "material_component": "A bit of fur and an amber, crystal, or glass rod."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "120 ft.",
-    "area": "120-ft. line",
-    "duration": "Instantaneous",
-    "saving_throw": "Reflex half",
-    "spell_resistance": "Yes",
-    "description": "You release a powerful stroke of electrical energy that deals 1d6 points of electricity damage per caster level (maximum 10d6) to each creature within its area. The bolt begins at your fingertips.",
-    "material_component": "A bit of fur and an amber, crystal, or glass rod."
-  },
-  {
-    "name": "Mage Armor",
-    "school": "Conjuration",
-    "subschool": "Creation",
-    "descriptors": ["Force"],
-    "level": {
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Mage Armor",
+        "school": "Conjuration",
+        "subschool": "Creation",
+        "descriptors": [
+            "Force"
+        ],
+        "level": {
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "F"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 hour/level (D)",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "No",
+        "description": "An invisible but tangible field of force surrounds the subject, providing a +4 armor bonus to AC. Unlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. Since mage armor is made of force, incorporeal creatures can't bypass it the way they do normal armor.",
+        "focus": "A piece of cured leather."
     },
-    "components": ["V", "S", "F"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 hour/level (D)",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "No",
-    "description": "An invisible but tangible field of force surrounds the subject, providing a +4 armor bonus to AC. Unlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. Since mage armor is made of force, incorporeal creatures can't bypass it the way they do normal armor.",
-    "focus": "A piece of cured leather."
-  },
-  {
-    "name": "Magic Missile",
-    "school": "Evocation",
-    "descriptors": ["Force"],
-    "level": {
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Magic Missile",
+        "school": "Evocation",
+        "descriptors": [
+            "Force"
+        ],
+        "level": {
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Medium (100 ft. + 10 ft./level)",
+        "targets": "Up to five creatures, no two of which can be more than 15 ft. apart",
+        "duration": "Instantaneous",
+        "saving_throw": "None",
+        "spell_resistance": "Yes",
+        "description": "A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d4+1 points of force damage. The missile strikes unerringly, even if the target is in melee combat or has less than total cover or total concealment. For every two caster levels beyond 1st, you gain an additional missile—two at 3rd level, three at 5th, four at 7th, and the maximum of five missiles at 9th level or higher."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Medium (100 ft. + 10 ft./level)",
-    "targets": "Up to five creatures, no two of which can be more than 15 ft. apart",
-    "duration": "Instantaneous",
-    "saving_throw": "None",
-    "spell_resistance": "Yes",
-    "description": "A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d4+1 points of force damage. The missile strikes unerringly, even if the target is in melee combat or has less than total cover or total concealment. For every two caster levels beyond 1st, you gain an additional missile—two at 3rd level, three at 5th, four at 7th, and the maximum of five missiles at 9th level or higher."
-  },
-  {
-    "name": "Magic Weapon",
-    "school": "Transmutation",
-    "level": {
-      "Cleric": 1,
-      "Paladin": 1,
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Magic Weapon",
+        "school": "Transmutation",
+        "level": {
+            "Cleric": 1,
+            "Paladin": 1,
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Weapon touched",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates (harmless, object)",
+        "spell_resistance": "Yes (harmless, object)",
+        "description": "Magic weapon gives a weapon a +1 enhancement bonus on attack and damage rolls. (An enhancement bonus does not stack with a masterwork weapon's +1 bonus on attack rolls.) You can't cast this spell on a natural weapon, such as an unarmed strike."
     },
-    "components": ["V", "S", "DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Weapon touched",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates (harmless, object)",
-    "spell_resistance": "Yes (harmless, object)",
-    "description": "Magic weapon gives a weapon a +1 enhancement bonus on attack and damage rolls. (An enhancement bonus does not stack with a masterwork weapon's +1 bonus on attack rolls.) You can't cast this spell on a natural weapon, such as an unarmed strike."
-  },
-  {
-    "name": "Mirror Image",
-    "school": "Illusion",
-    "subschool": "Figment",
-    "level": {
-      "Bard": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Mirror Image",
+        "school": "Illusion",
+        "subschool": "Figment",
+        "level": {
+            "Bard": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Personal",
+        "target": "You",
+        "duration": "1 min./level",
+        "description": "Several illusory duplicates of you pop into being, making it difficult for enemies to know which target to attack. The figments stay near you and disappear when struck."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Personal",
-    "target": "You",
-    "duration": "1 min./level",
-    "description": "Several illusory duplicates of you pop into being, making it difficult for enemies to know which target to attack. The figments stay near you and disappear when struck."
-  },
-  {
-    "name": "Owl's Wisdom",
-    "school": "Transmutation",
-    "level": {
-      "Cleric": 2,
-      "Druid": 2,
-      "Paladin": 2,
-      "Ranger": 2,
-      "Sorcerer": 2,
-      "Wizard": 2
+    {
+        "name": "Owl's Wisdom",
+        "school": "Transmutation",
+        "level": {
+            "Cleric": 2,
+            "Druid": 2,
+            "Paladin": 2,
+            "Ranger": 2,
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 min./level",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "Yes",
+        "description": "The transmuted creature becomes wiser. The spell grants a +4 enhancement bonus to Wisdom, adding the usual benefits to Wisdom-related skills, Will saves, and other uses of the Wisdom modifier.",
+        "material_component": "A few feathers or a pinch of droppings from an owl."
     },
-    "components": ["V", "S", "M/DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 min./level",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "Yes",
-    "description": "The transmuted creature becomes wiser. The spell grants a +4 enhancement bonus to Wisdom, adding the usual benefits to Wisdom-related skills, Will saves, and other uses of the Wisdom modifier.",
-    "material_component": "A few feathers or a pinch of droppings from an owl."
-  },
-  {
-    "name": "Protection from Evil",
-    "school": "Abjuration",
-    "descriptors": ["Good"],
-    "level": {
-      "Cleric": 1,
-      "Paladin": 1,
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Protection from Evil",
+        "school": "Abjuration",
+        "descriptors": [
+            "Good"
+        ],
+        "level": {
+            "Cleric": 1,
+            "Paladin": 1,
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "M/DF"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Touch",
+        "target": "Creature touched",
+        "duration": "1 min./level (D)",
+        "saving_throw": "Will negates (harmless)",
+        "spell_resistance": "No; see text",
+        "description": "This spell wards a creature from attacks by evil creatures, from mental control, and from summoned creatures. It creates a magical barrier around the subject at a distance of 1 foot. The barrier moves with the subject and has three major effects.",
+        "material_component": "A little powdered silver with which you trace a 3-foot-diameter circle on the floor (or ground) around the creature to be warded."
     },
-    "components": ["V", "S", "M/DF"],
-    "casting_time": "1 standard action",
-    "range": "Touch",
-    "target": "Creature touched",
-    "duration": "1 min./level (D)",
-    "saving_throw": "Will negates (harmless)",
-    "spell_resistance": "No; see text",
-    "description": "This spell wards a creature from attacks by evil creatures, from mental control, and from summoned creatures. It creates a magical barrier around the subject at a distance of 1 foot. The barrier moves with the subject and has three major effects.",
-    "material_component": "A little powdered silver with which you trace a 3-foot-diameter circle on the floor (or ground) around the creature to be warded."
-  },
-  {
-    "name": "Ray of Frost",
-    "school": "Evocation",
-    "descriptors": ["Cold"],
-    "level": {
-      "Sorcerer": 0,
-      "Wizard": 0
+    {
+        "name": "Ray of Frost",
+        "school": "Evocation",
+        "descriptors": [
+            "Cold"
+        ],
+        "level": {
+            "Sorcerer": 0,
+            "Wizard": 0
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Close (25 ft. + 5 ft./2 levels)",
+        "effect": "Ray",
+        "duration": "Instantaneous",
+        "saving_throw": "None",
+        "spell_resistance": "Yes",
+        "description": "A ray of freezing air and ice projects from your pointing finger. You must succeed on a ranged touch attack with the ray to deal damage to a target. The ray deals 1d3 points of cold damage."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Close (25 ft. + 5 ft./2 levels)",
-    "effect": "Ray",
-    "duration": "Instantaneous",
-    "saving_throw": "None",
-    "spell_resistance": "Yes",
-    "description": "A ray of freezing air and ice projects from your pointing finger. You must succeed on a ranged touch attack with the ray to deal damage to a target. The ray deals 1d3 points of cold damage."
-  },
-  {
-    "name": "Shield",
-    "school": "Abjuration",
-    "descriptors": ["Force"],
-    "level": {
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Shield",
+        "school": "Abjuration",
+        "descriptors": [
+            "Force"
+        ],
+        "level": {
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Personal",
+        "target": "You",
+        "duration": "1 min./level (D)",
+        "description": "Shield creates an invisible, tower shield-sized mobile disk of force that hovers in front of you. It negates magic missile attacks directed at you. The disk also provides a +4 shield bonus to AC. This bonus applies against incorporeal touch attacks, since it is a force effect. The shield has no armor check penalty or arcane spell failure chance."
     },
-    "components": ["V", "S"],
-    "casting_time": "1 standard action",
-    "range": "Personal",
-    "target": "You",
-    "duration": "1 min./level (D)",
-    "description": "Shield creates an invisible, tower shield-sized mobile disk of force that hovers in front of you. It negates magic missile attacks directed at you. The disk also provides a +4 shield bonus to AC. This bonus applies against incorporeal touch attacks, since it is a force effect. The shield has no armor check penalty or arcane spell failure chance."
-  },
-  {
-    "name": "Sleep",
-    "school": "Enchantment",
-    "subschool": "Compulsion",
-    "descriptors": ["Mind-Affecting"],
-    "level": {
-      "Bard": 1,
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Sleep",
+        "school": "Enchantment",
+        "subschool": "Compulsion",
+        "descriptors": [
+            "Mind-Affecting"
+        ],
+        "level": {
+            "Bard": 1,
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 round",
+        "range": "Medium (100 ft. + 10 ft./level)",
+        "area": "One or more living creatures within a 10-ft.-radius burst",
+        "duration": "1 min./level (D)",
+        "saving_throw": "Will negates",
+        "spell_resistance": "Yes",
+        "description": "A sleep spell causes a magical slumber to come upon 4d4 Hit Dice of creatures. Creatures with the fewest HD are affected first. Among creatures with equal HD, those who are closest to the spell's point of origin are affected first.",
+        "material_component": "A pinch of fine sand, rose petals, or a live cricket."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 round",
-    "range": "Medium (100 ft. + 10 ft./level)",
-    "area": "One or more living creatures within a 10-ft.-radius burst",
-    "duration": "1 min./level (D)",
-    "saving_throw": "Will negates",
-    "spell_resistance": "Yes",
-    "description": "A sleep spell causes a magical slumber to come upon 4d4 Hit Dice of creatures. Creatures with the fewest HD are affected first. Among creatures with equal HD, those who are closest to the spell's point of origin are affected first.",
-    "material_component": "A pinch of fine sand, rose petals, or a live cricket."
-  },
-  {
-    "name": "Slow",
-    "school": "Transmutation",
-    "level": {
-      "Bard": 3,
-      "Sorcerer": 3,
-      "Wizard": 3
+    {
+        "name": "Slow",
+        "school": "Transmutation",
+        "level": {
+            "Bard": 3,
+            "Sorcerer": 3,
+            "Wizard": 3
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Close (25 ft. + 5 ft./2 levels)",
+        "targets": "One creature/level, no two of which can be more than 30 ft. apart",
+        "duration": "1 round/level",
+        "saving_throw": "Will negates",
+        "spell_resistance": "Yes",
+        "description": "An affected creature moves and attacks at a drastically slowed rate. A slowed creature can take only a single move action or standard action each turn, but not both (nor may it take full-round actions).",
+        "material_component": "A drop of molasses."
     },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action",
-    "range": "Close (25 ft. + 5 ft./2 levels)",
-    "targets": "One creature/level, no two of which can be more than 30 ft. apart",
-    "duration": "1 round/level",
-    "saving_throw": "Will negates",
-    "spell_resistance": "Yes",
-    "description": "An affected creature moves and attacks at a drastically slowed rate. A slowed creature can take only a single move action or standard action each turn, but not both (nor may it take full-round actions).",
-    "material_component": "A drop of molasses."
-  },
-  {
-    "name": "Summon Monster I",
-    "school": "Conjuration",
-    "subschool": "Summoning",
-    "level": {
-      "Bard": 1,
-      "Cleric": 1,
-      "Sorcerer": 1,
-      "Wizard": 1
+    {
+        "name": "Summon Monster I",
+        "school": "Conjuration",
+        "subschool": "Summoning",
+        "level": {
+            "Bard": 1,
+            "Cleric": 1,
+            "Sorcerer": 1,
+            "Wizard": 1
+        },
+        "components": [
+            "V",
+            "S",
+            "F/DF"
+        ],
+        "casting_time": "1 round",
+        "range": "Close (25 ft. + 5 ft./2 levels)",
+        "effect": "One summoned creature",
+        "duration": "1 round/level (D)",
+        "saving_throw": "None",
+        "spell_resistance": "No",
+        "description": "This spell summons an extraplanar creature (typically an outsider, elemental, or magical beast native to another plane). It appears where you designate and acts immediately, on your turn. It attacks your opponents to the best of its ability.",
+        "focus": "A tiny bag and a small (not necessarily lit) candle."
     },
-    "components": ["V", "S", "F/DF"],
-    "casting_time": "1 round",
-    "range": "Close (25 ft. + 5 ft./2 levels)",
-    "effect": "One summoned creature",
-    "duration": "1 round/level (D)",
-    "saving_throw": "None",
-    "spell_resistance": "No",
-    "description": "This spell summons an extraplanar creature (typically an outsider, elemental, or magical beast native to another plane). It appears where you designate and acts immediately, on your turn. It attacks your opponents to the best of its ability.",
-    "focus": "A tiny bag and a small (not necessarily lit) candle."
-  },
-  {
-    "name": "Web",
-    "school": "Conjuration",
-    "subschool": "Creation",
-    "level": {
-      "Sorcerer": 2,
-      "Wizard": 2
-    },
-    "components": ["V", "S", "M"],
-    "casting_time": "1 standard action", 
-    "range": "Medium (100 ft. + 10 ft./level)",
-    "effect": "Webs in a 20-ft.-radius spread",
-    "duration": "10 min./level (D)",
-    "saving_throw": "Reflex negates; see text",
-    "spell_resistance": "No",
-    "description": "Web creates a many-layered mass of strong, sticky strands. These strands trap those caught in them. The strands are similar to spider webs but far larger and tougher. These masses must be anchored to two or more solid and diametrically opposed points or else the web collapses upon itself and disappears.",
-    "material_component": "A bit of spider web."
-  }
+    {
+        "name": "Web",
+        "school": "Conjuration",
+        "subschool": "Creation",
+        "level": {
+            "Sorcerer": 2,
+            "Wizard": 2
+        },
+        "components": [
+            "V",
+            "S",
+            "M"
+        ],
+        "casting_time": "1 standard action",
+        "range": "Medium (100 ft. + 10 ft./level)",
+        "effect": "Webs in a 20-ft.-radius spread",
+        "duration": "10 min./level (D)",
+        "saving_throw": "Reflex negates; see text",
+        "spell_resistance": "No",
+        "description": "Web creates a many-layered mass of strong, sticky strands. These strands trap those caught in them. The strands are similar to spider webs but far larger and tougher. These masses must be anchored to two or more solid and diametrically opposed points or else the web collapses upon itself and disappears.",
+        "material_component": "A bit of spider web."
+    }
 ]

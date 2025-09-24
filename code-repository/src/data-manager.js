@@ -16,13 +16,13 @@ class DnDDataManager {
             calculations: {},
             complete: {}
         };
-        
+
         this.loadPromises = {};
         this.isInitialized = false;
-        
+
         // Base path for data files
         this.dataPath = './data/';
-        
+
         // File mappings
         this.dataFiles = {
             races: 'races-expanded.json',
@@ -54,7 +54,7 @@ class DnDDataManager {
             // Load all data files in parallel
             const loadPromises = [
                 this.loadDataFile('races'),
-                this.loadDataFile('classes'), 
+                this.loadDataFile('classes'),
                 this.loadDataFile('skills'),
                 this.loadDataFile('feats'),
                 this.loadDataFile('spells'),
@@ -64,7 +64,7 @@ class DnDDataManager {
 
             await Promise.all(loadPromises);
             this.isInitialized = true;
-            
+
             console.log('D&D Data Manager initialized successfully');
             this.logDataSummary();
         } catch (error) {
@@ -302,11 +302,11 @@ class DnDDataManager {
     getWeapons(category = null) {
         const equipment = this.getEquipment();
         if (!equipment.weapons) return [];
-        
+
         if (category) {
             return equipment.weapons[category] || [];
         }
-        
+
         // Return all weapons
         const allWeapons = [];
         for (const [cat, weapons] of Object.entries(equipment.weapons)) {
@@ -323,11 +323,11 @@ class DnDDataManager {
     getArmor(category = null) {
         const equipment = this.getEquipment();
         if (!equipment.armor) return [];
-        
+
         if (category) {
             return equipment.armor[category] || [];
         }
-        
+
         // Return all armor
         const allArmor = [];
         for (const [cat, armor] of Object.entries(equipment.armor)) {
@@ -354,8 +354,8 @@ class DnDDataManager {
     searchEquipment(searchTerm, exactMatch = false) {
         const results = [];
         const equipment = this.getEquipment();
-        
-        const searchFunction = exactMatch 
+
+        const searchFunction = exactMatch
             ? (item) => item.name === searchTerm
             : (item) => item.name.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -363,17 +363,17 @@ class DnDDataManager {
         for (const weapons of Object.values(equipment.weapons || {})) {
             results.push(...weapons.filter(searchFunction));
         }
-        
+
         // Search armor
         for (const armor of Object.values(equipment.armor || {})) {
             results.push(...armor.filter(searchFunction));
         }
-        
+
         // Search other gear
         if (equipment.adventuring_gear) {
             results.push(...equipment.adventuring_gear.filter(searchFunction));
         }
-        
+
         return results;
     }
 
@@ -478,7 +478,7 @@ class DnDDataManager {
             calculations: {},
             complete: {}
         };
-        
+
         await this.initialize();
     }
 
@@ -488,21 +488,21 @@ class DnDDataManager {
      */
     validateData() {
         const issues = [];
-        
+
         // Check for required fields in races
         for (const race of this.data.races) {
             if (!race.name || !race.size || !race.ability_adjustments) {
                 issues.push(`Race missing required fields: ${race.name}`);
             }
         }
-        
+
         // Check for required fields in classes
         for (const cls of this.data.classes) {
             if (!cls.name || !cls.hit_die || !cls.skill_points_per_level) {
                 issues.push(`Class missing required fields: ${cls.name}`);
             }
         }
-        
+
         // Check for orphaned references
         for (const cls of this.data.classes) {
             if (cls.class_skills) {
@@ -513,7 +513,7 @@ class DnDDataManager {
                 }
             }
         }
-        
+
         return {
             valid: issues.length === 0,
             issues
