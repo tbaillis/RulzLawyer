@@ -16,7 +16,7 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 }
 
 # Start the server in the background
-$serverCmd = 'server-enhanced.js'
+$serverCmd = 'code-repository\server\server-enhanced.js'
 Write-Output "Launching server: node $serverCmd"
 $proc = Start-Process -FilePath node -ArgumentList 'server-enhanced.js' -PassThru -NoNewWindow
 
