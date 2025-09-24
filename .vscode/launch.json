@@ -1,0 +1,155 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch RulzLawyer Server",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/server-enhanced.js",
+            "console": "integratedTerminal",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "restart": true,
+            "runtimeArgs": [],
+            "cwd": "${workspaceFolder}",
+            "outputCapture": "console",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Launch with PowerShell Script",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/start-game.ps1",
+            "args": ["-Port", "3000", "-HostName", "localhost", "-WaitSeconds", "5"],
+            "cwd": "${workspaceFolder}",
+            "createTemporaryIntegratedConsole": false
+        },
+        {
+            "name": "Quick Launch Game (PS1)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/server-enhanced.js",
+            "console": "integratedTerminal",
+            "preLaunchTask": "Kill Node Processes",
+            "env": {
+                "NODE_ENV": "development",
+                "PORT": "3000"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "restart": true,
+            "runtimeArgs": [],
+            "cwd": "${workspaceFolder}",
+            "outputCapture": "console",
+            "internalConsoleOptions": "neverOpen",
+            "postDebugTask": "Open Game in Browser"
+        },
+        {
+            "name": "Debug Dice Engine",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/code-repository/src/dice/dice-engine.js",
+            "console": "integratedTerminal",
+            "args": [],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "cwd": "${workspaceFolder}/code-repository/src"
+        },
+        {
+            "name": "Test Character Generator",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/code-repository/tests/test-character-generator.js",
+            "console": "integratedTerminal",
+            "args": [],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV": "test"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Test Adventure Engine",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/code-repository/tests/test-adventure-engine.js",
+            "console": "integratedTerminal",
+            "args": [],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV": "test"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Debug Full Game System",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/debug-game-system.js",
+            "console": "integratedTerminal",
+            "args": [],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV": "debug"
+            },
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false
+        },
+        {
+            "name": "Launch Server with Auto-Restart",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/server-enhanced.js",
+            "console": "integratedTerminal",
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "runtimeArgs": [
+                "--inspect"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Attach to Running Server",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "restart": false,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": null,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch Game & Open Browser",
+            "configurations": [
+                "Launch RulzLawyer Server"
+            ],
+            "preLaunchTask": "Kill Node Processes",
+            "postDebugTask": "Open Game Browser"
+        }
+    ]
+}

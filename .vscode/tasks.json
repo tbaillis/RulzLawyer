@@ -1,0 +1,149 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Kill Node Processes",
+            "type": "shell",
+            "command": "Get-Process -Name node -ErrorAction SilentlyContinue | Stop-Process -Force",
+            "options": {
+                "shell": {
+                    "executable": "pwsh.exe",
+                    "args": ["-Command"]
+                }
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Open Game in Browser",
+            "type": "shell",
+            "command": "Start-Process",
+            "args": [
+                "http://localhost:3000"
+            ],
+            "options": {
+                "shell": {
+                    "executable": "pwsh.exe",
+                    "args": ["-Command"]
+                }
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Start RulzLawyer Server",
+            "type": "shell",
+            "command": "node",
+            "args": [
+                "server-enhanced.js"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "."
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Starting RulzLawyer",
+                    "endsPattern": "ready for gaming!"
+                }
+            }
+        },
+        {
+            "label": "Run PowerShell Game Launcher",
+            "type": "shell",
+            "command": "./start-game.ps1",
+            "args": [],
+            "options": {
+                "shell": {
+                    "executable": "pwsh.exe",
+                    "args": ["-ExecutionPolicy", "Bypass", "-File"]
+                },
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Test All Game Systems",
+            "type": "shell",
+            "command": "node",
+            "args": [
+                "-e",
+                "try { const DiceEngine = require('./code-repository/src/dice/dice-engine.js'); const { CharacterGenerator } = require('./code-repository/src/character/character-generator.js'); const AdventureEngine = require('./code-repository/src/adventure/adventure-engine.js'); console.log('✅ All systems loaded successfully!'); const dice = new DiceEngine(); console.log('🎲 Dice test:', dice.roll('4d6dl1')); const charGen = new CharacterGenerator(dice); const char = charGen.generateRandomCharacter(); console.log('🧙 Character test:', char.name, 'the', char.race, char.characterClass); const advEngine = new AdventureEngine(dice); const adv = advEngine.generateAdventure(char.level); console.log('⚔️ Adventure test:', adv.title); console.log('🎯 All systems working!'); } catch(e) { console.error('❌ Test failed:', e.message); process.exit(1); }"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean and Restart",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Kill Node Processes",
+                "Start RulzLawyer Server"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always"
+            }
+        },
+        {
+            "label": "Launch Game Complete",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Kill Node Processes",
+                "Start RulzLawyer Server",
+                "Open Game Browser"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always"
+            }
+        }
+    ]
+}

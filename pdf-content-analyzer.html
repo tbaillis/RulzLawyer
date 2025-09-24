@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Content Analyzer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #8B4513;
+        }
+        .pdf-selector {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .pdf-button {
+            background: linear-gradient(135deg, #8B4513, #CD853F);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .pdf-button:hover {
+            background: linear-gradient(135deg, #CD853F, #8B4513);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .pdf-canvas {
+            border: 2px solid #8B4513;
+            margin: 20px 0;
+            background: white;
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        .analysis-panel {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .text-content {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #8B4513;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .loading {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+        }
+        .error {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .form-field {
+            background: #e3f2fd;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border-left: 3px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗞️ PDF Content Analyzer</h1>
+            <p>Examining D&D Character Sheet PDFs for Layout and Form Fields</p>
+        </div>
+
+        <div class="pdf-selector">
+            <button class="pdf-button" onclick="loadPDF('examples/Example Sheet.pdf', 'Example Sheet')">
+                📄 Example Sheet (Page 1)
+            </button>
+            <button class="pdf-button" onclick="loadPDF('examples/Example Sheet page 2.pdf', 'Example Sheet Page 2')">
+                📄 Example Sheet (Page 2)
+            </button>
+            <button class="pdf-button" onclick="loadPDF('examples/Example Sheet page 3.pdf', 'Example Sheet Page 3')">
+                📄 Example Sheet (Page 3)
+            </button>
+        </div>
+
+        <div id="loadingStatus" class="loading" style="display: none;">Loading PDF...</div>
+        <div id="errorMessage" class="error" style="display: none;"></div>
+
+        <canvas id="pdfCanvas" class="pdf-canvas" style="display: none;"></canvas>
+
+        <div class="analysis-panel">
+            <h3>📋 PDF Analysis Results</h3>
+            <div id="pdfInfo"></div>
+            
+            <h4>📝 Extracted Text Content</h4>
+            <div id="textContent" class="text-content">No PDF loaded yet...</div>
+            
+            <h4>📊 Form Fields Detected</h4>
+            <div id="formFields">No PDF loaded yet...</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Set up PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        let currentPDF = null;
+
+        async function loadPDF(pdfUrl, title) {
+            const loadingDiv = document.getElementById('loadingStatus');
+            const errorDiv = document.getElementById('errorMessage');
+            const canvas = document.getElementById('pdfCanvas');
+            const infoDiv = document.getElementById('pdfInfo');
+            const textDiv = document.getElementById('textContent');
+            const formDiv = document.getElementById('formFields');
+
+            // Show loading state
+            loadingDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            canvas.style.display = 'none';
+            
+            try {
+                console.log('Loading PDF:', pdfUrl);
+                
+                // Load the PDF
+                const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+                currentPDF = pdf;
+                
+                // Display basic PDF info
+                infoDiv.innerHTML = `
+                    <strong>📄 ${title}</strong><br>
+                    Pages: ${pdf.numPages}<br>
+                    PDF Version: ${pdf.pdfInfo.PDFFormatVersion || 'Unknown'}<br>
+                    Created: ${pdf.pdfInfo.CreationDate || 'Unknown'}
+                `;
+
+                // Render first page
+                const page = await pdf.getPage(1);
+                const viewport = page.getViewport({ scale: 1.5 });
+
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                canvas.style.display = 'block';
+
+                const ctx = canvas.getContext('2d');
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                await page.render(renderContext).promise;
+
+                // Extract text content
+                const textContent = await page.getTextContent();
+                let extractedText = '';
+                const textItems = [];
+                
+                textContent.items.forEach(item => {
+                    if (item.str && item.str.trim()) {
+                        extractedText += item.str + '\n';
+                        textItems.push({
+                            text: item.str,
+                            x: item.transform[4],
+                            y: item.transform[5],
+                            width: item.width,
+                            height: item.height
+                        });
+                    }
+                });
+
+                textDiv.textContent = extractedText || 'No text content extracted';
+
+                // Analyze text items for form field patterns
+                analyzeFormFields(textItems, formDiv);
+
+                loadingDiv.style.display = 'none';
+
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                errorDiv.textContent = `Error loading PDF: ${error.message}`;
+                errorDiv.style.display = 'block';
+                loadingDiv.style.display = 'none';
+            }
+        }
+
+        function analyzeFormFields(textItems, formDiv) {
+            const formFields = [];
+            const fieldPatterns = [
+                { pattern: /character name/i, type: 'Character Name' },
+                { pattern: /player name/i, type: 'Player Name' },
+                { pattern: /class.*level/i, type: 'Class & Level' },
+                { pattern: /race/i, type: 'Race' },
+                { pattern: /alignment/i, type: 'Alignment' },
+                { pattern: /experience/i, type: 'Experience Points' },
+                { pattern: /strength|str/i, type: 'Strength' },
+                { pattern: /dexterity|dex/i, type: 'Dexterity' },
+                { pattern: /constitution|con/i, type: 'Constitution' },
+                { pattern: /intelligence|int/i, type: 'Intelligence' },
+                { pattern: /wisdom|wis/i, type: 'Wisdom' },
+                { pattern: /charisma|cha/i, type: 'Charisma' },
+                { pattern: /armor class|ac/i, type: 'Armor Class' },
+                { pattern: /hit points|hp/i, type: 'Hit Points' },
+                { pattern: /initiative/i, type: 'Initiative' },
+                { pattern: /speed/i, type: 'Speed' },
+                { pattern: /saving throw/i, type: 'Saving Throw' },
+                { pattern: /skill/i, type: 'Skill' },
+                { pattern: /attack/i, type: 'Attack' },
+                { pattern: /damage/i, type: 'Damage' },
+                { pattern: /equipment/i, type: 'Equipment' },
+                { pattern: /spell/i, type: 'Spell' },
+                { pattern: /feat/i, type: 'Feat' }
+            ];
+
+            textItems.forEach(item => {
+                fieldPatterns.forEach(pattern => {
+                    if (pattern.pattern.test(item.text)) {
+                        formFields.push({
+                            type: pattern.type,
+                            text: item.text,
+                            position: { x: item.x, y: item.y },
+                            dimensions: { width: item.width, height: item.height }
+                        });
+                    }
+                });
+            });
+
+            if (formFields.length > 0) {
+                formDiv.innerHTML = formFields.map(field => 
+                    `<div class="form-field">
+                        <strong>${field.type}:</strong> "${field.text}"<br>
+                        <small>Position: (${Math.round(field.position.x)}, ${Math.round(field.position.y)}) | 
+                        Size: ${Math.round(field.dimensions.width)}x${Math.round(field.dimensions.height)}</small>
+                    </div>`
+                ).join('');
+            } else {
+                formDiv.innerHTML = 'No form field patterns detected in extracted text.';
+            }
+        }
+
+        // Auto-load the first PDF when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loadPDF('examples/Example Sheet.pdf', 'Example Sheet');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

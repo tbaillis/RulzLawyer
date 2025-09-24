@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RulzLawyer - D&D 3.5 Character Survival Game</title>
+    <style>
+        /* Character Sheet Styling - Based on PDF Examples */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f3f0;
+            color: #2c1810;
+            line-height: 1.4;
+        }
+
+        .game-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Character Sheet Panel - Mimics PDF Layout */
+        .character-panel {
+            background: white;
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .character-panel h2 {
+            color: #8B4513;
+            border-bottom: 2px solid #8B4513;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        /* Character Basic Info - Top Section Like PDF */
+        .character-basics {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #faf9f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-group label {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #5d4037;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .field-group input, .field-group select {
+            padding: 5px 8px;
+            border: 1px solid #8B4513;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        /* Ability Scores - PDF Style Layout */
+        .ability-scores {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f6f3;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .ability-score {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border: 1px solid #8B4513;
+            border-radius: 5px;
+        }
+
+        .ability-score label {
+            display: block;
+            font-weight: bold;
+            color: #8B4513;
+            font-size: 0.8em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .score-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c1810;
+            margin-bottom: 3px;
+        }
+
+        .modifier-display {
+            font-size: 1em;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Skills and Features - PDF Style Tables */
+        .skills-section, .features-section {
+            margin: 15px 0;
+            padding: 15px;
+            background: #faf9f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: #8B4513;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            font-size: 0.9em;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 5px;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 3px;
+        }
+
+        /* Equipment and Inventory */
+        .equipment-section {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f6f3;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .equipment-item {
+            padding: 8px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        /* Game Panel - Right Side */
+        .game-panel {
+            background: white;
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .game-panel h2 {
+            color: #8B4513;
+            border-bottom: 2px solid #8B4513;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .action-btn {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Dice Rolling Area */
+        .dice-section {
+            background: #f8f6f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        .dice-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .dice-input input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #8B4513;
+            border-radius: 3px;
+            font-size: 1em;
+        }
+
+        .dice-result {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #8B4513;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* Adventure Log */
+        .adventure-log {
+            background: #faf9f7;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9em;
+            line-height: 1.3;
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .character-basics {
+                grid-template-columns: 1fr;
+            }
+            
+            .ability-scores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <header class="header">
+            <h1>RulzLawyer</h1>
+            <div class="subtitle">D&D 3.5 Character Survival Game</div>
+        </header>
+
+        <div class="main-content">
+            <!-- Character Sheet Panel -->
+            <div class="character-panel">
+                <h2>Character Sheet</h2>
+                
+                <!-- Basic Character Information -->
+                <div class="character-basics">
+                    <div class="field-group">
+                        <label>Character Name</label>
+                        <input type="text" id="characterName" placeholder="Enter character name">
+                    </div>
+                    <div class="field-group">
+                        <label>Race</label>
+                        <select id="raceSelect">
+                            <option value="">Select Race</option>
+                            <option value="human">Human</option>
+                            <option value="elf">Elf</option>
+                            <option value="dwarf">Dwarf</option>
+                            <option value="halfling">Halfling</option>
+                            <option value="gnome">Gnome</option>
+                            <option value="half-elf">Half-Elf</option>
+                            <option value="half-orc">Half-Orc</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label>Class</label>
+                        <select id="classSelect">
+                            <option value="">Select Class</option>
+                            <option value="fighter">Fighter</option>
+                            <option value="wizard">Wizard</option>
+                            <option value="rogue">Rogue</option>
+                            <option value="cleric">Cleric</option>
+                            <option value="ranger">Ranger</option>
+                            <option value="paladin">Paladin</option>
+                            <option value="barbarian">Barbarian</option>
+                            <option value="bard">Bard</option>
+                            <option value="druid">Druid</option>
+                            <option value="monk">Monk</option>
+                            <option value="sorcerer">Sorcerer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Ability Scores -->
+                <div class="section-title">Ability Scores</div>
+                <div class="ability-scores">
+                    <div class="ability-score">
+                        <label>Strength</label>
+                        <div class="score-display" id="strScore">10</div>
+                        <div class="modifier-display" id="strMod">+0</div>
+                    </div>
+                    <div class="ability-score">
+                        <label>Dexterity</label>
+                        <div class="score-display" id="dexScore">10</div>
+                        <div class="modifier-display" id="dexMod">+0</div>
+                    </div>
+                    <div class="ability-score">
+                        <label>Constitution</label>
+                        <div class="score-display" id="conScore">10</div>
+                        <div class="modifier-display" id="conMod">+0</div>
+                    </div>
+                    <div class="ability-score">
+                        <label>Intelligence</label>
+                        <div class="score-display" id="intScore">10</div>
+                        <div class="modifier-display" id="intMod">+0</div>
+                    </div>
+                    <div class="ability-score">
+                        <label>Wisdom</label>
+                        <div class="score-display" id="wisScore">10</div>
+                        <div class="modifier-display" id="wisMod">+0</div>
+                    </div>
+                    <div class="ability-score">
+                        <label>Charisma</label>
+                        <div class="score-display" id="chaScore">10</div>
+                        <div class="modifier-display" id="chaMod">+0</div>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="skills-section">
+                    <div class="section-title">Skills</div>
+                    <div class="skills-grid" id="skillsList">
+                        <!-- Skills will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Equipment Section -->
+                <div class="equipment-section">
+                    <div class="section-title">Equipment</div>
+                    <div class="equipment-grid" id="equipmentList">
+                        <!-- Equipment will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Control Panel -->
+            <div class="game-panel">
+                <h2>Game Controls</h2>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="window.open('new-character-creator.html', '_blank')" style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);">New Character Creator</button>
+                    <button class="action-btn" onclick="generateCharacter()">Quick Generate</button>
+                    <button class="action-btn" onclick="startAdventure()">Start Adventure</button>
+                    <button class="action-btn" onclick="saveCharacter()">Save Character</button>
+                    <button class="action-btn" onclick="loadCharacter()">Load Character</button>
+                    <button class="action-btn" onclick="window.open('/dice-roller.html', '_blank')">Dice Roller</button>
+                </div>
+
+                <!-- Dice Rolling Section -->
+                <div class="dice-section">
+                    <div class="section-title">Dice Rolling</div>
+                    <div class="dice-input">
+                        <input type="text" id="diceExpression" placeholder="Enter dice (e.g., 3d6, 1d20+5)" value="1d20">
+                        <button class="action-btn" onclick="rollDice()" style="width: auto; padding: 8px 15px; font-size: 0.9em;">Roll</button>
+                    </div>
+                    <div class="dice-result" id="diceResult">
+                        Enter a dice expression and click Roll
+                    </div>
+                </div>
+
+                <!-- Adventure Log -->
+                <div class="section-title">Adventure Log</div>
+                <div class="adventure-log" id="adventureLog">
+                    <div class="log-entry">Welcome to RulzLawyer! Generate a character to begin your survival adventure.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Game Engine Scripts -->
+    <script src="code-repository/src/dice/dice-engine.js"></script>
+    <script src="code-repository/src/character/character-generator.js"></script>
+    <script src="code-repository/src/adventure/adventure-engine.js"></script>
+    <script src="code-repository/src/integrated-character-creator.js"></script>
+
+    <script>
+        // Global game state
+        let currentCharacter = null;
+        let gameEngine = null;
+        let diceEngine = null;
+
+        // Initialize the game when the page loads
+        window.addEventListener('load', function() {
+            initializeGame();
+        });
+
+        function initializeGame() {
+            try {
+                // Initialize dice engine
+                if (typeof DiceEngine !== 'undefined') {
+                    diceEngine = new DiceEngine();
+                    addLogEntry('Dice engine initialized successfully');
+                } else {
+                    addLogEntry('Warning: Dice engine not loaded');
+                }
+
+                // Initialize character system
+                if (typeof CharacterGenerator !== 'undefined') {
+                    addLogEntry('Character system ready');
+                } else {
+                    addLogEntry('Warning: Character system not loaded');
+                }
+
+                addLogEntry('Game initialized. Ready to create characters!');
+            } catch (error) {
+                addLogEntry('Error initializing game: ' + error.message);
+                console.error('Game initialization error:', error);
+            }
+        }
+
+        function generateCharacter() {
+            try {
+                // Generate random ability scores using 4d6 drop lowest
+                const abilities = {};
+                const abilityNames = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
+                
+                abilityNames.forEach(ability => {
+                    if (diceEngine) {
+                        abilities[ability] = diceEngine.roll('4d6dl1');
+                    } else {
+                        // Fallback random generation
+                        abilities[ability] = Math.floor(Math.random() * 15) + 6;
+                    }
+                });
+
+                // Update display
+                updateAbilityScores(abilities);
+                
+                // Generate basic character info
+                const races = ['human', 'elf', 'dwarf', 'halfling', 'gnome', 'half-elf', 'half-orc'];
+                const classes = ['fighter', 'wizard', 'rogue', 'cleric', 'ranger', 'paladin', 'barbarian'];
+                
+                const randomRace = races[Math.floor(Math.random() * races.length)];
+                const randomClass = classes[Math.floor(Math.random() * classes.length)];
+                
+                document.getElementById('raceSelect').value = randomRace;
+                document.getElementById('classSelect').value = randomClass;
+                
+                // Generate random name
+                const names = ['Aerdrie', 'Beiro', 'Carric', 'Drannor', 'Enna', 'Galinndan', 'Hadarai', 'Immeral', 'Jhaan', 'Kiyueth'];
+                const randomName = names[Math.floor(Math.random() * names.length)];
+                document.getElementById('characterName').value = randomName;
+
+                addLogEntry(`Generated character: ${randomName} the ${randomRace} ${randomClass}`);
+                addLogEntry(`Ability scores - STR: ${abilities.strength}, DEX: ${abilities.dexterity}, CON: ${abilities.constitution}, INT: ${abilities.intelligence}, WIS: ${abilities.wisdom}, CHA: ${abilities.charisma}`);
+                
+                // Update skills and equipment based on class
+                updateSkillsForClass(randomClass);
+                updateEquipmentForClass(randomClass);
+                
+            } catch (error) {
+                addLogEntry('Error generating character: ' + error.message);
+                console.error('Character generation error:', error);
+            }
+        }
+
+        function updateAbilityScores(abilities) {
+            const abilityMap = {
+                strength: 'str',
+                dexterity: 'dex', 
+                constitution: 'con',
+                intelligence: 'int',
+                wisdom: 'wis',
+                charisma: 'cha'
+            };
+
+            Object.keys(abilities).forEach(ability => {
+                const score = abilities[ability];
+                const modifier = Math.floor((score - 10) / 2);
+                const shortName = abilityMap[ability];
+                
+                document.getElementById(shortName + 'Score').textContent = score;
+                document.getElementById(shortName + 'Mod').textContent = modifier >= 0 ? '+' + modifier : modifier;
+            });
+        }
+
+        function updateSkillsForClass(characterClass) {
+            const skillsList = document.getElementById('skillsList');
+            skillsList.innerHTML = '';
+
+            // Class-specific skills
+            const classSkills = {
+                fighter: ['Climb', 'Handle Animal', 'Intimidate', 'Jump', 'Ride', 'Swim'],
+                wizard: ['Concentration', 'Craft', 'Knowledge', 'Profession', 'Spellcraft'],
+                rogue: ['Balance', 'Bluff', 'Climb', 'Craft', 'Decipher Script', 'Diplomacy', 'Disable Device', 'Disguise', 'Escape Artist', 'Forgery', 'Gather Information', 'Hide', 'Intimidate', 'Jump', 'Knowledge', 'Listen', 'Move Silently', 'Open Lock', 'Perform', 'Profession', 'Search', 'Sense Motive', 'Sleight of Hand', 'Spot', 'Tumble', 'Use Magic Device', 'Use Rope'],
+                cleric: ['Concentration', 'Craft', 'Diplomacy', 'Heal', 'Knowledge (Religion)', 'Profession', 'Spellcraft']
+            };
+
+            const skills = classSkills[characterClass] || ['Craft', 'Knowledge', 'Profession'];
+            
+            skills.forEach(skill => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.innerHTML = `<span>${skill}</span><span>+0</span>`;
+                skillsList.appendChild(skillItem);
+            });
+        }
+
+        function updateEquipmentForClass(characterClass) {
+            const equipmentList = document.getElementById('equipmentList');
+            equipmentList.innerHTML = '';
+
+            // Class-specific starting equipment
+            const classEquipment = {
+                fighter: ['Longsword', 'Scale Mail', 'Heavy Shield', 'Longbow', '20 Arrows'],
+                wizard: ['Quarterstaff', 'Dagger', 'Spellbook', 'Component Pouch', 'Robes'],
+                rogue: ['Rapier', 'Shortbow', '20 Arrows', 'Studded Leather', 'Thieves\' Tools'],
+                cleric: ['Morningstar', 'Scale Mail', 'Heavy Shield', 'Holy Symbol', 'Healing Potion']
+            };
+
+            const equipment = classEquipment[characterClass] || ['Dagger', 'Clothes', 'Backpack'];
+            
+            equipment.forEach(item => {
+                const equipItem = document.createElement('div');
+                equipItem.className = 'equipment-item';
+                equipItem.textContent = item;
+                equipmentList.appendChild(equipItem);
+            });
+        }
+
+        function rollDice() {
+            try {
+                const expression = document.getElementById('diceExpression').value.trim();
+                if (!expression) {
+                    addLogEntry('Please enter a dice expression');
+                    return;
+                }
+
+                let result;
+                if (diceEngine) {
+                    result = diceEngine.roll(expression);
+                } else {
+                    // Basic fallback parser
+                    if (expression.includes('d20')) {
+                        result = Math.floor(Math.random() * 20) + 1;
+                    } else if (expression.includes('d6')) {
+                        result = Math.floor(Math.random() * 6) + 1;
+                    } else {
+                        result = Math.floor(Math.random() * 6) + 1;
+                    }
+                }
+
+                document.getElementById('diceResult').textContent = `${expression}: ${result}`;
+                addLogEntry(`Rolled ${expression}: ${result}`);
+                
+            } catch (error) {
+                document.getElementById('diceResult').textContent = 'Invalid dice expression';
+                addLogEntry('Error rolling dice: ' + error.message);
+                console.error('Dice rolling error:', error);
+            }
+        }
+
+        function startAdventure() {
+            const characterName = document.getElementById('characterName').value;
+            if (!characterName) {
+                addLogEntry('Please generate or create a character first');
+                return;
+            }
+
+            addLogEntry(`${characterName} begins their survival adventure!`);
+            addLogEntry('You find yourself at the edge of a mysterious forest...');
+            
+            // Simulate basic adventure encounter
+            setTimeout(() => {
+                const encounters = [
+                    'A pack of wolves approaches through the trees',
+                    'You discover an ancient ruined tower',
+                    'A traveling merchant offers to trade',
+                    'Strange lights flicker in the distance',
+                    'You hear the sound of running water nearby'
+                ];
+                
+                const randomEncounter = encounters[Math.floor(Math.random() * encounters.length)];
+                addLogEntry(randomEncounter);
+            }, 2000);
+        }
+
+        function saveCharacter() {
+            try {
+                const characterData = {
+                    name: document.getElementById('characterName').value,
+                    race: document.getElementById('raceSelect').value,
+                    class: document.getElementById('classSelect').value,
+                    abilities: {
+                        strength: parseInt(document.getElementById('strScore').textContent),
+                        dexterity: parseInt(document.getElementById('dexScore').textContent),
+                        constitution: parseInt(document.getElementById('conScore').textContent),
+                        intelligence: parseInt(document.getElementById('intScore').textContent),
+                        wisdom: parseInt(document.getElementById('wisScore').textContent),
+                        charisma: parseInt(document.getElementById('chaScore').textContent)
+                    }
+                };
+
+                localStorage.setItem('rulzLawyerCharacter', JSON.stringify(characterData));
+                addLogEntry(`Character ${characterData.name} saved successfully`);
+            } catch (error) {
+                addLogEntry('Error saving character: ' + error.message);
+            }
+        }
+
+        function loadCharacter() {
+            try {
+                const savedData = localStorage.getItem('rulzLawyerCharacter');
+                if (!savedData) {
+                    addLogEntry('No saved character found');
+                    return;
+                }
+
+                const characterData = JSON.parse(savedData);
+                
+                document.getElementById('characterName').value = characterData.name;
+                document.getElementById('raceSelect').value = characterData.race;
+                document.getElementById('classSelect').value = characterData.class;
+                
+                updateAbilityScores(characterData.abilities);
+                updateSkillsForClass(characterData.class);
+                updateEquipmentForClass(characterData.class);
+                
+                addLogEntry(`Character ${characterData.name} loaded successfully`);
+            } catch (error) {
+                addLogEntry('Error loading character: ' + error.message);
+            }
+        }
+
+        function addLogEntry(message) {
+            const log = document.getElementById('adventureLog');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+    </script>
+</body>
+</html>

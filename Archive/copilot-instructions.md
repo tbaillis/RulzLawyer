@@ -1,3 +1,5 @@
+IF THE PROMPT TELLS YOU TO DO SOMETHING DIFFERENTLY, FOLLOW THE PROMPT INSTEAD OF THESE INSTRUCTIONS.
+
 # GitHub Copilot Instructions - RulzLawyer D&D 3.5 Character Creator
 
 ## 🎯 Project Overview

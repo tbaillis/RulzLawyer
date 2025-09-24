@@ -1,0 +1,72 @@
+{
+    "recommendations": [
+        // Essential JavaScript/Node.js Development
+        "ms-vscode.vscode-json",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        
+        // HTML/CSS/Web Development
+        "ms-vscode.live-server",
+        "formulahendry.auto-rename-tag",
+        "pranaygp.vscode-css-peek",
+        "ecmel.vscode-html-css",
+        
+        // Debugging and Testing
+        "ms-vscode.vscode-js-debug",
+        "hbenl.vscode-test-explorer",
+        "formulahendry.code-runner",
+        
+        // Git and Version Control
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+        "github.copilot",
+        
+        // Markdown and Documentation
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "shd101wyy.markdown-preview-enhanced",
+        
+        // PowerShell (Windows development)
+        "ms-vscode.powershell",
+        
+        // Productivity and Code Quality
+        "streetsidesoftware.code-spell-checker",
+        "esbenp.prettier-vscode",
+        "ms-vsliveshare.vsliveshare",
+        "alefragnani.bookmarks",
+        "oderwat.indent-rainbow",
+        
+        // Theme and UI Enhancement
+        "pkief.material-icon-theme",
+        "zhuangtongfa.material-theme",
+        "usernamehw.errorlens",
+        
+        // REST API Testing (for future server API development)
+        "humao.rest-client",
+        
+        // File and Project Management
+        "alefragnani.project-manager",
+        "gruntfuggly.todo-tree",
+        "aaron-bond.better-comments",
+        
+        // Performance and Monitoring
+        "ms-vscode.vscode-json",
+        "christian-kohler.path-intellisense",
+        
+        // Optional: Advanced Development Tools
+        "ms-vscode.hexdump",
+        "tomoki1207.pdf",
+        "redhat.vscode-yaml",
+        
+        // Game Development Specific
+        "slevesque.vscode-multiclip",
+        "formulahendry.auto-close-tag"
+    ],
+    "unwantedRecommendations": [
+        // Extensions that might conflict with D&D development
+        "ms-python.python",
+        "ms-dotnettools.csharp",
+        "ms-vscode.cpptools",
+        "redhat.java"
+    ]
+}
