@@ -175,7 +175,7 @@ function handleAPIRequest(req, res, pathname, query) {
 function handleHomePage(res) {
     // Serve the actual index.html file instead of generated content
     const indexPath = path.join(__dirname, 'index.html');
-    
+
     try {
         const indexContent = fs.readFileSync(indexPath, 'utf8');
         res.writeHead(200, {
