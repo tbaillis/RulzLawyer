@@ -40,7 +40,7 @@ class DiceEngine {
                 // Fallback to Math.random
             }
         }
-        
+
         // Fallback to enhanced Math.random with seed capability
         return {
             type: 'math',
@@ -140,7 +140,7 @@ class DiceEngine {
 
         for (let i = 0; i < tokens.length; i++) {
             const token = tokens[i];
-            
+
             if (token === '+' || token === '-') {
                 operator = token;
             } else {
@@ -197,7 +197,7 @@ class DiceEngine {
         }
 
         const sorted = [...rolls].sort((a, b) => a - b);
-        
+
         if (dropKeep === 'd') { // drop
             if (highLow === 'l') { // drop lowest
                 return sorted.slice(num);
@@ -312,7 +312,7 @@ class DiceEngine {
 
         const avgDuration = durations.reduce((a, b) => a + b, 0) / durations.length;
         const maxDuration = Math.max(...durations);
-        
+
         return {
             averageDuration: Math.round(avgDuration * 1000) / 1000, // Round to 3 decimal places
             maxDuration: Math.round(maxDuration * 1000) / 1000,

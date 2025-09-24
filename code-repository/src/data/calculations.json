@@ -1,0 +1,57 @@
+﻿{
+    "spellcasting":  {
+                         "spells_per_day":  {
+                                                "description":  "Based on class level and casting ability modifier"
+                                            },
+                         "save_dc":  {
+                                         "formula":  "10 + spell_level + casting_ability_modifier"
+                                     }
+                     },
+    "ability_scores":  {
+                           "modifiers":  {
+                                             "formula":  "floor((score - 10) / 2)",
+                                             "description":  "Standard D\u0026D 3.5 ability modifier calculation"
+                                         },
+                           "level_increases":  {
+                                                   "frequency":  4,
+                                                   "description":  "Increase any ability score by 1 every 4 character levels"
+                                               },
+                           "base_scores":  [
+                                               "str",
+                                               "dex",
+                                               "con",
+                                               "int",
+                                               "wis",
+                                               "cha"
+                                           ]
+                       },
+    "skills":  {
+                   "skill_check":  {
+                                       "formula":  "1d20 + ranks + ability_modifier + misc_modifiers",
+                                       "armor_check_penalty":  "Applied to Str and Dex-based skills when wearing armor"
+                                   },
+                   "synergy":  {
+                                   "description":  "5+ ranks in certain skills provide +2 synergy bonus to related skills",
+                                   "threshold":  5,
+                                   "bonus":  2
+                               },
+                   "max_ranks":  {
+                                     "class_skill":  "character_level + 3",
+                                     "cross_class":  "(character_level + 3) / 2"
+                                 }
+               },
+    "combat":  {
+                   "bab":  {
+                               "poor":  "1/2 character level",
+                               "full":  "Character level",
+                               "medium":  "3/4 character level"
+                           },
+                   "armor_class":  {
+                                       "formula":  "10 + armor_bonus + shield_bonus + dex_modifier + size_modifier + natural_armor + deflection + dodge"
+                                   },
+                   "saving_throws":  {
+                                         "good":  "2 + 1/2 character level",
+                                         "poor":  "1/3 character level"
+                                     }
+               }
+}

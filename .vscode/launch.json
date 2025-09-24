@@ -24,7 +24,14 @@
             "type": "PowerShell",
             "request": "launch",
             "script": "${workspaceFolder}/start-game.ps1",
-            "args": ["-Port", "3000", "-HostName", "localhost", "-WaitSeconds", "5"],
+            "args": [
+                "-Port",
+                "3000",
+                "-HostName",
+                "localhost",
+                "-WaitSeconds",
+                "5"
+            ],
             "cwd": "${workspaceFolder}",
             "createTemporaryIntegratedConsole": false
         },

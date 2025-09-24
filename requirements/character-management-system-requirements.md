@@ -1,45 +1,66 @@
 # Character Management System Requirements
 
 **Document ID**: REQ-CM-001  
-**Version**: 1.0  
-**Date**: September 21, 2025  
+**Version**: 2.0  
+**Date**: September 23, 2025  
 **Author**: Coding Agent  
-**Status**: Ready for Implementation  
+**Status**: Enhanced with Rackem19 Analysis  
 
 ## 1. Overview
 
 This document outlines the comprehensive requirements for the Character Management System within the RulzLawyer D&D 3.5 gaming application. The system must provide full character lifecycle management including creation, editing, storage, and retrieval functionality.
+
+**Enhancement Note**: This document has been significantly enhanced based on analysis of the Rackem19.xlsm character sheet system, which represents the pinnacle of D&D 3.5 implementation with 61 worksheets, 14,000+ formulas, and complete rule coverage. Our system must match this level of sophistication and completeness.
+
+## 1.1 Rackem19 Analysis Integration
+
+Based on comprehensive analysis of the Rackem19.xlsm system, our character management must support:
+
+- **Complete Rule Complexity**: Ability score calculations involving 19+ class levels, templates, epic progression, and magical enhancements
+- **Advanced Multi-Classing**: Support for 20+ simultaneous classes with proper progression tracking
+- **Epic Level Support**: Characters from levels 1-60+ with epic feats, spells, and class features
+- **Template Integration**: Half-dragon, vampire, lich, and other creature templates with level adjustments
+- **Sophisticated Calculation Engine**: 14,000+ formula equivalent complexity for proper D&D 3.5 rule interactions
 
 ## 2. Functional Requirements
 
 ### 2.1 Character Creation (REQ-CM-001-F01) - **CRITICAL**
 
 **Priority**: High  
-**Description**: Users must be able to create new D&D 3.5 characters through a web-based interface.
+**Description**: Users must be able to create new D&D 3.5 characters through a comprehensive web-based interface that matches Rackem19 sophistication.
 
-**Acceptance Criteria**:
-- ⏳ Users can access character creation via "Create New Character" button
-- ⏳ Modal dialog displays character creation form with all required fields
-- ⏳ Form includes: Character Name (required), Race (dropdown with D&D 3.5 races), Class (dropdown with D&D 3.5 classes), Level (1-20)
-- ⏳ System validates all input fields before character creation
-- ⏳ Character creation integrates with D&D 3.5 SRD rules for ability scores, hit points, and base statistics
-- ⏳ Created characters are automatically saved to persistent storage
-- ⏳ Success feedback is displayed to user after character creation
-- ⏳ Character appears in character list immediately after creation
+**Enhanced Acceptance Criteria** (Based on Rackem19 Analysis):
+- ⏳ **Multi-Step Creation Wizard**: Professional 7-step character creation process
+- ⏳ **Complete Ability Score System**: Point-buy (25/28/32 points), rolling methods, racial modifiers for all PHB+ races
+- ⏳ **Advanced Multi-Class Support**: Support for 20+ simultaneous classes with proper progression tracking
+- ⏳ **Template Integration**: Half-dragon, half-fiend, half-celestial, lycanthrope, vampire, lich templates with LA calculations
+- ⏳ **Epic Level Support**: Character levels 1-60+ with epic feat progression and class features
+- ⏳ **Complex Formula Engine**: Ability score calculations accounting for:
+  - Racial base modifiers and all supplement races
+  - Level-based stat increases (every 4th level + epic progression)
+  - Class bonuses from 19+ different classes (Dragon Disciple, Death Ash, etc.)
+  - Template effects and creature type modifications
+  - Magical enhancements (oils, items, spells, grafts)
+  - Epic level paths and paragon progressions
+- ⏳ **Professional Character Sheets**: 5-sheet coordinated design for complete character display
+- ⏳ **Complete Rule Validation**: All D&D 3.5 rules enforced including prerequisites and restrictions
 
 ### 2.2 Character Update/Editing (REQ-CM-001-F02) - **CRITICAL**
 
 **Priority**: High  
-**Description**: Users must be able to edit existing characters and save changes.
+**Description**: Users must be able to edit existing characters with the same level of sophistication as the Rackem19 system.
 
-**Acceptance Criteria**:
-- 🔄 Users can select a character from the character list for editing
-- 🔄 Edit character modal displays with current character data pre-populated
-- 🔄 All character attributes can be modified: name, race, class, level, ability scores
-- 🔄 Changes are validated according to D&D 3.5 rules
-- 🔄 Modified characters are saved to persistent storage
-- 🔄 Character list refreshes to show updated information
-- 🔄 User receives confirmation when changes are saved successfully
+**Enhanced Acceptance Criteria** (Rackem19-Level Complexity):
+- 🔄 **Comprehensive Edit Interface**: Multi-sheet editing system matching Rackem19's 5-sheet architecture
+- 🔄 **Real-Time Calculations**: All 14,000+ formula equivalents recalculate automatically on changes
+- 🔄 **Advanced Multi-Class Editing**: Modify any of 20+ classes with proper BAB, saves, and skill point recalculation
+- 🔄 **Template Management**: Add/remove/modify creature templates with full LA and ability adjustments
+- 🔄 **Epic Level Progression**: Support editing characters through levels 21-60+ with epic feats and abilities
+- 🔄 **Equipment Integration**: Full gear management with armor penalties, weapon statistics, and magic item effects
+- 🔄 **Spell System Editing**: Complete spellcasting support for prepared, spontaneous, and psionic systems
+- 🔄 **Feat Chain Validation**: Prerequisites automatically checked for complex feat chains and dependencies
+- 🔄 **Cross-System Integration**: Changes in one area automatically update all related systems (skills, saves, etc.)
+- 🔄 **Professional Validation**: All D&D 3.5 rules enforced with error prevention and correction suggestions
 
 ### 2.3 Character Display and Selection (REQ-CM-001-F03) - **CRITICAL**
 

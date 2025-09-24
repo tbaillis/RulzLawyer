@@ -105,7 +105,7 @@ class CharacterGenerator {
                 refSave: 'Poor',
                 willSave: 'Good',
                 spellcasting: true,
-                spellsPerDay: {1: {0: 3, 1: 1}}
+                spellsPerDay: { 1: { 0: 3, 1: 1 } }
             },
             rogue: {
                 name: 'Rogue',
@@ -131,7 +131,7 @@ class CharacterGenerator {
                 refSave: 'Poor',
                 willSave: 'Good',
                 spellcasting: true,
-                spellsPerDay: {1: {0: 3, 1: 1}}
+                spellsPerDay: { 1: { 0: 3, 1: 1 } }
             },
             ranger: {
                 name: 'Ranger',
@@ -204,7 +204,7 @@ class CharacterGenerator {
      */
     generateRandomCharacter() {
         const character = new Character();
-        
+
         // Generate basic info
         character.name = this.generateRandomName();
         character.race = this.getRandomRace();
@@ -213,22 +213,22 @@ class CharacterGenerator {
 
         // Generate ability scores using 4d6 drop lowest
         character.abilities = this.generateAbilityScores();
-        
+
         // Apply racial modifiers
         this.applyRacialModifiers(character);
-        
+
         // Calculate derived stats
         this.calculateDerivedStats(character);
-        
+
         // Assign skill points
         this.assignSkillPoints(character);
-        
+
         // Generate starting equipment
         this.generateStartingEquipment(character);
 
         // Add to character list
         this.characters.push(character);
-        
+
         return character;
     }
 
@@ -238,7 +238,7 @@ class CharacterGenerator {
     generateAbilityScores() {
         const abilities = {};
         const abilityNames = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
-        
+
         abilityNames.forEach(ability => {
             if (this.diceEngine) {
                 abilities[ability] = this.diceEngine.roll('4d6dl1');
@@ -254,7 +254,7 @@ class CharacterGenerator {
                 abilities[ability] = rolls[0] + rolls[1] + rolls[2]; // Take top 3
             }
         });
-        
+
         return abilities;
     }
 
@@ -275,7 +275,7 @@ class CharacterGenerator {
      */
     calculateDerivedStats(character) {
         const classInfo = this.classes[character.characterClass];
-        
+
         // Calculate ability modifiers
         character.abilityModifiers = {};
         Object.keys(character.abilities).forEach(ability => {
@@ -335,10 +335,10 @@ class CharacterGenerator {
         const classInfo = this.classes[character.characterClass];
         const intModifier = character.abilityModifiers.intelligence;
         const raceBonus = character.race === 'human' ? 1 : 0;
-        
+
         const skillPointsPerLevel = classInfo.skillPoints + intModifier + raceBonus;
         character.skillPoints = Math.max(1, skillPointsPerLevel); // Minimum 1 skill point
-        
+
         // Initialize skills
         character.skills = {};
         classInfo.classSkills.forEach(skill => {
@@ -399,7 +399,7 @@ class CharacterGenerator {
         };
 
         const rollExpression = wealthRolls[characterClass] || '3d4*10';
-        
+
         if (this.diceEngine) {
             // Simple multiplication handling
             if (rollExpression.includes('*10')) {
@@ -418,9 +418,9 @@ class CharacterGenerator {
      */
     generateRandomName() {
         const names = [
-            'Aerdrie', 'Beiro', 'Carric', 'Drannor', 'Enna', 'Galinndan', 'Hadarai', 'Immeral', 
+            'Aerdrie', 'Beiro', 'Carric', 'Drannor', 'Enna', 'Galinndan', 'Hadarai', 'Immeral',
             'Jhaan', 'Kiyueth', 'Lamlis', 'Mindartis', 'Naal', 'Nutae', 'Paelinn', 'Peren',
-            'Quarion', 'Riardon', 'Rolen', 'Soveliss', 'Thamior', 'Tharivol', 'Theren', 
+            'Quarion', 'Riardon', 'Rolen', 'Soveliss', 'Thamior', 'Tharivol', 'Theren',
             'Theriatis', 'Thervan', 'Uthemar', 'Vanuath', 'Varis'
         ];
         return names[Math.floor(Math.random() * names.length)];
@@ -513,10 +513,10 @@ class Character {
     getSkillModifier(skillName) {
         const skillInfo = this.constructor.getSkillInfo(skillName);
         if (!skillInfo) return 0;
-        
+
         const ranks = this.skills[skillName] || 0;
         const abilityMod = this.getAbilityModifier(skillInfo.ability);
-        
+
         return ranks + abilityMod;
     }
 

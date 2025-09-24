@@ -1,341 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&D Character Sheet PDF Analyzer</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #1a1a1a;
-            color: #ffffff;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: #2d2d2d;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #8B4513;
-        }
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .pdf-viewer {
-            background: #3a3a3a;
-            border-radius: 8px;
-            padding: 15px;
-            border: 2px solid #8B4513;
-        }
-        .canvas-container {
-            text-align: center;
-            margin: 10px 0;
-        }
-        .pdf-canvas {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #555;
-            background: white;
-        }
-        .analysis-results {
-            background: #3a3a3a;
-            border-radius: 8px;
-            padding: 15px;
-            border: 2px solid #CD853F;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-        .field-item {
-            background: #4a4a4a;
-            margin: 8px 0;
-            padding: 10px;
-            border-radius: 5px;
-            border-left: 4px solid #8B4513;
-        }
-        .field-type {
-            color: #CD853F;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .field-text {
-            color: #ffffff;
-            font-family: monospace;
-            margin: 5px 0;
-        }
-        .field-position {
-            color: #aaa;
-            font-size: 12px;
-        }
-        .control-panel {
-            background: #2a2a2a;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .pdf-button {
-            background: linear-gradient(135deg, #8B4513, #CD853F);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            margin: 5px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        .pdf-button:hover {
-            background: linear-gradient(135deg, #CD853F, #8B4513);
-            transform: translateY(-1px);
-        }
-        .pdf-button.active {
-            background: linear-gradient(135deg, #228B22, #32CD32);
-        }
-        .summary-section {
-            background: #2a2a2a;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        .layout-map {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: monospace;
-            font-size: 12px;
-            white-space: pre-wrap;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .section-header {
-            color: #CD853F;
-            font-size: 18px;
-            font-weight: bold;
-            margin: 15px 0 10px 0;
-            border-bottom: 1px solid #555;
-            padding-bottom: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D&D Character Sheet PDF Analyzer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #1a1a1a;
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #2d2d2d;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #8B4513;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .pdf-viewer {
+      background: #3a3a3a;
+      border-radius: 8px;
+      padding: 15px;
+      border: 2px solid #8B4513;
+    }
+
+    .canvas-container {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .pdf-canvas {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #555;
+      background: white;
+    }
+
+    .analysis-results {
+      background: #3a3a3a;
+      border-radius: 8px;
+      padding: 15px;
+      border: 2px solid #CD853F;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .field-item {
+      background: #4a4a4a;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border-left: 4px solid #8B4513;
+    }
+
+    .field-type {
+      color: #CD853F;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .field-text {
+      color: #ffffff;
+      font-family: monospace;
+      margin: 5px 0;
+    }
+
+    .field-position {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .control-panel {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .pdf-button {
+      background: linear-gradient(135deg, #8B4513, #CD853F);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .pdf-button:hover {
+      background: linear-gradient(135deg, #CD853F, #8B4513);
+      transform: translateY(-1px);
+    }
+
+    .pdf-button.active {
+      background: linear-gradient(135deg, #228B22, #32CD32);
+    }
+
+    .summary-section {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .layout-map {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .section-header {
+      color: #CD853F;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 15px 0 10px 0;
+      border-bottom: 1px solid #555;
+      padding-bottom: 5px;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🗞️ D&D Character Sheet PDF Analyzer</h1>
-            <p>Comprehensive Analysis of Character Sheet Layout and Form Fields</p>
-        </div>
-
-        <div class="control-panel">
-            <div style="text-align: center;">
-                <button class="pdf-button active" onclick="analyzePDF('examples/Example Sheet.pdf', 'Page 1', 0)">
-                    📄 Analyze Page 1
-                </button>
-                <button class="pdf-button" onclick="analyzePDF('examples/Example Sheet page 2.pdf', 'Page 2', 1)">
-                    📄 Analyze Page 2
-                </button>
-                <button class="pdf-button" onclick="analyzePDF('examples/Example Sheet page 3.pdf', 'Page 3', 2)">
-                    📄 Analyze Page 3
-                </button>
-                <button class="pdf-button" onclick="generateLayoutReport()">
-                    📊 Generate Layout Report
-                </button>
-            </div>
-        </div>
-
-        <div class="analysis-grid">
-            <div class="pdf-viewer">
-                <h3 id="currentPDFTitle">Character Sheet Viewer</h3>
-                <div class="canvas-container">
-                    <canvas id="pdfCanvas" class="pdf-canvas"></canvas>
-                </div>
-            </div>
-
-            <div class="analysis-results">
-                <h3>🔍 Field Analysis</h3>
-                <div id="fieldResults">Select a PDF to begin analysis...</div>
-            </div>
-        </div>
-
-        <div class="summary-section">
-            <h3 class="section-header">📋 Character Sheet Layout Summary</h3>
-            <div id="layoutSummary" class="layout-map">Analysis results will appear here...</div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <h1>🗞️ D&D Character Sheet PDF Analyzer</h1>
+      <p>Comprehensive Analysis of Character Sheet Layout and Form Fields</p>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    <div class="control-panel">
+      <div style="text-align: center;">
+        <button class="pdf-button active" onclick="analyzePDF('examples/Example Sheet.pdf', 'Page 1', 0)">
+          📄 Analyze Page 1
+        </button>
+        <button class="pdf-button" onclick="analyzePDF('examples/Example Sheet page 2.pdf', 'Page 2', 1)">
+          📄 Analyze Page 2
+        </button>
+        <button class="pdf-button" onclick="analyzePDF('examples/Example Sheet page 3.pdf', 'Page 3', 2)">
+          📄 Analyze Page 3
+        </button>
+        <button class="pdf-button" onclick="generateLayoutReport()">
+          📊 Generate Layout Report
+        </button>
+      </div>
+    </div>
 
-        let analysisData = {
-            pages: [],
-            allFields: [],
-            layoutStructure: {}
+    <div class="analysis-grid">
+      <div class="pdf-viewer">
+        <h3 id="currentPDFTitle">Character Sheet Viewer</h3>
+        <div class="canvas-container">
+          <canvas id="pdfCanvas" class="pdf-canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="analysis-results">
+        <h3>🔍 Field Analysis</h3>
+        <div id="fieldResults">Select a PDF to begin analysis...</div>
+      </div>
+    </div>
+
+    <div class="summary-section">
+      <h3 class="section-header">📋 Character Sheet Layout Summary</h3>
+      <div id="layoutSummary" class="layout-map">Analysis results will appear here...</div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    let analysisData = {
+      pages: [],
+      allFields: [],
+      layoutStructure: {}
+    };
+
+    const DND_FIELD_PATTERNS = [
+      { pattern: /character\s*name/i, type: 'Character Name', section: 'Basic Info', priority: 1 },
+      { pattern: /player\s*name/i, type: 'Player Name', section: 'Basic Info', priority: 1 },
+      { pattern: /class\s*&?\s*level/i, type: 'Class & Level', section: 'Basic Info', priority: 1 },
+      { pattern: /race/i, type: 'Race', section: 'Basic Info', priority: 1 },
+      { pattern: /alignment/i, type: 'Alignment', section: 'Basic Info', priority: 1 },
+      { pattern: /experience\s*points?/i, type: 'Experience Points', section: 'Basic Info', priority: 2 },
+
+      // Ability Scores
+      { pattern: /strength|str/i, type: 'Strength', section: 'Ability Scores', priority: 1 },
+      { pattern: /dexterity|dex/i, type: 'Dexterity', section: 'Ability Scores', priority: 1 },
+      { pattern: /constitution|con/i, type: 'Constitution', section: 'Ability Scores', priority: 1 },
+      { pattern: /intelligence|int/i, type: 'Intelligence', section: 'Ability Scores', priority: 1 },
+      { pattern: /wisdom|wis/i, type: 'Wisdom', section: 'Ability Scores', priority: 1 },
+      { pattern: /charisma|cha/i, type: 'Charisma', section: 'Ability Scores', priority: 1 },
+
+      // Combat Stats
+      { pattern: /armor\s*class|^ac$/i, type: 'Armor Class', section: 'Combat Stats', priority: 1 },
+      { pattern: /hit\s*points?|^hp$/i, type: 'Hit Points', section: 'Combat Stats', priority: 1 },
+      { pattern: /initiative/i, type: 'Initiative', section: 'Combat Stats', priority: 1 },
+      { pattern: /speed/i, type: 'Speed', section: 'Combat Stats', priority: 1 },
+      { pattern: /base\s*attack\s*bonus|bab/i, type: 'Base Attack Bonus', section: 'Combat Stats', priority: 1 },
+
+      // Saving Throws
+      { pattern: /fortitude|fort/i, type: 'Fortitude Save', section: 'Saving Throws', priority: 1 },
+      { pattern: /reflex|ref/i, type: 'Reflex Save', section: 'Saving Throws', priority: 1 },
+      { pattern: /will/i, type: 'Will Save', section: 'Saving Throws', priority: 1 },
+
+      // Skills
+      { pattern: /skill/i, type: 'Skill', section: 'Skills', priority: 2 },
+      { pattern: /ranks/i, type: 'Skill Ranks', section: 'Skills', priority: 2 },
+      { pattern: /total/i, type: 'Total Modifier', section: 'Skills', priority: 2 },
+
+      // Equipment
+      { pattern: /weapon/i, type: 'Weapon', section: 'Equipment', priority: 2 },
+      { pattern: /armor/i, type: 'Armor', section: 'Equipment', priority: 2 },
+      { pattern: /equipment/i, type: 'Equipment', section: 'Equipment', priority: 2 },
+      { pattern: /gear/i, type: 'Gear', section: 'Equipment', priority: 2 },
+
+      // Spells
+      { pattern: /spell/i, type: 'Spell', section: 'Spells', priority: 2 },
+      { pattern: /cantrip/i, type: 'Cantrip', section: 'Spells', priority: 2 },
+      { pattern: /spell\s*level/i, type: 'Spell Level', section: 'Spells', priority: 2 },
+
+      // Other
+      { pattern: /feat/i, type: 'Feat', section: 'Features', priority: 2 },
+      { pattern: /special\s*abilit/i, type: 'Special Ability', section: 'Features', priority: 2 },
+      { pattern: /languages?/i, type: 'Languages', section: 'Features', priority: 2 }
+    ];
+
+    async function analyzePDF(pdfUrl, pageTitle, pageIndex) {
+      const titleElement = document.getElementById('currentPDFTitle');
+      const canvas = document.getElementById('pdfCanvas');
+      const resultsDiv = document.getElementById('fieldResults');
+
+      // Update active button
+      document.querySelectorAll('.pdf-button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      try {
+        titleElement.textContent = `Analyzing: ${pageTitle}`;
+        resultsDiv.innerHTML = '<div style="text-align: center; padding: 20px;">🔄 Analyzing PDF...</div>';
+
+        const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+        const page = await pdf.getPage(1);
+        const viewport = page.getViewport({ scale: 1.2 });
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const ctx = canvas.getContext('2d');
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+        // Extract text with positioning
+        const textContent = await page.getTextContent();
+        const pageFields = analyzeTextItems(textContent.items, pageTitle);
+
+        // Store analysis data
+        analysisData.pages[pageIndex] = {
+          title: pageTitle,
+          fields: pageFields,
+          textItems: textContent.items
         };
 
-        const DND_FIELD_PATTERNS = [
-            { pattern: /character\s*name/i, type: 'Character Name', section: 'Basic Info', priority: 1 },
-            { pattern: /player\s*name/i, type: 'Player Name', section: 'Basic Info', priority: 1 },
-            { pattern: /class\s*&?\s*level/i, type: 'Class & Level', section: 'Basic Info', priority: 1 },
-            { pattern: /race/i, type: 'Race', section: 'Basic Info', priority: 1 },
-            { pattern: /alignment/i, type: 'Alignment', section: 'Basic Info', priority: 1 },
-            { pattern: /experience\s*points?/i, type: 'Experience Points', section: 'Basic Info', priority: 2 },
-            
-            // Ability Scores
-            { pattern: /strength|str/i, type: 'Strength', section: 'Ability Scores', priority: 1 },
-            { pattern: /dexterity|dex/i, type: 'Dexterity', section: 'Ability Scores', priority: 1 },
-            { pattern: /constitution|con/i, type: 'Constitution', section: 'Ability Scores', priority: 1 },
-            { pattern: /intelligence|int/i, type: 'Intelligence', section: 'Ability Scores', priority: 1 },
-            { pattern: /wisdom|wis/i, type: 'Wisdom', section: 'Ability Scores', priority: 1 },
-            { pattern: /charisma|cha/i, type: 'Charisma', section: 'Ability Scores', priority: 1 },
-            
-            // Combat Stats
-            { pattern: /armor\s*class|^ac$/i, type: 'Armor Class', section: 'Combat Stats', priority: 1 },
-            { pattern: /hit\s*points?|^hp$/i, type: 'Hit Points', section: 'Combat Stats', priority: 1 },
-            { pattern: /initiative/i, type: 'Initiative', section: 'Combat Stats', priority: 1 },
-            { pattern: /speed/i, type: 'Speed', section: 'Combat Stats', priority: 1 },
-            { pattern: /base\s*attack\s*bonus|bab/i, type: 'Base Attack Bonus', section: 'Combat Stats', priority: 1 },
-            
-            // Saving Throws
-            { pattern: /fortitude|fort/i, type: 'Fortitude Save', section: 'Saving Throws', priority: 1 },
-            { pattern: /reflex|ref/i, type: 'Reflex Save', section: 'Saving Throws', priority: 1 },
-            { pattern: /will/i, type: 'Will Save', section: 'Saving Throws', priority: 1 },
-            
-            // Skills
-            { pattern: /skill/i, type: 'Skill', section: 'Skills', priority: 2 },
-            { pattern: /ranks/i, type: 'Skill Ranks', section: 'Skills', priority: 2 },
-            { pattern: /total/i, type: 'Total Modifier', section: 'Skills', priority: 2 },
-            
-            // Equipment
-            { pattern: /weapon/i, type: 'Weapon', section: 'Equipment', priority: 2 },
-            { pattern: /armor/i, type: 'Armor', section: 'Equipment', priority: 2 },
-            { pattern: /equipment/i, type: 'Equipment', section: 'Equipment', priority: 2 },
-            { pattern: /gear/i, type: 'Gear', section: 'Equipment', priority: 2 },
-            
-            // Spells
-            { pattern: /spell/i, type: 'Spell', section: 'Spells', priority: 2 },
-            { pattern: /cantrip/i, type: 'Cantrip', section: 'Spells', priority: 2 },
-            { pattern: /spell\s*level/i, type: 'Spell Level', section: 'Spells', priority: 2 },
-            
-            // Other
-            { pattern: /feat/i, type: 'Feat', section: 'Features', priority: 2 },
-            { pattern: /special\s*abilit/i, type: 'Special Ability', section: 'Features', priority: 2 },
-            { pattern: /languages?/i, type: 'Languages', section: 'Features', priority: 2 }
-        ];
+        displayFieldAnalysis(pageFields, pageTitle);
+        updateLayoutSummary();
 
-        async function analyzePDF(pdfUrl, pageTitle, pageIndex) {
-            const titleElement = document.getElementById('currentPDFTitle');
-            const canvas = document.getElementById('pdfCanvas');
-            const resultsDiv = document.getElementById('fieldResults');
-            
-            // Update active button
-            document.querySelectorAll('.pdf-button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            try {
-                titleElement.textContent = `Analyzing: ${pageTitle}`;
-                resultsDiv.innerHTML = '<div style="text-align: center; padding: 20px;">🔄 Analyzing PDF...</div>';
+      } catch (error) {
+        console.error('Error analyzing PDF:', error);
+        resultsDiv.innerHTML = `<div style="color: #ff6b6b; padding: 20px;">❌ Error: ${error.message}</div>`;
+      }
+    }
 
-                const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
-                const page = await pdf.getPage(1);
-                const viewport = page.getViewport({ scale: 1.2 });
+    function analyzeTextItems(textItems, pageTitle) {
+      const fields = [];
+      const processedItems = [];
 
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+      textItems.forEach(item => {
+        if (!item.str || !item.str.trim()) return;
 
-                const ctx = canvas.getContext('2d');
-                await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+        const textItem = {
+          text: item.str.trim(),
+          x: Math.round(item.transform[4]),
+          y: Math.round(item.transform[5]),
+          width: Math.round(item.width),
+          height: Math.round(item.height),
+          fontSize: Math.round(item.transform[0] || 12)
+        };
 
-                // Extract text with positioning
-                const textContent = await page.getTextContent();
-                const pageFields = analyzeTextItems(textContent.items, pageTitle);
-                
-                // Store analysis data
-                analysisData.pages[pageIndex] = {
-                    title: pageTitle,
-                    fields: pageFields,
-                    textItems: textContent.items
-                };
+        processedItems.push(textItem);
 
-                displayFieldAnalysis(pageFields, pageTitle);
-                updateLayoutSummary();
-
-            } catch (error) {
-                console.error('Error analyzing PDF:', error);
-                resultsDiv.innerHTML = `<div style="color: #ff6b6b; padding: 20px;">❌ Error: ${error.message}</div>`;
-            }
-        }
-
-        function analyzeTextItems(textItems, pageTitle) {
-            const fields = [];
-            const processedItems = [];
-
-            textItems.forEach(item => {
-                if (!item.str || !item.str.trim()) return;
-
-                const textItem = {
-                    text: item.str.trim(),
-                    x: Math.round(item.transform[4]),
-                    y: Math.round(item.transform[5]),
-                    width: Math.round(item.width),
-                    height: Math.round(item.height),
-                    fontSize: Math.round(item.transform[0] || 12)
-                };
-
-                processedItems.push(textItem);
-
-                // Match against D&D field patterns
-                DND_FIELD_PATTERNS.forEach(pattern => {
-                    if (pattern.pattern.test(textItem.text)) {
-                        fields.push({
-                            ...pattern,
-                            text: textItem.text,
-                            position: { x: textItem.x, y: textItem.y },
-                            dimensions: { width: textItem.width, height: textItem.height },
-                            fontSize: textItem.fontSize,
-                            page: pageTitle
-                        });
-                    }
-                });
+        // Match against D&D field patterns
+        DND_FIELD_PATTERNS.forEach(pattern => {
+          if (pattern.pattern.test(textItem.text)) {
+            fields.push({
+              ...pattern,
+              text: textItem.text,
+              position: { x: textItem.x, y: textItem.y },
+              dimensions: { width: textItem.width, height: textItem.height },
+              fontSize: textItem.fontSize,
+              page: pageTitle
             });
+          }
+        });
+      });
 
-            return fields.sort((a, b) => {
-                if (a.priority !== b.priority) return a.priority - b.priority;
-                if (a.section !== b.section) return a.section.localeCompare(b.section);
-                return a.position.y - b.position.y;
-            });
-        }
+      return fields.sort((a, b) => {
+        if (a.priority !== b.priority) return a.priority - b.priority;
+        if (a.section !== b.section) return a.section.localeCompare(b.section);
+        return a.position.y - b.position.y;
+      });
+    }
 
-        function displayFieldAnalysis(fields, pageTitle) {
-            const resultsDiv = document.getElementById('fieldResults');
-            
-            if (fields.length === 0) {
-                resultsDiv.innerHTML = '<div style="text-align: center; color: #999; padding: 20px;">No D&D field patterns detected</div>';
-                return;
-            }
+    function displayFieldAnalysis(fields, pageTitle) {
+      const resultsDiv = document.getElementById('fieldResults');
 
-            const sections = {};
-            fields.forEach(field => {
-                if (!sections[field.section]) sections[field.section] = [];
-                sections[field.section].push(field);
-            });
+      if (fields.length === 0) {
+        resultsDiv.innerHTML = '<div style="text-align: center; color: #999; padding: 20px;">No D&D field patterns detected</div>';
+        return;
+      }
 
-            let html = `<div style="margin-bottom: 15px;"><strong>📊 ${pageTitle} Analysis</strong><br><small>${fields.length} fields detected</small></div>`;
+      const sections = {};
+      fields.forEach(field => {
+        if (!sections[field.section]) sections[field.section] = [];
+        sections[field.section].push(field);
+      });
 
-            Object.keys(sections).forEach(sectionName => {
-                html += `<div style="color: #CD853F; font-weight: bold; margin: 15px 0 8px 0; border-bottom: 1px solid #555; padding-bottom: 3px;">${sectionName}</div>`;
-                
-                sections[sectionName].forEach(field => {
-                    html += `
+      let html = `<div style="margin-bottom: 15px;"><strong>📊 ${pageTitle} Analysis</strong><br><small>${fields.length} fields detected</small></div>`;
+
+      Object.keys(sections).forEach(sectionName => {
+        html += `<div style="color: #CD853F; font-weight: bold; margin: 15px 0 8px 0; border-bottom: 1px solid #555; padding-bottom: 3px;">${sectionName}</div>`;
+
+        sections[sectionName].forEach(field => {
+          html += `
                         <div class="field-item">
                             <div class="field-type">${field.type}</div>
                             <div class="field-text">"${field.text}"</div>
@@ -346,84 +366,85 @@
                             </div>
                         </div>
                     `;
-                });
-            });
-
-            resultsDiv.innerHTML = html;
-        }
-
-        function updateLayoutSummary() {
-            const summaryDiv = document.getElementById('layoutSummary');
-            let summary = 'D&D 3.5 CHARACTER SHEET LAYOUT ANALYSIS\n';
-            summary += '=' .repeat(50) + '\n\n';
-
-            analysisData.pages.forEach((page, index) => {
-                if (!page) return;
-                
-                summary += `📄 ${page.title.toUpperCase()}\n`;
-                summary += '-'.repeat(30) + '\n';
-                
-                const sections = {};
-                page.fields.forEach(field => {
-                    if (!sections[field.section]) sections[field.section] = [];
-                    sections[field.section].push(field);
-                });
-
-                Object.keys(sections).forEach(sectionName => {
-                    summary += `\n🔹 ${sectionName.toUpperCase()}:\n`;
-                    sections[sectionName].forEach(field => {
-                        summary += `   • ${field.type}: "${field.text}" @ (${field.position.x},${field.position.y})\n`;
-                    });
-                });
-
-                summary += '\n' + '='.repeat(50) + '\n\n';
-            });
-
-            summaryDiv.textContent = summary;
-        }
-
-        function generateLayoutReport() {
-            updateLayoutSummary();
-            
-            // Generate implementation recommendations
-            const summaryDiv = document.getElementById('layoutSummary');
-            let report = summaryDiv.textContent;
-            
-            report += '\n\n🎯 IMPLEMENTATION RECOMMENDATIONS\n';
-            report += '=' .repeat(50) + '\n';
-            
-            report += '\n1. LAYOUT STRUCTURE:\n';
-            report += '   - Use CSS Grid for main sections\n';
-            report += '   - Flexbox for field alignment within sections\n';
-            report += '   - Responsive design for different screen sizes\n';
-            
-            report += '\n2. STYLING REQUIREMENTS:\n';
-            report += '   - Traditional D&D parchment/paper aesthetic\n';
-            report += '   - Clear section divisions with borders\n';
-            report += '   - Consistent font sizing and spacing\n';
-            
-            report += '\n3. FORM FIELD IMPLEMENTATION:\n';
-            report += '   - Input fields positioned to match PDF layout\n';
-            report += '   - Proper labels and accessibility\n';
-            report += '   - D&D 3.5 rule validation and calculations\n';
-            
-            report += '\n4. INTERACTIVE FEATURES:\n';
-            report += '   - Auto-calculation of modifiers and bonuses\n';
-            report += '   - Skill point allocation system\n';
-            report += '   - Equipment management interface\n';
-            
-            summaryDiv.textContent = report;
-            
-            // Scroll to summary
-            summaryDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Auto-load first PDF when page loads
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                analyzePDF('examples/Example Sheet.pdf', 'Page 1', 0);
-            }, 1500);
         });
-    </script>
+      });
+
+      resultsDiv.innerHTML = html;
+    }
+
+    function updateLayoutSummary() {
+      const summaryDiv = document.getElementById('layoutSummary');
+      let summary = 'D&D 3.5 CHARACTER SHEET LAYOUT ANALYSIS\n';
+      summary += '='.repeat(50) + '\n\n';
+
+      analysisData.pages.forEach((page, index) => {
+        if (!page) return;
+
+        summary += `📄 ${page.title.toUpperCase()}\n`;
+        summary += '-'.repeat(30) + '\n';
+
+        const sections = {};
+        page.fields.forEach(field => {
+          if (!sections[field.section]) sections[field.section] = [];
+          sections[field.section].push(field);
+        });
+
+        Object.keys(sections).forEach(sectionName => {
+          summary += `\n🔹 ${sectionName.toUpperCase()}:\n`;
+          sections[sectionName].forEach(field => {
+            summary += `   • ${field.type}: "${field.text}" @ (${field.position.x},${field.position.y})\n`;
+          });
+        });
+
+        summary += '\n' + '='.repeat(50) + '\n\n';
+      });
+
+      summaryDiv.textContent = summary;
+    }
+
+    function generateLayoutReport() {
+      updateLayoutSummary();
+
+      // Generate implementation recommendations
+      const summaryDiv = document.getElementById('layoutSummary');
+      let report = summaryDiv.textContent;
+
+      report += '\n\n🎯 IMPLEMENTATION RECOMMENDATIONS\n';
+      report += '='.repeat(50) + '\n';
+
+      report += '\n1. LAYOUT STRUCTURE:\n';
+      report += '   - Use CSS Grid for main sections\n';
+      report += '   - Flexbox for field alignment within sections\n';
+      report += '   - Responsive design for different screen sizes\n';
+
+      report += '\n2. STYLING REQUIREMENTS:\n';
+      report += '   - Traditional D&D parchment/paper aesthetic\n';
+      report += '   - Clear section divisions with borders\n';
+      report += '   - Consistent font sizing and spacing\n';
+
+      report += '\n3. FORM FIELD IMPLEMENTATION:\n';
+      report += '   - Input fields positioned to match PDF layout\n';
+      report += '   - Proper labels and accessibility\n';
+      report += '   - D&D 3.5 rule validation and calculations\n';
+
+      report += '\n4. INTERACTIVE FEATURES:\n';
+      report += '   - Auto-calculation of modifiers and bonuses\n';
+      report += '   - Skill point allocation system\n';
+      report += '   - Equipment management interface\n';
+
+      summaryDiv.textContent = report;
+
+      // Scroll to summary
+      summaryDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Auto-load first PDF when page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        analyzePDF('examples/Example Sheet.pdf', 'Page 1', 0);
+      }, 1500);
+    });
+  </script>
 </body>
+
 </html>

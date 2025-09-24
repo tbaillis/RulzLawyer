@@ -698,8 +698,8 @@ class EpicSpellDatabase {
 
     for (const [spellId, spell] of this.epicSpells) {
       if (spell.name.toLowerCase().includes(searchTerm) ||
-          spell.description.toLowerCase().includes(searchTerm) ||
-          spell.school.toLowerCase().includes(searchTerm)) {
+        spell.description.toLowerCase().includes(searchTerm) ||
+        spell.school.toLowerCase().includes(searchTerm)) {
         results.push(spell);
       }
     }

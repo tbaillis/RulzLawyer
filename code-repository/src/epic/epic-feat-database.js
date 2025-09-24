@@ -965,8 +965,8 @@ class EpicFeatDatabase {
 
     for (const [featId, feat] of this.epicFeats) {
       if (feat.name.toLowerCase().includes(searchTerm) ||
-          feat.description.toLowerCase().includes(searchTerm) ||
-          feat.benefit.toLowerCase().includes(searchTerm)) {
+        feat.description.toLowerCase().includes(searchTerm) ||
+        feat.benefit.toLowerCase().includes(searchTerm)) {
         results.push(feat);
       }
     }

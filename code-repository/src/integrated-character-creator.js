@@ -19,7 +19,7 @@ class IntegratedCharacterCreator {
 
     initialize() {
         console.log('🎲 Initializing RulzLawyer Game System...');
-        
+
         try {
             if (typeof DiceEngine !== 'undefined') {
                 this.diceEngine = new DiceEngine();
@@ -38,7 +38,7 @@ class IntegratedCharacterCreator {
 
             this.log('🎯 Game system ready!');
             return true;
-            
+
         } catch (error) {
             console.error('❌ Initialization failed:', error);
             return false;
@@ -53,7 +53,7 @@ class IntegratedCharacterCreator {
 
             const character = this.characterGenerator.generateRandomCharacter();
             this.gameState.currentCharacter = character;
-            
+
             this.log(`📊 Generated: ${character.name} the ${character.race} ${character.characterClass}`);
             return character;
         } catch (error) {
@@ -75,10 +75,10 @@ class IntegratedCharacterCreator {
             const character = this.gameState.currentCharacter;
             const adventure = this.adventureEngine.generateAdventure(character.level, adventureType, duration);
             this.gameState.activeAdventure = adventure;
-            
+
             this.log(`🗡️ Adventure: ${adventure.title}`);
             this.log(`📖 ${adventure.description}`);
-            
+
             return adventure;
         } catch (error) {
             this.log('❌ Adventure start failed: ' + error.message);
@@ -102,7 +102,7 @@ class IntegratedCharacterCreator {
             this.log(`📋 ${encounter.description}`);
 
             const result = this.adventureEngine.simulateEncounter(encounter);
-            
+
             if (result) {
                 this.log(`✨ ${result.resultText}`);
                 if (result.experienceGained > 0) {
@@ -132,7 +132,7 @@ class IntegratedCharacterCreator {
         const adventure = this.gameState.activeAdventure;
         this.log(`🎉 "${adventure.title}" completed!`);
         this.log(`📊 Total XP: ${adventure.experience}`);
-        
+
         this.gameState.activeAdventure = null;
         return { completed: true, experience: adventure.experience };
     }
@@ -162,10 +162,10 @@ class IntegratedCharacterCreator {
             timestamp: new Date().toISOString(),
             message: message
         };
-        
+
         this.gameState.sessionLog.push(logEntry);
         console.log(`[${new Date().toLocaleTimeString()}] ${message}`);
-        
+
         if (this.gameState.sessionLog.length > 50) {
             this.gameState.sessionLog.shift();
         }

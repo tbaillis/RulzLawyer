@@ -4,10 +4,12 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": true,
     "editor.wordWrap": "on",
-    "editor.rulers": [80, 120],
+    "editor.rulers": [
+        80,
+        120
+    ],
     "editor.minimap.enabled": true,
     "editor.codeLens": true,
-    
     // File associations for D&D game files
     "files.associations": {
         "*.md": "markdown",
@@ -17,37 +19,36 @@
         "*.css": "css",
         "start-game.ps1": "powershell"
     },
-    
     // Auto-save for rapid development
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
-    
     // JavaScript/Node.js specific settings
     "javascript.preferences.quoteStyle": "single",
     "javascript.suggest.autoImports": true,
     "javascript.updateImportsOnFileMove.enabled": "always",
     "typescript.preferences.quoteStyle": "single",
-    
     // Terminal settings for PowerShell and Node.js
     "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
             "icon": "terminal-powershell",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass"]
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass"
+            ]
         },
         "Command Prompt": {
             "path": "cmd.exe",
             "icon": "terminal-cmd"
         }
     },
-    
     // Debugging settings
     "debug.console.fontSize": 14,
     "debug.inlineValues": "on",
     "debug.showBreakpointsInOverviewRuler": true,
     "debug.openDebug": "openOnDebugBreak",
-    
     // Search settings for large project
     "search.exclude": {
         "**/node_modules": true,
@@ -56,43 +57,35 @@
         "**/logs": true,
         "**/*.log": true
     },
-    
     // Explorer settings
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.sortOrder": "type",
-    
     // Extensions recommendations for D&D development
     "extensions.ignoreRecommendations": false,
-    
     // Live Server settings for testing HTML game interface
     "liveServer.settings.port": 3001,
     "liveServer.settings.root": "/",
     "liveServer.settings.CustomBrowser": "chrome",
     "liveServer.settings.donotShowInfoMsg": true,
-    
     // Emmet settings for HTML development
     "emmet.includeLanguages": {
         "javascript": "javascriptreact",
         "markdown": "html"
     },
-    
     // Git settings
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
-    
     // Format on save for clean code
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
         "source.organizeImports": "explicit"
     },
-    
     // Color theme optimized for game development
     "workbench.colorTheme": "Default Dark+",
     "workbench.iconTheme": "vs-seti",
-    
     // Performance settings for large D&D project
     "files.watcherExclude": {
         "**/.git/objects/**": true,
@@ -100,19 +93,15 @@
         "**/node_modules/*/**": true,
         "**/logs/**": true
     },
-    
     // IntelliSense settings
     "javascript.suggest.completeFunctionCalls": true,
     "typescript.suggest.completeFunctionCalls": true,
-    
     // Problem matcher settings
     "problems.decorations.enabled": true,
     "problems.showCurrentInStatus": true,
-    
     // Task settings
     "task.autoDetect": "on",
     "task.showDecorations": true,
-    
     // Custom language settings for D&D game files
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features",
@@ -143,7 +132,6 @@
         "files.encoding": "utf8bom",
         "files.eol": "\r\n"
     },
-    
     // Integrated terminal settings for game development
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.scrollback": 10000,
@@ -151,31 +139,25 @@
     "accessibility.signals.terminalBell": {
         "sound": "off"
     },
-    
     // Workspace trust settings
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.banner": "never",
-    
     // Zen mode settings for focused development
     "zenMode.centerLayout": false,
     "zenMode.fullScreen": false,
     "zenMode.hideLineNumbers": false,
-    
     // Breadcrumb settings for navigation
     "breadcrumbs.enabled": true,
     "breadcrumbs.showArrays": true,
     "breadcrumbs.showBooleans": true,
     "breadcrumbs.showFunctions": true,
-    
     // Custom CSS for D&D theme (if using Custom CSS extension)
     "vscode_custom_css.policy": true,
-    
     // Specific settings for RulzLawyer game files
     "eslint.workingDirectories": [
         "code-repository/src",
         "code-repository/tests"
     ],
-    
     // Auto-completion settings
     "editor.quickSuggestions": {
         "other": true,
@@ -184,7 +166,6 @@
     },
     "editor.parameterHints.enabled": true,
     "editor.suggest.insertMode": "replace",
-    
     // File watcher settings to monitor game file changes
     "files.watcherInclude": [
         "**/*.js",

@@ -1,0 +1,218 @@
+﻿[
+    {
+        "trained_only":  false,
+        "name":  "Appraise",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Balance",
+        "armor_check":  true,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Bluff",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Climb",
+        "armor_check":  true,
+        "ability":  "Str"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Concentration",
+        "armor_check":  false,
+        "ability":  "Con"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Craft",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Decipher Script",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Diplomacy",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Disable Device",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Disguise",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Escape Artist",
+        "armor_check":  true,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Forgery",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Gather Information",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Handle Animal",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Heal",
+        "armor_check":  false,
+        "ability":  "Wis"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Hide",
+        "armor_check":  true,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Intimidate",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Jump",
+        "armor_check":  true,
+        "ability":  "Str"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Knowledge",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Listen",
+        "armor_check":  false,
+        "ability":  "Wis"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Move Silently",
+        "armor_check":  true,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Open Lock",
+        "armor_check":  false,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Perform",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Profession",
+        "armor_check":  false,
+        "ability":  "Wis"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Ride",
+        "armor_check":  false,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Search",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Sense Motive",
+        "armor_check":  false,
+        "ability":  "Wis"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Sleight of Hand",
+        "armor_check":  true,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Speak Language",
+        "armor_check":  false,
+        "ability":  "None"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Spellcraft",
+        "armor_check":  false,
+        "ability":  "Int"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Spot",
+        "armor_check":  false,
+        "ability":  "Wis"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Survival",
+        "armor_check":  false,
+        "ability":  "Wis"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Swim",
+        "armor_check":  true,
+        "ability":  "Str"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Tumble",
+        "armor_check":  true,
+        "ability":  "Dex"
+    },
+    {
+        "trained_only":  true,
+        "name":  "Use Magic Device",
+        "armor_check":  false,
+        "ability":  "Cha"
+    },
+    {
+        "trained_only":  false,
+        "name":  "Use Rope",
+        "armor_check":  false,
+        "ability":  "Dex"
+    }
+]

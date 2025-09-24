@@ -1,0 +1,121 @@
+﻿[
+    {
+        "languages":  [
+                          "Common"
+                      ],
+        "base_speed":  30,
+        "name":  "Human",
+        "size":  "Medium",
+        "ability_modifiers":  {
+                                  "favored_class":  "Any",
+                                  "dex":  0,
+                                  "wis":  0,
+                                  "cha":  0,
+                                  "con":  0,
+                                  "str":  0,
+                                  "int":  0
+                              }
+    },
+    {
+        "languages":  [
+                          "Common"
+                      ],
+        "base_speed":  30,
+        "name":  "Elf",
+        "size":  "Medium",
+        "ability_modifiers":  {
+                                  "favored_class":  "Wizard",
+                                  "dex":  2,
+                                  "wis":  0,
+                                  "cha":  0,
+                                  "con":  -2,
+                                  "str":  0,
+                                  "int":  0
+                              }
+    },
+    {
+        "languages":  [
+                          "Common"
+                      ],
+        "base_speed":  30,
+        "name":  "Dwarf",
+        "size":  "Medium",
+        "ability_modifiers":  {
+                                  "favored_class":  "Fighter",
+                                  "dex":  0,
+                                  "wis":  0,
+                                  "cha":  -2,
+                                  "con":  2,
+                                  "str":  0,
+                                  "int":  0
+                              }
+    },
+    {
+        "languages":  [
+                          "Common"
+                      ],
+        "base_speed":  30,
+        "name":  "Halfling",
+        "size":  "Medium",
+        "ability_modifiers":  {
+                                  "favored_class":  "Rogue",
+                                  "dex":  2,
+                                  "wis":  0,
+                                  "cha":  0,
+                                  "con":  0,
+                                  "str":  -2,
+                                  "int":  0
+                              }
+    },
+    {
+        "languages":  [
+                          "Common"
+                      ],
+        "base_speed":  30,
+        "name":  "Gnome",
+        "size":  "Medium",
+        "ability_modifiers":  {
+                                  "favored_class":  "Bard",
+                                  "dex":  0,
+                                  "wis":  0,
+                                  "cha":  0,
+                                  "con":  2,
+                                  "str":  -2,
+                                  "int":  0
+                              }
+    },
+    {
+        "languages":  [
+                          "Common"
+                      ],
+        "base_speed":  30,
+        "name":  "Half-Elf",
+        "size":  "Medium",
+        "ability_modifiers":  {
+                                  "favored_class":  "Any",
+                                  "dex":  0,
+                                  "wis":  0,
+                                  "cha":  0,
+                                  "con":  0,
+                                  "str":  0,
+                                  "int":  0
+                              }
+    },
+    {
+        "languages":  [
+                          "Common"
+                      ],
+        "base_speed":  30,
+        "name":  "Half-Orc",
+        "size":  "Medium",
+        "ability_modifiers":  {
+                                  "favored_class":  "Barbarian",
+                                  "dex":  0,
+                                  "wis":  0,
+                                  "cha":  -2,
+                                  "con":  0,
+                                  "str":  2,
+                                  "int":  -2
+                              }
+    }
+]

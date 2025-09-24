@@ -2,16 +2,28 @@
 
 ## Document Information
 - **Document ID**: REQ-008
-- **Title**: Enhanced Character Creator with Advanced Inventory and Spell Systems
-- **Version**: 1.0
+- **Title**: Enhanced Character Creator with Rackem19-Level Sophistication
+- **Version**: 2.0
 - **Created**: September 21, 2025
-- **Last Updated**: September 21, 2025
-- **Status**: Ready for Implementation
+- **Last Updated**: September 23, 2025
+- **Status**: Enhanced with Rackem19 Analysis
 - **Owner**: AI Development Team
 
 ## Executive Summary
 
-This requirements document defines the enhanced character creation system for RulzLawyer, incorporating advanced inventory management, spell selection for spellcasting classes, and modern gaming UI patterns. The system builds upon the existing 7-step character creation wizard to provide a world-class character creation experience.
+This requirements document defines the enhanced character creation system for RulzLawyer, now enhanced with insights from the Rackem19.xlsm analysis. The system must match the sophistication of the 61-worksheet, 14,000+ formula Excel system while providing a modern web interface. The system incorporates advanced inventory management, comprehensive spell systems, sophisticated skills management, and complete D&D 3.5 rule coverage.
+
+## Rackem19 Integration Requirements
+
+Based on comprehensive analysis of the Rackem19.xlsm system, our enhanced character creator must support:
+
+### Complex Skills System (13,091 Formula Equivalent)
+- **All 40+ D&D 3.5 skills** with proper cross-class and class skill differentiation
+- **Synergy bonus calculations** between related skills (Bluff/Diplomacy/Intimidate triangular synergies)
+- **Per-level skill allocation tracking** supporting characters up to level 60+
+- **Equipment bonuses** (masterwork tools, skill-enhancing items)
+- **Racial and feat modifications** with proper stacking rules
+- **Maximum ranks enforcement** (character level + 3 for class skills)
 
 ## Business Requirements
 
@@ -66,9 +78,71 @@ The system must maintain high performance even with large datasets (500+ items, 
   - Visual feedback during item manipulation
   - Performance maintained with 100+ items
 
-### FR-002: Spell Selection System (Priority: HIGH)
+### FR-002A: Advanced Skills System (Priority: CRITICAL)
 
-#### FR-002.1: Automatic Spellcaster Detection
+#### FR-002A.1: Comprehensive Skills Database
+- **Description**: Complete D&D 3.5 skills implementation matching Rackem19's 13,091 formula complexity
+- **Details**:
+  - All 40+ PHB and supplement skills supported
+  - Proper ability score assignments for each skill
+  - Class vs cross-class skill differentiation by character class
+  - Armor check penalty application to relevant skills
+- **Acceptance Criteria**:
+  - 100% accurate skill list matching D&D 3.5 SRD
+  - Real-time calculation of all skill modifiers
+  - Cross-class skills cost 2 points per rank
+
+#### FR-002A.2: Advanced Synergy System
+- **Description**: Complex synergy bonuses between related skills as implemented in Rackem19
+- **Details**:
+  - Bluff/Diplomacy/Intimidate triangular synergies (+2 bonuses)
+  - Jump/Tumble movement skill interactions
+  - Knowledge skill cross-pollination bonuses
+  - Craft skill material and tool synergies
+  - Perform skill entertainment category bonuses
+- **Acceptance Criteria**:
+  - All PHB synergy bonuses automatically applied
+  - Real-time synergy calculation updates
+  - Conditional synergies based on skill ranks (5+ ranks requirement)
+
+#### FR-002A.3: Per-Level Skill Allocation
+- **Description**: Track skill point allocation across all character levels (1-60+)
+- **Details**:
+  - Starting character skill points by class and Intelligence
+  - Skill points gained per level with Intelligence bonus
+  - Multi-class skill point tracking and allocation
+  - Maximum skill ranks enforcement (level + 3)
+- **Acceptance Criteria**:
+  - Accurate skill points per D&D 3.5 progression tables
+  - Visual skill point budget tracking and remaining points
+  - Prevention of over-allocation beyond maximum ranks
+
+#### FR-002A.4: Equipment and Feat Skill Bonuses
+- **Description**: Comprehensive skill modification system from external sources
+- **Details**:
+  - Masterwork tool bonuses (+2 circumstance bonus)
+  - Skill Focus feat bonuses (+3 to chosen skill)
+  - Racial skill bonuses and penalties
+  - Class feature skill enhancements
+  - Equipment-based skill modifiers
+- **Acceptance Criteria**:
+  - All skill bonuses stack according to D&D 3.5 rules
+  - Automatic application of bonuses when items equipped
+  - Clear indication of bonus sources in skill display
+
+### FR-002B: Advanced Spell Selection System (Priority: HIGH)
+
+#### FR-002B.1: Multi-Class Spellcaster Support
+- **Description**: Complex spellcasting system supporting multiple simultaneous spellcasting classes
+- **Details**:
+  - Prepared casters: Cleric, Druid, Wizard, Ranger, Paladin
+  - Spontaneous casters: Sorcerer, Bard
+  - Psionic classes: Psion, Wilder, Psychic Warrior
+  - Multi-class caster level calculations and spell slot progression
+- **Acceptance Criteria**:
+  - Separate spell progression for each spellcasting class
+  - Proper caster level calculations for multi-class characters
+  - Domain spell access for clerics with chosen domains
 - **Description**: Detect spellcasting classes and show spell selection automatically
 - **Details**:
   - Supported classes: Wizard, Cleric, Sorcerer, Bard, Ranger, Paladin

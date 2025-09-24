@@ -240,20 +240,20 @@ ${prettyPrint ? '\n' : ''}`;
   <rect width="${width}" height="${height}" fill="#f0f0f0"/>
 
   <!-- Body -->
-  <ellipse cx="${width/2}" cy="${height * 0.6}" rx="${width * 0.25}" ry="${height * 0.3}" fill="url(#skinGradient)" stroke="#8B7355" stroke-width="2"/>
+  <ellipse cx="${width / 2}" cy="${height * 0.6}" rx="${width * 0.25}" ry="${height * 0.3}" fill="url(#skinGradient)" stroke="#8B7355" stroke-width="2"/>
 
   <!-- Head -->
-  <circle cx="${width/2}" cy="${height * 0.35}" r="${width * 0.15}" fill="url(#skinGradient)" stroke="#8B7355" stroke-width="2"/>
+  <circle cx="${width / 2}" cy="${height * 0.35}" r="${width * 0.15}" fill="url(#skinGradient)" stroke="#8B7355" stroke-width="2"/>
 
   <!-- Eyes -->
   <circle cx="${width * 0.45}" cy="${height * 0.32}" r="3" fill="#4169E1"/>
   <circle cx="${width * 0.55}" cy="${height * 0.32}" r="3" fill="#4169E1"/>
 
   <!-- Placeholder text -->
-  <text x="${width/2}" y="${height * 0.8}" text-anchor="middle" font-family="Arial" font-size="12" fill="#666">
+  <text x="${width / 2}" y="${height * 0.8}" text-anchor="middle" font-family="Arial" font-size="12" fill="#666">
     Portrait Preview
   </text>
-  <text x="${width/2}" y="${height * 0.85}" text-anchor="middle" font-family="Arial" font-size="10" fill="#999">
+  <text x="${width / 2}" y="${height * 0.85}" text-anchor="middle" font-family="Arial" font-size="10" fill="#999">
     (SVG Generation Active)
   </text>
 `;

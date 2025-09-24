@@ -1,0 +1,310 @@
+﻿[
+    {
+        "progression":  {
+                            "will_save":  "poor",
+                            "class_skills":  [
+                                                 "Climb",
+                                                 "Craft",
+                                                 "Handle Animal",
+                                                 "Intimidate",
+                                                 "Jump",
+                                                 "Ride",
+                                                 "Swim"
+                                             ],
+                            "bab_progression":  "full",
+                            "hit_die":  10,
+                            "ref_save":  "poor",
+                            "fort_save":  "good",
+                            "skill_points":  2
+                        },
+        "name":  "Fighter",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "poor",
+                            "class_skills":  [
+                                                 "Appraise",
+                                                 "Balance",
+                                                 "Bluff",
+                                                 "Climb",
+                                                 "Craft",
+                                                 "Decipher Script",
+                                                 "Diplomacy",
+                                                 "Disable Device",
+                                                 "Disguise",
+                                                 "Escape Artist",
+                                                 "Forgery",
+                                                 "Gather Information",
+                                                 "Hide",
+                                                 "Intimidate",
+                                                 "Jump",
+                                                 "Knowledge",
+                                                 "Listen",
+                                                 "Move Silently",
+                                                 "Open Lock",
+                                                 "Perform",
+                                                 "Profession",
+                                                 "Search",
+                                                 "Sense Motive",
+                                                 "Sleight of Hand",
+                                                 "Spot",
+                                                 "Swim",
+                                                 "Tumble",
+                                                 "Use Magic Device",
+                                                 "Use Rope"
+                                             ],
+                            "bab_progression":  "medium",
+                            "hit_die":  6,
+                            "ref_save":  "good",
+                            "fort_save":  "poor",
+                            "skill_points":  8
+                        },
+        "name":  "Rogue",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "good",
+                            "ref_save":  "poor",
+                            "skill_points":  2,
+                            "fort_save":  "good",
+                            "class_skills":  [
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Diplomacy",
+                                                 "Heal",
+                                                 "Knowledge",
+                                                 "Profession",
+                                                 "Spellcraft"
+                                             ],
+                            "hit_die":  8,
+                            "spellcaster":  "prepared",
+                            "bab_progression":  "medium"
+                        },
+        "name":  "Cleric",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "poor",
+                            "class_skills":  [
+                                                 "Climb",
+                                                 "Craft",
+                                                 "Handle Animal",
+                                                 "Intimidate",
+                                                 "Jump",
+                                                 "Listen",
+                                                 "Ride",
+                                                 "Survival",
+                                                 "Swim"
+                                             ],
+                            "bab_progression":  "full",
+                            "hit_die":  12,
+                            "ref_save":  "poor",
+                            "fort_save":  "good",
+                            "skill_points":  4
+                        },
+        "name":  "Barbarian",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "good",
+                            "ref_save":  "good",
+                            "skill_points":  6,
+                            "fort_save":  "poor",
+                            "class_skills":  [
+                                                 "Appraise",
+                                                 "Balance",
+                                                 "Bluff",
+                                                 "Climb",
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Decipher Script",
+                                                 "Diplomacy",
+                                                 "Disguise",
+                                                 "Escape Artist",
+                                                 "Gather Information",
+                                                 "Hide",
+                                                 "Jump",
+                                                 "Knowledge",
+                                                 "Listen",
+                                                 "Move Silently",
+                                                 "Perform",
+                                                 "Profession",
+                                                 "Sense Motive",
+                                                 "Sleight of Hand",
+                                                 "Speak Language",
+                                                 "Spellcraft",
+                                                 "Swim",
+                                                 "Tumble",
+                                                 "Use Magic Device"
+                                             ],
+                            "hit_die":  6,
+                            "spellcaster":  "spontaneous",
+                            "bab_progression":  "medium"
+                        },
+        "name":  "Bard",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "good",
+                            "ref_save":  "poor",
+                            "skill_points":  2,
+                            "fort_save":  "good",
+                            "class_skills":  [
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Diplomacy",
+                                                 "Handle Animal",
+                                                 "Heal",
+                                                 "Knowledge",
+                                                 "Profession",
+                                                 "Ride",
+                                                 "Sense Motive",
+                                                 "Spellcraft"
+                                             ],
+                            "hit_die":  10,
+                            "spellcaster":  "prepared",
+                            "bab_progression":  "full"
+                        },
+        "name":  "Paladin",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "good",
+                            "ref_save":  "poor",
+                            "skill_points":  2,
+                            "fort_save":  "poor",
+                            "class_skills":  [
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Decipher Script",
+                                                 "Knowledge",
+                                                 "Profession",
+                                                 "Spellcraft"
+                                             ],
+                            "hit_die":  4,
+                            "spellcaster":  "prepared",
+                            "bab_progression":  "poor"
+                        },
+        "name":  "Wizard",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "good",
+                            "class_skills":  [
+                                                 "Balance",
+                                                 "Climb",
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Diplomacy",
+                                                 "Escape Artist",
+                                                 "Hide",
+                                                 "Jump",
+                                                 "Knowledge",
+                                                 "Listen",
+                                                 "Move Silently",
+                                                 "Perform",
+                                                 "Profession",
+                                                 "Sense Motive",
+                                                 "Spot",
+                                                 "Swim",
+                                                 "Tumble"
+                                             ],
+                            "bab_progression":  "medium",
+                            "hit_die":  8,
+                            "ref_save":  "good",
+                            "fort_save":  "good",
+                            "skill_points":  4
+                        },
+        "name":  "Monk",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "poor",
+                            "ref_save":  "good",
+                            "skill_points":  6,
+                            "fort_save":  "good",
+                            "class_skills":  [
+                                                 "Climb",
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Handle Animal",
+                                                 "Heal",
+                                                 "Hide",
+                                                 "Jump",
+                                                 "Knowledge",
+                                                 "Listen",
+                                                 "Move Silently",
+                                                 "Profession",
+                                                 "Ride",
+                                                 "Search",
+                                                 "Spellcraft",
+                                                 "Spot",
+                                                 "Survival",
+                                                 "Swim",
+                                                 "Use Rope"
+                                             ],
+                            "hit_die":  8,
+                            "spellcaster":  "prepared",
+                            "bab_progression":  "full"
+                        },
+        "name":  "Ranger",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "good",
+                            "ref_save":  "poor",
+                            "skill_points":  2,
+                            "fort_save":  "poor",
+                            "class_skills":  [
+                                                 "Bluff",
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Knowledge",
+                                                 "Profession",
+                                                 "Spellcraft"
+                                             ],
+                            "hit_die":  4,
+                            "spellcaster":  "spontaneous",
+                            "bab_progression":  "poor"
+                        },
+        "name":  "Sorcerer",
+        "type":  "core"
+    },
+    {
+        "progression":  {
+                            "will_save":  "good",
+                            "ref_save":  "poor",
+                            "skill_points":  4,
+                            "fort_save":  "good",
+                            "class_skills":  [
+                                                 "Concentration",
+                                                 "Craft",
+                                                 "Diplomacy",
+                                                 "Handle Animal",
+                                                 "Heal",
+                                                 "Knowledge",
+                                                 "Listen",
+                                                 "Profession",
+                                                 "Ride",
+                                                 "Spellcraft",
+                                                 "Spot",
+                                                 "Survival",
+                                                 "Swim"
+                                             ],
+                            "hit_die":  8,
+                            "spellcaster":  "prepared",
+                            "bab_progression":  "medium"
+                        },
+        "name":  "Druid",
+        "type":  "core"
+    }
+]

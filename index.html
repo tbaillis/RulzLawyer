@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,12 +33,12 @@
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .header h1 {
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin-bottom: 10px;
         }
 
@@ -58,7 +59,7 @@
             border: 2px solid #8B4513;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .character-panel h2 {
@@ -95,7 +96,8 @@
             text-transform: uppercase;
         }
 
-        .field-group input, .field-group select {
+        .field-group input,
+        .field-group select {
             padding: 5px 8px;
             border: 1px solid #8B4513;
             border-radius: 3px;
@@ -146,7 +148,8 @@
         }
 
         /* Skills and Features - PDF Style Tables */
-        .skills-section, .features-section {
+        .skills-section,
+        .features-section {
             margin: 15px 0;
             padding: 15px;
             background: #faf9f7;
@@ -209,7 +212,7 @@
             border: 2px solid #8B4513;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .game-panel h2 {
@@ -239,12 +242,12 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .action-btn:active {
@@ -322,17 +325,18 @@
             .character-basics {
                 grid-template-columns: 1fr;
             }
-            
+
             .ability-scores {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .action-buttons {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="game-container">
         <header class="header">
@@ -344,7 +348,7 @@
             <!-- Character Sheet Panel -->
             <div class="character-panel">
                 <h2>Character Sheet</h2>
-                
+
                 <!-- Basic Character Information -->
                 <div class="character-basics">
                     <div class="field-group">
@@ -438,10 +442,12 @@
             <!-- Game Control Panel -->
             <div class="game-panel">
                 <h2>Game Controls</h2>
-                
+
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="action-btn" onclick="window.open('new-character-creator.html', '_blank')" style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);">New Character Creator</button>
+                    <button class="action-btn" onclick="window.open('new-character-creator.html', '_blank')"
+                        style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);">New Character
+                        Creator</button>
                     <button class="action-btn" onclick="generateCharacter()">Quick Generate</button>
                     <button class="action-btn" onclick="startAdventure()">Start Adventure</button>
                     <button class="action-btn" onclick="saveCharacter()">Save Character</button>
@@ -453,8 +459,10 @@
                 <div class="dice-section">
                     <div class="section-title">Dice Rolling</div>
                     <div class="dice-input">
-                        <input type="text" id="diceExpression" placeholder="Enter dice (e.g., 3d6, 1d20+5)" value="1d20">
-                        <button class="action-btn" onclick="rollDice()" style="width: auto; padding: 8px 15px; font-size: 0.9em;">Roll</button>
+                        <input type="text" id="diceExpression" placeholder="Enter dice (e.g., 3d6, 1d20+5)"
+                            value="1d20">
+                        <button class="action-btn" onclick="rollDice()"
+                            style="width: auto; padding: 8px 15px; font-size: 0.9em;">Roll</button>
                     </div>
                     <div class="dice-result" id="diceResult">
                         Enter a dice expression and click Roll
@@ -464,7 +472,8 @@
                 <!-- Adventure Log -->
                 <div class="section-title">Adventure Log</div>
                 <div class="adventure-log" id="adventureLog">
-                    <div class="log-entry">Welcome to RulzLawyer! Generate a character to begin your survival adventure.</div>
+                    <div class="log-entry">Welcome to RulzLawyer! Generate a character to begin your survival adventure.
+                    </div>
                 </div>
             </div>
         </div>
@@ -483,7 +492,7 @@
         let diceEngine = null;
 
         // Initialize the game when the page loads
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             initializeGame();
         });
 
@@ -516,7 +525,7 @@
                 // Generate random ability scores using 4d6 drop lowest
                 const abilities = {};
                 const abilityNames = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
-                
+
                 abilityNames.forEach(ability => {
                     if (diceEngine) {
                         abilities[ability] = diceEngine.roll('4d6dl1');
@@ -528,17 +537,17 @@
 
                 // Update display
                 updateAbilityScores(abilities);
-                
+
                 // Generate basic character info
                 const races = ['human', 'elf', 'dwarf', 'halfling', 'gnome', 'half-elf', 'half-orc'];
                 const classes = ['fighter', 'wizard', 'rogue', 'cleric', 'ranger', 'paladin', 'barbarian'];
-                
+
                 const randomRace = races[Math.floor(Math.random() * races.length)];
                 const randomClass = classes[Math.floor(Math.random() * classes.length)];
-                
+
                 document.getElementById('raceSelect').value = randomRace;
                 document.getElementById('classSelect').value = randomClass;
-                
+
                 // Generate random name
                 const names = ['Aerdrie', 'Beiro', 'Carric', 'Drannor', 'Enna', 'Galinndan', 'Hadarai', 'Immeral', 'Jhaan', 'Kiyueth'];
                 const randomName = names[Math.floor(Math.random() * names.length)];
@@ -546,11 +555,11 @@
 
                 addLogEntry(`Generated character: ${randomName} the ${randomRace} ${randomClass}`);
                 addLogEntry(`Ability scores - STR: ${abilities.strength}, DEX: ${abilities.dexterity}, CON: ${abilities.constitution}, INT: ${abilities.intelligence}, WIS: ${abilities.wisdom}, CHA: ${abilities.charisma}`);
-                
+
                 // Update skills and equipment based on class
                 updateSkillsForClass(randomClass);
                 updateEquipmentForClass(randomClass);
-                
+
             } catch (error) {
                 addLogEntry('Error generating character: ' + error.message);
                 console.error('Character generation error:', error);
@@ -560,7 +569,7 @@
         function updateAbilityScores(abilities) {
             const abilityMap = {
                 strength: 'str',
-                dexterity: 'dex', 
+                dexterity: 'dex',
                 constitution: 'con',
                 intelligence: 'int',
                 wisdom: 'wis',
@@ -571,7 +580,7 @@
                 const score = abilities[ability];
                 const modifier = Math.floor((score - 10) / 2);
                 const shortName = abilityMap[ability];
-                
+
                 document.getElementById(shortName + 'Score').textContent = score;
                 document.getElementById(shortName + 'Mod').textContent = modifier >= 0 ? '+' + modifier : modifier;
             });
@@ -590,7 +599,7 @@
             };
 
             const skills = classSkills[characterClass] || ['Craft', 'Knowledge', 'Profession'];
-            
+
             skills.forEach(skill => {
                 const skillItem = document.createElement('div');
                 skillItem.className = 'skill-item';
@@ -612,7 +621,7 @@
             };
 
             const equipment = classEquipment[characterClass] || ['Dagger', 'Clothes', 'Backpack'];
-            
+
             equipment.forEach(item => {
                 const equipItem = document.createElement('div');
                 equipItem.className = 'equipment-item';
@@ -645,7 +654,7 @@
 
                 document.getElementById('diceResult').textContent = `${expression}: ${result}`;
                 addLogEntry(`Rolled ${expression}: ${result}`);
-                
+
             } catch (error) {
                 document.getElementById('diceResult').textContent = 'Invalid dice expression';
                 addLogEntry('Error rolling dice: ' + error.message);
@@ -662,7 +671,7 @@
 
             addLogEntry(`${characterName} begins their survival adventure!`);
             addLogEntry('You find yourself at the edge of a mysterious forest...');
-            
+
             // Simulate basic adventure encounter
             setTimeout(() => {
                 const encounters = [
@@ -672,7 +681,7 @@
                     'Strange lights flicker in the distance',
                     'You hear the sound of running water nearby'
                 ];
-                
+
                 const randomEncounter = encounters[Math.floor(Math.random() * encounters.length)];
                 addLogEntry(randomEncounter);
             }, 2000);
@@ -710,15 +719,15 @@
                 }
 
                 const characterData = JSON.parse(savedData);
-                
+
                 document.getElementById('characterName').value = characterData.name;
                 document.getElementById('raceSelect').value = characterData.race;
                 document.getElementById('classSelect').value = characterData.class;
-                
+
                 updateAbilityScores(characterData.abilities);
                 updateSkillsForClass(characterData.class);
                 updateEquipmentForClass(characterData.class);
-                
+
                 addLogEntry(`Character ${characterData.name} loaded successfully`);
             } catch (error) {
                 addLogEntry('Error loading character: ' + error.message);
@@ -735,4 +744,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -117,7 +117,7 @@ class AdventureEngine {
         }
 
         const template = this.adventureTemplates[selectedType] || this.adventureTemplates['Goblin Raid'];
-        
+
         const adventure = {
             title: selectedType,
             description: template.description,
@@ -155,10 +155,10 @@ class AdventureEngine {
     generateEncounter(environment = 'wilderness', partyLevel = 1) {
         const encounters = this.encounterTables[environment] || this.encounterTables.wilderness;
         const baseEncounter = encounters[Math.floor(Math.random() * encounters.length)];
-        
+
         // Scale encounter to party level
         const scaledCR = Math.max(1, baseEncounter.cr + partyLevel - 1);
-        
+
         const encounter = {
             ...baseEncounter,
             cr: scaledCR,
@@ -176,10 +176,10 @@ class AdventureEngine {
     generateTreasureEncounter(treasureType = 'minor', partyLevel = 1) {
         const treasures = this.treasureTables[treasureType] || this.treasureTables.minor;
         const selectedTreasure = treasures[Math.floor(Math.random() * treasures.length)];
-        
+
         // Scale treasure value to party level
         const scaledValue = Math.floor(selectedTreasure.value * (1 + (partyLevel - 1) * 0.5));
-        
+
         return {
             name: 'Treasure Discovery',
             type: 'treasure',
@@ -226,7 +226,7 @@ class AdventureEngine {
 
         const adventure = this.activeAdventure;
         const currentIndex = adventure.currentEncounter;
-        
+
         if (currentIndex >= adventure.encounters.length) {
             throw new Error('No more encounters in this adventure');
         }
@@ -294,12 +294,12 @@ class AdventureEngine {
      */
     getCurrentEncounter() {
         if (!this.activeAdventure) return null;
-        
+
         const adventure = this.activeAdventure;
         const currentIndex = adventure.currentEncounter;
-        
+
         if (currentIndex >= adventure.encounters.length) return null;
-        
+
         return adventure.encounters[currentIndex];
     }
 
@@ -331,7 +331,7 @@ class AdventureEngine {
         const adventure = this.activeAdventure;
         const remainingEncounters = adventure.encounters.length - adventure.currentEncounter;
         const averageTimePerEncounter = 15; // minutes
-        
+
         return remainingEncounters * averageTimePerEncounter;
     }
 

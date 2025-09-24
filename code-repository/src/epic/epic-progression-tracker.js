@@ -310,8 +310,8 @@ class EpicProgressionTracker {
         if (milestone.id === 'divine_ascension_ready') {
           // Check divine ascension requirements
           return character.level >= 50 &&
-                 (character.abilities?.charisma?.totalScore || 0) >= 30 &&
-                 (character.abilities?.wisdom?.totalScore || 0) >= 25;
+            (character.abilities?.charisma?.totalScore || 0) >= 30 &&
+            (character.abilities?.wisdom?.totalScore || 0) >= 25;
         }
         return (character.divineRank || 0) >= milestone.threshold;
 

@@ -1,802 +1,827 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&D 3.5 Character Sheet - Exact PDF Match</title>
-    <style>
-        :root {
-            /* Exact PDF Colors */
-            --background-tan: #F5F0E8;
-            --ability-blue: #4A90E2;
-            --skill-green: #7ED321;
-            --header-red: #D0021B;
-            --border-dark: #333333;
-            --text-dark: #333333;
-            --field-white: #FFFFFF;
-            --light-border: #CCCCCC;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D&D 3.5 Character Sheet - Exact PDF Match</title>
+  <style>
+    :root {
+      /* Exact PDF Colors */
+      --background-tan: #F5F0E8;
+      --ability-blue: #4A90E2;
+      --skill-green: #7ED321;
+      --header-red: #D0021B;
+      --border-dark: #333333;
+      --text-dark: #333333;
+      --field-white: #FFFFFF;
+      --light-border: #CCCCCC;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Times New Roman', serif;
-            background-color: var(--background-tan);
-            color: var(--text-dark);
-            line-height: 1.2;
-            font-size: 10px;
-        }
+    body {
+      font-family: 'Times New Roman', serif;
+      background-color: var(--background-tan);
+      color: var(--text-dark);
+      line-height: 1.2;
+      font-size: 10px;
+    }
 
-        .character-sheet {
-            width: 8.5in;
-            margin: 0 auto;
-            padding: 0.25in;
-            background-color: var(--background-tan);
-        }
+    .character-sheet {
+      width: 8.5in;
+      margin: 0 auto;
+      padding: 0.25in;
+      background-color: var(--background-tan);
+    }
 
-        /* Header Section */
-        .header-section {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
-            grid-template-rows: auto auto auto;
-            gap: 2px;
-            margin-bottom: 8px;
-            border: 1px solid var(--border-dark);
-            padding: 4px;
-        }
+    /* Header Section */
+    .header-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 2px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border-dark);
+      padding: 4px;
+    }
 
-        .header-field {
-            border: 1px solid var(--light-border);
-            padding: 2px;
-        }
+    .header-field {
+      border: 1px solid var(--light-border);
+      padding: 2px;
+    }
 
-        .header-field label {
-            font-size: 8px;
-            font-weight: bold;
-            display: block;
-            text-transform: uppercase;
-        }
+    .header-field label {
+      font-size: 8px;
+      font-weight: bold;
+      display: block;
+      text-transform: uppercase;
+    }
 
-        .header-field input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            font-size: 10px;
-            font-family: inherit;
-        }
+    .header-field input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 10px;
+      font-family: inherit;
+    }
 
-        .name-field {
-            grid-column: 1 / 4;
-        }
+    .name-field {
+      grid-column: 1 / 4;
+    }
 
-        .class-field {
-            grid-column: 4 / 7;
-        }
+    .class-field {
+      grid-column: 4 / 7;
+    }
 
-        /* Main Layout - Three Columns */
-        .main-content {
-            display: grid;
-            grid-template-columns: 2in 3in 3.5in;
-            gap: 4px;
-            height: 9in;
-        }
+    /* Main Layout - Three Columns */
+    .main-content {
+      display: grid;
+      grid-template-columns: 2in 3in 3.5in;
+      gap: 4px;
+      height: 9in;
+    }
 
-        /* Left Column - Ability Scores */
-        .abilities-column {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+    /* Left Column - Ability Scores */
+    .abilities-column {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-        .ability-box {
-            background-color: var(--ability-blue);
-            border: 2px solid var(--border-dark);
-            border-radius: 4px;
-            padding: 4px;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-        }
+    .ability-box {
+      background-color: var(--ability-blue);
+      border: 2px solid var(--border-dark);
+      border-radius: 4px;
+      padding: 4px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
 
-        .ability-name {
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
+    .ability-name {
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
 
-        .ability-score {
-            background: var(--field-white);
-            color: var(--text-dark);
-            border: 1px solid var(--border-dark);
-            width: 40px;
-            height: 25px;
-            margin: 2px auto;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            border-radius: 2px;
-        }
+    .ability-score {
+      background: var(--field-white);
+      color: var(--text-dark);
+      border: 1px solid var(--border-dark);
+      width: 40px;
+      height: 25px;
+      margin: 2px auto;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 2px;
+    }
 
-        .ability-modifier {
-            font-size: 10px;
-            margin: 2px 0;
-        }
+    .ability-modifier {
+      font-size: 10px;
+      margin: 2px 0;
+    }
 
-        .ability-temp {
-            background: var(--field-white);
-            color: var(--text-dark);
-            border: 1px solid var(--border-dark);
-            width: 30px;
-            height: 15px;
-            margin: 1px auto;
-            font-size: 8px;
-            text-align: center;
-            border-radius: 2px;
-        }
+    .ability-temp {
+      background: var(--field-white);
+      color: var(--text-dark);
+      border: 1px solid var(--border-dark);
+      width: 30px;
+      height: 15px;
+      margin: 1px auto;
+      font-size: 8px;
+      text-align: center;
+      border-radius: 2px;
+    }
 
-        /* Middle Column - Combat Stats */
-        .combat-column {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+    /* Middle Column - Combat Stats */
+    .combat-column {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-        .combat-section {
-            border: 1px solid var(--border-dark);
-            padding: 4px;
-            background: var(--field-white);
-        }
+    .combat-section {
+      border: 1px solid var(--border-dark);
+      padding: 4px;
+      background: var(--field-white);
+    }
 
-        .combat-section h3 {
-            background: var(--header-red);
-            color: white;
-            padding: 2px;
-            margin: -4px -4px 4px -4px;
-            font-size: 10px;
-            text-align: center;
-        }
+    .combat-section h3 {
+      background: var(--header-red);
+      color: white;
+      padding: 2px;
+      margin: -4px -4px 4px -4px;
+      font-size: 10px;
+      text-align: center;
+    }
 
-        .hp-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2px;
-        }
+    .hp-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+    }
 
-        .stat-box {
-            text-align: center;
-            border: 1px solid var(--light-border);
-            padding: 2px;
-        }
+    .stat-box {
+      text-align: center;
+      border: 1px solid var(--light-border);
+      padding: 2px;
+    }
 
-        .stat-label {
-            font-size: 8px;
-            font-weight: bold;
-            display: block;
-        }
+    .stat-label {
+      font-size: 8px;
+      font-weight: bold;
+      display: block;
+    }
 
-        .stat-value {
-            width: 100%;
-            border: none;
-            background: transparent;
-            font-size: 12px;
-            font-weight: bold;
-            text-align: center;
-        }
+    .stat-value {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+    }
 
-        .ac-section {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 2px;
-            margin: 4px 0;
-        }
+    .ac-section {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+      margin: 4px 0;
+    }
 
-        .saves-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2px;
-        }
+    .saves-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+    }
 
-        .attack-section {
-            margin: 4px 0;
-        }
+    .attack-section {
+      margin: 4px 0;
+    }
 
-        .attack-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 2px;
-            margin: 2px 0;
-        }
+    .attack-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 2px;
+      margin: 2px 0;
+    }
 
-        /* Right Column - Skills */
-        .skills-column {
-            background: var(--skill-green);
-            border: 2px solid var(--border-dark);
-            padding: 4px;
-            border-radius: 4px;
-        }
+    /* Right Column - Skills */
+    .skills-column {
+      background: var(--skill-green);
+      border: 2px solid var(--border-dark);
+      padding: 4px;
+      border-radius: 4px;
+    }
 
-        .skills-header {
-            background: var(--header-red);
-            color: white;
-            padding: 2px;
-            margin: -4px -4px 4px -4px;
-            font-size: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
+    .skills-header {
+      background: var(--header-red);
+      color: white;
+      padding: 2px;
+      margin: -4px -4px 4px -4px;
+      font-size: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: auto 30px 30px 30px auto;
-            gap: 1px;
-            font-size: 8px;
-        }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: auto 30px 30px 30px auto;
+      gap: 1px;
+      font-size: 8px;
+    }
 
-        .skill-row {
-            display: contents;
-        }
+    .skill-row {
+      display: contents;
+    }
 
-        .skill-name {
-            padding: 1px 2px;
-            background: var(--field-white);
-            border: 1px solid var(--light-border);
-        }
+    .skill-name {
+      padding: 1px 2px;
+      background: var(--field-white);
+      border: 1px solid var(--light-border);
+    }
 
-        .skill-input {
-            width: 100%;
-            height: 16px;
-            border: 1px solid var(--border-dark);
-            background: var(--field-white);
-            text-align: center;
-            font-size: 8px;
-        }
+    .skill-input {
+      width: 100%;
+      height: 16px;
+      border: 1px solid var(--border-dark);
+      background: var(--field-white);
+      text-align: center;
+      font-size: 8px;
+    }
 
-        .skill-total {
-            background: #E8F4FD;
-        }
+    .skill-total {
+      background: #E8F4FD;
+    }
 
-        .skill-mod {
-            background: #FFF2CC;
-        }
+    .skill-mod {
+      background: #FFF2CC;
+    }
 
-        .skill-ranks {
-            background: var(--field-white);
-        }
+    .skill-ranks {
+      background: var(--field-white);
+    }
 
-        .skill-misc {
-            background: #F0F8F0;
-        }
+    .skill-misc {
+      background: #F0F8F0;
+    }
 
-        /* Utility Classes */
-        .text-center { text-align: center; }
-        .font-bold { font-weight: bold; }
-        .small-text { font-size: 8px; }
-    </style>
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+
+    .font-bold {
+      font-weight: bold;
+    }
+
+    .small-text {
+      font-size: 8px;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="character-sheet">
-        <!-- Character Header -->
-        <div class="header-section">
-            <div class="header-field name-field">
-                <label>Character Name</label>
-                <input type="text" id="characterName" placeholder="Enter character name">
-            </div>
-            <div class="header-field class-field">
-                <label>Class and Level</label>
-                <input type="text" id="classLevel" placeholder="Fighter 1">
-            </div>
-            
-            <div class="header-field">
-                <label>Race</label>
-                <input type="text" id="race" placeholder="Human">
-            </div>
-            <div class="header-field">
-                <label>Alignment</label>
-                <input type="text" id="alignment" placeholder="LG">
-            </div>
-            <div class="header-field">
-                <label>Deity</label>
-                <input type="text" id="deity">
-            </div>
-            <div class="header-field">
-                <label>Size</label>
-                <input type="text" id="size" placeholder="M">
-            </div>
-            <div class="header-field">
-                <label>Age</label>
-                <input type="text" id="age">
-            </div>
-            <div class="header-field">
-                <label>Gender</label>
-                <input type="text" id="gender">
-            </div>
-            
-            <div class="header-field">
-                <label>Height</label>
-                <input type="text" id="height">
-            </div>
-            <div class="header-field">
-                <label>Weight</label>
-                <input type="text" id="weight">
-            </div>
-            <div class="header-field">
-                <label>Eyes</label>
-                <input type="text" id="eyes">
-            </div>
-            <div class="header-field">
-                <label>Hair</label>
-                <input type="text" id="hair">
-            </div>
-            <div class="header-field">
-                <label>Homeland</label>
-                <input type="text" id="homeland">
-            </div>
-            <div class="header-field">
-                <label>Experience Points</label>
-                <input type="number" id="xp" value="0">
-            </div>
-        </div>
+  <div class="character-sheet">
+    <!-- Character Header -->
+    <div class="header-section">
+      <div class="header-field name-field">
+        <label>Character Name</label>
+        <input type="text" id="characterName" placeholder="Enter character name">
+      </div>
+      <div class="header-field class-field">
+        <label>Class and Level</label>
+        <input type="text" id="classLevel" placeholder="Fighter 1">
+      </div>
 
-        <!-- Main Three-Column Layout -->
-        <div class="main-content">
-            <!-- Left Column: Abilities -->
-            <div class="abilities-column">
-                <div class="ability-box">
-                    <div class="ability-name">STRENGTH</div>
-                    <input type="number" class="ability-score" id="str" value="10" onchange="calculateMods()">
-                    <div class="ability-modifier" id="strMod">+0</div>
-                    <div style="font-size: 8px;">ABILITY MODIFIER</div>
-                    <input type="number" class="ability-temp" id="strTemp" onchange="calculateMods()">
-                    <div style="font-size: 7px;">TEMPORARY SCORE</div>
-                </div>
-                
-                <div class="ability-box">
-                    <div class="ability-name">DEXTERITY</div>
-                    <input type="number" class="ability-score" id="dex" value="10" onchange="calculateMods()">
-                    <div class="ability-modifier" id="dexMod">+0</div>
-                    <div style="font-size: 8px;">ABILITY MODIFIER</div>
-                    <input type="number" class="ability-temp" id="dexTemp" onchange="calculateMods()">
-                    <div style="font-size: 7px;">TEMPORARY SCORE</div>
-                </div>
-                
-                <div class="ability-box">
-                    <div class="ability-name">CONSTITUTION</div>
-                    <input type="number" class="ability-score" id="con" value="10" onchange="calculateMods()">
-                    <div class="ability-modifier" id="conMod">+0</div>
-                    <div style="font-size: 8px;">ABILITY MODIFIER</div>
-                    <input type="number" class="ability-temp" id="conTemp" onchange="calculateMods()">
-                    <div style="font-size: 7px;">TEMPORARY SCORE</div>
-                </div>
-                
-                <div class="ability-box">
-                    <div class="ability-name">INTELLIGENCE</div>
-                    <input type="number" class="ability-score" id="int" value="10" onchange="calculateMods()">
-                    <div class="ability-modifier" id="intMod">+0</div>
-                    <div style="font-size: 8px;">ABILITY MODIFIER</div>
-                    <input type="number" class="ability-temp" id="intTemp" onchange="calculateMods()">
-                    <div style="font-size: 7px;">TEMPORARY SCORE</div>
-                </div>
-                
-                <div class="ability-box">
-                    <div class="ability-name">WISDOM</div>
-                    <input type="number" class="ability-score" id="wis" value="10" onchange="calculateMods()">
-                    <div class="ability-modifier" id="wisMod">+0</div>
-                    <div style="font-size: 8px;">ABILITY MODIFIER</div>
-                    <input type="number" class="ability-temp" id="wisTemp" onchange="calculateMods()">
-                    <div style="font-size: 7px;">TEMPORARY SCORE</div>
-                </div>
-                
-                <div class="ability-box">
-                    <div class="ability-name">CHARISMA</div>
-                    <input type="number" class="ability-score" id="cha" value="10" onchange="calculateMods()">
-                    <div class="ability-modifier" id="chaMod">+0</div>
-                    <div style="font-size: 8px;">ABILITY MODIFIER</div>
-                    <input type="number" class="ability-temp" id="chaTemp" onchange="calculateMods()">
-                    <div style="font-size: 7px;">TEMPORARY SCORE</div>
-                </div>
-            </div>
+      <div class="header-field">
+        <label>Race</label>
+        <input type="text" id="race" placeholder="Human">
+      </div>
+      <div class="header-field">
+        <label>Alignment</label>
+        <input type="text" id="alignment" placeholder="LG">
+      </div>
+      <div class="header-field">
+        <label>Deity</label>
+        <input type="text" id="deity">
+      </div>
+      <div class="header-field">
+        <label>Size</label>
+        <input type="text" id="size" placeholder="M">
+      </div>
+      <div class="header-field">
+        <label>Age</label>
+        <input type="text" id="age">
+      </div>
+      <div class="header-field">
+        <label>Gender</label>
+        <input type="text" id="gender">
+      </div>
 
-            <!-- Middle Column: Combat Stats -->
-            <div class="combat-column">
-                <!-- Hit Points -->
-                <div class="combat-section">
-                    <h3>HIT POINTS</h3>
-                    <div class="hp-section">
-                        <div class="stat-box">
-                            <span class="stat-label">TOTAL</span>
-                            <input type="number" class="stat-value" id="hpTotal" value="8">
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">CURRENT</span>
-                            <input type="number" class="stat-value" id="hpCurrent" value="8">
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">NONLETHAL</span>
-                            <input type="number" class="stat-value" id="hpNonlethal" value="0">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Armor Class -->
-                <div class="combat-section">
-                    <h3>ARMOR CLASS</h3>
-                    <div class="ac-section">
-                        <div class="stat-box">
-                            <span class="stat-label">TOTAL</span>
-                            <input type="number" class="stat-value" id="acTotal" value="10">
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">ARMOR</span>
-                            <input type="number" class="stat-value" id="acArmor" value="0" onchange="calculateAC()">
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">SHIELD</span>
-                            <input type="number" class="stat-value" id="acShield" value="0" onchange="calculateAC()">
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">DEX</span>
-                            <input type="number" class="stat-value" id="acDex" readonly>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">SIZE</span>
-                            <input type="number" class="stat-value" id="acSize" value="0" onchange="calculateAC()">
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">MISC</span>
-                            <input type="number" class="stat-value" id="acMisc" value="0" onchange="calculateAC()">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Initiative -->
-                <div class="combat-section">
-                    <h3>INITIATIVE</h3>
-                    <div class="stat-box">
-                        <input type="number" class="stat-value" id="initiative" readonly>
-                    </div>
-                </div>
-
-                <!-- Base Attack Bonus -->
-                <div class="combat-section">
-                    <h3>BASE ATTACK BONUS</h3>
-                    <div class="stat-box">
-                        <input type="number" class="stat-value" id="bab" value="0" onchange="calculateAttacks()">
-                    </div>
-                </div>
-
-                <!-- Saving Throws -->
-                <div class="combat-section">
-                    <h3>SAVING THROWS</h3>
-                    <div class="saves-section">
-                        <div class="stat-box">
-                            <span class="stat-label">FORTITUDE</span>
-                            <input type="number" class="stat-value" id="fortSave" readonly>
-                            <div style="font-size: 7px;">CON modifier</div>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">REFLEX</span>
-                            <input type="number" class="stat-value" id="refSave" readonly>
-                            <div style="font-size: 7px;">DEX modifier</div>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-label">WILL</span>
-                            <input type="number" class="stat-value" id="willSave" readonly>
-                            <div style="font-size: 7px;">WIS modifier</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Attacks -->
-                <div class="combat-section">
-                    <h3>ATTACKS</h3>
-                    <div class="attack-section">
-                        <div class="attack-row">
-                            <div class="stat-box">
-                                <span class="stat-label">MELEE</span>
-                                <input type="text" class="stat-value" id="meleeAttack" readonly>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">RANGED</span>
-                                <input type="text" class="stat-value" id="rangedAttack" readonly>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">GRAPPLE</span>
-                                <input type="text" class="stat-value" id="grapple" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column: Skills -->
-            <div class="skills-column">
-                <div class="skills-header">SKILLS</div>
-                <div class="skills-grid" style="margin-bottom: 4px;">
-                    <div style="font-weight: bold; text-align: center;">SKILL NAME</div>
-                    <div style="font-weight: bold; text-align: center; font-size: 7px;">TOTAL</div>
-                    <div style="font-weight: bold; text-align: center; font-size: 7px;">ABILITY MOD</div>
-                    <div style="font-weight: bold; text-align: center; font-size: 7px;">RANKS</div>
-                    <div style="font-weight: bold; text-align: center; font-size: 7px;">MISC MOD</div>
-                </div>
-                
-                <div class="skills-grid" id="skillsGrid">
-                    <!-- Skills will be populated by JavaScript -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Section: Equipment and Features -->
-        <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <!-- Left Side: Equipment -->
-            <div>
-                <!-- Armor -->
-                <div class="combat-section" style="margin-bottom: 4px;">
-                    <h3>ARMOR</h3>
-                    <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr 1fr; gap: 2px; font-size: 8px; margin-bottom: 2px;">
-                        <div class="font-bold text-center">TYPE</div>
-                        <div class="font-bold text-center">AC BONUS</div>
-                        <div class="font-bold text-center">MAX DEX</div>
-                        <div class="font-bold text-center">CHECK PENALTY</div>
-                        <div class="font-bold text-center">SPELL FAILURE</div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr 1fr; gap: 2px;">
-                        <input type="text" class="skill-input" placeholder="Armor name">
-                        <input type="number" class="skill-input">
-                        <input type="number" class="skill-input">
-                        <input type="number" class="skill-input">
-                        <input type="text" class="skill-input">
-                    </div>
-                </div>
-
-                <!-- Shield -->
-                <div class="combat-section" style="margin-bottom: 4px;">
-                    <h3>SHIELD</h3>
-                    <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; gap: 2px; font-size: 8px; margin-bottom: 2px;">
-                        <div class="font-bold text-center">TYPE</div>
-                        <div class="font-bold text-center">AC BONUS</div>
-                        <div class="font-bold text-center">CHECK PENALTY</div>
-                        <div class="font-bold text-center">SPELL FAILURE</div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; gap: 2px;">
-                        <input type="text" class="skill-input" placeholder="Shield name">
-                        <input type="number" class="skill-input">
-                        <input type="number" class="skill-input">
-                        <input type="text" class="skill-input">
-                    </div>
-                </div>
-
-                <!-- Weapons -->
-                <div class="combat-section" style="margin-bottom: 4px;">
-                    <h3>WEAPONS</h3>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px; font-size: 8px; margin-bottom: 2px;">
-                        <div class="font-bold text-center">WEAPON</div>
-                        <div class="font-bold text-center">ATTACK BONUS</div>
-                        <div class="font-bold text-center">DAMAGE</div>
-                        <div class="font-bold text-center">CRITICAL</div>
-                        <div class="font-bold text-center">RANGE</div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px;">
-                        <input type="text" class="skill-input" placeholder="Weapon 1">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                    </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px;">
-                        <input type="text" class="skill-input" placeholder="Weapon 2">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                    </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px;">
-                        <input type="text" class="skill-input" placeholder="Weapon 3">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                        <input type="text" class="skill-input">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side: Features and Equipment -->
-            <div>
-                <!-- Languages -->
-                <div class="combat-section" style="margin-bottom: 4px;">
-                    <h3>LANGUAGES</h3>
-                    <textarea style="width: 100%; height: 40px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;" placeholder="Common, Draconic..."></textarea>
-                </div>
-
-                <!-- Special Abilities -->
-                <div class="combat-section" style="margin-bottom: 4px;">
-                    <h3>SPECIAL ABILITIES</h3>
-                    <textarea style="width: 100%; height: 60px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;" placeholder="Racial traits, class features..."></textarea>
-                </div>
-
-                <!-- Feats -->
-                <div class="combat-section" style="margin-bottom: 4px;">
-                    <h3>FEATS</h3>
-                    <textarea style="width: 100%; height: 60px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;" placeholder="Power Attack, Cleave..."></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- Equipment List -->
-        <div style="margin-top: 8px;">
-            <div class="combat-section">
-                <h3>EQUIPMENT</h3>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
-                    <div>
-                        <textarea style="width: 100%; height: 120px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;" placeholder="Backpack&#10;Rope (50 ft)&#10;Torch x5&#10;Rations x3&#10;Waterskin&#10;Bedroll"></textarea>
-                    </div>
-                    <div>
-                        <textarea style="width: 100%; height: 120px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;" placeholder="Coins:&#10;Platinum: 0&#10;Gold: 150&#10;Silver: 0&#10;Copper: 0"></textarea>
-                    </div>
-                    <div>
-                        <textarea style="width: 100%; height: 120px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;" placeholder="Magic Items:&#10;Potion of Cure Light Wounds&#10;Scroll of Magic Missile"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="header-field">
+        <label>Height</label>
+        <input type="text" id="height">
+      </div>
+      <div class="header-field">
+        <label>Weight</label>
+        <input type="text" id="weight">
+      </div>
+      <div class="header-field">
+        <label>Eyes</label>
+        <input type="text" id="eyes">
+      </div>
+      <div class="header-field">
+        <label>Hair</label>
+        <input type="text" id="hair">
+      </div>
+      <div class="header-field">
+        <label>Homeland</label>
+        <input type="text" id="homeland">
+      </div>
+      <div class="header-field">
+        <label>Experience Points</label>
+        <input type="number" id="xp" value="0">
+      </div>
     </div>
 
-    <script>
-        // D&D 3.5 Skills List
-        const skills = [
-            { name: 'Appraise', ability: 'int' },
-            { name: 'Balance', ability: 'dex' },
-            { name: 'Bluff', ability: 'cha' },
-            { name: 'Climb', ability: 'str' },
-            { name: 'Concentration', ability: 'con' },
-            { name: 'Craft (Alchemy)', ability: 'int' },
-            { name: 'Craft (Armorsmithing)', ability: 'int' },
-            { name: 'Craft (Bowmaking)', ability: 'int' },
-            { name: 'Craft (Weaponsmithing)', ability: 'int' },
-            { name: 'Decipher Script', ability: 'int' },
-            { name: 'Diplomacy', ability: 'cha' },
-            { name: 'Disable Device', ability: 'int' },
-            { name: 'Disguise', ability: 'cha' },
-            { name: 'Escape Artist', ability: 'dex' },
-            { name: 'Forgery', ability: 'int' },
-            { name: 'Gather Information', ability: 'cha' },
-            { name: 'Handle Animal', ability: 'cha' },
-            { name: 'Heal', ability: 'wis' },
-            { name: 'Hide', ability: 'dex' },
-            { name: 'Intimidate', ability: 'cha' },
-            { name: 'Jump', ability: 'str' },
-            { name: 'Knowledge (Arcana)', ability: 'int' },
-            { name: 'Knowledge (Architecture)', ability: 'int' },
-            { name: 'Knowledge (Dungeoneering)', ability: 'int' },
-            { name: 'Knowledge (Geography)', ability: 'int' },
-            { name: 'Knowledge (History)', ability: 'int' },
-            { name: 'Knowledge (Local)', ability: 'int' },
-            { name: 'Knowledge (Nature)', ability: 'int' },
-            { name: 'Knowledge (Nobility)', ability: 'int' },
-            { name: 'Knowledge (Planes)', ability: 'int' },
-            { name: 'Knowledge (Religion)', ability: 'int' },
-            { name: 'Listen', ability: 'wis' },
-            { name: 'Move Silently', ability: 'dex' },
-            { name: 'Open Lock', ability: 'dex' },
-            { name: 'Perform (Act)', ability: 'cha' },
-            { name: 'Perform (Comedy)', ability: 'cha' },
-            { name: 'Perform (Dance)', ability: 'cha' },
-            { name: 'Perform (Keyboard)', ability: 'cha' },
-            { name: 'Perform (Oratory)', ability: 'cha' },
-            { name: 'Perform (Percussion)', ability: 'cha' },
-            { name: 'Perform (Sing)', ability: 'cha' },
-            { name: 'Perform (String)', ability: 'cha' },
-            { name: 'Perform (Wind)', ability: 'cha' },
-            { name: 'Profession ()', ability: 'wis' },
-            { name: 'Ride', ability: 'dex' },
-            { name: 'Search', ability: 'int' },
-            { name: 'Sense Motive', ability: 'wis' },
-            { name: 'Sleight of Hand', ability: 'dex' },
-            { name: 'Spellcraft', ability: 'int' },
-            { name: 'Spot', ability: 'wis' },
-            { name: 'Survival', ability: 'wis' },
-            { name: 'Swim', ability: 'str' },
-            { name: 'Tumble', ability: 'dex' },
-            { name: 'Use Magic Device', ability: 'cha' },
-            { name: 'Use Rope', ability: 'dex' }
-        ];
+    <!-- Main Three-Column Layout -->
+    <div class="main-content">
+      <!-- Left Column: Abilities -->
+      <div class="abilities-column">
+        <div class="ability-box">
+          <div class="ability-name">STRENGTH</div>
+          <input type="number" class="ability-score" id="str" value="10" onchange="calculateMods()">
+          <div class="ability-modifier" id="strMod">+0</div>
+          <div style="font-size: 8px;">ABILITY MODIFIER</div>
+          <input type="number" class="ability-temp" id="strTemp" onchange="calculateMods()">
+          <div style="font-size: 7px;">TEMPORARY SCORE</div>
+        </div>
 
-        function calculateModifier(score) {
-            return Math.floor((score - 10) / 2);
+        <div class="ability-box">
+          <div class="ability-name">DEXTERITY</div>
+          <input type="number" class="ability-score" id="dex" value="10" onchange="calculateMods()">
+          <div class="ability-modifier" id="dexMod">+0</div>
+          <div style="font-size: 8px;">ABILITY MODIFIER</div>
+          <input type="number" class="ability-temp" id="dexTemp" onchange="calculateMods()">
+          <div style="font-size: 7px;">TEMPORARY SCORE</div>
+        </div>
+
+        <div class="ability-box">
+          <div class="ability-name">CONSTITUTION</div>
+          <input type="number" class="ability-score" id="con" value="10" onchange="calculateMods()">
+          <div class="ability-modifier" id="conMod">+0</div>
+          <div style="font-size: 8px;">ABILITY MODIFIER</div>
+          <input type="number" class="ability-temp" id="conTemp" onchange="calculateMods()">
+          <div style="font-size: 7px;">TEMPORARY SCORE</div>
+        </div>
+
+        <div class="ability-box">
+          <div class="ability-name">INTELLIGENCE</div>
+          <input type="number" class="ability-score" id="int" value="10" onchange="calculateMods()">
+          <div class="ability-modifier" id="intMod">+0</div>
+          <div style="font-size: 8px;">ABILITY MODIFIER</div>
+          <input type="number" class="ability-temp" id="intTemp" onchange="calculateMods()">
+          <div style="font-size: 7px;">TEMPORARY SCORE</div>
+        </div>
+
+        <div class="ability-box">
+          <div class="ability-name">WISDOM</div>
+          <input type="number" class="ability-score" id="wis" value="10" onchange="calculateMods()">
+          <div class="ability-modifier" id="wisMod">+0</div>
+          <div style="font-size: 8px;">ABILITY MODIFIER</div>
+          <input type="number" class="ability-temp" id="wisTemp" onchange="calculateMods()">
+          <div style="font-size: 7px;">TEMPORARY SCORE</div>
+        </div>
+
+        <div class="ability-box">
+          <div class="ability-name">CHARISMA</div>
+          <input type="number" class="ability-score" id="cha" value="10" onchange="calculateMods()">
+          <div class="ability-modifier" id="chaMod">+0</div>
+          <div style="font-size: 8px;">ABILITY MODIFIER</div>
+          <input type="number" class="ability-temp" id="chaTemp" onchange="calculateMods()">
+          <div style="font-size: 7px;">TEMPORARY SCORE</div>
+        </div>
+      </div>
+
+      <!-- Middle Column: Combat Stats -->
+      <div class="combat-column">
+        <!-- Hit Points -->
+        <div class="combat-section">
+          <h3>HIT POINTS</h3>
+          <div class="hp-section">
+            <div class="stat-box">
+              <span class="stat-label">TOTAL</span>
+              <input type="number" class="stat-value" id="hpTotal" value="8">
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">CURRENT</span>
+              <input type="number" class="stat-value" id="hpCurrent" value="8">
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">NONLETHAL</span>
+              <input type="number" class="stat-value" id="hpNonlethal" value="0">
+            </div>
+          </div>
+        </div>
+
+        <!-- Armor Class -->
+        <div class="combat-section">
+          <h3>ARMOR CLASS</h3>
+          <div class="ac-section">
+            <div class="stat-box">
+              <span class="stat-label">TOTAL</span>
+              <input type="number" class="stat-value" id="acTotal" value="10">
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">ARMOR</span>
+              <input type="number" class="stat-value" id="acArmor" value="0" onchange="calculateAC()">
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">SHIELD</span>
+              <input type="number" class="stat-value" id="acShield" value="0" onchange="calculateAC()">
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">DEX</span>
+              <input type="number" class="stat-value" id="acDex" readonly>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">SIZE</span>
+              <input type="number" class="stat-value" id="acSize" value="0" onchange="calculateAC()">
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">MISC</span>
+              <input type="number" class="stat-value" id="acMisc" value="0" onchange="calculateAC()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Initiative -->
+        <div class="combat-section">
+          <h3>INITIATIVE</h3>
+          <div class="stat-box">
+            <input type="number" class="stat-value" id="initiative" readonly>
+          </div>
+        </div>
+
+        <!-- Base Attack Bonus -->
+        <div class="combat-section">
+          <h3>BASE ATTACK BONUS</h3>
+          <div class="stat-box">
+            <input type="number" class="stat-value" id="bab" value="0" onchange="calculateAttacks()">
+          </div>
+        </div>
+
+        <!-- Saving Throws -->
+        <div class="combat-section">
+          <h3>SAVING THROWS</h3>
+          <div class="saves-section">
+            <div class="stat-box">
+              <span class="stat-label">FORTITUDE</span>
+              <input type="number" class="stat-value" id="fortSave" readonly>
+              <div style="font-size: 7px;">CON modifier</div>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">REFLEX</span>
+              <input type="number" class="stat-value" id="refSave" readonly>
+              <div style="font-size: 7px;">DEX modifier</div>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">WILL</span>
+              <input type="number" class="stat-value" id="willSave" readonly>
+              <div style="font-size: 7px;">WIS modifier</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attacks -->
+        <div class="combat-section">
+          <h3>ATTACKS</h3>
+          <div class="attack-section">
+            <div class="attack-row">
+              <div class="stat-box">
+                <span class="stat-label">MELEE</span>
+                <input type="text" class="stat-value" id="meleeAttack" readonly>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">RANGED</span>
+                <input type="text" class="stat-value" id="rangedAttack" readonly>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">GRAPPLE</span>
+                <input type="text" class="stat-value" id="grapple" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Skills -->
+      <div class="skills-column">
+        <div class="skills-header">SKILLS</div>
+        <div class="skills-grid" style="margin-bottom: 4px;">
+          <div style="font-weight: bold; text-align: center;">SKILL NAME</div>
+          <div style="font-weight: bold; text-align: center; font-size: 7px;">TOTAL</div>
+          <div style="font-weight: bold; text-align: center; font-size: 7px;">ABILITY MOD</div>
+          <div style="font-weight: bold; text-align: center; font-size: 7px;">RANKS</div>
+          <div style="font-weight: bold; text-align: center; font-size: 7px;">MISC MOD</div>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+          <!-- Skills will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section: Equipment and Features -->
+    <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <!-- Left Side: Equipment -->
+      <div>
+        <!-- Armor -->
+        <div class="combat-section" style="margin-bottom: 4px;">
+          <h3>ARMOR</h3>
+          <div
+            style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr 1fr; gap: 2px; font-size: 8px; margin-bottom: 2px;">
+            <div class="font-bold text-center">TYPE</div>
+            <div class="font-bold text-center">AC BONUS</div>
+            <div class="font-bold text-center">MAX DEX</div>
+            <div class="font-bold text-center">CHECK PENALTY</div>
+            <div class="font-bold text-center">SPELL FAILURE</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr 1fr; gap: 2px;">
+            <input type="text" class="skill-input" placeholder="Armor name">
+            <input type="number" class="skill-input">
+            <input type="number" class="skill-input">
+            <input type="number" class="skill-input">
+            <input type="text" class="skill-input">
+          </div>
+        </div>
+
+        <!-- Shield -->
+        <div class="combat-section" style="margin-bottom: 4px;">
+          <h3>SHIELD</h3>
+          <div
+            style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; gap: 2px; font-size: 8px; margin-bottom: 2px;">
+            <div class="font-bold text-center">TYPE</div>
+            <div class="font-bold text-center">AC BONUS</div>
+            <div class="font-bold text-center">CHECK PENALTY</div>
+            <div class="font-bold text-center">SPELL FAILURE</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; gap: 2px;">
+            <input type="text" class="skill-input" placeholder="Shield name">
+            <input type="number" class="skill-input">
+            <input type="number" class="skill-input">
+            <input type="text" class="skill-input">
+          </div>
+        </div>
+
+        <!-- Weapons -->
+        <div class="combat-section" style="margin-bottom: 4px;">
+          <h3>WEAPONS</h3>
+          <div
+            style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px; font-size: 8px; margin-bottom: 2px;">
+            <div class="font-bold text-center">WEAPON</div>
+            <div class="font-bold text-center">ATTACK BONUS</div>
+            <div class="font-bold text-center">DAMAGE</div>
+            <div class="font-bold text-center">CRITICAL</div>
+            <div class="font-bold text-center">RANGE</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px;">
+            <input type="text" class="skill-input" placeholder="Weapon 1">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+          </div>
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px;">
+            <input type="text" class="skill-input" placeholder="Weapon 2">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+          </div>
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px;">
+            <input type="text" class="skill-input" placeholder="Weapon 3">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+            <input type="text" class="skill-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Features and Equipment -->
+      <div>
+        <!-- Languages -->
+        <div class="combat-section" style="margin-bottom: 4px;">
+          <h3>LANGUAGES</h3>
+          <textarea
+            style="width: 100%; height: 40px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;"
+            placeholder="Common, Draconic..."></textarea>
+        </div>
+
+        <!-- Special Abilities -->
+        <div class="combat-section" style="margin-bottom: 4px;">
+          <h3>SPECIAL ABILITIES</h3>
+          <textarea
+            style="width: 100%; height: 60px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;"
+            placeholder="Racial traits, class features..."></textarea>
+        </div>
+
+        <!-- Feats -->
+        <div class="combat-section" style="margin-bottom: 4px;">
+          <h3>FEATS</h3>
+          <textarea
+            style="width: 100%; height: 60px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;"
+            placeholder="Power Attack, Cleave..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Equipment List -->
+    <div style="margin-top: 8px;">
+      <div class="combat-section">
+        <h3>EQUIPMENT</h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+          <div>
+            <textarea
+              style="width: 100%; height: 120px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;"
+              placeholder="Backpack&#10;Rope (50 ft)&#10;Torch x5&#10;Rations x3&#10;Waterskin&#10;Bedroll"></textarea>
+          </div>
+          <div>
+            <textarea
+              style="width: 100%; height: 120px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;"
+              placeholder="Coins:&#10;Platinum: 0&#10;Gold: 150&#10;Silver: 0&#10;Copper: 0"></textarea>
+          </div>
+          <div>
+            <textarea
+              style="width: 100%; height: 120px; border: 1px solid var(--light-border); padding: 2px; font-size: 9px; font-family: inherit; resize: none;"
+              placeholder="Magic Items:&#10;Potion of Cure Light Wounds&#10;Scroll of Magic Missile"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // D&D 3.5 Skills List
+    const skills = [
+      { name: 'Appraise', ability: 'int' },
+      { name: 'Balance', ability: 'dex' },
+      { name: 'Bluff', ability: 'cha' },
+      { name: 'Climb', ability: 'str' },
+      { name: 'Concentration', ability: 'con' },
+      { name: 'Craft (Alchemy)', ability: 'int' },
+      { name: 'Craft (Armorsmithing)', ability: 'int' },
+      { name: 'Craft (Bowmaking)', ability: 'int' },
+      { name: 'Craft (Weaponsmithing)', ability: 'int' },
+      { name: 'Decipher Script', ability: 'int' },
+      { name: 'Diplomacy', ability: 'cha' },
+      { name: 'Disable Device', ability: 'int' },
+      { name: 'Disguise', ability: 'cha' },
+      { name: 'Escape Artist', ability: 'dex' },
+      { name: 'Forgery', ability: 'int' },
+      { name: 'Gather Information', ability: 'cha' },
+      { name: 'Handle Animal', ability: 'cha' },
+      { name: 'Heal', ability: 'wis' },
+      { name: 'Hide', ability: 'dex' },
+      { name: 'Intimidate', ability: 'cha' },
+      { name: 'Jump', ability: 'str' },
+      { name: 'Knowledge (Arcana)', ability: 'int' },
+      { name: 'Knowledge (Architecture)', ability: 'int' },
+      { name: 'Knowledge (Dungeoneering)', ability: 'int' },
+      { name: 'Knowledge (Geography)', ability: 'int' },
+      { name: 'Knowledge (History)', ability: 'int' },
+      { name: 'Knowledge (Local)', ability: 'int' },
+      { name: 'Knowledge (Nature)', ability: 'int' },
+      { name: 'Knowledge (Nobility)', ability: 'int' },
+      { name: 'Knowledge (Planes)', ability: 'int' },
+      { name: 'Knowledge (Religion)', ability: 'int' },
+      { name: 'Listen', ability: 'wis' },
+      { name: 'Move Silently', ability: 'dex' },
+      { name: 'Open Lock', ability: 'dex' },
+      { name: 'Perform (Act)', ability: 'cha' },
+      { name: 'Perform (Comedy)', ability: 'cha' },
+      { name: 'Perform (Dance)', ability: 'cha' },
+      { name: 'Perform (Keyboard)', ability: 'cha' },
+      { name: 'Perform (Oratory)', ability: 'cha' },
+      { name: 'Perform (Percussion)', ability: 'cha' },
+      { name: 'Perform (Sing)', ability: 'cha' },
+      { name: 'Perform (String)', ability: 'cha' },
+      { name: 'Perform (Wind)', ability: 'cha' },
+      { name: 'Profession ()', ability: 'wis' },
+      { name: 'Ride', ability: 'dex' },
+      { name: 'Search', ability: 'int' },
+      { name: 'Sense Motive', ability: 'wis' },
+      { name: 'Sleight of Hand', ability: 'dex' },
+      { name: 'Spellcraft', ability: 'int' },
+      { name: 'Spot', ability: 'wis' },
+      { name: 'Survival', ability: 'wis' },
+      { name: 'Swim', ability: 'str' },
+      { name: 'Tumble', ability: 'dex' },
+      { name: 'Use Magic Device', ability: 'cha' },
+      { name: 'Use Rope', ability: 'dex' }
+    ];
+
+    function calculateModifier(score) {
+      return Math.floor((score - 10) / 2);
+    }
+
+    function calculateMods() {
+      const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+
+      abilities.forEach(ability => {
+        const score = parseInt(document.getElementById(ability).value) || 10;
+        const temp = parseInt(document.getElementById(ability + 'Temp').value);
+        const finalScore = temp && temp > 0 ? temp : score;
+        const modifier = calculateModifier(finalScore);
+
+        document.getElementById(ability + 'Mod').textContent = modifier >= 0 ? '+' + modifier : modifier;
+      });
+
+      // Update derived stats
+      calculateAC();
+      calculateInitiative();
+      calculateSaves();
+      calculateAttacks();
+      updateSkillMods();
+    }
+
+    function calculateAC() {
+      const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
+      const armor = parseInt(document.getElementById('acArmor').value) || 0;
+      const shield = parseInt(document.getElementById('acShield').value) || 0;
+      const size = parseInt(document.getElementById('acSize').value) || 0;
+      const misc = parseInt(document.getElementById('acMisc').value) || 0;
+
+      document.getElementById('acDex').value = dexMod;
+      document.getElementById('acTotal').value = 10 + armor + shield + dexMod + size + misc;
+    }
+
+    function calculateInitiative() {
+      const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
+      document.getElementById('initiative').value = dexMod >= 0 ? '+' + dexMod : dexMod;
+    }
+
+    function calculateSaves() {
+      const conMod = calculateModifier(parseInt(document.getElementById('con').value) || 10);
+      const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
+      const wisMod = calculateModifier(parseInt(document.getElementById('wis').value) || 10);
+
+      document.getElementById('fortSave').value = conMod >= 0 ? '+' + conMod : conMod;
+      document.getElementById('refSave').value = dexMod >= 0 ? '+' + dexMod : dexMod;
+      document.getElementById('willSave').value = wisMod >= 0 ? '+' + wisMod : wisMod;
+    }
+
+    function calculateAttacks() {
+      const bab = parseInt(document.getElementById('bab').value) || 0;
+      const strMod = calculateModifier(parseInt(document.getElementById('str').value) || 10);
+      const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
+
+      const meleeTotal = bab + strMod;
+      const rangedTotal = bab + dexMod;
+      const grappleTotal = bab + strMod;
+
+      document.getElementById('meleeAttack').value = meleeTotal >= 0 ? '+' + meleeTotal : meleeTotal;
+      document.getElementById('rangedAttack').value = rangedTotal >= 0 ? '+' + rangedTotal : rangedTotal;
+      document.getElementById('grapple').value = grappleTotal >= 0 ? '+' + grappleTotal : grappleTotal;
+    }
+
+    function updateSkillMods() {
+      skills.forEach((skill, index) => {
+        const abilityScore = parseInt(document.getElementById(skill.ability).value) || 10;
+        const abilityMod = calculateModifier(abilityScore);
+        const abilityInput = document.getElementById(`skill-${index}-ability`);
+        if (abilityInput) {
+          abilityInput.value = abilityMod >= 0 ? '+' + abilityMod : abilityMod;
         }
+        calculateSkillTotal(index);
+      });
+    }
 
-        function calculateMods() {
-            const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
-            
-            abilities.forEach(ability => {
-                const score = parseInt(document.getElementById(ability).value) || 10;
-                const temp = parseInt(document.getElementById(ability + 'Temp').value);
-                const finalScore = temp && temp > 0 ? temp : score;
-                const modifier = calculateModifier(finalScore);
-                
-                document.getElementById(ability + 'Mod').textContent = modifier >= 0 ? '+' + modifier : modifier;
-            });
+    function calculateSkillTotal(index) {
+      const abilityMod = parseInt(document.getElementById(`skill-${index}-ability`).value) || 0;
+      const ranks = parseInt(document.getElementById(`skill-${index}-ranks`).value) || 0;
+      const misc = parseInt(document.getElementById(`skill-${index}-misc`).value) || 0;
 
-            // Update derived stats
-            calculateAC();
-            calculateInitiative();
-            calculateSaves();
-            calculateAttacks();
-            updateSkillMods();
-        }
+      const total = abilityMod + ranks + misc;
+      document.getElementById(`skill-${index}-total`).value = total >= 0 ? '+' + total : total;
+    }
 
-        function calculateAC() {
-            const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
-            const armor = parseInt(document.getElementById('acArmor').value) || 0;
-            const shield = parseInt(document.getElementById('acShield').value) || 0;
-            const size = parseInt(document.getElementById('acSize').value) || 0;
-            const misc = parseInt(document.getElementById('acMisc').value) || 0;
-            
-            document.getElementById('acDex').value = dexMod;
-            document.getElementById('acTotal').value = 10 + armor + shield + dexMod + size + misc;
-        }
+    // Initialize skills grid
+    function initializeSkills() {
+      const skillsGrid = document.getElementById('skillsGrid');
 
-        function calculateInitiative() {
-            const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
-            document.getElementById('initiative').value = dexMod >= 0 ? '+' + dexMod : dexMod;
-        }
-
-        function calculateSaves() {
-            const conMod = calculateModifier(parseInt(document.getElementById('con').value) || 10);
-            const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
-            const wisMod = calculateModifier(parseInt(document.getElementById('wis').value) || 10);
-            
-            document.getElementById('fortSave').value = conMod >= 0 ? '+' + conMod : conMod;
-            document.getElementById('refSave').value = dexMod >= 0 ? '+' + dexMod : dexMod;
-            document.getElementById('willSave').value = wisMod >= 0 ? '+' + wisMod : wisMod;
-        }
-
-        function calculateAttacks() {
-            const bab = parseInt(document.getElementById('bab').value) || 0;
-            const strMod = calculateModifier(parseInt(document.getElementById('str').value) || 10);
-            const dexMod = calculateModifier(parseInt(document.getElementById('dex').value) || 10);
-            
-            const meleeTotal = bab + strMod;
-            const rangedTotal = bab + dexMod;
-            const grappleTotal = bab + strMod;
-            
-            document.getElementById('meleeAttack').value = meleeTotal >= 0 ? '+' + meleeTotal : meleeTotal;
-            document.getElementById('rangedAttack').value = rangedTotal >= 0 ? '+' + rangedTotal : rangedTotal;
-            document.getElementById('grapple').value = grappleTotal >= 0 ? '+' + grappleTotal : grappleTotal;
-        }
-
-        function updateSkillMods() {
-            skills.forEach((skill, index) => {
-                const abilityScore = parseInt(document.getElementById(skill.ability).value) || 10;
-                const abilityMod = calculateModifier(abilityScore);
-                const abilityInput = document.getElementById(`skill-${index}-ability`);
-                if (abilityInput) {
-                    abilityInput.value = abilityMod >= 0 ? '+' + abilityMod : abilityMod;
-                }
-                calculateSkillTotal(index);
-            });
-        }
-
-        function calculateSkillTotal(index) {
-            const abilityMod = parseInt(document.getElementById(`skill-${index}-ability`).value) || 0;
-            const ranks = parseInt(document.getElementById(`skill-${index}-ranks`).value) || 0;
-            const misc = parseInt(document.getElementById(`skill-${index}-misc`).value) || 0;
-            
-            const total = abilityMod + ranks + misc;
-            document.getElementById(`skill-${index}-total`).value = total >= 0 ? '+' + total : total;
-        }
-
-        // Initialize skills grid
-        function initializeSkills() {
-            const skillsGrid = document.getElementById('skillsGrid');
-            
-            skills.forEach((skill, index) => {
-                const skillRow = document.createElement('div');
-                skillRow.className = 'skill-row';
-                skillRow.innerHTML = `
+      skills.forEach((skill, index) => {
+        const skillRow = document.createElement('div');
+        skillRow.className = 'skill-row';
+        skillRow.innerHTML = `
                     <div class="skill-name">${skill.name}</div>
                     <input type="text" class="skill-input skill-total" id="skill-${index}-total" readonly>
                     <input type="text" class="skill-input skill-mod" id="skill-${index}-ability" readonly>
@@ -805,15 +830,16 @@
                     <input type="number" class="skill-input skill-misc" id="skill-${index}-misc" value="0" 
                            onchange="calculateSkillTotal(${index})">
                 `;
-                skillsGrid.appendChild(skillRow);
-            });
-        }
+        skillsGrid.appendChild(skillRow);
+      });
+    }
 
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeSkills();
-            calculateMods();
-        });
-    </script>
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', function () {
+      initializeSkills();
+      calculateMods();
+    });
+  </script>
 </body>
+
 </html>

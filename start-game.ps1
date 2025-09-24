@@ -23,7 +23,7 @@ $proc = Start-Process -FilePath node -ArgumentList 'server-enhanced.js' -PassThr
 Write-Output "Waiting $WaitSeconds second(s) for server to initialize..."
 Start-Sleep -Seconds $WaitSeconds
 
- $healthUrl = "http://$HostName`:$Port/health"
+$healthUrl = "http://$HostName`:$Port/health"
 Write-Output "Checking health endpoint: $healthUrl"
 
 try {
@@ -31,7 +31,8 @@ try {
     Write-Output "Health endpoint returned:" 
     $resp | ConvertTo-Json -Depth 6 | Write-Output
     Write-Output "Server started successfully (Process Id: $($proc.Id))"
-} catch {
+}
+catch {
     Write-Warning "Unable to reach health endpoint. The server may still be starting or failed to start."
     Write-Output "Server process info:" 
     Write-Output ("  Id: {0}" -f $($proc.Id))
