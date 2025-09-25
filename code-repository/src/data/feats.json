@@ -1,265 +1,239 @@
-﻿[
-    {
-        "benefits":  [
-                         "Jump +2",
-                         "Tumble +2"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Acrobatic",
-        "description":  "You have excellent body awareness and coordination.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "Listen +2",
-                         "Spot +2"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Alertness",
-        "description":  "You have finely tuned senses.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "Handle Animal +2",
-                         "Ride +2"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Animal Affinity",
-        "description":  "You are good with animals.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "Extra attack after killing blow"
-                     ],
-        "prerequisites":  [
-                              "Str 13",
-                              "Power Attack"
-                          ],
-        "name":  "Cleave",
-        "description":  "You can follow through with powerful blows.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "Trade attack bonus for AC bonus"
-                     ],
-        "prerequisites":  [
-                              "Int 13"
-                          ],
-        "name":  "Combat Expertise",
-        "description":  "You are trained at using your combat skill for defense.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "Additional attacks of opportunity"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Combat Reflexes",
-        "description":  "You can respond quickly to threats.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "+1 dodge bonus to AC against one opponent"
-                     ],
-        "prerequisites":  [
-                              "Dex 13"
-                          ],
-        "name":  "Dodge",
-        "description":  "You are adept at dodging blows.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "Spell variables increased by 50%",
-                         "+2 spell levels"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Empower Spell",
-        "description":  "You can cast spells to greater effect.",
-        "type":  "Metamagic"
-    },
-    {
-        "benefits":  [
-                         "+4 bonus on checks for extended activity"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Endurance",
-        "description":  "You have exceptional endurance.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "No penalty with chosen exotic weapon"
-                     ],
-        "prerequisites":  [
-                              "Base attack bonus +1"
-                          ],
-        "name":  "Exotic Weapon Proficiency",
-        "description":  "You understand how to use an exotic weapon.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "No limit on cleave attacks per round"
-                     ],
-        "prerequisites":  [
-                              "Str 13",
-                              "Power Attack",
-                              "Cleave",
-                              "Base attack bonus +4"
-                          ],
-        "name":  "Great Cleave",
-        "description":  "You can strike many nearby foes with a single mighty swing.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "+2 bonus on Fortitude saves"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Great Fortitude",
-        "description":  "You are tougher than normal.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "+4 bonus on initiative checks"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Improved Initiative",
-        "description":  "You can react faster than normal.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "+2 bonus on Will saves"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Iron Will",
-        "description":  "You have a stronger will than normal.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "+2 bonus on Reflex saves"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Lightning Reflexes",
-        "description":  "You have faster reflexes than normal.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "All variable dice results maximized",
-                         "+3 spell levels"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Maximize Spell",
-        "description":  "You can cast spells to maximum effect.",
-        "type":  "Metamagic"
-    },
-    {
-        "benefits":  [
-                         "Trade attack bonus for damage bonus"
-                     ],
-        "prerequisites":  [
-                              "Str 13"
-                          ],
-        "name":  "Power Attack",
-        "description":  "You can make exceptionally deadly melee attacks.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "Can create scrolls"
-                     ],
-        "prerequisites":  [
-                              "Caster level 1st"
-                          ],
-        "name":  "Scribe Scroll",
-        "description":  "You can create scrolls from known spells.",
-        "type":  "Item Creation"
-    },
-    {
-        "benefits":  [
-                         "+3 bonus to chosen skill"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Skill Focus",
-        "description":  "You are particularly adept at a certain skill.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "+3 hit points"
-                     ],
-        "prerequisites":  [
-
-                          ],
-        "name":  "Toughness",
-        "description":  "You are tougher than normal.",
-        "type":  "General"
-    },
-    {
-        "benefits":  [
-                         "Reduced penalties for fighting with two weapons"
-                     ],
-        "prerequisites":  [
-                              "Dex 15"
-                          ],
-        "name":  "Two-Weapon Fighting",
-        "description":  "You can fight with a weapon in each hand.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "Use Dex instead of Str for attack rolls with light weapons"
-                     ],
-        "prerequisites":  [
-                              "Base attack bonus +1"
-                          ],
-        "name":  "Weapon Finesse",
-        "description":  "You are skilled at using your agility in melee combat.",
-        "type":  "Fighter"
-    },
-    {
-        "benefits":  [
-                         "+1 bonus on attack rolls with selected weapon"
-                     ],
-        "prerequisites":  [
-                              "Proficiency with weapon",
-                              "Base attack bonus +1"
-                          ],
-        "name":  "Weapon Focus",
-        "description":  "You are especially good at using a selected weapon.",
-        "type":  "Fighter"
-    }
+[
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "Jump +2",
+      "Tumble +2"
+    ],
+    "description": "You have excellent body awareness and coordination.",
+    "name": "Acrobatic"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "Listen +2",
+      "Spot +2"
+    ],
+    "description": "You have finely tuned senses.",
+    "name": "Alertness"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "Handle Animal +2",
+      "Ride +2"
+    ],
+    "description": "You are good with animals.",
+    "name": "Animal Affinity"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Str 13",
+      "Power Attack"
+    ],
+    "benefits": [
+      "Extra attack after killing blow"
+    ],
+    "description": "You can follow through with powerful blows.",
+    "name": "Cleave"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Int 13"
+    ],
+    "benefits": [
+      "Trade attack bonus for AC bonus"
+    ],
+    "description": "You are trained at using your combat skill for defense.",
+    "name": "Combat Expertise"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [],
+    "benefits": [
+      "Additional attacks of opportunity"
+    ],
+    "description": "You can respond quickly to threats.",
+    "name": "Combat Reflexes"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Dex 13"
+    ],
+    "benefits": [
+      "+1 dodge bonus to AC against one opponent"
+    ],
+    "description": "You are adept at dodging blows.",
+    "name": "Dodge"
+  },
+  {
+    "type": "Metamagic",
+    "prerequisites": [],
+    "benefits": [
+      "Spell variables increased by 50%",
+      "+2 spell levels"
+    ],
+    "description": "You can cast spells to greater effect.",
+    "name": "Empower Spell"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "+4 bonus on checks for extended activity"
+    ],
+    "description": "You have exceptional endurance.",
+    "name": "Endurance"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Base attack bonus +1"
+    ],
+    "benefits": [
+      "No penalty with chosen exotic weapon"
+    ],
+    "description": "You understand how to use an exotic weapon.",
+    "name": "Exotic Weapon Proficiency"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Str 13",
+      "Power Attack",
+      "Cleave",
+      "Base attack bonus +4"
+    ],
+    "benefits": [
+      "No limit on cleave attacks per round"
+    ],
+    "description": "You can strike many nearby foes with a single mighty swing.",
+    "name": "Great Cleave"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "+2 bonus on Fortitude saves"
+    ],
+    "description": "You are tougher than normal.",
+    "name": "Great Fortitude"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [],
+    "benefits": [
+      "+4 bonus on initiative checks"
+    ],
+    "description": "You can react faster than normal.",
+    "name": "Improved Initiative"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "+2 bonus on Will saves"
+    ],
+    "description": "You have a stronger will than normal.",
+    "name": "Iron Will"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "+2 bonus on Reflex saves"
+    ],
+    "description": "You have faster reflexes than normal.",
+    "name": "Lightning Reflexes"
+  },
+  {
+    "type": "Metamagic",
+    "prerequisites": [],
+    "benefits": [
+      "All variable dice results maximized",
+      "+3 spell levels"
+    ],
+    "description": "You can cast spells to maximum effect.",
+    "name": "Maximize Spell"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Str 13"
+    ],
+    "benefits": [
+      "Trade attack bonus for damage bonus"
+    ],
+    "description": "You can make exceptionally deadly melee attacks.",
+    "name": "Power Attack"
+  },
+  {
+    "type": "Item Creation",
+    "prerequisites": [
+      "Caster level 1st"
+    ],
+    "benefits": [
+      "Can create scrolls"
+    ],
+    "description": "You can create scrolls from known spells.",
+    "name": "Scribe Scroll"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "+3 bonus to chosen skill"
+    ],
+    "description": "You are particularly adept at a certain skill.",
+    "name": "Skill Focus"
+  },
+  {
+    "type": "General",
+    "prerequisites": [],
+    "benefits": [
+      "+3 hit points"
+    ],
+    "description": "You are tougher than normal.",
+    "name": "Toughness"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Dex 15"
+    ],
+    "benefits": [
+      "Reduced penalties for fighting with two weapons"
+    ],
+    "description": "You can fight with a weapon in each hand.",
+    "name": "Two-Weapon Fighting"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Base attack bonus +1"
+    ],
+    "benefits": [
+      "Use Dex instead of Str for attack rolls with light weapons"
+    ],
+    "description": "You are skilled at using your agility in melee combat.",
+    "name": "Weapon Finesse"
+  },
+  {
+    "type": "Fighter",
+    "prerequisites": [
+      "Proficiency with weapon",
+      "Base attack bonus +1"
+    ],
+    "benefits": [
+      "+1 bonus on attack rolls with selected weapon"
+    ],
+    "description": "You are especially good at using a selected weapon.",
+    "name": "Weapon Focus"
+  }
 ]

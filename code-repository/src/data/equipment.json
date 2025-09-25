@@ -1,96 +1,96 @@
-﻿{
-    "armor":  [
-                  {
-                      "arcane_failure":  10,
-                      "speed_30":  30,
-                      "ac_bonus":  2,
-                      "max_dex":  6,
-                      "category":  "Light",
-                      "check_penalty":  0,
-                      "weight":  "15 lb",
-                      "name":  "Leather Armor",
-                      "cost":  "10 gp",
-                      "speed_20":  20
-                  },
-                  {
-                      "arcane_failure":  30,
-                      "speed_30":  20,
-                      "ac_bonus":  5,
-                      "max_dex":  2,
-                      "category":  "Medium",
-                      "check_penalty":  -5,
-                      "weight":  "40 lb",
-                      "name":  "Chain Mail",
-                      "cost":  "150 gp",
-                      "speed_20":  15
-                  },
-                  {
-                      "arcane_failure":  35,
-                      "speed_30":  20,
-                      "ac_bonus":  8,
-                      "max_dex":  1,
-                      "category":  "Heavy",
-                      "check_penalty":  -6,
-                      "weight":  "50 lb",
-                      "name":  "Full Plate",
-                      "cost":  "1500 gp",
-                      "speed_20":  15
-                  }
-              ],
-    "weapons":  [
-                    {
-                        "weight":  "4 lb",
-                        "properties":  [
-                                           "Slashing"
-                                       ],
-                        "cost":  "15 gp",
-                        "critical":  "19-20/x2",
-                        "damage":  "1d8",
-                        "category":  "Martial",
-                        "type":  "Melee",
-                        "name":  "Longsword"
-                    },
-                    {
-                        "weight":  "8 lb",
-                        "properties":  [
-                                           "Two-handed",
-                                           "Slashing"
-                                       ],
-                        "cost":  "50 gp",
-                        "critical":  "19-20/x2",
-                        "damage":  "2d6",
-                        "category":  "Martial",
-                        "type":  "Melee",
-                        "name":  "Greatsword"
-                    },
-                    {
-                        "weight":  "1 lb",
-                        "properties":  [
-                                           "Light",
-                                           "Finesse",
-                                           "Thrown",
-                                           "Piercing"
-                                       ],
-                        "cost":  "2 gp",
-                        "critical":  "19-20/x2",
-                        "damage":  "1d4",
-                        "category":  "Simple",
-                        "type":  "Melee",
-                        "name":  "Dagger"
-                    },
-                    {
-                        "range":  "100 ft",
-                        "type":  "Ranged",
-                        "category":  "Martial",
-                        "weight":  "3 lb",
-                        "critical":  "x3",
-                        "name":  "Longbow",
-                        "damage":  "1d8",
-                        "properties":  [
-                                           "Two-handed",
-                                           "Piercing"
-                                       ],
-                        "cost":  "75 gp"
-                    }
-                ]
+{
+  "armor": [
+    {
+      "ac_bonus": 2,
+      "check_penalty": 0,
+      "speed_20": 20,
+      "weight": "15 lb",
+      "arcane_failure": 10,
+      "category": "Light",
+      "cost": "10 gp",
+      "name": "Leather Armor",
+      "max_dex": 6,
+      "speed_30": 30
+    },
+    {
+      "ac_bonus": 5,
+      "check_penalty": -5,
+      "speed_20": 15,
+      "weight": "40 lb",
+      "arcane_failure": 30,
+      "category": "Medium",
+      "cost": "150 gp",
+      "name": "Chain Mail",
+      "max_dex": 2,
+      "speed_30": 20
+    },
+    {
+      "ac_bonus": 8,
+      "check_penalty": -6,
+      "speed_20": 15,
+      "weight": "50 lb",
+      "arcane_failure": 35,
+      "category": "Heavy",
+      "cost": "1500 gp",
+      "name": "Full Plate",
+      "max_dex": 1,
+      "speed_30": 20
+    }
+  ],
+  "weapons": [
+    {
+      "weight": "4 lb",
+      "properties": [
+        "Slashing"
+      ],
+      "critical": "19-20/x2",
+      "type": "Melee",
+      "cost": "15 gp",
+      "category": "Martial",
+      "name": "Longsword",
+      "damage": "1d8"
+    },
+    {
+      "weight": "8 lb",
+      "properties": [
+        "Two-handed",
+        "Slashing"
+      ],
+      "critical": "19-20/x2",
+      "type": "Melee",
+      "cost": "50 gp",
+      "category": "Martial",
+      "name": "Greatsword",
+      "damage": "2d6"
+    },
+    {
+      "weight": "1 lb",
+      "properties": [
+        "Light",
+        "Finesse",
+        "Thrown",
+        "Piercing"
+      ],
+      "critical": "19-20/x2",
+      "type": "Melee",
+      "cost": "2 gp",
+      "category": "Simple",
+      "name": "Dagger",
+      "damage": "1d4"
+    },
+    {
+      "type": "Ranged",
+      "range": "100 ft",
+      "critical": "x3",
+      "category": "Martial",
+      "cost": "75 gp",
+      "weight": "3 lb",
+      "name": "Longbow",
+      "properties": [
+        "Two-handed",
+        "Piercing"
+      ],
+      "damage": "1d8"
+    }
+  ]
 }

@@ -653,7 +653,7 @@
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#game-areas">Game Areas</a></li>
-                <li><a href="./code-repository/web/character-sheets/new-character-creator.html">Character Creator</a>
+                <li><a href="./code-repository/examples/character-sheets/new-character-creator.html">Character Creator</a>
                 </li>
                 <li><a href="./code-repository/docs/">Documentation</a></li>
                 <li><a href="#about">About</a></li>
@@ -704,7 +704,7 @@
                     <h4
                         style="font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: #8B4513; margin: 0 0 0.5rem 0; padding-bottom: 0.25rem; border-bottom: 1px solid rgba(139, 69, 19, 0.3);">
                         Game Tools</h4>
-                    <a href="./code-repository/web/character-sheets/new-character-creator.html"
+                    <a href="./code-repository/examples/character-sheets/new-character-creator.html"
                         style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #1a1a1a; text-decoration: none; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.25rem; transition: all 0.2s ease;"
                         onmouseover="this.style.background='rgba(139, 0, 0, 0.1)'; this.style.color='#8B0000'; this.style.transform='translateX(2px)'"
                         onmouseout="this.style.background=''; this.style.color='#1a1a1a'; this.style.transform=''">
@@ -867,7 +867,7 @@
                 Create characters, manage campaigns, and explore infinite adventures with our AI-powered system.
             </p>
             <div class="cta-buttons">
-                <a href="./code-repository/web/character-sheets/new-character-creator.html" class="btn btn-primary">
+                <a href="./code-repository/examples/character-sheets/new-character-creator.html" class="btn btn-primary">
                     <i class="fas fa-user-plus"></i>
                     Create Character
                 </a>
@@ -895,7 +895,7 @@
                     <h3>7-Step Character Creation<span class="status-badge status-implemented">✓ Live</span></h3>
                     <p>Award-winning character creation wizard with real-time validation, spell management, and
                         equipment presets. Full D&D 3.5 SRD compliance.</p>
-                    <a href="./code-repository/web/character-sheets/new-character-creator.html" class="feature-link">
+                    <a href="./code-repository/examples/character-sheets/new-character-creator.html" class="feature-link">
                         Start Creating <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -972,7 +972,7 @@
             </div>
 
             <div class="areas-grid">
-                <a href="./code-repository/web/character-sheets/new-character-creator.html" class="area-card">
+                <a href="./code-repository/examples/character-sheets/new-character-creator.html" class="area-card">
                     <div class="area-icon">
                         <i class="fas fa-user-edit"></i>
                     </div>
@@ -1421,10 +1421,24 @@ grid-template-columns: 1fr;
         </div>
     </div>
 
+    <!-- Load CSS Styles -->
+    <link rel="stylesheet" href="code-repository/web/css/character-creator.css">
+    <link rel="stylesheet" href="code-repository/web/css/character-sheet.css">
+
     <!-- Load Game Engine Scripts -->
     <script src="code-repository/src/dice/dice-engine.js"></script>
     <script src="code-repository/src/character/character-generator.js"></script>
     <script src="code-repository/src/adventure/adventure-engine.js"></script>
+    
+    <!-- Load New Advanced Systems -->
+    <script src="code-repository/src/spells/spell-manager.js"></script>
+    <script src="code-repository/src/epic/epic-level-manager.js"></script>
+    <script src="code-repository/src/combat/combat-manager.js"></script>
+    <script src="code-repository/src/character/character-sheet-renderer.js"></script>
+    <script src="code-repository/src/character/character-storage-manager.js"></script>
+    
+    <!-- Load Interface and Integration -->
+    <script src="code-repository/web/js/character-creator-interface.js"></script>
     <script src="code-repository/src/integrated-character-creator.js"></script>
 
     <script>

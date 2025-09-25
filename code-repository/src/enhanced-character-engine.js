@@ -70,9 +70,17 @@ class RulzLawyerCharacterEngine {
      */
     async initializeCoreSystem() {
         try {
-            // Load system integration module
-            const { DnDSystemIntegration } = await this.loadModule('./code-repository/src/system-integration.js');
-            this.systemIntegration = new DnDSystemIntegration();
+            // Use pre-loaded system integration class from window
+            if (typeof window !== 'undefined' && window.DnDSystemIntegration) {
+                this.systemIntegration = new window.DnDSystemIntegration();
+            } else if (typeof require !== 'undefined') {
+                // Node.js environment fallback
+                const { DnDSystemIntegration } = require('./system-integration.js');
+                this.systemIntegration = new DnDSystemIntegration();
+            } else {
+                throw new Error('DnDSystemIntegration not available');
+            }
+
             await this.systemIntegration.initialize();
 
             // Get references to core components

@@ -1,1141 +1,1109 @@
-﻿{
-    "calculations":  {
-                         "spellcasting":  {
-                                              "spells_per_day":  {
-                                                                     "description":  "Based on class level and casting ability modifier"
-                                                                 },
-                                              "save_dc":  {
-                                                              "formula":  "10 + spell_level + casting_ability_modifier"
-                                                          }
-                                          },
-                         "ability_scores":  {
-                                                "modifiers":  {
-                                                                  "formula":  "floor((score - 10) / 2)",
-                                                                  "description":  "Standard D\u0026D 3.5 ability modifier calculation"
-                                                              },
-                                                "level_increases":  {
-                                                                        "frequency":  4,
-                                                                        "description":  "Increase any ability score by 1 every 4 character levels"
-                                                                    },
-                                                "base_scores":  [
-                                                                    "str",
-                                                                    "dex",
-                                                                    "con",
-                                                                    "int",
-                                                                    "wis",
-                                                                    "cha"
-                                                                ]
-                                            },
-                         "skills":  {
-                                        "skill_check":  {
-                                                            "formula":  "1d20 + ranks + ability_modifier + misc_modifiers",
-                                                            "armor_check_penalty":  "Applied to Str and Dex-based skills when wearing armor"
-                                                        },
-                                        "synergy":  {
-                                                        "description":  "5+ ranks in certain skills provide +2 synergy bonus to related skills",
-                                                        "threshold":  5,
-                                                        "bonus":  2
-                                                    },
-                                        "max_ranks":  {
-                                                          "class_skill":  "character_level + 3",
-                                                          "cross_class":  "(character_level + 3) / 2"
-                                                      }
-                                    },
-                         "combat":  {
-                                        "bab":  {
-                                                    "poor":  "1/2 character level",
-                                                    "full":  "Character level",
-                                                    "medium":  "3/4 character level"
-                                                },
-                                        "armor_class":  {
-                                                            "formula":  "10 + armor_bonus + shield_bonus + dex_modifier + size_modifier + natural_armor + deflection + dodge"
-                                                        },
-                                        "saving_throws":  {
-                                                              "good":  "2 + 1/2 character level",
-                                                              "poor":  "1/3 character level"
-                                                          }
-                                    }
-                     },
-    "classes":  [
-                    {
-                        "progression":  {
-                                            "will_save":  "poor",
-                                            "class_skills":  [
-                                                                 "Climb",
-                                                                 "Craft",
-                                                                 "Handle Animal",
-                                                                 "Intimidate",
-                                                                 "Jump",
-                                                                 "Ride",
-                                                                 "Swim"
-                                                             ],
-                                            "bab_progression":  "full",
-                                            "hit_die":  10,
-                                            "ref_save":  "poor",
-                                            "fort_save":  "good",
-                                            "skill_points":  2
-                                        },
-                        "name":  "Fighter",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "poor",
-                                            "class_skills":  [
-                                                                 "Appraise",
-                                                                 "Balance",
-                                                                 "Bluff",
-                                                                 "Climb",
-                                                                 "Craft",
-                                                                 "Decipher Script",
-                                                                 "Diplomacy",
-                                                                 "Disable Device",
-                                                                 "Disguise",
-                                                                 "Escape Artist",
-                                                                 "Forgery",
-                                                                 "Gather Information",
-                                                                 "Hide",
-                                                                 "Intimidate",
-                                                                 "Jump",
-                                                                 "Knowledge",
-                                                                 "Listen",
-                                                                 "Move Silently",
-                                                                 "Open Lock",
-                                                                 "Perform",
-                                                                 "Profession",
-                                                                 "Search",
-                                                                 "Sense Motive",
-                                                                 "Sleight of Hand",
-                                                                 "Spot",
-                                                                 "Swim",
-                                                                 "Tumble",
-                                                                 "Use Magic Device",
-                                                                 "Use Rope"
-                                                             ],
-                                            "bab_progression":  "medium",
-                                            "hit_die":  6,
-                                            "ref_save":  "good",
-                                            "fort_save":  "poor",
-                                            "skill_points":  8
-                                        },
-                        "name":  "Rogue",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "good",
-                                            "ref_save":  "poor",
-                                            "skill_points":  2,
-                                            "fort_save":  "good",
-                                            "class_skills":  [
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Diplomacy",
-                                                                 "Heal",
-                                                                 "Knowledge",
-                                                                 "Profession",
-                                                                 "Spellcraft"
-                                                             ],
-                                            "hit_die":  8,
-                                            "spellcaster":  "prepared",
-                                            "bab_progression":  "medium"
-                                        },
-                        "name":  "Cleric",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "poor",
-                                            "class_skills":  [
-                                                                 "Climb",
-                                                                 "Craft",
-                                                                 "Handle Animal",
-                                                                 "Intimidate",
-                                                                 "Jump",
-                                                                 "Listen",
-                                                                 "Ride",
-                                                                 "Survival",
-                                                                 "Swim"
-                                                             ],
-                                            "bab_progression":  "full",
-                                            "hit_die":  12,
-                                            "ref_save":  "poor",
-                                            "fort_save":  "good",
-                                            "skill_points":  4
-                                        },
-                        "name":  "Barbarian",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "good",
-                                            "ref_save":  "good",
-                                            "skill_points":  6,
-                                            "fort_save":  "poor",
-                                            "class_skills":  [
-                                                                 "Appraise",
-                                                                 "Balance",
-                                                                 "Bluff",
-                                                                 "Climb",
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Decipher Script",
-                                                                 "Diplomacy",
-                                                                 "Disguise",
-                                                                 "Escape Artist",
-                                                                 "Gather Information",
-                                                                 "Hide",
-                                                                 "Jump",
-                                                                 "Knowledge",
-                                                                 "Listen",
-                                                                 "Move Silently",
-                                                                 "Perform",
-                                                                 "Profession",
-                                                                 "Sense Motive",
-                                                                 "Sleight of Hand",
-                                                                 "Speak Language",
-                                                                 "Spellcraft",
-                                                                 "Swim",
-                                                                 "Tumble",
-                                                                 "Use Magic Device"
-                                                             ],
-                                            "hit_die":  6,
-                                            "spellcaster":  "spontaneous",
-                                            "bab_progression":  "medium"
-                                        },
-                        "name":  "Bard",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "good",
-                                            "ref_save":  "poor",
-                                            "skill_points":  2,
-                                            "fort_save":  "good",
-                                            "class_skills":  [
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Diplomacy",
-                                                                 "Handle Animal",
-                                                                 "Heal",
-                                                                 "Knowledge",
-                                                                 "Profession",
-                                                                 "Ride",
-                                                                 "Sense Motive",
-                                                                 "Spellcraft"
-                                                             ],
-                                            "hit_die":  10,
-                                            "spellcaster":  "prepared",
-                                            "bab_progression":  "full"
-                                        },
-                        "name":  "Paladin",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "good",
-                                            "ref_save":  "poor",
-                                            "skill_points":  2,
-                                            "fort_save":  "poor",
-                                            "class_skills":  [
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Decipher Script",
-                                                                 "Knowledge",
-                                                                 "Profession",
-                                                                 "Spellcraft"
-                                                             ],
-                                            "hit_die":  4,
-                                            "spellcaster":  "prepared",
-                                            "bab_progression":  "poor"
-                                        },
-                        "name":  "Wizard",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "good",
-                                            "class_skills":  [
-                                                                 "Balance",
-                                                                 "Climb",
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Diplomacy",
-                                                                 "Escape Artist",
-                                                                 "Hide",
-                                                                 "Jump",
-                                                                 "Knowledge",
-                                                                 "Listen",
-                                                                 "Move Silently",
-                                                                 "Perform",
-                                                                 "Profession",
-                                                                 "Sense Motive",
-                                                                 "Spot",
-                                                                 "Swim",
-                                                                 "Tumble"
-                                                             ],
-                                            "bab_progression":  "medium",
-                                            "hit_die":  8,
-                                            "ref_save":  "good",
-                                            "fort_save":  "good",
-                                            "skill_points":  4
-                                        },
-                        "name":  "Monk",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "poor",
-                                            "ref_save":  "good",
-                                            "skill_points":  6,
-                                            "fort_save":  "good",
-                                            "class_skills":  [
-                                                                 "Climb",
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Handle Animal",
-                                                                 "Heal",
-                                                                 "Hide",
-                                                                 "Jump",
-                                                                 "Knowledge",
-                                                                 "Listen",
-                                                                 "Move Silently",
-                                                                 "Profession",
-                                                                 "Ride",
-                                                                 "Search",
-                                                                 "Spellcraft",
-                                                                 "Spot",
-                                                                 "Survival",
-                                                                 "Swim",
-                                                                 "Use Rope"
-                                                             ],
-                                            "hit_die":  8,
-                                            "spellcaster":  "prepared",
-                                            "bab_progression":  "full"
-                                        },
-                        "name":  "Ranger",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "good",
-                                            "ref_save":  "poor",
-                                            "skill_points":  2,
-                                            "fort_save":  "poor",
-                                            "class_skills":  [
-                                                                 "Bluff",
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Knowledge",
-                                                                 "Profession",
-                                                                 "Spellcraft"
-                                                             ],
-                                            "hit_die":  4,
-                                            "spellcaster":  "spontaneous",
-                                            "bab_progression":  "poor"
-                                        },
-                        "name":  "Sorcerer",
-                        "type":  "core"
-                    },
-                    {
-                        "progression":  {
-                                            "will_save":  "good",
-                                            "ref_save":  "poor",
-                                            "skill_points":  4,
-                                            "fort_save":  "good",
-                                            "class_skills":  [
-                                                                 "Concentration",
-                                                                 "Craft",
-                                                                 "Diplomacy",
-                                                                 "Handle Animal",
-                                                                 "Heal",
-                                                                 "Knowledge",
-                                                                 "Listen",
-                                                                 "Profession",
-                                                                 "Ride",
-                                                                 "Spellcraft",
-                                                                 "Spot",
-                                                                 "Survival",
-                                                                 "Swim"
-                                                             ],
-                                            "hit_die":  8,
-                                            "spellcaster":  "prepared",
-                                            "bab_progression":  "medium"
-                                        },
-                        "name":  "Druid",
-                        "type":  "core"
-                    }
-                ],
-    "skills":  [
-                   {
-                       "trained_only":  false,
-                       "name":  "Appraise",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Balance",
-                       "armor_check":  true,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Bluff",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Climb",
-                       "armor_check":  true,
-                       "ability":  "Str"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Concentration",
-                       "armor_check":  false,
-                       "ability":  "Con"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Craft",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Decipher Script",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Diplomacy",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Disable Device",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Disguise",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Escape Artist",
-                       "armor_check":  true,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Forgery",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Gather Information",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Handle Animal",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Heal",
-                       "armor_check":  false,
-                       "ability":  "Wis"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Hide",
-                       "armor_check":  true,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Intimidate",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Jump",
-                       "armor_check":  true,
-                       "ability":  "Str"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Knowledge",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Listen",
-                       "armor_check":  false,
-                       "ability":  "Wis"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Move Silently",
-                       "armor_check":  true,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Open Lock",
-                       "armor_check":  false,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Perform",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Profession",
-                       "armor_check":  false,
-                       "ability":  "Wis"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Ride",
-                       "armor_check":  false,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Search",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Sense Motive",
-                       "armor_check":  false,
-                       "ability":  "Wis"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Sleight of Hand",
-                       "armor_check":  true,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Speak Language",
-                       "armor_check":  false,
-                       "ability":  "None"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Spellcraft",
-                       "armor_check":  false,
-                       "ability":  "Int"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Spot",
-                       "armor_check":  false,
-                       "ability":  "Wis"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Survival",
-                       "armor_check":  false,
-                       "ability":  "Wis"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Swim",
-                       "armor_check":  true,
-                       "ability":  "Str"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Tumble",
-                       "armor_check":  true,
-                       "ability":  "Dex"
-                   },
-                   {
-                       "trained_only":  true,
-                       "name":  "Use Magic Device",
-                       "armor_check":  false,
-                       "ability":  "Cha"
-                   },
-                   {
-                       "trained_only":  false,
-                       "name":  "Use Rope",
-                       "armor_check":  false,
-                       "ability":  "Dex"
-                   }
-               ],
-    "spells":  [
-                   {
-                       "target":  "Up to five creatures, no two of which can be more than 15 ft. apart",
-                       "range":  "Medium (100 ft. + 10 ft./level)",
-                       "casting_time":  "1 action",
-                       "school":  "Evocation",
-                       "description":  "A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d4+1 points of force damage.",
-                       "level":  {
-                                     "Sorcerer":  1,
-                                     "Wizard":  1
-                                 },
-                       "name":  "Magic Missile",
-                       "components":  [
-                                          "V",
-                                          "S"
-                                      ],
-                       "saving_throw":  "None",
-                       "spell_resistance":  "Yes",
-                       "duration":  "Instantaneous"
-                   },
-                   {
-                       "target":  "Creature touched",
-                       "range":  "Touch",
-                       "casting_time":  "1 action",
-                       "school":  "Conjuration",
-                       "description":  "When laying your hand upon a living creature, you channel positive energy that cures 1d8+1 points of damage (maximum +5).",
-                       "level":  {
-                                     "Ranger":  2,
-                                     "Druid":  1,
-                                     "Paladin":  1,
-                                     "Cleric":  1
-                                 },
-                       "subschool":  "Healing",
-                       "name":  "Cure Light Wounds",
-                       "components":  [
-                                          "V",
-                                          "S"
-                                      ],
-                       "saving_throw":  "Will half (harmless)",
-                       "spell_resistance":  "Yes (harmless)",
-                       "duration":  "Instantaneous"
-                   },
-                   {
-                       "saving_throw":  "Reflex half",
-                       "range":  "Long (400 ft. + 40 ft./level)",
-                       "casting_time":  "1 action",
-                       "school":  "Evocation",
-                       "description":  "A fireball spell generates a searing explosion of flame that detonates with a low roar and deals 1d6 points of fire damage per caster level (maximum 10d6) to every creature within the area.",
-                       "level":  {
-                                     "Sorcerer":  3,
-                                     "Wizard":  3
-                                 },
-                       "name":  "Fireball",
-                       "components":  [
-                                          "V",
-                                          "S",
-                                          "M"
-                                      ],
-                       "area":  "20-ft.-radius spread",
-                       "spell_resistance":  "Yes",
-                       "duration":  "Instantaneous"
-                   }
-               ],
-    "epic_progression":  {
-
-                         },
-    "equipment":  {
-                      "armor":  [
-                                    {
-                                        "arcane_failure":  10,
-                                        "speed_30":  30,
-                                        "ac_bonus":  2,
-                                        "max_dex":  6,
-                                        "category":  "Light",
-                                        "check_penalty":  0,
-                                        "weight":  "15 lb",
-                                        "name":  "Leather Armor",
-                                        "cost":  "10 gp",
-                                        "speed_20":  20
-                                    },
-                                    {
-                                        "arcane_failure":  30,
-                                        "speed_30":  20,
-                                        "ac_bonus":  5,
-                                        "max_dex":  2,
-                                        "category":  "Medium",
-                                        "check_penalty":  -5,
-                                        "weight":  "40 lb",
-                                        "name":  "Chain Mail",
-                                        "cost":  "150 gp",
-                                        "speed_20":  15
-                                    },
-                                    {
-                                        "arcane_failure":  35,
-                                        "speed_30":  20,
-                                        "ac_bonus":  8,
-                                        "max_dex":  1,
-                                        "category":  "Heavy",
-                                        "check_penalty":  -6,
-                                        "weight":  "50 lb",
-                                        "name":  "Full Plate",
-                                        "cost":  "1500 gp",
-                                        "speed_20":  15
-                                    }
-                                ],
-                      "weapons":  [
-                                      {
-                                          "weight":  "4 lb",
-                                          "properties":  [
-                                                             "Slashing"
-                                                         ],
-                                          "cost":  "15 gp",
-                                          "critical":  "19-20/x2",
-                                          "damage":  "1d8",
-                                          "category":  "Martial",
-                                          "type":  "Melee",
-                                          "name":  "Longsword"
-                                      },
-                                      {
-                                          "weight":  "8 lb",
-                                          "properties":  [
-                                                             "Two-handed",
-                                                             "Slashing"
-                                                         ],
-                                          "cost":  "50 gp",
-                                          "critical":  "19-20/x2",
-                                          "damage":  "2d6",
-                                          "category":  "Martial",
-                                          "type":  "Melee",
-                                          "name":  "Greatsword"
-                                      },
-                                      {
-                                          "weight":  "1 lb",
-                                          "properties":  [
-                                                             "Light",
-                                                             "Finesse",
-                                                             "Thrown",
-                                                             "Piercing"
-                                                         ],
-                                          "cost":  "2 gp",
-                                          "critical":  "19-20/x2",
-                                          "damage":  "1d4",
-                                          "category":  "Simple",
-                                          "type":  "Melee",
-                                          "name":  "Dagger"
-                                      },
-                                      {
-                                          "range":  "100 ft",
-                                          "type":  "Ranged",
-                                          "category":  "Martial",
-                                          "weight":  "3 lb",
-                                          "critical":  "x3",
-                                          "name":  "Longbow",
-                                          "damage":  "1d8",
-                                          "properties":  [
-                                                             "Two-handed",
-                                                             "Piercing"
-                                                         ],
-                                          "cost":  "75 gp"
-                                      }
-                                  ]
-                  },
-    "feats":  [
-                  {
-                      "benefits":  [
-                                       "Jump +2",
-                                       "Tumble +2"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Acrobatic",
-                      "description":  "You have excellent body awareness and coordination.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "Listen +2",
-                                       "Spot +2"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Alertness",
-                      "description":  "You have finely tuned senses.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "Handle Animal +2",
-                                       "Ride +2"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Animal Affinity",
-                      "description":  "You are good with animals.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "Extra attack after killing blow"
-                                   ],
-                      "prerequisites":  [
-                                            "Str 13",
-                                            "Power Attack"
-                                        ],
-                      "name":  "Cleave",
-                      "description":  "You can follow through with powerful blows.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "Trade attack bonus for AC bonus"
-                                   ],
-                      "prerequisites":  [
-                                            "Int 13"
-                                        ],
-                      "name":  "Combat Expertise",
-                      "description":  "You are trained at using your combat skill for defense.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "Additional attacks of opportunity"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Combat Reflexes",
-                      "description":  "You can respond quickly to threats.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "+1 dodge bonus to AC against one opponent"
-                                   ],
-                      "prerequisites":  [
-                                            "Dex 13"
-                                        ],
-                      "name":  "Dodge",
-                      "description":  "You are adept at dodging blows.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "Spell variables increased by 50%",
-                                       "+2 spell levels"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Empower Spell",
-                      "description":  "You can cast spells to greater effect.",
-                      "type":  "Metamagic"
-                  },
-                  {
-                      "benefits":  [
-                                       "+4 bonus on checks for extended activity"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Endurance",
-                      "description":  "You have exceptional endurance.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "No penalty with chosen exotic weapon"
-                                   ],
-                      "prerequisites":  [
-                                            "Base attack bonus +1"
-                                        ],
-                      "name":  "Exotic Weapon Proficiency",
-                      "description":  "You understand how to use an exotic weapon.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "No limit on cleave attacks per round"
-                                   ],
-                      "prerequisites":  [
-                                            "Str 13",
-                                            "Power Attack",
-                                            "Cleave",
-                                            "Base attack bonus +4"
-                                        ],
-                      "name":  "Great Cleave",
-                      "description":  "You can strike many nearby foes with a single mighty swing.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "+2 bonus on Fortitude saves"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Great Fortitude",
-                      "description":  "You are tougher than normal.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "+4 bonus on initiative checks"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Improved Initiative",
-                      "description":  "You can react faster than normal.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "+2 bonus on Will saves"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Iron Will",
-                      "description":  "You have a stronger will than normal.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "+2 bonus on Reflex saves"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Lightning Reflexes",
-                      "description":  "You have faster reflexes than normal.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "All variable dice results maximized",
-                                       "+3 spell levels"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Maximize Spell",
-                      "description":  "You can cast spells to maximum effect.",
-                      "type":  "Metamagic"
-                  },
-                  {
-                      "benefits":  [
-                                       "Trade attack bonus for damage bonus"
-                                   ],
-                      "prerequisites":  [
-                                            "Str 13"
-                                        ],
-                      "name":  "Power Attack",
-                      "description":  "You can make exceptionally deadly melee attacks.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "Can create scrolls"
-                                   ],
-                      "prerequisites":  [
-                                            "Caster level 1st"
-                                        ],
-                      "name":  "Scribe Scroll",
-                      "description":  "You can create scrolls from known spells.",
-                      "type":  "Item Creation"
-                  },
-                  {
-                      "benefits":  [
-                                       "+3 bonus to chosen skill"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Skill Focus",
-                      "description":  "You are particularly adept at a certain skill.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "+3 hit points"
-                                   ],
-                      "prerequisites":  [
-
-                                        ],
-                      "name":  "Toughness",
-                      "description":  "You are tougher than normal.",
-                      "type":  "General"
-                  },
-                  {
-                      "benefits":  [
-                                       "Reduced penalties for fighting with two weapons"
-                                   ],
-                      "prerequisites":  [
-                                            "Dex 15"
-                                        ],
-                      "name":  "Two-Weapon Fighting",
-                      "description":  "You can fight with a weapon in each hand.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "Use Dex instead of Str for attack rolls with light weapons"
-                                   ],
-                      "prerequisites":  [
-                                            "Base attack bonus +1"
-                                        ],
-                      "name":  "Weapon Finesse",
-                      "description":  "You are skilled at using your agility in melee combat.",
-                      "type":  "Fighter"
-                  },
-                  {
-                      "benefits":  [
-                                       "+1 bonus on attack rolls with selected weapon"
-                                   ],
-                      "prerequisites":  [
-                                            "Proficiency with weapon",
-                                            "Base attack bonus +1"
-                                        ],
-                      "name":  "Weapon Focus",
-                      "description":  "You are especially good at using a selected weapon.",
-                      "type":  "Fighter"
-                  }
-              ],
-    "races":  [
-                  {
-                      "languages":  [
-                                        "Common"
-                                    ],
-                      "base_speed":  30,
-                      "name":  "Human",
-                      "size":  "Medium",
-                      "ability_modifiers":  {
-                                                "favored_class":  "Any",
-                                                "dex":  0,
-                                                "wis":  0,
-                                                "cha":  0,
-                                                "con":  0,
-                                                "str":  0,
-                                                "int":  0
-                                            }
-                  },
-                  {
-                      "languages":  [
-                                        "Common"
-                                    ],
-                      "base_speed":  30,
-                      "name":  "Elf",
-                      "size":  "Medium",
-                      "ability_modifiers":  {
-                                                "favored_class":  "Wizard",
-                                                "dex":  2,
-                                                "wis":  0,
-                                                "cha":  0,
-                                                "con":  -2,
-                                                "str":  0,
-                                                "int":  0
-                                            }
-                  },
-                  {
-                      "languages":  [
-                                        "Common"
-                                    ],
-                      "base_speed":  30,
-                      "name":  "Dwarf",
-                      "size":  "Medium",
-                      "ability_modifiers":  {
-                                                "favored_class":  "Fighter",
-                                                "dex":  0,
-                                                "wis":  0,
-                                                "cha":  -2,
-                                                "con":  2,
-                                                "str":  0,
-                                                "int":  0
-                                            }
-                  },
-                  {
-                      "languages":  [
-                                        "Common"
-                                    ],
-                      "base_speed":  30,
-                      "name":  "Halfling",
-                      "size":  "Medium",
-                      "ability_modifiers":  {
-                                                "favored_class":  "Rogue",
-                                                "dex":  2,
-                                                "wis":  0,
-                                                "cha":  0,
-                                                "con":  0,
-                                                "str":  -2,
-                                                "int":  0
-                                            }
-                  },
-                  {
-                      "languages":  [
-                                        "Common"
-                                    ],
-                      "base_speed":  30,
-                      "name":  "Gnome",
-                      "size":  "Medium",
-                      "ability_modifiers":  {
-                                                "favored_class":  "Bard",
-                                                "dex":  0,
-                                                "wis":  0,
-                                                "cha":  0,
-                                                "con":  2,
-                                                "str":  -2,
-                                                "int":  0
-                                            }
-                  },
-                  {
-                      "languages":  [
-                                        "Common"
-                                    ],
-                      "base_speed":  30,
-                      "name":  "Half-Elf",
-                      "size":  "Medium",
-                      "ability_modifiers":  {
-                                                "favored_class":  "Any",
-                                                "dex":  0,
-                                                "wis":  0,
-                                                "cha":  0,
-                                                "con":  0,
-                                                "str":  0,
-                                                "int":  0
-                                            }
-                  },
-                  {
-                      "languages":  [
-                                        "Common"
-                                    ],
-                      "base_speed":  30,
-                      "name":  "Half-Orc",
-                      "size":  "Medium",
-                      "ability_modifiers":  {
-                                                "favored_class":  "Barbarian",
-                                                "dex":  0,
-                                                "wis":  0,
-                                                "cha":  -2,
-                                                "con":  0,
-                                                "str":  2,
-                                                "int":  -2
-                                            }
-                  }
-              ],
-    "prestige_classes":  [
-
-                         ],
-    "abilityScores":  {
-
-                      }
+{
+  "calculations": {
+    "ability_scores": {
+      "level_increases": {
+        "description": "Increase any ability score by 1 every 4 character levels",
+        "frequency": 4
+      },
+      "base_scores": [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+      ],
+      "modifiers": {
+        "description": "Standard D&D 3.5 ability modifier calculation",
+        "formula": "floor((score - 10) / 2)"
+      }
+    },
+    "combat": {
+      "saving_throws": {
+        "poor": "1/3 character level",
+        "good": "2 + 1/2 character level"
+      },
+      "bab": {
+        "medium": "3/4 character level",
+        "full": "Character level",
+        "poor": "1/2 character level"
+      },
+      "armor_class": {
+        "formula": "10 + armor_bonus + shield_bonus + dex_modifier + size_modifier + natural_armor + deflection + dodge"
+      }
+    },
+    "skills": {
+      "synergy": {
+        "bonus": 2,
+        "threshold": 5,
+        "description": "5+ ranks in certain skills provide +2 synergy bonus to related skills"
+      },
+      "skill_check": {
+        "armor_check_penalty": "Applied to Str and Dex-based skills when wearing armor",
+        "formula": "1d20 + ranks + ability_modifier + misc_modifiers"
+      },
+      "max_ranks": {
+        "cross_class": "(character_level + 3) / 2",
+        "class_skill": "character_level + 3"
+      }
+    },
+    "spellcasting": {
+      "save_dc": {
+        "formula": "10 + spell_level + casting_ability_modifier"
+      },
+      "spells_per_day": {
+        "description": "Based on class level and casting ability modifier"
+      }
+    }
+  },
+  "feats": [
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "Jump +2",
+        "Tumble +2"
+      ],
+      "description": "You have excellent body awareness and coordination.",
+      "name": "Acrobatic"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "Listen +2",
+        "Spot +2"
+      ],
+      "description": "You have finely tuned senses.",
+      "name": "Alertness"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "Handle Animal +2",
+        "Ride +2"
+      ],
+      "description": "You are good with animals.",
+      "name": "Animal Affinity"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Str 13",
+        "Power Attack"
+      ],
+      "benefits": [
+        "Extra attack after killing blow"
+      ],
+      "description": "You can follow through with powerful blows.",
+      "name": "Cleave"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Int 13"
+      ],
+      "benefits": [
+        "Trade attack bonus for AC bonus"
+      ],
+      "description": "You are trained at using your combat skill for defense.",
+      "name": "Combat Expertise"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [],
+      "benefits": [
+        "Additional attacks of opportunity"
+      ],
+      "description": "You can respond quickly to threats.",
+      "name": "Combat Reflexes"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Dex 13"
+      ],
+      "benefits": [
+        "+1 dodge bonus to AC against one opponent"
+      ],
+      "description": "You are adept at dodging blows.",
+      "name": "Dodge"
+    },
+    {
+      "type": "Metamagic",
+      "prerequisites": [],
+      "benefits": [
+        "Spell variables increased by 50%",
+        "+2 spell levels"
+      ],
+      "description": "You can cast spells to greater effect.",
+      "name": "Empower Spell"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "+4 bonus on checks for extended activity"
+      ],
+      "description": "You have exceptional endurance.",
+      "name": "Endurance"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Base attack bonus +1"
+      ],
+      "benefits": [
+        "No penalty with chosen exotic weapon"
+      ],
+      "description": "You understand how to use an exotic weapon.",
+      "name": "Exotic Weapon Proficiency"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Str 13",
+        "Power Attack",
+        "Cleave",
+        "Base attack bonus +4"
+      ],
+      "benefits": [
+        "No limit on cleave attacks per round"
+      ],
+      "description": "You can strike many nearby foes with a single mighty swing.",
+      "name": "Great Cleave"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "+2 bonus on Fortitude saves"
+      ],
+      "description": "You are tougher than normal.",
+      "name": "Great Fortitude"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [],
+      "benefits": [
+        "+4 bonus on initiative checks"
+      ],
+      "description": "You can react faster than normal.",
+      "name": "Improved Initiative"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "+2 bonus on Will saves"
+      ],
+      "description": "You have a stronger will than normal.",
+      "name": "Iron Will"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "+2 bonus on Reflex saves"
+      ],
+      "description": "You have faster reflexes than normal.",
+      "name": "Lightning Reflexes"
+    },
+    {
+      "type": "Metamagic",
+      "prerequisites": [],
+      "benefits": [
+        "All variable dice results maximized",
+        "+3 spell levels"
+      ],
+      "description": "You can cast spells to maximum effect.",
+      "name": "Maximize Spell"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Str 13"
+      ],
+      "benefits": [
+        "Trade attack bonus for damage bonus"
+      ],
+      "description": "You can make exceptionally deadly melee attacks.",
+      "name": "Power Attack"
+    },
+    {
+      "type": "Item Creation",
+      "prerequisites": [
+        "Caster level 1st"
+      ],
+      "benefits": [
+        "Can create scrolls"
+      ],
+      "description": "You can create scrolls from known spells.",
+      "name": "Scribe Scroll"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "+3 bonus to chosen skill"
+      ],
+      "description": "You are particularly adept at a certain skill.",
+      "name": "Skill Focus"
+    },
+    {
+      "type": "General",
+      "prerequisites": [],
+      "benefits": [
+        "+3 hit points"
+      ],
+      "description": "You are tougher than normal.",
+      "name": "Toughness"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Dex 15"
+      ],
+      "benefits": [
+        "Reduced penalties for fighting with two weapons"
+      ],
+      "description": "You can fight with a weapon in each hand.",
+      "name": "Two-Weapon Fighting"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Base attack bonus +1"
+      ],
+      "benefits": [
+        "Use Dex instead of Str for attack rolls with light weapons"
+      ],
+      "description": "You are skilled at using your agility in melee combat.",
+      "name": "Weapon Finesse"
+    },
+    {
+      "type": "Fighter",
+      "prerequisites": [
+        "Proficiency with weapon",
+        "Base attack bonus +1"
+      ],
+      "benefits": [
+        "+1 bonus on attack rolls with selected weapon"
+      ],
+      "description": "You are especially good at using a selected weapon.",
+      "name": "Weapon Focus"
+    }
+  ],
+  "equipment": {
+    "armor": [
+      {
+        "ac_bonus": 2,
+        "check_penalty": 0,
+        "speed_20": 20,
+        "weight": "15 lb",
+        "arcane_failure": 10,
+        "category": "Light",
+        "cost": "10 gp",
+        "name": "Leather Armor",
+        "max_dex": 6,
+        "speed_30": 30
+      },
+      {
+        "ac_bonus": 5,
+        "check_penalty": -5,
+        "speed_20": 15,
+        "weight": "40 lb",
+        "arcane_failure": 30,
+        "category": "Medium",
+        "cost": "150 gp",
+        "name": "Chain Mail",
+        "max_dex": 2,
+        "speed_30": 20
+      },
+      {
+        "ac_bonus": 8,
+        "check_penalty": -6,
+        "speed_20": 15,
+        "weight": "50 lb",
+        "arcane_failure": 35,
+        "category": "Heavy",
+        "cost": "1500 gp",
+        "name": "Full Plate",
+        "max_dex": 1,
+        "speed_30": 20
+      }
+    ],
+    "weapons": [
+      {
+        "weight": "4 lb",
+        "properties": [
+          "Slashing"
+        ],
+        "critical": "19-20/x2",
+        "type": "Melee",
+        "cost": "15 gp",
+        "category": "Martial",
+        "name": "Longsword",
+        "damage": "1d8"
+      },
+      {
+        "weight": "8 lb",
+        "properties": [
+          "Two-handed",
+          "Slashing"
+        ],
+        "critical": "19-20/x2",
+        "type": "Melee",
+        "cost": "50 gp",
+        "category": "Martial",
+        "name": "Greatsword",
+        "damage": "2d6"
+      },
+      {
+        "weight": "1 lb",
+        "properties": [
+          "Light",
+          "Finesse",
+          "Thrown",
+          "Piercing"
+        ],
+        "critical": "19-20/x2",
+        "type": "Melee",
+        "cost": "2 gp",
+        "category": "Simple",
+        "name": "Dagger",
+        "damage": "1d4"
+      },
+      {
+        "type": "Ranged",
+        "range": "100 ft",
+        "critical": "x3",
+        "category": "Martial",
+        "cost": "75 gp",
+        "weight": "3 lb",
+        "name": "Longbow",
+        "properties": [
+          "Two-handed",
+          "Piercing"
+        ],
+        "damage": "1d8"
+      }
+    ]
+  },
+  "spells": [
+    {
+      "components": [
+        "V",
+        "S"
+      ],
+      "saving_throw": "None",
+      "description": "A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d4+1 points of force damage.",
+      "target": "Up to five creatures, no two of which can be more than 15 ft. apart",
+      "range": "Medium (100 ft. + 10 ft./level)",
+      "duration": "Instantaneous",
+      "casting_time": "1 action",
+      "level": {
+        "Wizard": 1,
+        "Sorcerer": 1
+      },
+      "name": "Magic Missile",
+      "school": "Evocation",
+      "spell_resistance": "Yes"
+    },
+    {
+      "components": [
+        "V",
+        "S"
+      ],
+      "saving_throw": "Will half (harmless)",
+      "description": "When laying your hand upon a living creature, you channel positive energy that cures 1d8+1 points of damage (maximum +5).",
+      "subschool": "Healing",
+      "range": "Touch",
+      "duration": "Instantaneous",
+      "target": "Creature touched",
+      "casting_time": "1 action",
+      "level": {
+        "Ranger": 2,
+        "Paladin": 1,
+        "Druid": 1,
+        "Cleric": 1
+      },
+      "name": "Cure Light Wounds",
+      "school": "Conjuration",
+      "spell_resistance": "Yes (harmless)"
+    },
+    {
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "saving_throw": "Reflex half",
+      "description": "A fireball spell generates a searing explosion of flame that detonates with a low roar and deals 1d6 points of fire damage per caster level (maximum 10d6) to every creature within the area.",
+      "area": "20-ft.-radius spread",
+      "range": "Long (400 ft. + 40 ft./level)",
+      "duration": "Instantaneous",
+      "casting_time": "1 action",
+      "level": {
+        "Wizard": 3,
+        "Sorcerer": 3
+      },
+      "name": "Fireball",
+      "school": "Evocation",
+      "spell_resistance": "Yes"
+    }
+  ],
+  "abilityScores": {},
+  "prestige_classes": [],
+  "skills": [
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Appraise",
+      "ability": "Int"
+    },
+    {
+      "trained_only": false,
+      "armor_check": true,
+      "name": "Balance",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Bluff",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": false,
+      "armor_check": true,
+      "name": "Climb",
+      "ability": "Str"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Concentration",
+      "ability": "Con"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Craft",
+      "ability": "Int"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Decipher Script",
+      "ability": "Int"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Diplomacy",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Disable Device",
+      "ability": "Int"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Disguise",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": false,
+      "armor_check": true,
+      "name": "Escape Artist",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Forgery",
+      "ability": "Int"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Gather Information",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Handle Animal",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Heal",
+      "ability": "Wis"
+    },
+    {
+      "trained_only": false,
+      "armor_check": true,
+      "name": "Hide",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Intimidate",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": false,
+      "armor_check": true,
+      "name": "Jump",
+      "ability": "Str"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Knowledge",
+      "ability": "Int"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Listen",
+      "ability": "Wis"
+    },
+    {
+      "trained_only": false,
+      "armor_check": true,
+      "name": "Move Silently",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Open Lock",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Perform",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Profession",
+      "ability": "Wis"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Ride",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Search",
+      "ability": "Int"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Sense Motive",
+      "ability": "Wis"
+    },
+    {
+      "trained_only": true,
+      "armor_check": true,
+      "name": "Sleight of Hand",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Speak Language",
+      "ability": "None"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Spellcraft",
+      "ability": "Int"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Spot",
+      "ability": "Wis"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Survival",
+      "ability": "Wis"
+    },
+    {
+      "trained_only": false,
+      "armor_check": true,
+      "name": "Swim",
+      "ability": "Str"
+    },
+    {
+      "trained_only": true,
+      "armor_check": true,
+      "name": "Tumble",
+      "ability": "Dex"
+    },
+    {
+      "trained_only": true,
+      "armor_check": false,
+      "name": "Use Magic Device",
+      "ability": "Cha"
+    },
+    {
+      "trained_only": false,
+      "armor_check": false,
+      "name": "Use Rope",
+      "ability": "Dex"
+    }
+  ],
+  "races": [
+    {
+      "languages": [
+        "Common"
+      ],
+      "base_speed": 30,
+      "ability_modifiers": {
+        "wis": 0,
+        "cha": 0,
+        "con": 2,
+        "int": 0,
+        "favored_class": "Bard",
+        "dex": 0,
+        "str": -2
+      },
+      "name": "Gnome",
+      "size": "Medium"
+    },
+    {
+      "languages": [
+        "Common"
+      ],
+      "base_speed": 30,
+      "ability_modifiers": {
+        "wis": 0,
+        "cha": 0,
+        "con": -2,
+        "int": 0,
+        "favored_class": "Wizard",
+        "dex": 2,
+        "str": 0
+      },
+      "name": "Elf",
+      "size": "Medium"
+    },
+    {
+      "languages": [
+        "Common"
+      ],
+      "base_speed": 30,
+      "ability_modifiers": {
+        "wis": 0,
+        "cha": -2,
+        "con": 2,
+        "int": 0,
+        "favored_class": "Fighter",
+        "dex": 0,
+        "str": 0
+      },
+      "name": "Dwarf",
+      "size": "Medium"
+    },
+    {
+      "languages": [
+        "Common"
+      ],
+      "base_speed": 30,
+      "ability_modifiers": {
+        "wis": 0,
+        "cha": 0,
+        "con": 0,
+        "int": 0,
+        "favored_class": "Any",
+        "dex": 0,
+        "str": 0
+      },
+      "name": "Human",
+      "size": "Medium"
+    },
+    {
+      "languages": [
+        "Common"
+      ],
+      "base_speed": 30,
+      "ability_modifiers": {
+        "wis": 0,
+        "cha": -2,
+        "con": 0,
+        "int": -2,
+        "favored_class": "Barbarian",
+        "dex": 0,
+        "str": 2
+      },
+      "name": "Half-Orc",
+      "size": "Medium"
+    },
+    {
+      "languages": [
+        "Common"
+      ],
+      "base_speed": 30,
+      "ability_modifiers": {
+        "wis": 0,
+        "cha": 0,
+        "con": 0,
+        "int": 0,
+        "favored_class": "Rogue",
+        "dex": 2,
+        "str": -2
+      },
+      "name": "Halfling",
+      "size": "Medium"
+    },
+    {
+      "languages": [
+        "Common"
+      ],
+      "base_speed": 30,
+      "ability_modifiers": {
+        "wis": 0,
+        "cha": 0,
+        "con": 0,
+        "int": 0,
+        "favored_class": "Any",
+        "dex": 0,
+        "str": 0
+      },
+      "name": "Half-Elf",
+      "size": "Medium"
+    }
+  ],
+  "classes": [
+    {
+      "type": "core",
+      "progression": {
+        "ref_save": "good",
+        "class_skills": [
+          "Appraise",
+          "Balance",
+          "Bluff",
+          "Climb",
+          "Concentration",
+          "Craft",
+          "Decipher Script",
+          "Diplomacy",
+          "Disguise",
+          "Escape Artist",
+          "Gather Information",
+          "Hide",
+          "Jump",
+          "Knowledge",
+          "Listen",
+          "Move Silently",
+          "Perform",
+          "Profession",
+          "Sense Motive",
+          "Sleight of Hand",
+          "Speak Language",
+          "Spellcraft",
+          "Swim",
+          "Tumble",
+          "Use Magic Device"
+        ],
+        "hit_die": 6,
+        "fort_save": "poor",
+        "skill_points": 6,
+        "bab_progression": "medium",
+        "spellcaster": "spontaneous",
+        "will_save": "good"
+      },
+      "name": "Bard"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "will_save": "good",
+        "ref_save": "good",
+        "hit_die": 8,
+        "class_skills": [
+          "Balance",
+          "Climb",
+          "Concentration",
+          "Craft",
+          "Diplomacy",
+          "Escape Artist",
+          "Hide",
+          "Jump",
+          "Knowledge",
+          "Listen",
+          "Move Silently",
+          "Perform",
+          "Profession",
+          "Sense Motive",
+          "Spot",
+          "Swim",
+          "Tumble"
+        ],
+        "fort_save": "good",
+        "bab_progression": "medium",
+        "skill_points": 4
+      },
+      "name": "Monk"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "ref_save": "poor",
+        "class_skills": [
+          "Concentration",
+          "Craft",
+          "Decipher Script",
+          "Knowledge",
+          "Profession",
+          "Spellcraft"
+        ],
+        "hit_die": 4,
+        "fort_save": "poor",
+        "skill_points": 2,
+        "bab_progression": "poor",
+        "spellcaster": "prepared",
+        "will_save": "good"
+      },
+      "name": "Wizard"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "will_save": "poor",
+        "ref_save": "poor",
+        "hit_die": 10,
+        "class_skills": [
+          "Climb",
+          "Craft",
+          "Handle Animal",
+          "Intimidate",
+          "Jump",
+          "Ride",
+          "Swim"
+        ],
+        "fort_save": "good",
+        "bab_progression": "full",
+        "skill_points": 2
+      },
+      "name": "Fighter"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "ref_save": "good",
+        "class_skills": [
+          "Climb",
+          "Concentration",
+          "Craft",
+          "Handle Animal",
+          "Heal",
+          "Hide",
+          "Jump",
+          "Knowledge",
+          "Listen",
+          "Move Silently",
+          "Profession",
+          "Ride",
+          "Search",
+          "Spellcraft",
+          "Spot",
+          "Survival",
+          "Swim",
+          "Use Rope"
+        ],
+        "hit_die": 8,
+        "fort_save": "good",
+        "skill_points": 6,
+        "bab_progression": "full",
+        "spellcaster": "prepared",
+        "will_save": "poor"
+      },
+      "name": "Ranger"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "ref_save": "poor",
+        "class_skills": [
+          "Concentration",
+          "Craft",
+          "Diplomacy",
+          "Handle Animal",
+          "Heal",
+          "Knowledge",
+          "Profession",
+          "Ride",
+          "Sense Motive",
+          "Spellcraft"
+        ],
+        "hit_die": 10,
+        "fort_save": "good",
+        "skill_points": 2,
+        "bab_progression": "full",
+        "spellcaster": "prepared",
+        "will_save": "good"
+      },
+      "name": "Paladin"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "will_save": "poor",
+        "ref_save": "good",
+        "hit_die": 6,
+        "class_skills": [
+          "Appraise",
+          "Balance",
+          "Bluff",
+          "Climb",
+          "Craft",
+          "Decipher Script",
+          "Diplomacy",
+          "Disable Device",
+          "Disguise",
+          "Escape Artist",
+          "Forgery",
+          "Gather Information",
+          "Hide",
+          "Intimidate",
+          "Jump",
+          "Knowledge",
+          "Listen",
+          "Move Silently",
+          "Open Lock",
+          "Perform",
+          "Profession",
+          "Search",
+          "Sense Motive",
+          "Sleight of Hand",
+          "Spot",
+          "Swim",
+          "Tumble",
+          "Use Magic Device",
+          "Use Rope"
+        ],
+        "fort_save": "poor",
+        "bab_progression": "medium",
+        "skill_points": 8
+      },
+      "name": "Rogue"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "ref_save": "poor",
+        "class_skills": [
+          "Concentration",
+          "Craft",
+          "Diplomacy",
+          "Handle Animal",
+          "Heal",
+          "Knowledge",
+          "Listen",
+          "Profession",
+          "Ride",
+          "Spellcraft",
+          "Spot",
+          "Survival",
+          "Swim"
+        ],
+        "hit_die": 8,
+        "fort_save": "good",
+        "skill_points": 4,
+        "bab_progression": "medium",
+        "spellcaster": "prepared",
+        "will_save": "good"
+      },
+      "name": "Druid"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "will_save": "poor",
+        "ref_save": "poor",
+        "hit_die": 12,
+        "class_skills": [
+          "Climb",
+          "Craft",
+          "Handle Animal",
+          "Intimidate",
+          "Jump",
+          "Listen",
+          "Ride",
+          "Survival",
+          "Swim"
+        ],
+        "fort_save": "good",
+        "bab_progression": "full",
+        "skill_points": 4
+      },
+      "name": "Barbarian"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "ref_save": "poor",
+        "class_skills": [
+          "Bluff",
+          "Concentration",
+          "Craft",
+          "Knowledge",
+          "Profession",
+          "Spellcraft"
+        ],
+        "hit_die": 4,
+        "fort_save": "poor",
+        "skill_points": 2,
+        "bab_progression": "poor",
+        "spellcaster": "spontaneous",
+        "will_save": "good"
+      },
+      "name": "Sorcerer"
+    },
+    {
+      "type": "core",
+      "progression": {
+        "ref_save": "poor",
+        "class_skills": [
+          "Concentration",
+          "Craft",
+          "Diplomacy",
+          "Heal",
+          "Knowledge",
+          "Profession",
+          "Spellcraft"
+        ],
+        "hit_die": 8,
+        "fort_save": "good",
+        "skill_points": 2,
+        "bab_progression": "medium",
+        "spellcaster": "prepared",
+        "will_save": "good"
+      },
+      "name": "Cleric"
+    }
+  ],
+  "epic_progression": {}
 }

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D 3.5 Dice Roller - RulzLawyer</title>
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --primary-gold: #FFD700;
+            --ancient-black: #1a1a1a;
+            --parchment: #F4E9D1;
+            --soft-white: #F8F8F8;
+            --scroll-brown: #8B4513;
+            --success-green: #22C55E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--parchment) 0%, #E6D5A8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-red) 0%, #B22222 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .dice-input-section {
+            background: var(--parchment);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 2px solid var(--scroll-brown);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .dice-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--scroll-brown);
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+
+        .roll-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--success-green) 0%, #16A085 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .roll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dice-examples {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .example-btn {
+            padding: 6px 12px;
+            background: var(--soft-white);
+            border: 1px solid var(--scroll-brown);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .example-btn:hover {
+            background: var(--primary-gold);
+            color: var(--ancient-black);
+        }
+
+        .results-section {
+            background: white;
+            border: 2px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-display {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--primary-red);
+            border-radius: 6px;
+            background: var(--parchment);
+        }
+
+        .result-details {
+            background: var(--soft-white);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .history-section {
+            background: var(--soft-white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .clear-btn {
+            padding: 6px 12px;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-family: monospace;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #B22222;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .dice-examples {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-btn">&larr; Back to Game</a>
+    
+    <div class="dice-container">
+        <div class="header">
+            <h1>🎲 D&D 3.5 Dice Roller</h1>
+            <p>Professional-grade dice rolling with D&D 3.5 mechanics</p>
+        </div>
+
+        <div class="content">
+            <div class="dice-input-section">
+                <h3 style="margin-bottom: 1rem; color: var(--scroll-brown);">Roll Dice</h3>
+                
+                <div class="input-group">
+                    <input type="text" id="diceExpression" class="dice-input" 
+                           placeholder="Enter dice expression (e.g., 3d6, 1d20+5, 4d6dl1)"
+                           value="1d20">
+                    <button onclick="rollDice()" class="roll-btn">🎲 Roll</button>
+                </div>
+
+                <div class="dice-examples">
+                    <span style="margin-right: 1rem; font-weight: bold;">Quick Examples:</span>
+                    <button class="example-btn" onclick="setDiceExpression('1d20')">d20</button>
+                    <button class="example-btn" onclick="setDiceExpression('3d6')">3d6</button>
+                    <button class="example-btn" onclick="setDiceExpression('4d6dl1')">4d6 drop lowest</button>
+                    <button class="example-btn" onclick="setDiceExpression('1d20+5')">d20+5</button>
+                    <button class="example-btn" onclick="setDiceExpression('2d10+3')">2d10+3</button>
+                    <button class="example-btn" onclick="setDiceExpression('1d100')">d100</button>
+                </div>
+
+                <div style="font-size: 0.9rem; color: var(--scroll-brown); margin-top: 1rem;">
+                    <strong>Supported formats:</strong> XdY (X dice of Y sides), +/- modifiers, 
+                    dl/dh (drop lowest/highest), kl/kh (keep lowest/highest), advantage/disadvantage
+                </div>
+            </div>
+
+            <div class="results-section">
+                <h3 style="margin-bottom: 1rem; color: var(--primary-red);">Result</h3>
+                <div id="resultDisplay" class="result-display">
+                    Enter a dice expression and click Roll
+                </div>
+                <div id="resultDetails" class="result-details" style="display: none;">
+                    <!-- Detailed breakdown will appear here -->
+                </div>
+            </div>
+
+            <div class="history-section">
+                <div class="history-header">
+                    <h3 style="color: var(--scroll-brown);">Roll History</h3>
+                    <button onclick="clearHistory()" class="clear-btn">Clear History</button>
+                </div>
+                <div id="historyList" class="history-list">
+                    <div style="text-align: center; color: #999; padding: 2rem;">
+                        No rolls yet. Start rolling to see your history!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the dice engine -->
+    <script src="../../src/dice/dice-engine.js"></script>
+    
+    <script>
+        // Initialize dice engine
+        let diceEngine;
+        let rollHistory = [];
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                diceEngine = new DiceEngine();
+                console.log('🎲 Dice Engine initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize dice engine:', error);
+                document.getElementById('resultDisplay').innerHTML = 
+                    '<span style="color: red;">Error: Failed to load dice engine</span>';
+            }
+        });
+
+        function setDiceExpression(expression) {
+            document.getElementById('diceExpression').value = expression;
+        }
+
+        function rollDice() {
+            const expression = document.getElementById('diceExpression').value.trim();
+            
+            if (!expression) {
+                showResult('Please enter a dice expression', null);
+                return;
+            }
+
+            if (!diceEngine) {
+                showResult('Dice engine not loaded', null);
+                return;
+            }
+
+            try {
+                const result = diceEngine.roll(expression);
+                showResult(result.total, result);
+                addToHistory(expression, result);
+            } catch (error) {
+                console.error('Roll error:', error);
+                showResult(`Error: ${error.message}`, null);
+            }
+        }
+
+        function showResult(total, details) {
+            const resultDisplay = document.getElementById('resultDisplay');
+            const resultDetails = document.getElementById('resultDetails');
+
+            if (details && typeof details === 'object') {
+                resultDisplay.innerHTML = `<span style="font-size: 3rem;">${total}</span>`;
+                
+                let detailsHtml = `
+                    <strong>Expression:</strong> ${details.expression}<br>
+                    <strong>Total:</strong> ${details.total}<br>
+                `;
+
+                if (details.rolls && details.rolls.length > 0) {
+                    detailsHtml += `<strong>Individual Rolls:</strong> [${details.rolls.join(', ')}]<br>`;
+                }
+
+                if (details.modifier) {
+                    detailsHtml += `<strong>Modifier:</strong> ${details.modifier > 0 ? '+' : ''}${details.modifier}<br>`;
+                }
+
+                if (details.breakdown) {
+                    detailsHtml += `<strong>Breakdown:</strong> ${details.breakdown}`;
+                }
+
+                resultDetails.innerHTML = detailsHtml;
+                resultDetails.style.display = 'block';
+            } else {
+                resultDisplay.innerHTML = total;
+                resultDetails.style.display = 'none';
+            }
+        }
+
+        function addToHistory(expression, result) {
+            const historyItem = {
+                expression: expression,
+                result: result.total,
+                time: new Date().toLocaleTimeString(),
+                details: result
+            };
+
+            rollHistory.unshift(historyItem);
+            
+            // Keep only last 50 rolls
+            if (rollHistory.length > 50) {
+                rollHistory = rollHistory.slice(0, 50);
+            }
+
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('historyList');
+            
+            if (rollHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div style="text-align: center; color: #999; padding: 2rem;">
+                        No rolls yet. Start rolling to see your history!
+                    </div>
+                `;
+                return;
+            }
+
+            const historyHtml = rollHistory.map(item => `
+                <div class="history-item">
+                    <span><strong>${item.expression}</strong> = ${item.result}</span>
+                    <span style="color: #666; font-size: 0.8rem;">${item.time}</span>
+                </div>
+            `).join('');
+
+            historyList.innerHTML = historyHtml;
+        }
+
+        function clearHistory() {
+            rollHistory = [];
+            updateHistoryDisplay();
+        }
+
+        // Allow Enter key to roll dice
+        document.getElementById('diceExpression').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                rollDice();
+            }
+        });
+
+        // Auto-focus on input when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('diceExpression').focus();
+        });
+    </script>
+</body>
+</html>
