@@ -31,12 +31,12 @@ class CharacterCreationWizard {
         this.srdData = new SRDDataManager();
         this.diceEngine = new DiceEngine();
         this.character = new CharacterModel(this.srdData);
-        
+
         this.currentStep = 1;
         this.totalSteps = 7;
         this.stepHistory = [];
         this.validationResults = {};
-        
+
         // Step definitions
         this.steps = [
             { id: 1, name: 'Basic Information', required: true },
@@ -47,7 +47,7 @@ class CharacterCreationWizard {
             { id: 6, name: 'Feat Selection', required: true },
             { id: 7, name: 'Equipment Selection', required: false }
         ];
-        
+
         console.log('🧙 Character Creation Wizard initialized');
     }
 
@@ -63,7 +63,7 @@ class CharacterCreationWizard {
         this.character = new CharacterModel(this.srdData);
         this.stepHistory = [];
         this.validationResults = {};
-        
+
         console.log('🎯 Starting character creation wizard');
         return this.getCurrentStepData();
     }
@@ -75,15 +75,15 @@ class CharacterCreationWizard {
         if (this.currentStep >= this.totalSteps) {
             throw new Error('Already at final step');
         }
-        
+
         // Validate current step before proceeding
         if (!this.validateCurrentStep()) {
             throw new Error('Current step validation failed');
         }
-        
+
         this.stepHistory.push(this.currentStep);
         this.currentStep++;
-        
+
         console.log(`➡️ Advanced to step ${this.currentStep}: ${this.getCurrentStepName()}`);
         return this.getCurrentStepData();
     }
@@ -95,7 +95,7 @@ class CharacterCreationWizard {
         if (this.currentStep <= 1) {
             throw new Error('Already at first step');
         }
-        
+
         this.currentStep--;
         console.log(`⬅️ Returned to step ${this.currentStep}: ${this.getCurrentStepName()}`);
         return this.getCurrentStepData();
@@ -108,7 +108,7 @@ class CharacterCreationWizard {
         if (stepNumber < 1 || stepNumber > this.totalSteps) {
             throw new Error(`Invalid step number: ${stepNumber}`);
         }
-        
+
         this.currentStep = stepNumber;
         console.log(`🎯 Jumped to step ${this.currentStep}: ${this.getCurrentStepName()}`);
         return this.getCurrentStepData();
@@ -127,7 +127,7 @@ class CharacterCreationWizard {
             character: this.character.getSummary(),
             validation: this.validationResults[this.currentStep] || { isValid: false, errors: [] }
         };
-        
+
         // Add step-specific data
         switch (this.currentStep) {
             case 1:
@@ -152,7 +152,7 @@ class CharacterCreationWizard {
                 stepData.stepContent = this.getEquipmentSelectionStep();
                 break;
         }
-        
+
         return stepData;
     }
 
@@ -200,34 +200,34 @@ class CharacterCreationWizard {
     setBasicInformation(name, alignment) {
         this.character.name = name.trim();
         this.character.alignment = alignment;
-        
+
         this.validationResults[1] = this.validateBasicInformation();
-        
+
         console.log(`📝 Set basic info: ${name} (${alignment})`);
         return this.validationResults[1];
     }
 
     validateBasicInformation() {
         const errors = [];
-        
+
         if (!this.character.name || this.character.name.trim().length === 0) {
             errors.push('Character name is required');
         }
-        
+
         if (this.character.name.length > 50) {
             errors.push('Character name must be 50 characters or less');
         }
-        
+
         const validAlignments = [
             'Lawful Good', 'Neutral Good', 'Chaotic Good',
             'Lawful Neutral', 'True Neutral', 'Chaotic Neutral',
             'Lawful Evil', 'Neutral Evil', 'Chaotic Evil'
         ];
-        
+
         if (!validAlignments.includes(this.character.alignment)) {
             errors.push('Invalid alignment selected');
         }
-        
+
         return {
             isValid: errors.length === 0,
             errors: errors
@@ -240,7 +240,7 @@ class CharacterCreationWizard {
 
     getRaceSelectionStep() {
         const races = this.srdData.getRaces();
-        
+
         return {
             title: 'Race Selection',
             description: 'Choose your character\'s race',
@@ -259,10 +259,10 @@ class CharacterCreationWizard {
         try {
             this.character.setRace(raceName);
             this.validationResults[2] = { isValid: true, errors: [] };
-            
+
             // Clear dependent steps when race changes
             this.clearDependentSteps([3, 4, 5, 6, 7]);
-            
+
             console.log(`🌟 Race selected: ${raceName}`);
             return this.validationResults[2];
         } catch (error) {
@@ -276,10 +276,10 @@ class CharacterCreationWizard {
     // ===================
 
     getClassSelectionStep() {
-        const availableClasses = this.character.race ? 
-            this.srdData.getClassesForRace(this.character.race) : 
+        const availableClasses = this.character.race ?
+            this.srdData.getClassesForRace(this.character.race) :
             this.srdData.getClasses();
-        
+
         return {
             title: 'Class Selection',
             description: 'Choose your character\'s class',
@@ -301,10 +301,10 @@ class CharacterCreationWizard {
         try {
             this.character.setClass(className);
             this.validationResults[3] = { isValid: true, errors: [] };
-            
+
             // Clear dependent steps when class changes
             this.clearDependentSteps([4, 5, 6, 7]);
-            
+
             console.log(`⚔️ Class selected: ${className}`);
             return this.validationResults[3];
         } catch (error) {
@@ -333,7 +333,7 @@ class CharacterCreationWizard {
                     charisma: this.character.getAbilityModifier('charisma')
                 }
             },
-            racialModifiers: this.character.race ? 
+            racialModifiers: this.character.race ?
                 this.srdData.getRacialAbilityModifiers(this.character.race) : {},
             generationMethods: [
                 { name: '4d6 Drop Lowest', description: 'Roll 4d6, drop lowest die (standard)' },
@@ -347,27 +347,27 @@ class CharacterCreationWizard {
 
     generateAbilityScores(method = '4d6 Drop Lowest') {
         const abilities = {};
-        
+
         switch (method) {
             case '4d6 Drop Lowest':
                 for (const ability of ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']) {
                     abilities[ability] = this.roll4d6DropLowest();
                 }
                 break;
-                
+
             case '3d6 Straight':
                 for (const ability of ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']) {
                     abilities[ability] = this.diceEngine.roll('3d6');
                 }
                 break;
-                
+
             default:
                 throw new Error(`Unsupported generation method: ${method}`);
         }
-        
+
         this.character.setAbilities(abilities);
         this.validationResults[4] = this.validateAbilityScores();
-        
+
         console.log(`🎲 Generated abilities using ${method}`);
         return this.validationResults[4];
     }
@@ -385,7 +385,7 @@ class CharacterCreationWizard {
         try {
             this.character.setAbilities(abilities);
             this.validationResults[4] = this.validateAbilityScores();
-            
+
             console.log('💪 Ability scores set manually');
             return this.validationResults[4];
         } catch (error) {
@@ -396,13 +396,13 @@ class CharacterCreationWizard {
 
     validateAbilityScores() {
         const errors = [];
-        
+
         for (const [ability, score] of Object.entries(this.character.baseAbilities)) {
             if (score < 3 || score > 25) {
                 errors.push(`${ability} must be between 3 and 25`);
             }
         }
-        
+
         return {
             isValid: errors.length === 0,
             errors: errors
@@ -414,10 +414,10 @@ class CharacterCreationWizard {
     // ===================
 
     getSkillAllocationStep() {
-        const availableSkills = this.character.characterClass ? 
-            this.srdData.getSkillsForClass(this.character.characterClass) : 
+        const availableSkills = this.character.characterClass ?
+            this.srdData.getSkillsForClass(this.character.characterClass) :
             this.srdData.getSkills();
-        
+
         return {
             title: 'Skill Point Allocation',
             description: 'Allocate skill points to your skills',
@@ -428,8 +428,8 @@ class CharacterCreationWizard {
                 isClassSkill: skill.isClassSkill || false,
                 currentRanks: this.character.skills[skill.name] || 0,
                 totalModifier: this.character.getSkillModifier(skill.name),
-                maxRanks: skill.isClassSkill ? 
-                    (this.character.level + 3) : 
+                maxRanks: skill.isClassSkill ?
+                    (this.character.level + 3) :
                     Math.floor((this.character.level + 3) / 2)
             }))
         };
@@ -439,7 +439,7 @@ class CharacterCreationWizard {
         try {
             this.character.allocateSkillPoints(skillName, points);
             this.validationResults[5] = this.validateSkillAllocation();
-            
+
             console.log(`📚 Allocated ${points} points to ${skillName}`);
             return this.validationResults[5];
         } catch (error) {
@@ -450,16 +450,16 @@ class CharacterCreationWizard {
 
     validateSkillAllocation() {
         const errors = [];
-        
+
         if (this.character.skillPoints.available < 0) {
             errors.push('Cannot have negative skill points');
         }
-        
+
         // Optional: Warn if too many skill points remain unspent
         if (this.character.skillPoints.available > this.character.level) {
             errors.push(`Consider spending more skill points (${this.character.skillPoints.available} remaining)`);
         }
-        
+
         return {
             isValid: errors.length === 0,
             errors: errors
@@ -472,7 +472,7 @@ class CharacterCreationWizard {
 
     getFeatSelectionStep() {
         const availableFeats = this.srdData.getFeatsForLevel(this.character.level);
-        
+
         return {
             title: 'Feat Selection',
             description: 'Choose your character\'s feats',
@@ -493,13 +493,13 @@ class CharacterCreationWizard {
         if (this.character.feats.includes(feat.name)) {
             return false; // Already has feat
         }
-        
+
         if (this.character.featSlots.available <= 0) {
             return false; // No feat slots available
         }
-        
+
         // TODO: Check feat prerequisites
-        
+
         return true;
     }
 
@@ -507,7 +507,7 @@ class CharacterCreationWizard {
         try {
             this.character.addFeat(featName);
             this.validationResults[6] = this.validateFeatSelection();
-            
+
             console.log(`✨ Added feat: ${featName}`);
             return this.validationResults[6];
         } catch (error) {
@@ -520,7 +520,7 @@ class CharacterCreationWizard {
         try {
             this.character.removeFeat(featName);
             this.validationResults[6] = this.validateFeatSelection();
-            
+
             console.log(`🗑️ Removed feat: ${featName}`);
             return this.validationResults[6];
         } catch (error) {
@@ -531,11 +531,11 @@ class CharacterCreationWizard {
 
     validateFeatSelection() {
         const errors = [];
-        
+
         if (this.character.featSlots.available < 0) {
             errors.push('Cannot have negative feat slots');
         }
-        
+
         return {
             isValid: errors.length === 0,
             errors: errors
@@ -548,7 +548,7 @@ class CharacterCreationWizard {
 
     getEquipmentSelectionStep() {
         const equipment = this.srdData.getEquipment();
-        
+
         return {
             title: 'Equipment Selection',
             description: 'Select starting equipment',
@@ -564,8 +564,8 @@ class CharacterCreationWizard {
 
     filterEquipmentByType(equipment, type) {
         if (!Array.isArray(equipment)) return [];
-        
-        return equipment.filter(item => 
+
+        return equipment.filter(item =>
             item.type && item.type.toLowerCase().includes(type.toLowerCase())
         );
     }
@@ -579,7 +579,7 @@ class CharacterCreationWizard {
         try {
             this.character.addEquipment(equipmentName, category);
             this.validationResults[7] = { isValid: true, errors: [] };
-            
+
             console.log(`🎒 Added equipment: ${equipmentName}`);
             return this.validationResults[7];
         } catch (error) {
@@ -598,23 +598,23 @@ class CharacterCreationWizard {
     completeCreation() {
         // Validate all steps
         const allValid = this.validateAllSteps();
-        
+
         if (!allValid.isValid) {
             throw new Error(`Character validation failed: ${allValid.errors.join(', ')}`);
         }
-        
+
         // Final character validation
         const characterValidation = this.character.validate();
-        
+
         if (!characterValidation.isValid) {
             throw new Error(`Character validation failed: ${characterValidation.errors.join(', ')}`);
         }
-        
+
         this.character.creationStep = this.totalSteps;
         this.character.isComplete = true;
-        
+
         console.log('🎉 Character creation completed successfully!');
-        
+
         return {
             success: true,
             character: this.character.toJSON(),
@@ -627,21 +627,21 @@ class CharacterCreationWizard {
      */
     validateAllSteps() {
         const allErrors = [];
-        
+
         for (let step = 1; step <= this.totalSteps; step++) {
             const oldStep = this.currentStep;
             this.currentStep = step;
-            
+
             if (!this.validateCurrentStep()) {
                 const stepValidation = this.validationResults[step];
                 if (stepValidation && stepValidation.errors) {
                     allErrors.push(...stepValidation.errors.map(err => `Step ${step}: ${err}`));
                 }
             }
-            
+
             this.currentStep = oldStep;
         }
-        
+
         return {
             isValid: allErrors.length === 0,
             errors: allErrors
@@ -675,7 +675,7 @@ class CharacterCreationWizard {
                 this.validationResults[7] = { isValid: true, errors: [] }; // Equipment is optional
                 break;
         }
-        
+
         const result = this.validationResults[this.currentStep];
         return result ? result.isValid : false;
     }
@@ -698,18 +698,18 @@ class CharacterCreationWizard {
      */
     getProgress() {
         let completedSteps = 0;
-        
+
         for (let step = 1; step <= this.totalSteps; step++) {
             const oldStep = this.currentStep;
             this.currentStep = step;
-            
+
             if (this.validateCurrentStep()) {
                 completedSteps++;
             }
-            
+
             this.currentStep = oldStep;
         }
-        
+
         return {
             completed: completedSteps,
             total: this.totalSteps,
@@ -737,7 +737,7 @@ class CharacterCreationWizard {
         this.character.fromJSON(state.character);
         this.validationResults = state.validationResults || {};
         this.stepHistory = state.stepHistory || [];
-        
+
         console.log(`📥 Loaded wizard state at step ${this.currentStep}`);
         return this.getCurrentStepData();
     }

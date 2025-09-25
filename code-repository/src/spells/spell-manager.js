@@ -19,7 +19,7 @@ class SpellManager {
     constructor(srdDataManager) {
         this.srdData = srdDataManager;
         this.spellDatabase = this.initializeSpellDatabase();
-        
+
         console.log('🔮 SpellManager initialized with comprehensive D&D 3.5 spell system');
     }
 
@@ -115,7 +115,7 @@ class SpellManager {
      */
     calculateSpellSlots(characterClass, level, abilities) {
         const spellSlots = {};
-        
+
         // Get class spell progression
         const classData = this.srdData.getClass(characterClass);
         if (!classData || !classData.progression.spellcaster) {
@@ -124,20 +124,20 @@ class SpellManager {
 
         const castingAbility = this.getCastingAbility(characterClass);
         const abilityMod = Math.floor((abilities[castingAbility.toLowerCase()] - 10) / 2);
-        
+
         // Base spell slots by class and level
         const baseSlots = this.getBaseSpellSlots(characterClass, level);
-        
+
         // Add bonus spells from high ability scores
         for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
             if (baseSlots[spellLevel] && baseSlots[spellLevel] > 0) {
                 let bonusSpells = 0;
-                
+
                 // Calculate bonus spells for this spell level
                 if (spellLevel > 0 && abilityMod >= spellLevel) {
                     bonusSpells = Math.floor((abilityMod - spellLevel + 4) / 4);
                 }
-                
+
                 spellSlots[spellLevel] = {
                     base: baseSlots[spellLevel],
                     bonus: bonusSpells,
@@ -145,7 +145,7 @@ class SpellManager {
                 };
             }
         }
-        
+
         return spellSlots;
     }
 
@@ -162,7 +162,7 @@ class SpellManager {
             'Sorcerer': 'Charisma',
             'Wizard': 'Intelligence'
         };
-        
+
         return castingAbilities[characterClass] || 'Intelligence';
     }
 
@@ -260,7 +260,7 @@ class SpellManager {
                 20: { 0: 4, 1: 5, 2: 5, 3: 5, 4: 5, 5: 5, 6: 4, 7: 4, 8: 4, 9: 4 }
             }
         };
-        
+
         return spellProgression[characterClass]?.[level] || {};
     }
 
@@ -271,7 +271,7 @@ class SpellManager {
         if (!this.isSpontaneousCaster(characterClass)) {
             return null; // Prepared casters don't have fixed spells known
         }
-        
+
         const spellsKnownProgression = {
             'Bard': {
                 1: { 0: 4 },
@@ -318,7 +318,7 @@ class SpellManager {
                 20: { 0: 9, 1: 5, 2: 5, 3: 5, 4: 5, 5: 5, 6: 5, 7: 4, 8: 4, 9: 3 }
             }
         };
-        
+
         return spellsKnownProgression[characterClass]?.[level] || {};
     }
 
@@ -336,8 +336,8 @@ class SpellManager {
         if (!this.spellDatabase[spellLevel]) {
             return [];
         }
-        
-        return this.spellDatabase[spellLevel].filter(spell => 
+
+        return this.spellDatabase[spellLevel].filter(spell =>
             spell.classes.includes(characterClass)
         );
     }
@@ -348,7 +348,7 @@ class SpellManager {
     calculateSpellDC(spellLevel, abilities, characterClass) {
         const castingAbility = this.getCastingAbility(characterClass);
         const abilityMod = Math.floor((abilities[castingAbility.toLowerCase()] - 10) / 2);
-        
+
         return 10 + spellLevel + abilityMod;
     }
 
@@ -359,7 +359,7 @@ class SpellManager {
         const spellSlots = this.calculateSpellSlots(characterClass, level, abilities);
         const spellsKnown = this.getSpellsKnown(characterClass, level);
         const isSpontaneous = this.isSpontaneousCaster(characterClass);
-        
+
         const spellList = {
             characterClass,
             level,
@@ -370,7 +370,7 @@ class SpellManager {
             isSpontaneous,
             spells: {}
         };
-        
+
         // Initialize spell arrays for each level
         for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
             if (spellSlots[spellLevel]) {
@@ -381,7 +381,7 @@ class SpellManager {
                 };
             }
         }
-        
+
         return spellList;
     }
 
@@ -392,24 +392,24 @@ class SpellManager {
         if (!spellList.isSpontaneous) {
             throw new Error('Only spontaneous casters have known spells');
         }
-        
+
         const spellsKnownLimit = spellList.spellsKnown[spellLevel];
         if (!spellsKnownLimit) {
             throw new Error(`No spells known available for level ${spellLevel}`);
         }
-        
+
         if (spellList.spells[spellLevel].known.length >= spellsKnownLimit) {
             throw new Error(`Maximum spells known reached for level ${spellLevel}`);
         }
-        
+
         const spell = spellList.spells[spellLevel].available.find(s => s.name === spellName);
         if (!spell) {
             throw new Error(`Spell ${spellName} not available for ${spellList.characterClass}`);
         }
-        
+
         spellList.spells[spellLevel].known.push(spell);
         console.log(`🔮 Added ${spellName} to known spells (level ${spellLevel})`);
-        
+
         return spellList;
     }
 
@@ -420,20 +420,20 @@ class SpellManager {
         if (spellList.isSpontaneous) {
             throw new Error('Spontaneous casters do not prepare spells');
         }
-        
+
         const slotsAvailable = spellList.spellSlots[spellLevel]?.total || 0;
         if (spellList.spells[spellLevel].prepared.length >= slotsAvailable) {
             throw new Error(`No more spell slots available for level ${spellLevel}`);
         }
-        
+
         const spell = spellList.spells[spellLevel].available.find(s => s.name === spellName);
         if (!spell) {
             throw new Error(`Spell ${spellName} not available for ${spellList.characterClass}`);
         }
-        
+
         spellList.spells[spellLevel].prepared.push(spell);
         console.log(`📜 Prepared ${spellName} (level ${spellLevel})`);
-        
+
         return spellList;
     }
 
@@ -450,15 +450,15 @@ class SpellManager {
             totalPrepared: 0,
             spellsByLevel: {}
         };
-        
+
         for (const [spellLevel, slots] of Object.entries(spellList.spellSlots)) {
             const level = parseInt(spellLevel);
             const spells = spellList.spells[level];
-            
+
             summary.totalSlots += slots.total;
             summary.totalKnown += spells.known?.length || 0;
             summary.totalPrepared += spells.prepared?.length || 0;
-            
+
             summary.spellsByLevel[level] = {
                 slots: slots.total,
                 dc: 10 + level + spellList.castingMod,
@@ -467,7 +467,7 @@ class SpellManager {
                 available: spells.available.length
             };
         }
-        
+
         return summary;
     }
 }

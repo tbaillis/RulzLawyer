@@ -23,9 +23,9 @@ class CharacterStorageManager {
         this.autoSaveInterval = null;
         this.autoSaveEnabled = true;
         this.maxCharacters = 100; // Prevent excessive storage usage
-        
+
         this.initializeStorage();
-        
+
         console.log('💾 CharacterStorageManager initialized with auto-save and export capabilities');
     }
 
@@ -44,15 +44,15 @@ class CharacterStorageManager {
 
             // Load existing characters
             this.loadCharacters();
-            
+
             // Load settings
             this.loadSettings();
-            
+
             // Setup auto-save if enabled
             if (this.autoSaveEnabled) {
                 this.setupAutoSave();
             }
-            
+
         } catch (error) {
             console.error('❌ Error initializing storage:', error);
             this.characters = new Map();
@@ -164,7 +164,7 @@ class CharacterStorageManager {
             }
 
             console.log(`💾 Character '${character.name}' saved successfully (ID: ${character.characterId})`);
-            
+
             return {
                 success: true,
                 characterId: character.characterId,
@@ -190,7 +190,7 @@ class CharacterStorageManager {
             }
 
             const character = this.characters.get(characterId);
-            
+
             // Update last accessed
             character.metadata = {
                 ...character.metadata,
@@ -198,9 +198,9 @@ class CharacterStorageManager {
             };
 
             this.characters.set(characterId, character);
-            
+
             console.log(`📖 Character '${character.name}' loaded successfully`);
-            
+
             return {
                 success: true,
                 character: character,
@@ -243,7 +243,7 @@ class CharacterStorageManager {
             }
 
             console.log(`🗑️ Character '${characterName}' deleted successfully`);
-            
+
             return {
                 success: true,
                 message: `Character '${characterName}' deleted successfully`
@@ -267,19 +267,19 @@ class CharacterStorageManager {
 
             // Apply filters
             if (filter.name) {
-                characters = characters.filter(char => 
+                characters = characters.filter(char =>
                     char.name.toLowerCase().includes(filter.name.toLowerCase())
                 );
             }
 
             if (filter.race) {
-                characters = characters.filter(char => 
+                characters = characters.filter(char =>
                     char.race.toLowerCase() === filter.race.toLowerCase()
                 );
             }
 
             if (filter.characterClass) {
-                characters = characters.filter(char => 
+                characters = characters.filter(char =>
                     char.characterClass.toLowerCase() === filter.characterClass.toLowerCase()
                 );
             }
@@ -300,7 +300,7 @@ class CharacterStorageManager {
             });
 
             console.log(`📋 Retrieved ${characters.length} characters (filtered from ${this.characters.size} total)`);
-            
+
             return {
                 success: true,
                 characters: characters,
@@ -363,7 +363,7 @@ class CharacterStorageManager {
             const blob = new Blob([JSON.stringify(exportObject, null, 2)], {
                 type: 'application/json'
             });
-            
+
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
@@ -374,7 +374,7 @@ class CharacterStorageManager {
             URL.revokeObjectURL(url);
 
             console.log(`📤 Character '${character.name}' exported as ${filename}`);
-            
+
             return {
                 success: true,
                 filename: filename,
@@ -397,11 +397,11 @@ class CharacterStorageManager {
         return new Promise((resolve) => {
             try {
                 const reader = new FileReader();
-                
+
                 reader.onload = (e) => {
                     try {
                         const jsonData = JSON.parse(e.target.result);
-                        
+
                         // Extract character data
                         let characterData;
                         if (jsonData.character) {
@@ -423,7 +423,7 @@ class CharacterStorageManager {
                         // Generate new ID to avoid conflicts
                         const originalId = characterData.characterId;
                         characterData.characterId = this.generateCharacterId();
-                        
+
                         // Add import metadata
                         characterData.metadata = {
                             ...characterData.metadata,
@@ -434,7 +434,7 @@ class CharacterStorageManager {
 
                         // Save the imported character
                         const saveResult = this.saveCharacter(characterData);
-                        
+
                         if (saveResult.success) {
                             console.log(`📥 Character '${characterData.name}' imported successfully from ${file.name}`);
                             resolve({
@@ -485,7 +485,7 @@ class CharacterStorageManager {
 
             const character = this.characters.get(characterId);
             const backupKey = `${this.storageKey}_backup_${characterId}`;
-            
+
             const backupData = {
                 character: character,
                 backupCreated: new Date().toISOString(),
@@ -511,7 +511,7 @@ class CharacterStorageManager {
         }
 
         const interval = this.settings.autoSaveInterval || 30000;
-        
+
         this.autoSaveInterval = setInterval(() => {
             this.performAutoSave();
         }, interval);
@@ -623,11 +623,11 @@ class CharacterStorageManager {
 
         try {
             this.characters.clear();
-            
+
             if (this.isLocalStorageAvailable()) {
                 localStorage.removeItem(this.storageKey);
                 localStorage.removeItem(this.settingsKey);
-                
+
                 // Clear backups
                 const keys = Object.keys(localStorage);
                 keys.forEach(key => {
@@ -638,7 +638,7 @@ class CharacterStorageManager {
             }
 
             console.log('🗑️ All character data cleared');
-            
+
             return {
                 success: true,
                 message: 'All character data cleared successfully'

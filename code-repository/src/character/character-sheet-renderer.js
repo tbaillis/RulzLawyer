@@ -23,7 +23,7 @@ class CharacterSheetRenderer {
         this.srdData = srdDataManager;
         this.spellManager = spellManager;
         this.epicManager = epicLevelManager;
-        
+
         console.log('📄 CharacterSheetRenderer initialized for complete character display');
     }
 
@@ -58,7 +58,7 @@ class CharacterSheetRenderer {
                 </div>
             </div>
         `;
-        
+
         return html;
     }
 
@@ -67,7 +67,7 @@ class CharacterSheetRenderer {
      */
     renderCharacterHeader(character) {
         const epicSummary = this.epicManager?.getEpicSummary(character);
-        
+
         return `
             <div class="character-header">
                 <div class="character-name-section">
@@ -116,13 +116,13 @@ class CharacterSheetRenderer {
      */
     renderAbilityScores(character) {
         const abilities = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
-        
+
         let abilitiesHtml = '';
         abilities.forEach(ability => {
             const score = character.abilities[ability] || 10;
             const modifier = Math.floor((score - 10) / 2);
             const modifierText = modifier >= 0 ? `+${modifier}` : `${modifier}`;
-            
+
             abilitiesHtml += `
                 <div class="ability-block">
                     <div class="ability-name">${ability.toUpperCase().substring(0, 3)}</div>
@@ -131,7 +131,7 @@ class CharacterSheetRenderer {
                 </div>
             `;
         });
-        
+
         return `
             <div class="abilities-section">
                 <h3 class="section-title">Ability Scores</h3>
@@ -150,7 +150,7 @@ class CharacterSheetRenderer {
         const ac = this.calculateArmorClass(character);
         const hp = this.calculateHitPoints(character);
         const initiative = this.calculateInitiative(character);
-        
+
         return `
             <div class="combat-stats-section">
                 <h3 class="section-title">Combat Statistics</h3>
@@ -205,7 +205,7 @@ class CharacterSheetRenderer {
      */
     renderSavingThrows(character) {
         const saves = this.calculateSavingThrows(character);
-        
+
         return `
             <div class="saves-section">
                 <h3 class="section-title">Saving Throws</h3>
@@ -246,7 +246,7 @@ class CharacterSheetRenderer {
         const skills = this.srdData.skills || [];
         const characterClass = this.srdData.classes?.find(c => c.name === character.characterClass);
         const classSkills = characterClass?.progression?.class_skills || [];
-        
+
         let skillsHtml = '';
         skills.forEach(skill => {
             const isClassSkill = classSkills.includes(skill.name);
@@ -254,7 +254,7 @@ class CharacterSheetRenderer {
             const abilityMod = this.calculateAbilityModifier(character.abilities[skill.ability.toLowerCase()] || 10);
             const miscMod = character.skillBonuses?.[skill.name] || 0;
             const total = ranks + abilityMod + miscMod;
-            
+
             if (ranks > 0 || isClassSkill) {
                 skillsHtml += `
                     <div class="skill-row ${isClassSkill ? 'class-skill' : ''}">
@@ -271,7 +271,7 @@ class CharacterSheetRenderer {
                 `;
             }
         });
-        
+
         return `
             <div class="skills-section">
                 <h3 class="section-title">Skills</h3>
@@ -302,7 +302,7 @@ class CharacterSheetRenderer {
                 `;
             });
         }
-        
+
         // Class features
         let featuresHtml = '';
         const characterClass = this.srdData.classes?.find(c => c.name === character.characterClass);
@@ -319,7 +319,7 @@ class CharacterSheetRenderer {
                 </div>
             `;
         }
-        
+
         // Epic features
         let epicFeaturesHtml = '';
         if (character.epicFeatures && character.epicFeatures.length > 0) {
@@ -331,7 +331,7 @@ class CharacterSheetRenderer {
                 `;
             });
         }
-        
+
         return `
             <div class="feats-features-section">
                 <h3 class="section-title">Feats</h3>
@@ -359,7 +359,7 @@ class CharacterSheetRenderer {
      */
     renderEquipmentSection(character) {
         let equipmentHtml = '';
-        
+
         if (character.equipment) {
             // Weapons
             if (character.equipment.weapons && character.equipment.weapons.length > 0) {
@@ -378,7 +378,7 @@ class CharacterSheetRenderer {
                 });
                 equipmentHtml += '</div>';
             }
-            
+
             // Armor
             if (character.equipment.armor && character.equipment.armor.length > 0) {
                 equipmentHtml += '<h4>Armor</h4><div class="armor-list">';
@@ -396,7 +396,7 @@ class CharacterSheetRenderer {
                 });
                 equipmentHtml += '</div>';
             }
-            
+
             // Gear
             if (character.equipment.gear && character.equipment.gear.length > 0) {
                 equipmentHtml += '<h4>Equipment</h4><div class="gear-list">';
@@ -410,7 +410,7 @@ class CharacterSheetRenderer {
                 });
                 equipmentHtml += '</div>';
             }
-            
+
             // Money
             if (character.equipment.gold !== undefined) {
                 equipmentHtml += `
@@ -421,7 +421,7 @@ class CharacterSheetRenderer {
                 `;
             }
         }
-        
+
         return `
             <div class="equipment-section">
                 <h3 class="section-title">Equipment & Possessions</h3>
@@ -439,17 +439,17 @@ class CharacterSheetRenderer {
         if (!this.spellManager) {
             return '';
         }
-        
+
         const spellList = this.spellManager.createSpellList(
             character.characterClass,
             character.level,
             character.abilities
         );
-        
+
         if (!spellList.spellSlots || Object.keys(spellList.spellSlots).length === 0) {
             return ''; // Non-spellcaster
         }
-        
+
         let spellsHtml = `
             <div class="spellcasting-info">
                 <div class="casting-ability">
@@ -462,14 +462,14 @@ class CharacterSheetRenderer {
                 </div>
             </div>
         `;
-        
+
         // Spell slots by level
         spellsHtml += '<div class="spell-slots-grid">';
         for (let level = 0; level <= 9; level++) {
             if (spellList.spellSlots[level]) {
                 const slots = spellList.spellSlots[level];
                 const dc = 10 + level + spellList.castingMod;
-                
+
                 spellsHtml += `
                     <div class="spell-level-block">
                         <div class="spell-level-header">
@@ -493,7 +493,7 @@ class CharacterSheetRenderer {
             }
         }
         spellsHtml += '</div>';
-        
+
         return `
             <div class="spells-section">
                 <h3 class="section-title">Spells</h3>
@@ -509,7 +509,7 @@ class CharacterSheetRenderer {
         if (!spells || spells.length === 0) {
             return '<p class="no-spells">No spells available</p>';
         }
-        
+
         let spellsHtml = '';
         spells.forEach(spell => {
             spellsHtml += `
@@ -520,7 +520,7 @@ class CharacterSheetRenderer {
                 </div>
             `;
         });
-        
+
         return spellsHtml;
     }
 
@@ -531,9 +531,9 @@ class CharacterSheetRenderer {
         if (!this.epicManager || character.level < 21) {
             return '';
         }
-        
+
         const epicSummary = this.epicManager.getEpicSummary(character);
-        
+
         return `
             <div class="epic-section">
                 <h3 class="section-title">Epic Character (Level ${character.level})</h3>
@@ -610,10 +610,10 @@ class CharacterSheetRenderer {
     calculateBAB(character) {
         const characterClass = this.srdData.classes?.find(c => c.name === character.characterClass);
         if (!characterClass) return 0;
-        
+
         const progression = characterClass.progression?.bab_progression || 'medium';
         const level = character.level || 1;
-        
+
         switch (progression) {
             case 'good': return level;
             case 'medium': return Math.floor(level * 3 / 4);
@@ -625,12 +625,12 @@ class CharacterSheetRenderer {
     getAttackSequence(bab) {
         const attacks = [];
         let currentBAB = bab;
-        
+
         while (currentBAB > 0) {
             attacks.push(`+${currentBAB}`);
             currentBAB -= 5;
         }
-        
+
         return attacks.join('/');
     }
 
@@ -647,9 +647,9 @@ class CharacterSheetRenderer {
             natural: character.naturalArmor || 0,
             deflection: character.deflectionBonus || 0
         };
-        
+
         ac.total = ac.base + ac.armor + ac.shield + ac.dex + ac.size + ac.natural + ac.deflection;
-        
+
         return ac;
     }
 
@@ -658,12 +658,12 @@ class CharacterSheetRenderer {
         const hitDie = characterClass?.progression?.hit_die || 8;
         const level = character.level || 1;
         const conMod = this.calculateAbilityModifier(character.abilities.constitution || 10);
-        
+
         const classHP = hitDie + (level - 1) * Math.floor(hitDie / 2 + 1); // Average HP per level after 1st
         const conHP = level * conMod;
         const epicHP = character.epicHP || 0;
         const otherHP = character.bonusHP || 0;
-        
+
         return {
             classHP,
             conHP,
@@ -677,29 +677,29 @@ class CharacterSheetRenderer {
     calculateInitiative(character) {
         const dexMod = this.calculateAbilityModifier(character.abilities.dexterity || 10);
         const miscBonus = character.initiativeBonus || 0;
-        
+
         return dexMod + miscBonus;
     }
 
     calculateSavingThrows(character) {
         const characterClass = this.srdData.classes?.find(c => c.name === character.characterClass);
         const level = character.level || 1;
-        
+
         // Base saves
         const fortitudeBase = this.calculateBaseSave(characterClass?.progression?.fort_save, level);
         const reflexBase = this.calculateBaseSave(characterClass?.progression?.ref_save, level);
         const willBase = this.calculateBaseSave(characterClass?.progression?.will_save, level);
-        
+
         // Ability modifiers
         const conMod = this.calculateAbilityModifier(character.abilities.constitution || 10);
         const dexMod = this.calculateAbilityModifier(character.abilities.dexterity || 10);
         const wisMod = this.calculateAbilityModifier(character.abilities.wisdom || 10);
-        
+
         // Misc bonuses
         const fortitudeMisc = character.saveBonuses?.fortitude || 0;
         const reflexMisc = character.saveBonuses?.reflex || 0;
         const willMisc = character.saveBonuses?.will || 0;
-        
+
         return {
             fortitudeBase,
             reflexBase,

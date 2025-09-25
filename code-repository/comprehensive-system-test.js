@@ -55,7 +55,7 @@ try {
                 }
             }
         ],
-        getClass: function(className) {
+        getClass: function (className) {
             return this.classes.find(c => c.name.toLowerCase() === className.toLowerCase());
         }
     };
@@ -167,7 +167,7 @@ try {
             gold: 450
         }
     };
-    
+
     console.log(`   Created integrated character: Level ${integratedChar.level} ${integratedChar.characterClass}`);
     console.log(`   Equipment: ${integratedChar.equipment.weapons.length} weapons, ${integratedChar.equipment.gear.length} items`);
     console.log(`   Skills: ${Object.keys(integratedChar.skills).length} trained skills`);

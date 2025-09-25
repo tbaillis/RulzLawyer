@@ -21,18 +21,18 @@ class SRDDataManager {
         this.dataPath = dataPath || path.join(__dirname, '..', 'data');
         this.cache = new Map();
         this.lastModified = new Map();
-        
+
         // Data categories
         this.dataCategories = [
             'races',
-            'classes', 
+            'classes',
             'skills',
             'feats',
             'equipment',
             'spells',
             'calculations'
         ];
-        
+
         console.log(`📊 SRDDataManager initialized with data path: ${this.dataPath}`);
         this.validateDataDirectory();
         this.loadAllData();
@@ -45,7 +45,7 @@ class SRDDataManager {
         if (!fs.existsSync(this.dataPath)) {
             throw new Error(`SRD data directory not found: ${this.dataPath}`);
         }
-        
+
         const missingFiles = [];
         for (const category of this.dataCategories) {
             const filePath = path.join(this.dataPath, `${category}.json`);
@@ -53,11 +53,11 @@ class SRDDataManager {
                 missingFiles.push(`${category}.json`);
             }
         }
-        
+
         if (missingFiles.length > 0) {
             throw new Error(`Missing SRD data files: ${missingFiles.join(', ')}`);
         }
-        
+
         console.log(`✅ All ${this.dataCategories.length} SRD data files found`);
     }
 
@@ -66,27 +66,27 @@ class SRDDataManager {
      */
     loadAllData() {
         let totalEntries = 0;
-        
+
         for (const category of this.dataCategories) {
             try {
                 const data = this.loadDataFile(category);
                 this.cache.set(category, data);
-                
+
                 // Count entries for reporting
                 if (Array.isArray(data)) {
                     totalEntries += data.length;
                 } else if (typeof data === 'object') {
                     totalEntries += Object.keys(data).length;
                 }
-                
+
                 console.log(`📋 Loaded ${category}: ${this.getDataCount(data)} entries`);
-                
+
             } catch (error) {
                 console.error(`❌ Failed to load ${category}:`, error.message);
                 throw error;
             }
         }
-        
+
         console.log(`🎲 SRD Data loaded successfully: ${totalEntries} total entries`);
     }
 
@@ -95,22 +95,22 @@ class SRDDataManager {
      */
     loadDataFile(category) {
         const filePath = path.join(this.dataPath, `${category}.json`);
-        
+
         // Check file modification time for cache invalidation
         const stats = fs.statSync(filePath);
         const lastMod = this.lastModified.get(category);
-        
+
         if (lastMod && stats.mtime.getTime() === lastMod) {
             return this.cache.get(category);
         }
-        
+
         // Load and parse file
         const rawData = fs.readFileSync(filePath, 'utf8');
         const data = JSON.parse(rawData);
-        
+
         // Update cache and timestamp
         this.lastModified.set(category, stats.mtime.getTime());
-        
+
         return data;
     }
 
@@ -137,7 +137,7 @@ class SRDDataManager {
         if (!this.dataCategories.includes(category)) {
             throw new Error(`Invalid data category: ${category}`);
         }
-        
+
         return this.cache.get(category) || [];
     }
 
@@ -210,7 +210,7 @@ class SRDDataManager {
      */
     findRace(name) {
         const races = this.getRaces();
-        return races.find(race => 
+        return races.find(race =>
             race.name.toLowerCase() === name.toLowerCase()
         );
     }
@@ -220,7 +220,7 @@ class SRDDataManager {
      */
     findClass(name) {
         const classes = this.getClasses();
-        return classes.find(cls => 
+        return classes.find(cls =>
             cls.name.toLowerCase() === name.toLowerCase()
         );
     }
@@ -230,7 +230,7 @@ class SRDDataManager {
      */
     findSkill(name) {
         const skills = this.getSkills();
-        return skills.find(skill => 
+        return skills.find(skill =>
             skill.name.toLowerCase() === name.toLowerCase()
         );
     }
@@ -240,7 +240,7 @@ class SRDDataManager {
      */
     findFeat(name) {
         const feats = this.getFeats();
-        return feats.find(feat => 
+        return feats.find(feat =>
             feat.name.toLowerCase() === name.toLowerCase()
         );
     }
@@ -251,7 +251,7 @@ class SRDDataManager {
     findEquipment(name) {
         const equipment = this.getEquipment();
         if (Array.isArray(equipment)) {
-            return equipment.find(item => 
+            return equipment.find(item =>
                 item.name && item.name.toLowerCase() === name.toLowerCase()
             );
         }
@@ -264,7 +264,7 @@ class SRDDataManager {
     findSpell(name) {
         const spells = this.getSpells();
         if (Array.isArray(spells)) {
-            return spells.find(spell => 
+            return spells.find(spell =>
                 spell.name && spell.name.toLowerCase() === name.toLowerCase()
             );
         }
@@ -281,7 +281,7 @@ class SRDDataManager {
     getClassesForRace(raceName) {
         const race = this.findRace(raceName);
         if (!race) return [];
-        
+
         const classes = this.getClasses();
         return classes.filter(cls => {
             // Check if race has any restrictions for this class
@@ -300,10 +300,10 @@ class SRDDataManager {
         if (!characterClass || !characterClass.classSkills) {
             return this.getSkills();
         }
-        
+
         const classSkills = characterClass.classSkills;
         const allSkills = this.getSkills();
-        
+
         return allSkills.map(skill => ({
             ...skill,
             isClassSkill: classSkills.includes(skill.name)
@@ -329,7 +329,7 @@ class SRDDataManager {
     getSpellsForClassLevel(className, spellLevel) {
         const spells = this.getSpells();
         if (!Array.isArray(spells)) return [];
-        
+
         return spells.filter(spell => {
             if (spell.classes && spell.classes[className]) {
                 return spell.classes[className] === spellLevel;
@@ -357,7 +357,7 @@ class SRDDataManager {
                 charisma: 0
             };
         }
-        
+
         return race.abilityModifiers;
     }
 
@@ -404,7 +404,7 @@ class SRDDataManager {
                 will: 'poor'
             };
         }
-        
+
         return characterClass.savingThrows;
     }
 
@@ -445,17 +445,17 @@ class SRDDataManager {
      */
     validateCharacterBuild(character) {
         const errors = [];
-        
+
         // Validate race
         if (!this.isValidRace(character.race)) {
             errors.push(`Invalid race: ${character.race}`);
         }
-        
+
         // Validate class
         if (!this.isValidClass(character.characterClass)) {
             errors.push(`Invalid class: ${character.characterClass}`);
         }
-        
+
         // Validate skills
         if (character.skills) {
             for (const skillName of Object.keys(character.skills)) {
@@ -464,7 +464,7 @@ class SRDDataManager {
                 }
             }
         }
-        
+
         // Validate feats
         if (character.feats) {
             for (const featName of character.feats) {
@@ -473,7 +473,7 @@ class SRDDataManager {
                 }
             }
         }
-        
+
         return {
             isValid: errors.length === 0,
             errors: errors
@@ -499,7 +499,7 @@ class SRDDataManager {
      */
     getDataStats() {
         const stats = {};
-        
+
         for (const category of this.dataCategories) {
             const data = this.getData(category);
             stats[category] = {
@@ -507,7 +507,7 @@ class SRDDataManager {
                 type: Array.isArray(data) ? 'array' : typeof data
             };
         }
-        
+
         return stats;
     }
 
@@ -524,11 +524,11 @@ class SRDDataManager {
     search(query) {
         const results = {};
         const searchTerm = query.toLowerCase();
-        
+
         for (const category of this.dataCategories) {
             const data = this.getData(category);
             const matches = [];
-            
+
             if (Array.isArray(data)) {
                 for (const item of data) {
                     if (item.name && item.name.toLowerCase().includes(searchTerm)) {
@@ -537,18 +537,18 @@ class SRDDataManager {
                 }
             } else if (typeof data === 'object') {
                 for (const [key, value] of Object.entries(data)) {
-                    if (key.toLowerCase().includes(searchTerm) || 
+                    if (key.toLowerCase().includes(searchTerm) ||
                         (typeof value === 'string' && value.toLowerCase().includes(searchTerm))) {
                         matches.push({ key, value });
                     }
                 }
             }
-            
+
             if (matches.length > 0) {
                 results[category] = matches;
             }
         }
-        
+
         return results;
     }
 }

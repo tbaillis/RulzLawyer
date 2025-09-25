@@ -29,11 +29,11 @@ class GameServerEnhanced {
         this.server = null;
         this.requestCount = 0;
         this.startTime = Date.now();
-        
+
         // Initialize routes and middleware
         this.initializeRoutes();
         this.setupDefaultMiddleware();
-        
+
         console.log(`🎲 GameServerEnhanced initialized for port ${port}`);
     }
 
@@ -44,39 +44,39 @@ class GameServerEnhanced {
         // Main game interface routes
         this.addRoute('/', this.handleHomePage.bind(this));
         this.addRoute('/index.html', this.handleHomePage.bind(this));
-        
+
         // Character Creator routes
         this.addRoute('/character-creator', this.handleCharacterCreator.bind(this));
         this.addRoute('/character-creator.html', this.handleCharacterCreator.bind(this));
-        
+
         // Adventure Engine routes
         this.addRoute('/adventure-engine', this.handleAdventureEngine.bind(this));
         this.addRoute('/adventure-engine.html', this.handleAdventureEngine.bind(this));
-        
+
         // Dice Roller routes
         this.addRoute('/dice-roller', this.handleDiceRoller.bind(this));
         this.addRoute('/dice-roller.html', this.handleDiceRoller.bind(this));
-        
+
         // API endpoints
         this.addRoute('/api/character/generate', this.handleCharacterGeneration.bind(this));
         this.addRoute('/api/adventure/generate', this.handleAdventureGeneration.bind(this));
         this.addRoute('/api/dice/roll', this.handleDiceRoll.bind(this));
         this.addRoute('/api/srd/data', this.handleSRDData.bind(this));
         this.addRoute('/api/health', this.handleHealthCheck.bind(this));
-        
+
         // Static asset paths
         this.addStaticPath('/assets', './code-repository/web/assets');
         this.addStaticPath('/js', './code-repository/web/js');
         this.addStaticPath('/css', './code-repository/web/css');
         this.addStaticPath('/images', './code-repository/web/images');
         this.addStaticPath('/src', './code-repository/src');
-        
+
         // Full code-repository path for complete access
         this.addStaticPath('/code-repository', './code-repository');
-        
+
         // Root path for test files and other root-level assets
         this.addStaticPath('/', './');
-        
+
         console.log(`✅ Initialized ${this.routes.size} routes and ${this.staticPaths.size} static paths`);
     }
 
@@ -106,7 +106,7 @@ class GameServerEnhanced {
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
             res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            
+
             if (req.method === 'OPTIONS') {
                 res.writeHead(200);
                 res.end();
@@ -144,24 +144,24 @@ class GameServerEnhanced {
         try {
             // Run middleware stack
             await this.runMiddleware(req, res);
-            
+
             const parsedUrl = url.parse(req.url, true);
             const pathname = parsedUrl.pathname;
-            
+
             // Check for exact route match
             if (this.routes.has(pathname)) {
                 await this.routes.get(pathname)(req, res, parsedUrl);
                 return;
             }
-            
+
             // Check for static file serving
             if (await this.handleStaticFile(req, res, pathname)) {
                 return;
             }
-            
+
             // 404 Not Found
             this.handle404Error(res, pathname);
-            
+
         } catch (error) {
             this.handleServerError(res, error);
         }
@@ -186,16 +186,16 @@ class GameServerEnhanced {
             if (pathname.startsWith(urlPath)) {
                 const relativePath = pathname.substring(urlPath.length);
                 const filePath = path.join(localPath, relativePath);
-                
+
                 try {
                     // Security check - prevent directory traversal
                     const resolvedPath = path.resolve(filePath);
                     const resolvedLocalPath = path.resolve(localPath);
-                    
+
                     if (!resolvedPath.startsWith(resolvedLocalPath)) {
                         return false; // Directory traversal attempt
                     }
-                    
+
                     if (fs.existsSync(resolvedPath) && fs.statSync(resolvedPath).isFile()) {
                         await this.serveStaticFile(res, resolvedPath);
                         return true;
@@ -214,12 +214,12 @@ class GameServerEnhanced {
     async serveStaticFile(res, filePath) {
         const ext = path.extname(filePath).toLowerCase();
         const contentType = this.getContentType(ext);
-        
+
         const fileData = fs.readFileSync(filePath);
-        
+
         res.setHeader('Content-Type', contentType);
         res.setHeader('Cache-Control', 'public, max-age=86400'); // 24 hours
-        
+
         // Add compression for text files
         if (this.shouldCompress(contentType)) {
             res.setHeader('Content-Encoding', 'gzip');
@@ -254,9 +254,9 @@ class GameServerEnhanced {
      * Check if content should be compressed
      */
     shouldCompress(contentType) {
-        return contentType.startsWith('text/') || 
-               contentType.includes('javascript') || 
-               contentType.includes('json');
+        return contentType.startsWith('text/') ||
+            contentType.includes('javascript') ||
+            contentType.includes('json');
     }
 
     // ===================
@@ -325,29 +325,29 @@ class GameServerEnhanced {
             // Import character generation modules
             const { CharacterGenerator } = require('../character/character-generator.js');
             const DiceEngine = require('../dice/dice-engine.js');
-            
+
             const dice = new DiceEngine();
             const generator = new CharacterGenerator(dice);
             const character = generator.generateRandomCharacter();
-            
+
             const response = {
                 success: true,
                 character: character,
                 timestamp: new Date().toISOString(),
                 version: '1.0.0'
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(200);
             res.end(JSON.stringify(response, null, 2));
-            
+
         } catch (error) {
             const errorResponse = {
                 success: false,
                 error: error.message,
                 timestamp: new Date().toISOString()
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(500);
             res.end(JSON.stringify(errorResponse, null, 2));
@@ -361,34 +361,34 @@ class GameServerEnhanced {
         try {
             const AdventureEngine = require('../adventure/adventure-engine.js');
             const DiceEngine = require('../dice/dice-engine.js');
-            
+
             const dice = new DiceEngine();
             const advEngine = new AdventureEngine(dice);
-            
+
             // Parse request parameters
             const parsedUrl = url.parse(req.url, true);
             const level = parseInt(parsedUrl.query.level) || 1;
             const duration = parsedUrl.query.duration || 'weekly';
-            
+
             const adventure = advEngine.generateAdventure(level, duration);
-            
+
             const response = {
                 success: true,
                 adventure: adventure,
                 timestamp: new Date().toISOString()
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(200);
             res.end(JSON.stringify(response, null, 2));
-            
+
         } catch (error) {
             const errorResponse = {
                 success: false,
                 error: error.message,
                 timestamp: new Date().toISOString()
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(500);
             res.end(JSON.stringify(errorResponse, null, 2));
@@ -402,23 +402,23 @@ class GameServerEnhanced {
         try {
             const DiceEngine = require('../dice/dice-engine.js');
             const dice = new DiceEngine();
-            
+
             const parsedUrl = url.parse(req.url, true);
             const expression = parsedUrl.query.expression || '1d20';
-            
+
             const result = dice.roll(expression);
-            
+
             const response = {
                 success: true,
                 expression: expression,
                 result: result,
                 timestamp: new Date().toISOString()
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(200);
             res.end(JSON.stringify(response, null, 2));
-            
+
         } catch (error) {
             const errorResponse = {
                 success: false,
@@ -426,7 +426,7 @@ class GameServerEnhanced {
                 expression: parsedUrl.query.expression,
                 timestamp: new Date().toISOString()
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(400);
             res.end(JSON.stringify(errorResponse, null, 2));
@@ -440,24 +440,24 @@ class GameServerEnhanced {
         try {
             const SRDDataManager = require('../data/srd-data-manager.js');
             const srdManager = new SRDDataManager();
-            
+
             const response = {
                 success: true,
                 data: srdManager.getAllData(),
                 timestamp: new Date().toISOString()
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(200);
             res.end(JSON.stringify(response, null, 2));
-            
+
         } catch (error) {
             const errorResponse = {
                 success: false,
                 error: error.message,
                 timestamp: new Date().toISOString()
             };
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(500);
             res.end(JSON.stringify(errorResponse, null, 2));
@@ -476,7 +476,7 @@ class GameServerEnhanced {
             timestamp: new Date().toISOString(),
             version: '1.0.0'
         };
-        
+
         res.setHeader('Content-Type', 'application/json');
         res.writeHead(200);
         res.end(JSON.stringify(response, null, 2));
@@ -751,7 +751,7 @@ class GameServerEnhanced {
     <p><a href="/" style="color: #ffd700;">Return to Home</a></p>
 </body>
 </html>`;
-        
+
         res.setHeader('Content-Type', 'text/html');
         res.writeHead(404);
         res.end(errorHTML);
@@ -759,13 +759,13 @@ class GameServerEnhanced {
 
     handleServerError(res, error) {
         console.error('Server error:', error);
-        
+
         const errorResponse = {
             success: false,
             error: 'Internal server error',
             timestamp: new Date().toISOString()
         };
-        
+
         res.setHeader('Content-Type', 'application/json');
         res.writeHead(500);
         res.end(JSON.stringify(errorResponse, null, 2));
@@ -781,7 +781,7 @@ class GameServerEnhanced {
     async start() {
         return new Promise((resolve, reject) => {
             this.server = http.createServer(this.handleRequest.bind(this));
-            
+
             this.server.listen(this.port, () => {
                 console.log(`🚀 RulzLawyer Server running on http://localhost:${this.port}`);
                 console.log(`📋 Character Creator: http://localhost:${this.port}/character-creator`);
@@ -790,7 +790,7 @@ class GameServerEnhanced {
                 console.log(`📊 Health Check: http://localhost:${this.port}/api/health`);
                 resolve(this.server);
             });
-            
+
             this.server.on('error', (error) => {
                 console.error('Server startup error:', error);
                 reject(error);

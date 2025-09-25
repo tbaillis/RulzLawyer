@@ -21,17 +21,17 @@ class CharacterCreatorInterface {
         this.currentCharacter = null;
         this.srdData = {};
         this.stepData = {};
-        
+
         // New systems integration
         this.characterSheetRenderer = null;
         this.storageManager = null;
         this.spellManager = null;
         this.epicManager = null;
         this.combatManager = null;
-        
+
         // UI elements
         this.elements = {};
-        
+
         console.log('🧙 Character Creator Interface initializing...');
         this.initialize();
     }
@@ -43,19 +43,19 @@ class CharacterCreatorInterface {
         try {
             // Load SRD data first
             await this.loadSRDData();
-            
+
             // Initialize all system managers
             await this.initializeManagers();
-            
+
             // Initialize wizard
             await this.initializeWizard();
-            
+
             // Setup UI elements
             this.setupUI();
-            
+
             // Start the creation process
             this.startCharacterCreation();
-            
+
             console.log('✅ Character Creator Interface ready with all systems');
         } catch (error) {
             console.error('❌ Failed to initialize Character Creator:', error);
@@ -70,39 +70,39 @@ class CharacterCreatorInterface {
         try {
             // Initialize storage manager
             this.storageManager = new CharacterStorageManager();
-            
+
             // Initialize character sheet renderer
             this.characterSheetRenderer = new CharacterSheetRenderer(
                 { srdData: this.srdData },
                 this.spellManager,
                 this.epicManager
             );
-            
+
             // Initialize specialized managers (if available)
             if (typeof SpellManager !== 'undefined') {
                 this.spellManager = new SpellManager();
                 console.log('✅ Spell Manager initialized');
             }
-            
+
             if (typeof EpicLevelManager !== 'undefined') {
                 this.epicManager = new EpicLevelManager();
                 console.log('✅ Epic Level Manager initialized');
             }
-            
+
             if (typeof CombatManager !== 'undefined') {
                 this.combatManager = new CombatManager();
                 console.log('✅ Combat Manager initialized');
             }
-            
+
             // Update character sheet renderer with all managers
             this.characterSheetRenderer = new CharacterSheetRenderer(
                 { srdData: this.srdData },
                 this.spellManager,
                 this.epicManager
             );
-            
+
             console.log('💾 All system managers initialized');
-            
+
         } catch (error) {
             console.error('❌ Error initializing managers:', error);
             throw error;
@@ -116,7 +116,7 @@ class CharacterCreatorInterface {
         try {
             const response = await fetch('/api/srd/data');
             const result = await response.json();
-            
+
             if (result.success) {
                 this.srdData = result.data;
                 console.log('📊 SRD data loaded:', Object.keys(this.srdData));
@@ -157,7 +157,7 @@ class CharacterCreatorInterface {
                 equipment: { weapons: [], armor: [], gear: [] }
             }
         };
-        
+
         console.log('🎯 Wizard initialized at step 1');
     }
 
@@ -171,12 +171,12 @@ class CharacterCreatorInterface {
         this.elements.stepContent = document.getElementById('step-content');
         this.elements.navigationButtons = document.getElementById('navigation-buttons');
         this.elements.characterPreview = document.getElementById('character-preview');
-        
+
         // Create UI if elements don't exist
         if (!this.elements.container) {
             this.createBaseUI();
         }
-        
+
         // Setup navigation
         this.setupNavigation();
     }
@@ -188,7 +188,7 @@ class CharacterCreatorInterface {
         const container = document.createElement('div');
         container.id = 'character-creator-container';
         container.className = 'character-creator-container';
-        
+
         container.innerHTML = `
             <div class="wizard-header">
                 <h1>🧙 D&D 3.5 Character Creator</h1>
@@ -211,9 +211,9 @@ class CharacterCreatorInterface {
                 <button id="complete-button" class="nav-button complete-button" style="display: none;">Complete Character</button>
             </div>
         `;
-        
+
         document.body.appendChild(container);
-        
+
         // Update element references
         this.elements.container = container;
         this.elements.stepIndicator = document.getElementById('step-indicator');
@@ -229,15 +229,15 @@ class CharacterCreatorInterface {
         const prevButton = document.getElementById('prev-button');
         const nextButton = document.getElementById('next-button');
         const completeButton = document.getElementById('complete-button');
-        
+
         if (prevButton) {
             prevButton.addEventListener('click', () => this.previousStep());
         }
-        
+
         if (nextButton) {
             nextButton.addEventListener('click', () => this.nextStep());
         }
-        
+
         if (completeButton) {
             completeButton.addEventListener('click', () => this.completeCharacter());
         }
@@ -263,10 +263,10 @@ class CharacterCreatorInterface {
                 this.showError('Please complete all required fields before continuing.');
                 return;
             }
-            
+
             // Save current step data
             await this.saveCurrentStepData();
-            
+
             // Advance step
             if (this.wizard.currentStep < this.wizard.totalSteps) {
                 this.wizard.currentStep++;
@@ -298,7 +298,7 @@ class CharacterCreatorInterface {
      */
     updateStepIndicator() {
         if (!this.elements.stepIndicator) return;
-        
+
         const steps = [
             'Basic Info',
             'Race',
@@ -308,21 +308,21 @@ class CharacterCreatorInterface {
             'Feats',
             'Equipment'
         ];
-        
+
         let html = '<div class="step-indicators">';
-        
+
         for (let i = 1; i <= this.wizard.totalSteps; i++) {
             const isActive = i === this.wizard.currentStep;
             const isCompleted = i < this.wizard.currentStep;
-            
+
             html += `
                 <div class="step-indicator-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}">
                     <div class="step-number">${i}</div>
-                    <div class="step-name">${steps[i-1]}</div>
+                    <div class="step-name">${steps[i - 1]}</div>
                 </div>
             `;
         }
-        
+
         html += '</div>';
         this.elements.stepIndicator.innerHTML = html;
     }
@@ -332,10 +332,10 @@ class CharacterCreatorInterface {
      */
     renderCurrentStep() {
         if (!this.elements.stepContent) return;
-        
+
         const step = this.wizard.currentStep;
         let content = '';
-        
+
         switch (step) {
             case 1:
                 content = this.renderBasicInformationStep();
@@ -361,7 +361,7 @@ class CharacterCreatorInterface {
             default:
                 content = '<p>Unknown step</p>';
         }
-        
+
         this.elements.stepContent.innerHTML = content;
         this.attachStepEventHandlers();
     }
@@ -408,7 +408,7 @@ class CharacterCreatorInterface {
      */
     renderRaceSelectionStep() {
         const races = this.srdData.races || [];
-        
+
         let raceOptions = '';
         races.forEach(race => {
             const isSelected = this.wizard.character.race === race.name;
@@ -417,7 +417,7 @@ class CharacterCreatorInterface {
                 .filter(([_, value]) => value !== 0)
                 .map(([ability, value]) => `${ability.substring(0, 3).toUpperCase()} ${value > 0 ? '+' : ''}${value}`)
                 .join(', ');
-            
+
             raceOptions += `
                 <div class="selection-card ${isSelected ? 'selected' : ''}" data-race="${race.name}">
                     <h4>${race.name}</h4>
@@ -431,7 +431,7 @@ class CharacterCreatorInterface {
                 </div>
             `;
         });
-        
+
         return `
             <div class="step-content-inner">
                 <h2>Step 2: Race Selection</h2>
@@ -456,11 +456,11 @@ class CharacterCreatorInterface {
      */
     renderClassSelectionStep() {
         const classes = this.srdData.classes || [];
-        
+
         let classOptions = '';
         classes.forEach(cls => {
             const isSelected = this.wizard.character.characterClass === cls.name;
-            
+
             classOptions += `
                 <div class="selection-card ${isSelected ? 'selected' : ''}" data-class="${cls.name}">
                     <h4>${cls.name}</h4>
@@ -478,7 +478,7 @@ class CharacterCreatorInterface {
                 </div>
             `;
         });
-        
+
         return `
             <div class="step-content-inner">
                 <h2>Step 3: Class Selection</h2>
@@ -504,14 +504,14 @@ class CharacterCreatorInterface {
     renderAbilityScoreStep() {
         const abilities = this.wizard.character.baseAbilities;
         const finalAbilities = this.wizard.character.abilities;
-        
+
         let abilityInputs = '';
         ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'].forEach(ability => {
             const base = abilities[ability] || 10;
             const final = finalAbilities[ability] || base;
             const modifier = Math.floor((final - 10) / 2);
             const modifierText = modifier >= 0 ? `+${modifier}` : `${modifier}`;
-            
+
             abilityInputs += `
                 <div class="ability-row">
                     <label class="ability-label">${ability.charAt(0).toUpperCase() + ability.slice(1)}</label>
@@ -523,7 +523,7 @@ class CharacterCreatorInterface {
                 </div>
             `;
         });
-        
+
         return `
             <div class="step-content-inner">
                 <h2>Step 4: Ability Scores</h2>
@@ -575,7 +575,7 @@ class CharacterCreatorInterface {
         const skillPoints = this.calculateSkillPoints(characterClass);
         const skills = this.srdData.skills || [];
         const classSkills = characterClass?.progression?.class_skills || [];
-        
+
         // Initialize skill ranks if not already set
         if (!this.wizard.character.skills) {
             this.wizard.character.skills = {};
@@ -595,7 +595,7 @@ class CharacterCreatorInterface {
             const abilityMod = this.calculateAbilityModifier(skill.ability);
             const totalBonus = currentRanks + abilityMod;
             const maxRanks = isClassSkill ? this.wizard.character.level + 3 : Math.floor((this.wizard.character.level + 3) / 2);
-            
+
             skillRows += `
                 <tr class="${isClassSkill ? 'class-skill' : 'cross-class-skill'}">
                     <td class="skill-name">
@@ -686,7 +686,7 @@ class CharacterCreatorInterface {
 
         const feats = this.srdData.feats || [];
         const availableFeats = this.calculateAvailableFeats();
-        
+
         // Initialize selected feats if not already set
         if (!this.wizard.character.feats) {
             this.wizard.character.feats = [];
@@ -694,11 +694,11 @@ class CharacterCreatorInterface {
 
         // Filter feats based on prerequisites
         const eligibleFeats = feats.filter(feat => this.checkFeatPrerequisites(feat));
-        
+
         let featOptions = '';
         eligibleFeats.forEach(feat => {
             const isSelected = this.wizard.character.feats.includes(feat.name);
-            
+
             featOptions += `
                 <div class="feat-card ${isSelected ? 'selected' : ''}" data-feat="${feat.name}">
                     <div class="feat-header">
@@ -764,14 +764,14 @@ class CharacterCreatorInterface {
                         <h4>Selected Feats:</h4>
                         <div class="selected-feat-list">
                             ${this.wizard.character.feats.map(featName => {
-                                const feat = feats.find(f => f.name === featName);
-                                return `
+            const feat = feats.find(f => f.name === featName);
+            return `
                                     <div class="selected-feat-item">
                                         <span class="selected-feat-name">${featName}</span>
                                         <button class="remove-feat-btn" onclick="characterCreator.toggleFeat('${featName}')">×</button>
                                     </div>
                                 `;
-                            }).join('')}
+        }).join('')}
                         </div>
                     </div>
                 ` : ''}
@@ -794,7 +794,7 @@ class CharacterCreatorInterface {
 
         const characterClass = this.srdData.classes?.find(c => c.name === this.wizard.character.characterClass);
         const startingGold = this.calculateStartingGold(characterClass);
-        
+
         // Initialize equipment if not already set
         if (!this.wizard.character.equipment) {
             this.wizard.character.equipment = {
@@ -882,18 +882,18 @@ class CharacterCreatorInterface {
      */
     selectRace(raceName) {
         this.wizard.character.race = raceName;
-        
+
         // Apply racial modifiers
         const race = this.srdData.races?.find(r => r.name === raceName);
         if (race && race.abilityModifiers) {
             this.wizard.character.abilities = { ...this.wizard.character.baseAbilities };
-            
+
             for (const [ability, modifier] of Object.entries(race.abilityModifiers)) {
-                this.wizard.character.abilities[ability] = 
+                this.wizard.character.abilities[ability] =
                     (this.wizard.character.baseAbilities[ability] || 10) + (modifier || 0);
             }
         }
-        
+
         this.renderCurrentStep();
         this.updateCharacterPreview();
         console.log(`🌟 Selected race: ${raceName}`);
@@ -915,16 +915,16 @@ class CharacterCreatorInterface {
     updateAbility(ability, value) {
         const numValue = parseInt(value) || 10;
         this.wizard.character.baseAbilities[ability] = numValue;
-        
+
         // Recalculate final abilities with racial modifiers
         const race = this.srdData.races?.find(r => r.name === this.wizard.character.race);
         if (race && race.abilityModifiers) {
-            this.wizard.character.abilities[ability] = 
+            this.wizard.character.abilities[ability] =
                 numValue + (race.abilityModifiers[ability] || 0);
         } else {
             this.wizard.character.abilities[ability] = numValue;
         }
-        
+
         this.renderCurrentStep();
         this.updateCharacterPreview();
     }
@@ -941,30 +941,30 @@ class CharacterCreatorInterface {
         const characterClass = this.srdData.classes?.find(c => c.name === this.wizard.character.characterClass);
         const classSkills = characterClass?.progression?.class_skills || [];
         const isClassSkill = classSkills.includes(skillName);
-        
+
         const currentRanks = this.wizard.character.skills[skillName] || 0;
         const newRanks = Math.max(0, currentRanks + change);
         const maxRanks = isClassSkill ? this.wizard.character.level + 3 : Math.floor((this.wizard.character.level + 3) / 2);
-        
+
         // Validate the change
         if (newRanks > maxRanks) {
             return; // Can't exceed max ranks
         }
-        
+
         // Calculate skill point cost
         const pointCost = isClassSkill ? 1 : 2;
         const skillPoints = this.calculateSkillPoints(characterClass);
         const currentUsedPoints = Object.values(this.wizard.character.skills).reduce((sum, ranks) => sum + ranks, 0);
         const pointsAfterChange = currentUsedPoints - currentRanks + newRanks;
-        
+
         if (pointsAfterChange > skillPoints && change > 0) {
             return; // Not enough skill points
         }
-        
+
         this.wizard.character.skills[skillName] = newRanks;
         this.renderCurrentStep();
         this.updateCharacterPreview();
-        
+
         console.log(`📈 Adjusted ${skillName}: ${currentRanks} → ${newRanks} ranks`);
     }
 
@@ -1000,22 +1000,22 @@ class CharacterCreatorInterface {
      */
     calculateAvailableFeats() {
         let baseFeats = 1; // All characters get 1 feat at 1st level
-        
+
         // Humans get bonus feat
         if (this.wizard.character.race === 'Human') {
             baseFeats += 1;
         }
-        
+
         // Fighters get bonus combat feats
         if (this.wizard.character.characterClass === 'Fighter') {
             baseFeats += 1;
         }
-        
+
         // Wizards get bonus metamagic or item creation feats
         if (this.wizard.character.characterClass === 'Wizard') {
             baseFeats += 1;
         }
-        
+
         return baseFeats;
     }
 
@@ -1034,11 +1034,11 @@ class CharacterCreatorInterface {
     filterFeats(type) {
         const feats = this.srdData.feats || [];
         const featCards = document.querySelectorAll('.feat-card');
-        
+
         featCards.forEach(card => {
             const featName = card.dataset.feat;
             const feat = feats.find(f => f.name === featName);
-            
+
             if (type === 'all' || (feat && feat.type === type)) {
                 card.style.display = 'block';
             } else {
@@ -1064,7 +1064,7 @@ class CharacterCreatorInterface {
             'Sorcerer': 75,
             'Wizard': 75
         };
-        
+
         return startingGoldByClass[characterClass?.name] || 100;
     }
 
@@ -1073,25 +1073,25 @@ class CharacterCreatorInterface {
      */
     calculateSpentGold() {
         if (!this.wizard.character.equipment) return 0;
-        
+
         let total = 0;
         const equipment = this.wizard.character.equipment;
-        
+
         // Add up weapon costs
         equipment.weapons?.forEach(weapon => {
             total += weapon.cost || 0;
         });
-        
+
         // Add up armor costs
         equipment.armor?.forEach(armor => {
             total += armor.cost || 0;
         });
-        
+
         // Add up gear costs
         equipment.gear?.forEach(item => {
             total += (item.cost || 0) * (item.quantity || 1);
         });
-        
+
         return total;
     }
 
@@ -1168,7 +1168,7 @@ class CharacterCreatorInterface {
      */
     renderWeaponOptions(weapons) {
         let html = '';
-        
+
         Object.entries(weapons).forEach(([category, weaponList]) => {
             html += `<h5>${category.charAt(0).toUpperCase() + category.slice(1)} Weapons</h5>`;
             weaponList.forEach(weapon => {
@@ -1187,7 +1187,7 @@ class CharacterCreatorInterface {
                 `;
             });
         });
-        
+
         return html;
     }
 
@@ -1196,7 +1196,7 @@ class CharacterCreatorInterface {
      */
     renderArmorOptions(armor) {
         let html = '';
-        
+
         Object.entries(armor).forEach(([category, armorList]) => {
             html += `<h5>${category.charAt(0).toUpperCase() + category.slice(1)} Armor</h5>`;
             armorList.forEach(armorItem => {
@@ -1215,7 +1215,7 @@ class CharacterCreatorInterface {
                 `;
             });
         });
-        
+
         return html;
     }
 
@@ -1224,11 +1224,11 @@ class CharacterCreatorInterface {
      */
     renderGearOptions(gear) {
         let html = '';
-        
+
         gear.forEach(item => {
             const selectedItem = this.getSelectedGearItem(item.name);
             const quantity = selectedItem ? selectedItem.quantity : 0;
-            
+
             html += `
                 <div class="equipment-item ${quantity > 0 ? 'selected' : ''}">
                     <div class="item-info">
@@ -1243,7 +1243,7 @@ class CharacterCreatorInterface {
                 </div>
             `;
         });
-        
+
         return html;
     }
 
@@ -1252,10 +1252,10 @@ class CharacterCreatorInterface {
      */
     renderSelectedEquipment() {
         if (!this.wizard.character.equipment) return '<p>No equipment selected.</p>';
-        
+
         const equipment = this.wizard.character.equipment;
         let html = '';
-        
+
         if (equipment.weapons?.length > 0) {
             html += '<h5>Weapons</h5><ul>';
             equipment.weapons.forEach(weapon => {
@@ -1263,7 +1263,7 @@ class CharacterCreatorInterface {
             });
             html += '</ul>';
         }
-        
+
         if (equipment.armor?.length > 0) {
             html += '<h5>Armor</h5><ul>';
             equipment.armor.forEach(armor => {
@@ -1271,7 +1271,7 @@ class CharacterCreatorInterface {
             });
             html += '</ul>';
         }
-        
+
         if (equipment.gear?.length > 0) {
             html += '<h5>Gear</h5><ul>';
             equipment.gear.forEach(item => {
@@ -1279,11 +1279,11 @@ class CharacterCreatorInterface {
             });
             html += '</ul>';
         }
-        
+
         if (html === '') {
             html = '<p>No equipment selected.</p>';
         }
-        
+
         return html;
     }
 
@@ -1294,7 +1294,7 @@ class CharacterCreatorInterface {
         if (!this.wizard.character.equipment || !this.wizard.character.equipment[category]) {
             return false;
         }
-        
+
         return this.wizard.character.equipment[category].some(item => item.name === itemName);
     }
 
@@ -1305,7 +1305,7 @@ class CharacterCreatorInterface {
         if (!this.wizard.character.equipment || !this.wizard.character.equipment.gear) {
             return null;
         }
-        
+
         return this.wizard.character.equipment.gear.find(item => item.name === itemName);
     }
 
@@ -1316,13 +1316,13 @@ class CharacterCreatorInterface {
         if (!this.wizard.character.equipment) {
             this.wizard.character.equipment = { weapons: [], armor: [], gear: [], gold: 0 };
         }
-        
+
         if (!this.wizard.character.equipment[category]) {
             this.wizard.character.equipment[category] = [];
         }
-        
+
         const existingIndex = this.wizard.character.equipment[category].findIndex(existing => existing.name === item.name);
-        
+
         if (existingIndex === -1) {
             // Add item
             this.wizard.character.equipment[category].push(item);
@@ -1332,7 +1332,7 @@ class CharacterCreatorInterface {
             this.wizard.character.equipment[category].splice(existingIndex, 1);
             console.log(`❌ Removed ${item.name} from ${category}`);
         }
-        
+
         this.renderCurrentStep();
         this.updateCharacterPreview();
     }
@@ -1344,13 +1344,13 @@ class CharacterCreatorInterface {
         if (!this.wizard.character.equipment) {
             this.wizard.character.equipment = { weapons: [], armor: [], gear: [], gold: 0 };
         }
-        
+
         if (!this.wizard.character.equipment.gear) {
             this.wizard.character.equipment.gear = [];
         }
-        
+
         let existingItem = this.wizard.character.equipment.gear.find(item => item.name === itemName);
-        
+
         if (!existingItem) {
             // Create new item
             const basicGear = this.getBasicGear();
@@ -1362,9 +1362,9 @@ class CharacterCreatorInterface {
                 return;
             }
         }
-        
+
         const newQuantity = Math.max(0, existingItem.quantity + change);
-        
+
         if (newQuantity === 0) {
             // Remove item if quantity is 0
             const index = this.wizard.character.equipment.gear.indexOf(existingItem);
@@ -1372,7 +1372,7 @@ class CharacterCreatorInterface {
         } else {
             existingItem.quantity = newQuantity;
         }
-        
+
         this.renderCurrentStep();
         this.updateCharacterPreview();
     }
@@ -1384,19 +1384,19 @@ class CharacterCreatorInterface {
         // Hide all tabs
         const tabs = document.querySelectorAll('.equipment-tab');
         tabs.forEach(tab => tab.classList.remove('active'));
-        
+
         // Hide all tab buttons
         const buttons = document.querySelectorAll('.tab-button');
         buttons.forEach(button => button.classList.remove('active'));
-        
+
         // Show selected tab
         const selectedTab = document.getElementById(`${tabName}-tab`);
         if (selectedTab) {
             selectedTab.classList.add('active');
         }
-        
+
         // Highlight selected button
-        const selectedButton = [...buttons].find(button => 
+        const selectedButton = [...buttons].find(button =>
             button.textContent.toLowerCase().includes(tabName.toLowerCase())
         );
         if (selectedButton) {
@@ -1411,11 +1411,11 @@ class CharacterCreatorInterface {
         if (!characterClass || !characterClass.progression) {
             return 8; // Default fallback
         }
-        
+
         const baseSkillPoints = characterClass.progression.skill_points || 2;
         const intModifier = this.calculateAbilityModifier('Intelligence');
         const raceBonus = 0; // Humans get +1, could add this later
-        
+
         return Math.max(1, baseSkillPoints + intModifier + raceBonus);
     }
 
@@ -1425,19 +1425,19 @@ class CharacterCreatorInterface {
     calculateAbilityModifier(abilityName) {
         const abilityShort = {
             'Strength': 'strength',
-            'Dexterity': 'dexterity', 
+            'Dexterity': 'dexterity',
             'Constitution': 'constitution',
             'Intelligence': 'intelligence',
             'Wisdom': 'wisdom',
             'Charisma': 'charisma',
             'Str': 'strength',
             'Dex': 'dexterity',
-            'Con': 'constitution', 
+            'Con': 'constitution',
             'Int': 'intelligence',
             'Wis': 'wisdom',
             'Cha': 'charisma'
         };
-        
+
         const ability = abilityShort[abilityName] || abilityName.toLowerCase();
         const score = this.wizard.character.abilities[ability] || 10;
         return Math.floor((score - 10) / 2);
@@ -1450,7 +1450,7 @@ class CharacterCreatorInterface {
         try {
             const abilities = {};
             const abilityNames = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
-            
+
             for (const ability of abilityNames) {
                 let roll;
                 if (method === '4d6dl1') {
@@ -1466,27 +1466,27 @@ class CharacterCreatorInterface {
                 } else {
                     roll = 10; // Default
                 }
-                
+
                 abilities[ability] = roll;
             }
-            
+
             this.wizard.character.baseAbilities = abilities;
-            
+
             // Apply racial modifiers
             const race = this.srdData.races?.find(r => r.name === this.wizard.character.race);
             if (race && race.abilityModifiers) {
                 this.wizard.character.abilities = {};
                 for (const [ability, base] of Object.entries(abilities)) {
-                    this.wizard.character.abilities[ability] = 
+                    this.wizard.character.abilities[ability] =
                         base + (race.abilityModifiers[ability] || 0);
                 }
             } else {
                 this.wizard.character.abilities = { ...abilities };
             }
-            
+
             this.renderCurrentStep();
             this.updateCharacterPreview();
-            
+
             console.log(`🎲 Generated abilities using ${method}:`, abilities);
         } catch (error) {
             console.error('Error generating abilities:', error);
@@ -1503,7 +1503,7 @@ class CharacterCreatorInterface {
      */
     async validateCurrentStep() {
         const step = this.wizard.currentStep;
-        
+
         switch (step) {
             case 1:
                 return this.wizard.character.name && this.wizard.character.name.trim().length > 0;
@@ -1527,13 +1527,13 @@ class CharacterCreatorInterface {
      */
     areAbilityScoresValid() {
         const abilities = this.wizard.character.baseAbilities;
-        
+
         for (const [ability, score] of Object.entries(abilities)) {
             if (score < 3 || score > 25) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -1553,11 +1553,11 @@ class CharacterCreatorInterface {
         const prevButton = document.getElementById('prev-button');
         const nextButton = document.getElementById('next-button');
         const completeButton = document.getElementById('complete-button');
-        
+
         if (prevButton) {
             prevButton.disabled = this.wizard.currentStep <= 1;
         }
-        
+
         if (nextButton && completeButton) {
             if (this.wizard.currentStep >= this.wizard.totalSteps) {
                 nextButton.style.display = 'none';
@@ -1575,15 +1575,15 @@ class CharacterCreatorInterface {
     updateCharacterPreview() {
         const previewContent = document.getElementById('preview-content');
         if (!previewContent) return;
-        
+
         const char = this.wizard.character;
-        
+
         let html = '<div class="character-summary">';
-        
+
         if (char.name) {
             html += `<h4>${char.name}</h4>`;
         }
-        
+
         if (char.race || char.characterClass) {
             html += `<p class="character-title">`;
             if (char.race) html += `${char.race}`;
@@ -1591,11 +1591,11 @@ class CharacterCreatorInterface {
             if (char.characterClass) html += `${char.characterClass}`;
             html += `</p>`;
         }
-        
+
         if (char.level) {
             html += `<p><strong>Level:</strong> ${char.level}</p>`;
         }
-        
+
         // Show abilities if they exist
         if (char.abilities && Object.values(char.abilities).some(v => v !== 10)) {
             html += '<div class="preview-abilities">';
@@ -1634,32 +1634,32 @@ class CharacterCreatorInterface {
         // Show equipment summary
         if (char.equipment) {
             const hasEquipment = (char.equipment.weapons && char.equipment.weapons.length > 0) ||
-                               (char.equipment.armor && char.equipment.armor.length > 0) ||
-                               (char.equipment.gear && char.equipment.gear.length > 0);
-            
+                (char.equipment.armor && char.equipment.armor.length > 0) ||
+                (char.equipment.gear && char.equipment.gear.length > 0);
+
             if (hasEquipment) {
                 html += '<div class="preview-equipment">';
                 html += '<h5>Equipment</h5>';
-                
+
                 if (char.equipment.weapons && char.equipment.weapons.length > 0) {
                     html += `<div class="equipment-category">Weapons: ${char.equipment.weapons.map(w => w.name).join(', ')}</div>`;
                 }
-                
+
                 if (char.equipment.armor && char.equipment.armor.length > 0) {
                     html += `<div class="equipment-category">Armor: ${char.equipment.armor.map(a => a.name).join(', ')}</div>`;
                 }
-                
+
                 if (char.equipment.gear && char.equipment.gear.length > 0) {
                     const gearSummary = char.equipment.gear.map(g => `${g.name} (${g.quantity})`).join(', ');
                     html += `<div class="equipment-category">Gear: ${gearSummary}</div>`;
                 }
-                
+
                 html += '</div>';
             }
         }
-        
+
         html += '</div>';
-        
+
         previewContent.innerHTML = html;
     }
 
@@ -1681,15 +1681,15 @@ class CharacterCreatorInterface {
                 this.showError('Please complete all required steps before finishing.');
                 return;
             }
-            
+
             // Generate final character using server API
             const response = await fetch('/api/character/generate');
             const result = await response.json();
-            
+
             if (result.success) {
                 this.showSuccess('Character created successfully!');
                 console.log('🎉 Character creation completed:', result.character);
-                
+
                 // Show final character sheet
                 this.showFinalCharacterSheet(result.character);
             } else {
@@ -1706,7 +1706,7 @@ class CharacterCreatorInterface {
      */
     async validateAllSteps() {
         const originalStep = this.wizard.currentStep;
-        
+
         for (let step = 1; step <= this.wizard.totalSteps; step++) {
             this.wizard.currentStep = step;
             if (!await this.validateCurrentStep()) {
@@ -1714,7 +1714,7 @@ class CharacterCreatorInterface {
                 return false;
             }
         }
-        
+
         this.wizard.currentStep = originalStep;
         return true;
     }
@@ -1724,7 +1724,7 @@ class CharacterCreatorInterface {
      */
     showFinalCharacterSheet(character) {
         const container = this.elements.container;
-        
+
         container.innerHTML = `
             <div class="character-sheet-final">
                 <h1>🎉 Character Creation Complete!</h1>
@@ -1794,9 +1794,9 @@ class CharacterCreatorInterface {
                 <button class="error-close" onclick="this.parentElement.parentElement.remove()">×</button>
             </div>
         `;
-        
+
         document.body.appendChild(errorDiv);
-        
+
         // Auto-remove after 5 seconds
         setTimeout(() => {
             if (errorDiv.parentElement) {
@@ -1818,9 +1818,9 @@ class CharacterCreatorInterface {
                 <button class="success-close" onclick="this.parentElement.parentElement.remove()">×</button>
             </div>
         `;
-        
+
         document.body.appendChild(successDiv);
-        
+
         // Auto-remove after 3 seconds
         setTimeout(() => {
             if (successDiv.parentElement) {
@@ -1839,7 +1839,7 @@ class CharacterCreatorInterface {
             }
 
             const result = this.storageManager.saveCharacter(this.wizard.character);
-            
+
             if (result.success) {
                 this.showSuccess(result.message);
                 // Update current character reference for auto-save
@@ -1864,7 +1864,7 @@ class CharacterCreatorInterface {
 
             // Create character sheet HTML
             const sheetHTML = this.characterSheetRenderer.renderCharacterSheet(this.wizard.character);
-            
+
             // Create modal window for character sheet
             const modal = document.createElement('div');
             modal.className = 'character-sheet-modal';
@@ -1890,9 +1890,9 @@ class CharacterCreatorInterface {
                     </div>
                 </div>
             `;
-            
+
             document.body.appendChild(modal);
-            
+
         } catch (error) {
             console.error('❌ Error viewing character sheet:', error);
             this.showError('Failed to display character sheet: ' + error.message);
@@ -1906,7 +1906,7 @@ class CharacterCreatorInterface {
         try {
             const printWindow = window.open('', '_blank');
             const sheetHTML = this.characterSheetRenderer.renderCharacterSheet(this.wizard.character);
-            
+
             printWindow.document.write(`
                 <!DOCTYPE html>
                 <html>
@@ -1931,9 +1931,9 @@ class CharacterCreatorInterface {
                 </body>
                 </html>
             `);
-            
+
             printWindow.document.close();
-            
+
         } catch (error) {
             console.error('❌ Error printing character sheet:', error);
             this.showError('Failed to print character sheet: ' + error.message);
@@ -1950,7 +1950,7 @@ class CharacterCreatorInterface {
             }
 
             const result = this.storageManager.getAllCharacters();
-            
+
             if (!result.success) {
                 throw new Error(result.error);
             }
@@ -1963,12 +1963,12 @@ class CharacterCreatorInterface {
             // Create character selection modal
             const modal = document.createElement('div');
             modal.className = 'character-library-modal';
-            
+
             let charactersHTML = '';
             result.characters.forEach(character => {
-                const lastSaved = character.metadata?.lastSaved ? 
+                const lastSaved = character.metadata?.lastSaved ?
                     new Date(character.metadata.lastSaved).toLocaleDateString() : 'Unknown';
-                
+
                 charactersHTML += `
                     <div class="saved-character-item" onclick="characterCreator.loadCharacterById('${character.characterId}')">
                         <div class="character-info">
@@ -1987,7 +1987,7 @@ class CharacterCreatorInterface {
                     </div>
                 `;
             });
-            
+
             modal.innerHTML = `
                 <div class="modal-overlay" onclick="this.parentElement.remove()"></div>
                 <div class="modal-content library-modal">
@@ -2011,9 +2011,9 @@ class CharacterCreatorInterface {
                     </div>
                 </div>
             `;
-            
+
             document.body.appendChild(modal);
-            
+
         } catch (error) {
             console.error('❌ Error loading saved characters:', error);
             this.showError('Failed to load saved characters: ' + error.message);
@@ -2026,20 +2026,20 @@ class CharacterCreatorInterface {
     loadCharacterById(characterId) {
         try {
             const result = this.storageManager.loadCharacter(characterId);
-            
+
             if (result.success) {
                 if (confirm(`Load character '${result.character.name}'? This will replace your current character.`)) {
                     this.wizard.character = result.character;
                     this.currentCharacter = result.character;
                     window.currentCharacter = result.character;
-                    
+
                     // Close modal
                     const modal = document.querySelector('.character-library-modal');
                     if (modal) modal.remove();
-                    
+
                     // Refresh display
                     this.renderCurrentStep();
-                    
+
                     this.showSuccess(`Character '${result.character.name}' loaded successfully!`);
                 }
             } else {
@@ -2064,7 +2064,7 @@ class CharacterCreatorInterface {
 
             if (confirm(`Are you sure you want to delete '${character.name}'? This action cannot be undone.`)) {
                 const result = this.storageManager.deleteCharacter(characterId);
-                
+
                 if (result.success) {
                     // Refresh the character library
                     const modal = document.querySelector('.character-library-modal');
@@ -2072,7 +2072,7 @@ class CharacterCreatorInterface {
                         modal.remove();
                         this.loadSavedCharacters();
                     }
-                    
+
                     this.showSuccess(result.message);
                 } else {
                     this.showError(result.error);
@@ -2090,7 +2090,7 @@ class CharacterCreatorInterface {
     exportCharacterById(characterId) {
         try {
             const result = this.storageManager.exportCharacter(characterId);
-            
+
             if (result.success) {
                 this.showSuccess(result.message);
             } else {
@@ -2110,7 +2110,7 @@ class CharacterCreatorInterface {
             if (!file) return;
 
             const result = await this.storageManager.importCharacter(file);
-            
+
             if (result.success) {
                 // Refresh the character library
                 const modal = document.querySelector('.character-library-modal');
@@ -2118,7 +2118,7 @@ class CharacterCreatorInterface {
                     modal.remove();
                     this.loadSavedCharacters();
                 }
-                
+
                 this.showSuccess(result.message);
             } else {
                 this.showError(result.error);
@@ -2152,16 +2152,16 @@ class CharacterCreatorInterface {
                 const characterData = JSON.stringify(this.wizard.character, null, 2);
                 const blob = new Blob([characterData], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
-                
+
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = `${this.wizard.character.name || 'character'}.json`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                
+
                 URL.revokeObjectURL(url);
-                
+
                 this.showSuccess('Character exported successfully!');
             }
         } catch (error) {

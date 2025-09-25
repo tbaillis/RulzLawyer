@@ -23,7 +23,7 @@ class CombatManager {
         this.srdData = srdDataManager;
         this.combatState = null;
         this.conditions = this.initializeConditions();
-        
+
         console.log('⚔️ CombatManager initialized with D&D 3.5 combat mechanics');
     }
 
@@ -131,7 +131,7 @@ class CombatManager {
                 conditions: [],
                 actions: { move: true, standard: true, swift: true, immediate: true }
             };
-            
+
             this.combatState.participants.push(combatant);
         });
 
@@ -141,7 +141,7 @@ class CombatManager {
 
         console.log('⚔️ Combat initialized with', participants.length, 'participants');
         this.logEvent('Combat begins!');
-        
+
         return this.combatState;
     }
 
@@ -151,10 +151,10 @@ class CombatManager {
     rollInitiative(participant) {
         const dexMod = this.calculateAbilityModifier(participant.abilities?.dexterity || 10);
         const initiativeBonus = participant.initiativeBonus || 0;
-        
+
         const roll = this.dice.roll('1d20');
         const total = roll + dexMod + initiativeBonus;
-        
+
         console.log(`🎲 ${participant.name} initiative: ${roll} + ${dexMod} = ${total}`);
         return total;
     }
@@ -173,7 +173,7 @@ class CombatManager {
         if (!this.combatState || this.combatState.initiativeOrder.length === 0) {
             return null;
         }
-        
+
         return this.combatState.initiativeOrder[this.combatState.currentTurn];
     }
 
@@ -184,13 +184,13 @@ class CombatManager {
         if (!this.combatState) return null;
 
         this.combatState.currentTurn++;
-        
+
         // Check if round is complete
         if (this.combatState.currentTurn >= this.combatState.initiativeOrder.length) {
             this.combatState.currentTurn = 0;
             this.combatState.round++;
             this.logEvent(`--- Round ${this.combatState.round} ---`);
-            
+
             // Process end-of-round effects
             this.processEndOfRoundEffects();
         }
@@ -198,13 +198,13 @@ class CombatManager {
         const currentCombatant = this.getCurrentCombatant();
         if (currentCombatant) {
             // Reset actions for new turn
-            currentCombatant.actions = { 
-                move: true, 
-                standard: true, 
-                swift: true, 
-                immediate: true 
+            currentCombatant.actions = {
+                move: true,
+                standard: true,
+                swift: true,
+                immediate: true
             };
-            
+
             this.logEvent(`${currentCombatant.name}'s turn (Initiative ${currentCombatant.initiative})`);
         }
 
@@ -217,10 +217,10 @@ class CombatManager {
     makeAttackRoll(attacker, target, options = {}) {
         const attackBonus = this.calculateAttackBonus(attacker, options);
         const targetAC = this.calculateArmorClass(target);
-        
+
         const roll = this.dice.roll('1d20');
         const total = roll + attackBonus;
-        
+
         const result = {
             attacker: attacker.name,
             target: target.name,
@@ -240,12 +240,12 @@ class CombatManager {
             const confirmTotal = confirmRoll + attackBonus;
             result.criticalConfirm = confirmTotal >= targetAC;
             result.critical = result.criticalConfirm;
-            
+
             this.logEvent(`🎯 Critical threat! Confirmation: ${confirmRoll} + ${attackBonus} = ${confirmTotal} vs AC ${targetAC}`);
         }
 
         this.logEvent(`⚔️ ${attacker.name} attacks ${target.name}: ${roll} + ${attackBonus} = ${total} vs AC ${targetAC} ${result.hit ? 'HIT' : 'MISS'}`);
-        
+
         return result;
     }
 
@@ -254,36 +254,36 @@ class CombatManager {
      */
     calculateAttackBonus(attacker, options = {}) {
         let bonus = 0;
-        
+
         // Base Attack Bonus
         bonus += attacker.baseAttackBonus || this.calculateBAB(attacker);
-        
+
         // Ability modifier (Str for melee, Dex for ranged)
         if (options.ranged) {
             bonus += this.calculateAbilityModifier(attacker.abilities?.dexterity || 10);
         } else {
             bonus += this.calculateAbilityModifier(attacker.abilities?.strength || 10);
         }
-        
+
         // Size modifier
         bonus += this.getSizeModifier(attacker.size || 'Medium');
-        
+
         // Weapon bonuses
         if (options.weapon) {
             bonus += options.weapon.enhancementBonus || 0;
         }
-        
+
         // Feat bonuses (Weapon Focus, etc.)
         bonus += this.calculateFeatBonuses(attacker, 'attack', options);
-        
+
         // Condition modifiers
         bonus += this.calculateConditionModifiers(attacker, 'attack');
-        
+
         // Situational modifiers
         if (options.flanking) bonus += 2;
         if (options.chargeAttack) bonus += 2;
         if (options.powerAttack) bonus -= options.powerAttackPenalty || 0;
-        
+
         return bonus;
     }
 
@@ -293,10 +293,10 @@ class CombatManager {
     calculateBAB(character) {
         const characterClass = this.srdData.getClass(character.characterClass);
         if (!characterClass) return 0;
-        
+
         const progression = characterClass.progression?.bab_progression || 'medium';
         const level = character.level || 1;
-        
+
         switch (progression) {
             case 'good':
                 return level;
@@ -314,30 +314,30 @@ class CombatManager {
      */
     calculateArmorClass(character) {
         let ac = 10; // Base AC
-        
+
         // Armor bonus
         ac += character.armorBonus || 0;
-        
+
         // Shield bonus
         ac += character.shieldBonus || 0;
-        
+
         // Dexterity modifier (limited by armor)
         const dexMod = this.calculateAbilityModifier(character.abilities?.dexterity || 10);
         const maxDex = character.maxDexBonus !== undefined ? character.maxDexBonus : 10;
         ac += Math.min(dexMod, maxDex);
-        
+
         // Size modifier
         ac += this.getSizeModifier(character.size || 'Medium');
-        
+
         // Natural armor
         ac += character.naturalArmor || 0;
-        
+
         // Deflection bonus
         ac += character.deflectionBonus || 0;
-        
+
         // Condition modifiers
         ac += this.calculateConditionModifiers(character, 'ac');
-        
+
         return ac;
     }
 
@@ -362,7 +362,7 @@ class CombatManager {
 
         let baseDamage = 0;
         let damageType = 'nonlethal';
-        
+
         // Weapon damage
         if (options.weapon) {
             const weaponDamage = this.dice.roll(options.weapon.damage || '1d4');
@@ -373,7 +373,7 @@ class CombatManager {
             baseDamage += this.dice.roll('1d3');
             damageType = 'bludgeoning';
         }
-        
+
         // Ability modifier to damage
         if (options.ranged) {
             // Ranged weapons don't add Str to damage (except composite bows)
@@ -383,7 +383,7 @@ class CombatManager {
         } else {
             // Melee weapons add Str modifier
             let strMod = this.calculateAbilityModifier(attacker.abilities?.strength || 10);
-            
+
             // Two-handed weapons get 1.5x Str modifier
             if (options.twoHanded) {
                 strMod = Math.floor(strMod * 1.5);
@@ -392,15 +392,15 @@ class CombatManager {
             else if (options.offHand) {
                 strMod = Math.floor(strMod * 0.5);
             }
-            
+
             baseDamage += strMod;
         }
-        
+
         // Enhancement bonus
         if (options.weapon?.enhancementBonus) {
             baseDamage += options.weapon.enhancementBonus;
         }
-        
+
         // Power Attack damage bonus
         if (options.powerAttack) {
             let powerAttackBonus = options.powerAttackPenalty || 1;
@@ -409,7 +409,7 @@ class CombatManager {
             }
             baseDamage += powerAttackBonus;
         }
-        
+
         // Critical hit multiplier
         let totalDamage = baseDamage;
         if (attackResult.critical) {
@@ -417,11 +417,11 @@ class CombatManager {
             totalDamage = baseDamage * multiplier;
             this.logEvent(`💥 Critical hit! Damage multiplied by ${multiplier}`);
         }
-        
+
         // Damage reduction
         const damageReduction = target.damageReduction || 0;
         totalDamage = Math.max(0, totalDamage - damageReduction);
-        
+
         const damageResult = {
             baseDamage,
             totalDamage,
@@ -429,9 +429,9 @@ class CombatManager {
             critical: attackResult.critical,
             damageReduction
         };
-        
+
         this.logEvent(`💀 Damage: ${baseDamage}${attackResult.critical ? ` × ${options.weapon?.criticalMultiplier || 2}` : ''} - ${damageReduction} DR = ${totalDamage} ${damageType}`);
-        
+
         return damageResult;
     }
 
@@ -441,9 +441,9 @@ class CombatManager {
     applyDamage(target, damageResult) {
         const damage = damageResult.totalDamage;
         target.currentHP = Math.max(0, target.currentHP - damage);
-        
+
         this.logEvent(`❤️ ${target.name}: ${target.currentHP}/${target.maxHP} HP remaining`);
-        
+
         // Check for death or unconsciousness
         if (target.currentHP <= 0) {
             if (target.currentHP <= -10) {
@@ -454,7 +454,7 @@ class CombatManager {
                 this.logEvent(`😵 ${target.name} is unconscious!`);
             }
         }
-        
+
         return target.currentHP;
     }
 
@@ -465,7 +465,7 @@ class CombatManager {
         const saveBonus = this.calculateSaveBonus(character, saveType);
         const roll = this.dice.roll('1d20');
         const total = roll + saveBonus;
-        
+
         const result = {
             character: character.name,
             saveType,
@@ -477,13 +477,13 @@ class CombatManager {
             naturalTwenty: roll === 20,
             naturalOne: roll === 1
         };
-        
+
         // Natural 20 is always a success, natural 1 is always a failure
         if (result.naturalTwenty) result.success = true;
         if (result.naturalOne) result.success = false;
-        
+
         this.logEvent(`🛡️ ${character.name} ${saveType} save: ${roll} + ${saveBonus} = ${total} vs DC ${dc} ${result.success ? 'SUCCESS' : 'FAILURE'}`);
-        
+
         return result;
     }
 
@@ -492,10 +492,10 @@ class CombatManager {
      */
     calculateSaveBonus(character, saveType) {
         let bonus = 0;
-        
+
         // Base save from class
         bonus += this.calculateBaseSave(character, saveType);
-        
+
         // Ability modifier
         switch (saveType.toLowerCase()) {
             case 'fortitude':
@@ -510,10 +510,10 @@ class CombatManager {
                 bonus += this.calculateAbilityModifier(character.abilities?.wisdom || 10);
                 break;
         }
-        
+
         // Condition modifiers
         bonus += this.calculateConditionModifiers(character, 'save_' + saveType.toLowerCase());
-        
+
         return bonus;
     }
 
@@ -523,10 +523,10 @@ class CombatManager {
     calculateBaseSave(character, saveType) {
         const characterClass = this.srdData.getClass(character.characterClass);
         if (!characterClass) return 0;
-        
+
         const level = character.level || 1;
         const progression = characterClass.progression;
-        
+
         let saveProgression = 'poor';
         switch (saveType.toLowerCase()) {
             case 'fortitude':
@@ -541,7 +541,7 @@ class CombatManager {
                 saveProgression = progression?.will_save || 'poor';
                 break;
         }
-        
+
         if (saveProgression === 'good') {
             return 2 + Math.floor(level / 2);
         } else {
@@ -556,16 +556,16 @@ class CombatManager {
         if (!character.conditions) {
             character.conditions = [];
         }
-        
+
         const condition = {
             name: conditionName,
             duration,
             effects: this.conditions[conditionName]?.effects || {}
         };
-        
+
         character.conditions.push(condition);
         this.logEvent(`🔴 ${character.name} is now ${conditionName.toLowerCase()}`);
-        
+
         return condition;
     }
 
@@ -574,14 +574,14 @@ class CombatManager {
      */
     removeCondition(character, conditionName) {
         if (!character.conditions) return false;
-        
+
         const index = character.conditions.findIndex(c => c.name === conditionName);
         if (index !== -1) {
             character.conditions.splice(index, 1);
             this.logEvent(`🟢 ${character.name} is no longer ${conditionName.toLowerCase()}`);
             return true;
         }
-        
+
         return false;
     }
 
@@ -590,12 +590,12 @@ class CombatManager {
      */
     calculateConditionModifiers(character, modifierType) {
         if (!character.conditions) return 0;
-        
+
         let modifier = 0;
-        
+
         character.conditions.forEach(condition => {
             const effects = condition.effects;
-            
+
             switch (modifierType) {
                 case 'attack':
                     modifier += effects.attackBonus || 0;
@@ -613,7 +613,7 @@ class CombatManager {
                     break;
             }
         });
-        
+
         return modifier;
     }
 
@@ -652,11 +652,11 @@ class CombatManager {
      */
     isCombatOver() {
         if (!this.combatState) return true;
-        
-        const aliveCombatants = this.combatState.participants.filter(p => 
+
+        const aliveCombatants = this.combatState.participants.filter(p =>
             p.currentHP > 0 && !p.conditions?.some(c => c.name === 'Dead')
         );
-        
+
         return aliveCombatants.length <= 1;
     }
 
@@ -665,7 +665,7 @@ class CombatManager {
      */
     getCombatSummary() {
         if (!this.combatState) return null;
-        
+
         return {
             round: this.combatState.round,
             currentTurn: this.combatState.currentTurn,
@@ -686,11 +686,11 @@ class CombatManager {
     logEvent(message) {
         const timestamp = new Date().toLocaleTimeString();
         const logMessage = `[${timestamp}] ${message}`;
-        
+
         if (this.combatState) {
             this.combatState.events.push(logMessage);
         }
-        
+
         console.log(`⚔️ ${logMessage}`);
     }
 

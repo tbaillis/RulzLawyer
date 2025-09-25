@@ -44,7 +44,7 @@ try {
         wisdom: 13,
         charisma: 10
     });
-    
+
     const summary = character.getSummary();
     console.log(`  Character: ${summary.name || 'Test'} the ${summary.race} ${summary.characterClass}`);
     console.log(`  Level: ${summary.level}, HP: ${summary.maxHitPoints}, AC: ${summary.armorClass}`);

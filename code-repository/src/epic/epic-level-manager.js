@@ -21,7 +21,7 @@ class EpicLevelManager {
         this.spellManager = spellManager;
         this.epicFeats = this.initializeEpicFeats();
         this.epicProgression = this.initializeEpicProgression();
-        
+
         console.log('⚡ EpicLevelManager initialized with levels 21-100 support');
     }
 
@@ -204,7 +204,7 @@ class EpicLevelManager {
                 56: 1, 60: 1, 64: 1, 68: 1, 72: 1, 76: 1, 80: 1, 84: 1,
                 88: 1, 92: 1, 96: 1, 100: 1
             },
-            
+
             // Epic feat progression (every 3 levels after 21st)
             epicFeats: {
                 21: 1, 24: 1, 27: 1, 30: 1, 33: 1, 36: 1, 39: 1, 42: 1,
@@ -212,7 +212,7 @@ class EpicLevelManager {
                 69: 1, 72: 1, 75: 1, 78: 1, 81: 1, 84: 1, 87: 1, 90: 1,
                 93: 1, 96: 1, 99: 1
             },
-            
+
             // Class-specific epic progressions
             classProgression: {
                 'Barbarian': {
@@ -339,7 +339,7 @@ class EpicLevelManager {
      */
     calculateEpicBenefits(character) {
         const level = character.level;
-        
+
         if (level < 21) {
             return { isEpic: false };
         }
@@ -392,7 +392,7 @@ class EpicLevelManager {
         const level = character.level;
         const characterClass = character.characterClass;
         const classProgression = this.epicProgression.classProgression[characterClass];
-        
+
         if (!classProgression || level < 21) {
             return 0;
         }
@@ -400,11 +400,11 @@ class EpicLevelManager {
         const epicLevels = level - 20;
         const hitDie = classProgression.hitDie;
         const conMod = Math.floor((character.abilities.constitution - 10) / 2);
-        
+
         // Epic levels gain half hit die + Con modifier per level
         const baseEpicHP = Math.floor(hitDie / 2) + 1;
         const totalEpicHP = epicLevels * (baseEpicHP + conMod);
-        
+
         return totalEpicHP;
     }
 
@@ -415,7 +415,7 @@ class EpicLevelManager {
         const level = character.level;
         const characterClass = character.characterClass;
         const classProgression = this.epicProgression.classProgression[characterClass];
-        
+
         if (!classProgression || level < 21) {
             return 0;
         }
@@ -423,10 +423,10 @@ class EpicLevelManager {
         const epicLevels = level - 20;
         const baseSkillPoints = classProgression.skillPoints;
         const intMod = Math.floor((character.abilities.intelligence - 10) / 2);
-        
+
         const skillPointsPerLevel = Math.max(1, baseSkillPoints + intMod);
         const totalEpicSkillPoints = epicLevels * skillPointsPerLevel;
-        
+
         return totalEpicSkillPoints;
     }
 
@@ -437,14 +437,14 @@ class EpicLevelManager {
         const level = character.level;
         const characterClass = character.characterClass;
         const classProgression = this.epicProgression.classProgression[characterClass];
-        
+
         if (!classProgression || level < 21) {
             return [];
         }
 
         const features = [];
         const epicFeatures = classProgression.epicFeatures;
-        
+
         for (const [featureLevel, feature] of Object.entries(epicFeatures)) {
             if (level >= parseInt(featureLevel)) {
                 features.push({
@@ -453,7 +453,7 @@ class EpicLevelManager {
                 });
             }
         }
-        
+
         return features;
     }
 
@@ -466,8 +466,8 @@ class EpicLevelManager {
         }
 
         const baseSlots = this.spellManager.calculateSpellSlots(
-            character.characterClass, 
-            20, 
+            character.characterClass,
+            20,
             character.abilities
         );
 
@@ -529,7 +529,7 @@ class EpicLevelManager {
      * Get available epic feats for character
      */
     getAvailableEpicFeats(character) {
-        return this.epicFeats.filter(feat => 
+        return this.epicFeats.filter(feat =>
             this.checkEpicFeatPrerequisites(feat, character)
         );
     }
@@ -593,7 +593,7 @@ class EpicLevelManager {
      */
     getEpicSummary(character) {
         const epicBenefits = this.calculateEpicBenefits(character);
-        
+
         if (!epicBenefits.isEpic) {
             return null;
         }
@@ -622,7 +622,7 @@ class EpicLevelManager {
             4: 'Greater Deity',
             5: 'Supreme Deity'
         };
-        
+
         return titles[divineRank] || 'Mortal';
     }
 }
