@@ -56,9 +56,9 @@ if ($Help) {
 
 # Display banner
 Write-Host ""
-Write-Host "🎮 $ScriptName" -ForegroundColor Cyan
-Write-Host "⚔️  Epic Level D&D 3.5 Adventure System" -ForegroundColor Magenta
-Write-Host "🎭 AI Portraits | 🗡️ Tactical Combat | ✨ 400+ Spells | 🏛️ Divine Ascension" -ForegroundColor Green
+Write-Host "RulzLawyer $ScriptName" -ForegroundColor Cyan
+Write-Host "Epic Level D&D 3.5 Adventure System" -ForegroundColor Magenta
+Write-Host "AI Portraits | Tactical Combat | 400+ Spells | Divine Ascension" -ForegroundColor Green
 Write-Host "=" * 80 -ForegroundColor Gray
 Write-Host ""
 
@@ -120,7 +120,7 @@ $scriptArgs = @()
 # Add debug inspector if requested
 if ($Debug -and -not $Production) {
     $nodeArgs += "--inspect"
-    Write-Host "🔍 Debug mode enabled - Inspector running on default port" -ForegroundColor Cyan
+    Write-Host "Debug mode enabled - Inspector running on default port" -ForegroundColor Cyan
 }
 
 # Add script arguments
@@ -132,7 +132,7 @@ if ($Debug -and -not $Production) {
 
 if ($Production) {
     $env:NODE_ENV = "production"
-    Write-Host "🚀 Production mode enabled" -ForegroundColor Green
+    Write-Host "Production mode enabled" -ForegroundColor Green
 } else {
     $env:NODE_ENV = "development"
 }
@@ -153,14 +153,14 @@ if ($Debug) {
 
 # Display startup information
 Write-Host ""
-Write-Host "🎯 Starting RulzLawyer in '$Mode' mode..." -ForegroundColor Yellow
-Write-Host "📝 Environment: $($env:NODE_ENV)" -ForegroundColor Gray
-Write-Host "🔌 Port: $Port" -ForegroundColor Gray
+Write-Host "Starting RulzLawyer in '$Mode' mode..." -ForegroundColor Yellow
+Write-Host "Environment: $($env:NODE_ENV)" -ForegroundColor Gray
+Write-Host "Port: $Port" -ForegroundColor Gray
 if ($Debug) {
-    Write-Host "🐛 Debug: Enabled" -ForegroundColor Gray
+    Write-Host "Debug: Enabled" -ForegroundColor Gray
 }
 if ($Web) {
-    Write-Host "🌐 Web Interface: Enabled" -ForegroundColor Gray
+    Write-Host "Web Interface: Enabled" -ForegroundColor Gray
 }
 Write-Host ""
 

@@ -33,7 +33,7 @@ class RulzLawyerWebServer {
             port: options.port || process.env.PORT || 3000,
             host: options.host || 'localhost',
             environment: process.env.NODE_ENV || 'development',
-            webRoot: path.join(__dirname, '..', 'web'),
+            webRoot: path.join(__dirname, 'web'),
             enableCORS: options.cors !== false,
             enableCompression: options.compression !== false,
             enableLogging: options.logging !== false,

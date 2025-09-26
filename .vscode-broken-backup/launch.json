@@ -1,0 +1,208 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🎮 RulzLawyer - Full Game (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:*",
+                "PORT": "3000"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9229"]
+        },
+        {
+            "name": "🎮 RulzLawyer - Full Game (Production)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "production",
+                "PORT": "3000"
+            },
+            "skipFiles": ["<node_internals>/**"]
+        },
+        {
+            "name": "🖥️ RulzLawyer - Server Only (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:server:*",
+                "PORT": "3000"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9230"]
+        },
+        {
+            "name": "⚡ RulzLawyer - Character Creator (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:character:*",
+                "PORT": "3001"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9231"]
+        },
+        {
+            "name": "🗡️ RulzLawyer - Combat System (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:combat:*",
+                "PORT": "3002"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9232"]
+        },
+        {
+            "name": "✨ RulzLawyer - Spell System (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:spells:*",
+                "PORT": "3003"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9233"]
+        },
+        {
+            "name": "🏛️ RulzLawyer - Epic System (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:epic:*",
+                "PORT": "3004"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9234"]
+        },
+        {
+            "name": "🎭 RulzLawyer - Portrait System (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:portrait:*",
+                "PORT": "3005"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9235"]
+        },
+        {
+            "name": "📖 RulzLawyer - Adventure System (Debug)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:adventure:*",
+                "PORT": "3006"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9236"]
+        },
+        {
+            "name": "🧪 RulzLawyer - System Integration Test",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/code-repository/examples/complete-system-integration-demo.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:*",
+                "TEST_MODE": "integration"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9237"]
+        },
+        {
+            "name": "🌐 RulzLawyer - Web Client (Debug)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/web",
+            "sourceMaps": true,
+            "userDataDir": "${workspaceFolder}/.vscode/chrome-debug-profile"
+        },
+        {
+            "name": "🎯 RulzLawyer - Full Stack Debug",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/web-server.js",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "rulzlawyer:*",
+                "PORT": "3000",
+                "WEB_PORT": "8080"
+            },
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "runtimeArgs": ["--inspect=127.0.0.1:9238"],
+            "serverReadyAction": {
+                "pattern": "Server running on port ([0-9]+)",
+                "uriFormat": "http://localhost:%s",
+                "action": "openExternally"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "🚀 RulzLawyer - Complete System (Server + Client)",
+            "configurations": [
+                "🎮 RulzLawyer - Full Game (Debug)",
+                "🌐 RulzLawyer - Web Client (Debug)"
+            ],
+            "stopAll": true,
+            "presentation": {
+                "hidden": false,
+                "group": "Full System",
+                "order": 1
+            }
+        }
+    ]
+}
