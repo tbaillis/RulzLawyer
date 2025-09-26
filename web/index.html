@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RulzLawyer D&D 3.5 System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .header .features {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .launch-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .launch-panel h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .game-modes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .mode-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .mode-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mode-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mode-card .title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .mode-card .description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        .launch-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-debug {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .system-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .status-online {
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-offline {
+            background: #dc3545;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .launch-panel {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .game-modes {
+                grid-template-columns: 1fr;
+            }
+            
+            .launch-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 RulzLawyer D&D 3.5</h1>
+        <div class="subtitle">⚔️ Epic Level Adventure Engine</div>
+        <div class="features">🎭 AI Portraits | 🗡️ Tactical Combat | ✨ 400+ Spells | 🏛️ Divine Ascension</div>
+    </div>
+    
+    <div class="main-content">
+        <div class="launch-panel">
+            <h2>Launch Game System</h2>
+            
+            <div class="game-modes">
+                <div class="mode-card" data-mode="full">
+                    <div class="icon">🎮</div>
+                    <div class="title">Complete Game System</div>
+                    <div class="description">Full RulzLawyer system with all components including character creation, combat, spells, epic levels, and AI portraits.</div>
+                </div>
+                
+                <div class="mode-card" data-mode="character-creator">
+                    <div class="icon">⚡</div>
+                    <div class="title">Character Creator</div>
+                    <div class="description">Advanced character creation system with D&D 3.5 rules, epic progression, and portrait generation.</div>
+                </div>
+                
+                <div class="mode-card" data-mode="combat">
+                    <div class="icon">🗡️</div>
+                    <div class="title">Combat System</div>
+                    <div class="description">Tactical combat engine with initiative tracking, spell effects, and dynamic encounter management.</div>
+                </div>
+                
+                <div class="mode-card" data-mode="spells">
+                    <div class="icon">✨</div>
+                    <div class="title">Spell System</div>
+                    <div class="description">Comprehensive spell management with 400+ spells, metamagic, and epic spell creation.</div>
+                </div>
+                
+                <div class="mode-card" data-mode="epic">
+                    <div class="icon">🏛️</div>
+                    <div class="title">Epic System</div>
+                    <div class="description">Epic level progression (21-99), divine ascension, and planar adventures.</div>
+                </div>
+                
+                <div class="mode-card" data-mode="adventure">
+                    <div class="icon">📖</div>
+                    <div class="title">Adventure Engine</div>
+                    <div class="description">Dynamic storytelling with AI-powered NPCs, branching narratives, and collaborative campaigns.</div>
+                </div>
+            </div>
+            
+            <div class="launch-options">
+                <button class="btn btn-primary" onclick="launchGame('full', false)">🚀 Launch Game</button>
+                <button class="btn btn-debug" onclick="launchGame('full', true)">🔍 Debug Mode</button>
+                <button class="btn btn-secondary" onclick="runTests()">🧪 Run Tests</button>
+            </div>
+            
+            <div class="system-status">
+                <div id="status-display">
+                    <span class="status-indicator status-offline"></span>
+                    System Status: Checking...
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>RulzLawyer D&D 3.5 System v2.0.0 | Created with ⚔️ for Epic Adventures</p>
+    </div>
+    
+    <script>
+        let selectedMode = 'full';
+        
+        // Handle mode selection
+        document.querySelectorAll('.mode-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.mode-card').forEach(c => c.style.background = 'rgba(255, 255, 255, 0.1)');
+                card.style.background = 'rgba(255, 255, 255, 0.3)';
+                selectedMode = card.dataset.mode;
+            });
+        });
+        
+        // Launch game function
+        function launchGame(mode, debug = false) {
+            const port = 3000;
+            const url = `http://localhost:${port}/launch`;
+            const params = new URLSearchParams({
+                mode: mode || selectedMode,
+                debug: debug.toString()
+            });
+            
+            // Show loading state
+            updateStatus('Launching...', 'loading');
+            
+            // Make launch request
+            fetch(`${url}?${params}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateStatus(`${data.mode} launched successfully`, 'online');
+                        // Open character creator or relevant interface
+                        if (mode === 'character-creator' || selectedMode === 'character-creator') {
+                            window.open('/character-creator', '_blank');
+                        }
+                    } else {
+                        updateStatus(`Launch failed: ${data.error}`, 'offline');
+                    }
+                })
+                .catch(error => {
+                    updateStatus(`Connection error: ${error.message}`, 'offline');
+                });
+        }
+        
+        // Run tests function
+        function runTests() {
+            updateStatus('Running integration tests...', 'loading');
+            
+            fetch('/api/test', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateStatus(`Tests completed: ${data.passed}/${data.total} passed`, 'online');
+                    } else {
+                        updateStatus(`Tests failed: ${data.error}`, 'offline');
+                    }
+                })
+                .catch(error => {
+                    updateStatus(`Test error: ${error.message}`, 'offline');
+                });
+        }
+        
+        // Update status display
+        function updateStatus(message, status) {
+            const statusDisplay = document.getElementById('status-display');
+            const indicator = statusDisplay.querySelector('.status-indicator');
+            
+            indicator.className = `status-indicator status-${status}`;
+            statusDisplay.innerHTML = `<span class="status-indicator status-${status}"></span>System Status: ${message}`;
+        }
+        
+        // Check system status on load
+        function checkSystemStatus() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    updateStatus(`Online - ${data.mode} mode`, 'online');
+                })
+                .catch(error => {
+                    updateStatus('Offline - Start server to launch', 'offline');
+                });
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select full mode by default
+            document.querySelector('[data-mode="full"]').click();
+            
+            // Check status
+            checkSystemStatus();
+            
+            // Auto-refresh status every 30 seconds
+            setInterval(checkSystemStatus, 30000);
+        });
+    </script>
+</body>
+</html>

@@ -1,17 +1,63 @@
 /**
- * AdventureEngine - D&D 3.5 Adventure Generation and Management System
- * Creates dynamic adventures with encounters, treasure, and progression
- * Scales difficulty based on character level and party composition
+ * AdventureEngine - AI-Powered D&D 3.5 Adventure Generation System
+ * 
+ * Features:
+ * - Dynamic encounter generation with appropriate challenge ratings
+ * - Environmental adventure types (wilderness, dungeon, urban, planar)
+ * - Narrative generation with character integration
+ * - Treasure and reward distribution
+ * - Experience point calculation and character advancement
+ * - Adventure state persistence and save/load functionality
+ * - AI-powered story generation and plot hooks
+ * 
+ * @version 2.0.0
+ * @author RulzLawyer Development Team
  */
 
 class AdventureEngine {
-    constructor(diceEngine = null) {
+    constructor(diceEngine, characterManager, dataManager, systemIntegrations = {}) {
         this.diceEngine = diceEngine;
-        this.encounters = [];
-        this.activeAdventure = null;
-        this.treasureGenerated = 0;
-        this.experienceAwarded = 0;
+        this.characterManager = characterManager;
+        this.dataManager = dataManager;
+        
+        // System integrations
+        this.inventoryIntegration = systemIntegrations.inventoryIntegration;
+        this.combatIntegration = systemIntegrations.combatIntegration;
+        this.spellSystem = systemIntegrations.spellSystem;
+        
+        // Adventure state
+        this.currentAdventure = null;
+        this.activeEncounters = [];
+        this.adventureHistory = [];
+        this.worldState = {};
+        
+        // Configuration
+        this.difficultySettings = {
+            easy: 0.75,
+            normal: 1.0,
+            hard: 1.25,
+            extreme: 1.5
+        };
+        
+        // Adventure templates
+        this.adventureTemplates = [
+            'goblin_raid', 'ancient_tomb', 'city_investigation', 'wilderness_survival',
+            'planar_intrusion', 'dragon_encounter', 'cultist_conspiracy', 'haunted_mansion',
+            'bandit_stronghold', 'missing_caravan', 'corrupted_grove', 'underground_cult',
+            'noble_intrigue', 'demon_summoning', 'lost_expedition', 'mysterious_plague'
+        ];
+        
+        // Environment types
+        this.environments = [
+            'forest', 'mountain', 'desert', 'swamp', 'urban', 'dungeon', 
+            'cave', 'ruins', 'plane', 'underwater', 'arctic', 'volcanic'
+        ];
+        
+        // Load encounter tables and AI patterns
         this.loadEncounterTables();
+        this.initializeAINarratives();
+        
+        console.log('🗺️ Adventure Engine initialized');
     }
 
     /**
@@ -366,6 +412,278 @@ class AdventureEngine {
             encountersResolved: this.encounters.length,
             activeAdventure: this.activeAdventure ? this.activeAdventure.title : null
         };
+    }
+
+    // ===== SYSTEM INTEGRATION METHODS =====
+
+    /**
+     * Execute integrated combat encounter
+     */
+    async executeIntegratedCombat(encounter, party) {
+        if (!this.combatIntegration) {
+            console.warn('Combat integration not available, using basic resolution');
+            return this.resolveEncounter(encounter);
+        }
+        
+        console.log(`⚔️ Starting integrated combat: ${encounter.name}`);
+        
+        // Initialize combat with full integration
+        const combatSetup = {
+            enemies: encounter.enemies || this.generateEnemiesForEncounter(encounter),
+            environment: encounter.environment || 'standard',
+            terrain: encounter.terrain || 'normal',
+            lighting: encounter.lighting || 'normal'
+        };
+        
+        // Run combat through combat integration system
+        const combat = await this.combatIntegration.initializeCombat(
+            party, 
+            combatSetup.enemies, 
+            combatSetup.environment
+        );
+        
+        const combatResult = await this.combatIntegration.runCombat(combat);
+        
+        // Process combat rewards through inventory integration
+        if (combatResult.success && this.inventoryIntegration) {
+            await this.processIntegratedRewards(combatResult, party);
+        }
+        
+        return {
+            ...combatResult,
+            encounter: encounter,
+            integratedSystems: true
+        };
+    }
+
+    /**
+     * Process rewards through integrated systems
+     */
+    async processIntegratedRewards(combatResult, party) {
+        if (!this.inventoryIntegration) return;
+        
+        // Distribute treasure through inventory system
+        if (combatResult.treasure) {
+            for (const item of combatResult.treasure) {
+                await this.inventoryIntegration.distributeLoot(party, item);
+            }
+        }
+        
+        // Handle experience distribution
+        if (combatResult.experience) {
+            this.distributeExperience(party, combatResult.experience);
+        }
+        
+        console.log('💰 Rewards processed through integrated inventory system');
+    }
+
+    /**
+     * Cast spells during adventure events
+     */
+    async castAdventureSpell(caster, spellName, targets = [], context = {}) {
+        if (!this.spellSystem) {
+            console.warn('Spell system not available');
+            return { success: false, error: 'Spell system not integrated' };
+        }
+        
+        console.log(`🔮 ${caster.name} attempts to cast ${spellName}`);
+        
+        // Determine caster level
+        const casterLevel = this.characterManager.getCharacterLevel(caster);
+        
+        // Attempt spell casting
+        const castingResult = await this.spellSystem.castSpell(
+            caster, 
+            spellName, 
+            casterLevel, 
+            context.metamagicFeats || []
+        );
+        
+        if (castingResult.success) {
+            // Apply spell effects to targets
+            if (targets.length > 0) {
+                await this.applySpellEffects(castingResult, targets);
+            }
+            
+            // Track spell usage in adventure log
+            this.logAdventureEvent({
+                type: 'spell_cast',
+                caster: caster.name,
+                spell: spellName,
+                targets: targets.map(t => t.name),
+                success: true,
+                timestamp: Date.now()
+            });
+        }
+        
+        return castingResult;
+    }
+
+    /**
+     * Apply spell effects to targets
+     */
+    async applySpellEffects(castingResult, targets) {
+        const { effects, damage, healing } = castingResult;
+        
+        for (const target of targets) {
+            // Apply damage
+            if (damage && damage.total > 0) {
+                target.hitPoints = Math.max(0, (target.hitPoints || target.maxHitPoints) - damage.total);
+                console.log(`⚡ ${target.name} takes ${damage.total} ${damage.type} damage`);
+            }
+            
+            // Apply healing
+            if (healing && healing.total > 0) {
+                target.hitPoints = Math.min(
+                    target.maxHitPoints, 
+                    (target.hitPoints || 0) + healing.total
+                );
+                console.log(`💚 ${target.name} heals ${healing.total} hit points`);
+            }
+            
+            // Apply conditions and effects
+            if (effects.conditions) {
+                target.conditions = target.conditions || [];
+                effects.conditions.forEach(condition => {
+                    target.conditions.push({
+                        ...condition,
+                        duration: castingResult.duration,
+                        source: castingResult.spell.name
+                    });
+                });
+            }
+        }
+    }
+
+    /**
+     * Generate adventure with integrated systems
+     */
+    generateIntegratedAdventure(options = {}) {
+        const adventure = this.generateAdventure(options);
+        
+        // Enhance encounters with integration data
+        if (adventure.encounters) {
+            adventure.encounters = adventure.encounters.map(encounter => {
+                return this.enhanceEncounterWithIntegration(encounter, options);
+            });
+        }
+        
+        // Set up adventure-specific inventory tracking
+        if (this.inventoryIntegration && options.party) {
+            adventure.sharedInventory = this.inventoryIntegration.createSharedInventory(options.party);
+        }
+        
+        // Initialize spell tracking for adventure
+        if (this.spellSystem && options.party) {
+            adventure.spellTracking = {
+                dailySpells: new Map(),
+                activeSpells: new Map(),
+                spellComponents: new Map()
+            };
+        }
+        
+        console.log('🎲 Generated integrated adventure with full system support');
+        
+        return adventure;
+    }
+
+    /**
+     * Enhance encounter with integration features
+     */
+    enhanceEncounterWithIntegration(encounter, options) {
+        const enhanced = { ...encounter };
+        
+        // Add combat integration features
+        if (encounter.type === 'combat' && this.combatIntegration) {
+            enhanced.combatTactics = this.generateCombatTactics(encounter);
+            enhanced.battlefieldFeatures = this.generateBattlefieldFeatures(encounter);
+        }
+        
+        // Add inventory integration features
+        if (this.inventoryIntegration) {
+            enhanced.lootTable = this.generateEnhancedLootTable(encounter);
+            enhanced.environmentalItems = this.generateEnvironmentalItems(encounter);
+        }
+        
+        // Add spell integration features
+        if (this.spellSystem) {
+            enhanced.magicalEffects = this.generateMagicalEffects(encounter);
+            enhanced.spellTriggers = this.generateSpellTriggers(encounter);
+        }
+        
+        return enhanced;
+    }
+
+    /**
+     * Log adventure events for integrated tracking
+     */
+    logAdventureEvent(event) {
+        if (!this.activeAdventure) return;
+        
+        this.activeAdventure.eventLog = this.activeAdventure.eventLog || [];
+        this.activeAdventure.eventLog.push({
+            ...event,
+            adventureTime: this.activeAdventure.currentTime || Date.now(),
+            location: this.activeAdventure.currentLocation || 'unknown'
+        });
+        
+        // Limit log size to prevent memory issues
+        if (this.activeAdventure.eventLog.length > 1000) {
+            this.activeAdventure.eventLog = this.activeAdventure.eventLog.slice(-900);
+        }
+    }
+
+    /**
+     * Get integrated system status
+     */
+    getIntegrationStatus() {
+        return {
+            inventoryIntegration: !!this.inventoryIntegration,
+            combatIntegration: !!this.combatIntegration,
+            spellSystem: !!this.spellSystem,
+            fullyIntegrated: !!(this.inventoryIntegration && this.combatIntegration && this.spellSystem)
+        };
+    }
+
+    /**
+     * Generate enhanced loot table with inventory integration
+     */
+    generateEnhancedLootTable(encounter) {
+        if (!this.inventoryIntegration) return encounter.treasure || [];
+        
+        return this.inventoryIntegration.generateContextualLoot({
+            encounterType: encounter.type,
+            challengeRating: encounter.cr,
+            environment: encounter.environment,
+            enemyTypes: encounter.enemies
+        });
+    }
+
+    /**
+     * Distribute experience with character progression tracking
+     */
+    distributeExperience(party, totalExperience) {
+        const experiencePerCharacter = Math.floor(totalExperience / party.length);
+        
+        party.forEach(character => {
+            const oldLevel = this.characterManager.getCharacterLevel(character);
+            character.experience = (character.experience || 0) + experiencePerCharacter;
+            const newLevel = this.characterManager.getCharacterLevel(character);
+            
+            if (newLevel > oldLevel) {
+                this.logAdventureEvent({
+                    type: 'level_up',
+                    character: character.name,
+                    oldLevel: oldLevel,
+                    newLevel: newLevel,
+                    experienceGained: experiencePerCharacter
+                });
+                
+                console.log(`🎉 ${character.name} advances to level ${newLevel}!`);
+            }
+        });
+        
+        this.experienceAwarded += totalExperience;
     }
 
     /**

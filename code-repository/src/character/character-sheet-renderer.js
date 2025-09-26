@@ -19,22 +19,86 @@
  */
 
 class CharacterSheetRenderer {
-    constructor(srdDataManager, spellManager, epicLevelManager) {
+    constructor(srdDataManager, spellManager, epicLevelManager, portraitGenerator = null) {
         this.srdData = srdDataManager;
         this.spellManager = spellManager;
         this.epicManager = epicLevelManager;
+        this.portraitGenerator = portraitGenerator;
+        
+        // Rendering configuration
+        this.config = {
+            includePortrait: true,
+            includeEquipment: true,
+            includeSpells: true,
+            colorScheme: 'classic',
+            printFriendly: false
+        };
+        
+        // Available export formats
+        this.exportFormats = ['html', 'pdf', 'png', 'json'];
+        
+        // Color schemes for theming
+        this.colorSchemes = {
+            'classic': {
+                primary: '#2c3e50',
+                secondary: '#34495e',
+                accent: '#3498db',
+                background: '#ffffff',
+                text: '#2c3e50',
+                border: '#bdc3c7'
+            },
+            'parchment': {
+                primary: '#8b4513',
+                secondary: '#a0522d',
+                accent: '#daa520',
+                background: '#fdf5e6',
+                text: '#654321',
+                border: '#deb887'
+            },
+            'fantasy': {
+                primary: '#8b0000',
+                secondary: '#a52a2a',
+                accent: '#ffd700',
+                background: '#f5f5dc',
+                text: '#2f4f4f',
+                border: '#cd853f'
+            }
+        };
 
-        console.log('📄 CharacterSheetRenderer initialized for complete character display');
+        console.log('📄 CharacterSheetRenderer initialized for complete character display with portrait integration');
     }
 
     /**
-     * Render complete character sheet
+     * Render complete character sheet with advanced options
      */
-    renderCharacterSheet(character) {
+    async renderCharacterSheet(character, options = {}) {
+        console.log(`📄 Rendering character sheet for ${character.name}`);
+        
+        const renderOptions = {
+            format: options.format || 'html',
+            includePortrait: options.includePortrait !== false,
+            colorScheme: options.colorScheme || this.config.colorScheme,
+            printFriendly: options.printFriendly || false,
+            ...options
+        };
+        
+        // Generate portrait if available and requested
+        let portraitData = null;
+        if (this.portraitGenerator && renderOptions.includePortrait) {
+            try {
+                portraitData = await this.portraitGenerator.generatePortrait(character, {
+                    style: 'fantasy_art',
+                    size: { width: 200, height: 250 }
+                });
+            } catch (error) {
+                console.warn('Failed to generate portrait for character sheet:', error);
+            }
+        }
+        
         const html = `
-            <div class="character-sheet-complete">
+            <div class="character-sheet-complete ${renderOptions.colorScheme}">
                 <div class="sheet-header">
-                    ${this.renderCharacterHeader(character)}
+                    ${await this.renderCharacterHeader(character, portraitData)}
                 </div>
                 
                 <div class="sheet-body">
@@ -56,17 +120,49 @@ class CharacterSheetRenderer {
                 <div class="sheet-footer">
                     ${this.renderCharacterNotes(character)}
                 </div>
+                
+                <style>
+                    ${this.generateCSS(renderOptions)}
+                </style>
             </div>
         `;
 
-        return html;
+        // Return different formats based on request
+        switch (renderOptions.format) {
+            case 'html':
+                return { type: 'html', content: html };
+            case 'pdf':
+                return await this.convertToPDF(html);
+            case 'png':
+                return await this.convertToPNG(html);
+            case 'json':
+                return await this.generateJSONSheet(character);
+            default:
+                return { type: 'html', content: html };
+        }
     }
 
     /**
-     * Render character header with basic info
+     * Render character header with basic info and optional portrait
      */
-    renderCharacterHeader(character) {
+    async renderCharacterHeader(character, portraitData = null) {
         const epicSummary = this.epicManager?.getEpicSummary(character);
+
+        const portraitHTML = portraitData ? `
+            <div class="character-portrait">
+                <img src="data:image/svg+xml;base64,${btoa(portraitData.imageData.data)}" 
+                     alt="${character.name} Portrait" 
+                     class="portrait-image">
+                <div class="portrait-info">
+                    <div class="character-appearance">
+                        <div class="appearance-detail">Eyes: ${character.appearance?.eye_color || 'Unknown'}</div>
+                        <div class="appearance-detail">Hair: ${character.appearance?.hair_color || 'Unknown'}</div>
+                        <div class="appearance-detail">Height: ${character.appearance?.height || 'Unknown'}</div>
+                        <div class="appearance-detail">Weight: ${character.appearance?.weight || 'Unknown'}</div>
+                    </div>
+                </div>
+            </div>
+        ` : '';
 
         return `
             <div class="character-header">
@@ -76,7 +172,12 @@ class CharacterSheetRenderer {
                         ${character.race} ${character.characterClass}
                         ${epicSummary ? `, ${epicSummary.divineTitle}` : ''}
                     </div>
+                    <div class="character-player">
+                        Player: ${character.player || 'Unknown'}
+                    </div>
                 </div>
+                
+                ${portraitHTML}
                 
                 <div class="character-level-section">
                     <div class="level-display">
@@ -89,6 +190,13 @@ class CharacterSheetRenderer {
                         <span class="xp-label">Experience Points</span>
                         <span class="xp-value">${character.experiencePoints || 0}</span>
                     </div>
+                    
+                    ${epicSummary?.divineRank !== null ? `
+                        <div class="divine-rank-display">
+                            <span class="divine-label">Divine Rank</span>
+                            <span class="divine-value">${epicSummary.divineRank}</span>
+                        </div>
+                    ` : ''}
                 </div>
                 
                 <div class="character-vitals">
@@ -719,6 +827,381 @@ class CharacterSheetRenderer {
         } else {
             return Math.floor(level / 3);
         }
+    }
+
+    /**
+     * Generate CSS styling for character sheet
+     */
+    generateCSS(options) {
+        const colorScheme = this.colorSchemes[options.colorScheme] || this.colorSchemes.classic;
+        
+        return `
+            .character-sheet-complete {
+                font-family: 'Times New Roman', serif;
+                max-width: 8.5in;
+                margin: 0 auto;
+                padding: 0.5in;
+                background-color: ${colorScheme.background};
+                color: ${colorScheme.text};
+                line-height: 1.4;
+            }
+            
+            .character-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 2px solid ${colorScheme.border};
+                gap: 20px;
+            }
+            
+            .character-name {
+                font-size: 24px;
+                font-weight: bold;
+                color: ${colorScheme.primary};
+                margin: 0;
+            }
+            
+            .character-title {
+                font-size: 16px;
+                font-weight: bold;
+                color: ${colorScheme.secondary};
+                margin-top: 5px;
+            }
+            
+            .character-player {
+                font-size: 12px;
+                color: ${colorScheme.text};
+                margin-top: 3px;
+            }
+            
+            .character-portrait {
+                flex-shrink: 0;
+                width: 150px;
+                text-align: center;
+            }
+            
+            .portrait-image {
+                width: 150px;
+                height: 200px;
+                border: 2px solid ${colorScheme.border};
+                border-radius: 8px;
+                object-fit: cover;
+                background-color: ${colorScheme.secondary};
+            }
+            
+            .portrait-info {
+                margin-top: 8px;
+                font-size: 10px;
+            }
+            
+            .appearance-detail {
+                margin: 2px 0;
+                color: ${colorScheme.secondary};
+            }
+            
+            .character-level-section {
+                text-align: right;
+                flex-shrink: 0;
+            }
+            
+            .level-display, .xp-display, .divine-rank-display {
+                margin-bottom: 10px;
+            }
+            
+            .level-label, .xp-label, .divine-label {
+                display: block;
+                font-size: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: ${colorScheme.secondary};
+            }
+            
+            .level-value, .xp-value, .divine-value {
+                display: block;
+                font-size: 18px;
+                font-weight: bold;
+                color: ${colorScheme.accent};
+            }
+            
+            .epic-level {
+                font-size: 12px;
+                color: ${colorScheme.accent};
+                font-style: italic;
+            }
+            
+            .divine-rank-display .divine-value {
+                color: #ffd700;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+            
+            .sheet-body {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .ability-scores {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .ability-block {
+                text-align: center;
+                border: 1px solid ${colorScheme.border};
+                border-radius: 5px;
+                padding: 8px;
+                background-color: ${colorScheme.background};
+            }
+            
+            .ability-name {
+                font-size: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: ${colorScheme.secondary};
+                margin-bottom: 5px;
+            }
+            
+            .ability-score {
+                font-size: 20px;
+                font-weight: bold;
+                color: ${colorScheme.accent};
+            }
+            
+            .ability-modifier {
+                font-size: 12px;
+                color: ${colorScheme.text};
+                margin-top: 2px;
+            }
+            
+            .section-title {
+                background-color: ${colorScheme.primary};
+                color: ${colorScheme.background};
+                padding: 8px 12px;
+                font-weight: bold;
+                font-size: 12px;
+                text-transform: uppercase;
+                margin: 15px 0 10px 0;
+                border-radius: 3px;
+            }
+            
+            .combat-stats {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .stat-block {
+                border: 1px solid ${colorScheme.border};
+                border-radius: 3px;
+                padding: 8px;
+                text-align: center;
+            }
+            
+            .stat-label {
+                font-size: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: ${colorScheme.secondary};
+                margin-bottom: 3px;
+            }
+            
+            .stat-value {
+                font-size: 16px;
+                font-weight: bold;
+                color: ${colorScheme.accent};
+            }
+            
+            .skills-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 11px;
+                margin-bottom: 15px;
+            }
+            
+            .skills-table th,
+            .skills-table td {
+                border: 1px solid ${colorScheme.border};
+                padding: 4px 6px;
+                text-align: left;
+            }
+            
+            .skills-table th {
+                background-color: ${colorScheme.secondary};
+                color: ${colorScheme.background};
+                font-weight: bold;
+                font-size: 10px;
+                text-transform: uppercase;
+            }
+            
+            .equipment-list {
+                font-size: 11px;
+                margin-bottom: 10px;
+            }
+            
+            .equipment-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 3px 0;
+                border-bottom: 1px dotted ${colorScheme.border};
+            }
+            
+            .equipment-name {
+                font-weight: bold;
+                flex-grow: 1;
+            }
+            
+            .equipment-weight {
+                width: 50px;
+                text-align: right;
+                color: ${colorScheme.secondary};
+            }
+            
+            .spells-section {
+                margin-bottom: 15px;
+            }
+            
+            .spell-level {
+                margin-bottom: 10px;
+                border: 1px solid ${colorScheme.border};
+                border-radius: 3px;
+            }
+            
+            .spell-level-header {
+                background-color: ${colorScheme.secondary};
+                color: ${colorScheme.background};
+                padding: 5px 8px;
+                font-weight: bold;
+                font-size: 11px;
+            }
+            
+            .spell-list {
+                padding: 8px;
+                font-size: 10px;
+            }
+            
+            .spell-item {
+                margin-bottom: 3px;
+                padding: 2px 0;
+                border-bottom: 1px dotted ${colorScheme.border};
+            }
+            
+            .epic-section {
+                background: linear-gradient(45deg, ${colorScheme.background}, ${colorScheme.accent}20);
+                border: 2px solid ${colorScheme.accent};
+                border-radius: 5px;
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .epic-section .section-title {
+                background-color: ${colorScheme.accent};
+                color: ${colorScheme.background};
+            }
+            
+            @media print {
+                .character-sheet-complete {
+                    margin: 0;
+                    padding: 0.25in;
+                    max-width: none;
+                    background: white;
+                    color: black;
+                }
+                
+                .character-portrait {
+                    display: ${options.printFriendly ? 'none' : 'block'};
+                }
+            }
+        `;
+    }
+
+    /**
+     * Convert HTML to PDF format
+     */
+    async convertToPDF(html) {
+        // This would typically use a library like Puppeteer or similar
+        console.log('📄 PDF conversion would be implemented with Puppeteer or similar');
+        return {
+            type: 'pdf',
+            content: html,
+            note: 'PDF conversion requires additional libraries'
+        };
+    }
+
+    /**
+     * Convert HTML to PNG format
+     */
+    async convertToPNG(html) {
+        // This would typically use a library like Puppeteer or html2canvas
+        console.log('📄 PNG conversion would be implemented with html2canvas or similar');
+        return {
+            type: 'png',
+            content: html,
+            note: 'PNG conversion requires additional libraries'
+        };
+    }
+
+    /**
+     * Generate JSON representation of character sheet
+     */
+    async generateJSONSheet(character) {
+        const epicSummary = this.epicManager?.getEpicSummary(character);
+        
+        return {
+            type: 'json',
+            content: {
+                character: {
+                    basic: {
+                        name: character.name,
+                        player: character.player,
+                        race: character.race,
+                        class: character.characterClass,
+                        level: character.level,
+                        alignment: character.alignment,
+                        deity: character.deity
+                    },
+                    abilities: character.abilities,
+                    combat: this.calculateCombatStats(character),
+                    saves: this.calculateSaves(character),
+                    skills: character.skills,
+                    feats: character.feats,
+                    equipment: character.equipment,
+                    spells: character.spells,
+                    epic: epicSummary,
+                    metadata: {
+                        generatedAt: new Date().toISOString(),
+                        version: '2.0.0'
+                    }
+                }
+            }
+        };
+    }
+
+    /**
+     * Set rendering configuration
+     */
+    setConfig(newConfig) {
+        this.config = { ...this.config, ...newConfig };
+        console.log('📄 Character sheet renderer configuration updated');
+    }
+
+    /**
+     * Get available color schemes
+     */
+    getAvailableColorSchemes() {
+        return Object.keys(this.colorSchemes);
+    }
+
+    /**
+     * Get available export formats
+     */
+    getAvailableFormats() {
+        return [...this.exportFormats];
     }
 }
 
